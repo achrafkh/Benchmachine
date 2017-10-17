@@ -92,4 +92,10 @@ class LoginController extends Controller
             'provider_id' => $user->id,
         ]);
     }
+
+    public function logout()
+    {
+        auth()->logout();
+        return redirect('/');
+    }
 }
