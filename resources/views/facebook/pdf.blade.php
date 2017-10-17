@@ -15,3 +15,6 @@
 	@include('facebook.sections.posts',['posts' => $benchmark->posts,'sort'=> 'total_interactions' ])
 </div>
 @endsection
+@section('js')
+@include('facebook.test')
+@endsection
