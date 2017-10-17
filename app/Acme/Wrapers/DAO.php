@@ -52,10 +52,11 @@ class DAO
         return $this->api->post('custom-benchmark', $params);
     }
 
-    public function addPages($pages = [])
+    public function addPages($pages = [], $token = null)
     {
         $account_ids = collect([]);
         $errors['error'] = false;
+        $status = 1;
         foreach ($pages as $url) {
             if (null == $url) {
                 continue;
@@ -72,12 +73,22 @@ class DAO
             $account->remote_id = $response->data->social_account_id;
             $account->real_id = $response->data->social_account_real_id;
 
+            if (!$response->data->exits) {
+                $status = 0;
+            }
+
             $account_ids->push($account);
         }
         if ($errors['error']) {
             return $errors;
         }
-        $response = $this->api->post('restore-if-deleted', ['account_ids' => $account_ids->toarray()]);
-        return $account_ids;
+        if ($token) {
+            $this->api->post('restore-if-deleted-bench', [
+                'account_ids' => $account_ids->pluck('remote_id')->toarray(),
+                'bench_temp_id' => $token,
+            ]);
+        }
+
+        return compact('status', 'account_ids');
     }
 }

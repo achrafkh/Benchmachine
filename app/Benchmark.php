@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Benchmark extends Model
 {
     protected $fillable = [
-        'title', 'since', 'until', 'user_id', 'status',
+        'title', 'since', 'until', 'user_id', 'status', 'temp_id',
     ];
 
     /**
@@ -27,5 +27,14 @@ class Benchmark extends Model
     public function accounts()
     {
         return $this->hasMany(Account::class);
+    }
+
+    public function updateTitle($title)
+    {
+        if ($title == $this->title && trim($title) == '') {
+            return true;
+        }
+        $this->title = $title;
+        return $this->save();
     }
 }

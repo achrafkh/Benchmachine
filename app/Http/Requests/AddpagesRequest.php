@@ -24,13 +24,17 @@ class AddpagesRequest extends FormRequest
     public function rules()
     {
         $accs = $this->accounts;
+
+        // Remove emty strings
         foreach ($accs as $key => $value) {
             if ('' == $value || null == $value) {
                 unset($accs[$key]);
             }
         }
-
+        // override request to the genearted array (that contains no empty values)
         $this->accounts = $accs;
+
+        //Start generating rules
         $rules = [];
         for ($i = 0; $i < count($this->accounts); $i++) {
             $rules['accounts.' . $i] = 'url';

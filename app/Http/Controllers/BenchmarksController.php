@@ -6,7 +6,6 @@ use App\Acme\Wrapers\DAO;
 use App\Acme\Wrapers\Utils;
 use App\Benchmark;
 use App\Http\Requests\AddpagesRequest;
-use App\Jobs\GenerateBenchmark;
 use Artisan;
 use Cache;
 use Carbon\Carbon;
@@ -17,13 +16,26 @@ use Storage;
 class BenchmarksController extends Controller
 {
     protected $api;
-
+    protected $repo;
+    /**
+     * Create a new controller instance.
+     * @param DAO $api An instance of DAO class
+     * @param Utils $repo An instance of Utils class
+     * @return void
+     */
     public function __construct(DAO $api, Utils $repo)
     {
+        $this->middleware('auth')->except(['render', 'validatePages']);
         $this->api = $api;
         $this->repo = $repo;
     }
 
+    /**
+     * Render a benchmark to the browser
+     * also it adds the benchmark to cache for certain amount of time
+     * @param  $id Integer Benchmark id
+     * @return \Illuminate\Http\Response
+     */
     public function show($id)
     {
         $benchmark = Cache::remember($id, env('CACHE_TIME'), function () use ($id) {
@@ -32,6 +44,12 @@ class BenchmarksController extends Controller
         return view('facebook.benchmark', compact('benchmark'));
     }
 
+    /**
+     * Download A benchmark as PDF
+     * This uses Dompdf to generate the file
+     * @param  $id Integer Benchmark id
+     * @return \Illuminate\Http\Response
+     */
     public function download($id)
     {
         $benchmark = $this->repo->getBenchmark($id);
@@ -40,18 +58,38 @@ class BenchmarksController extends Controller
         return $pdf->download('invoice.pdf');
     }
 
-    public function render($id)
+    /**
+     * Generate a benchmark and render it to the screen without header
+     * wkhtmltopdf  will generate pdf from this view
+     * @param  $id Integer Benchmark id
+     * @param  $secret String Secret code to make sure that the call is internal
+     * @return \Illuminate\Http\Response
+     */
+    public function render($id, $secret = '')
     {
+        // too add , check if the provided secret is = to secret in Cache/or file
+        //if (env('SECRET') != $secret) {
+        //unauthorized
+        // abort(401);
+        //}
         $benchmark = $this->repo->getBenchmark($id);
 
         return view('facebook.pdf', compact('benchmark'));
     }
 
+    /**
+     * Generate a PDF file and send it to the user using wkhtmltopdf
+     * if the file already exists, use the available one
+     * @param  $id Integer Benchmark id
+     * @return \Illuminate\Http\Response
+     */
     public function wkdownload($id)
     {
         $path = 'pdf/benchmark-' . $id . '.pdf';
 
         if (!Storage::exists($path)) {
+            // Generate the pdf and save it to storage/app/pdf/
+            //File name will be benchmark-{id}.pdf
             Artisan::call('make:pdf', [
                 'id' => $id,
             ]);
@@ -59,6 +97,12 @@ class BenchmarksController extends Controller
         return response()->file(storage_path('app/' . $path));
     }
 
+    /**
+     * Create a benchmark using the provided data in the request
+     * This is for the Non paid benchmarks (free)
+     * @param  \Illuminate\Http\Request
+     * @return \Illuminate\Http\Response
+     */
     public function create(Request $request)
     {
         $accounts = $request->accounts;
@@ -72,25 +116,34 @@ class BenchmarksController extends Controller
         $since = Carbon::now()->subDays(8)->toDateString();
         $until = Carbon::now()->subDays(1)->toDateString();
 
-        // Add pages to kpeiz core to collect data
-        $pages_ids = $this->api->addPages($accounts);
+        // Add pages to kpeiz core to collect dat
+        $token = str_random(40);
+        $response = $this->api->addPages($accounts, $token);
+
+        $pages_ids = $response['account_ids'];
+        $status = $response['status'];
 
         $benchmark = Benchmark::create([
             'user_id' => auth()->user()->id,
+            'temp_id' => $token,
             'title' => $title,
             'since' => $since,
             'until' => $until,
-            'status' => 0,
+            'status' => $status,
         ]);
 
         $benchmark->save();
         $benchmark->accounts()->saveMany($pages_ids);
 
-        dispatch(new GenerateBenchmark($benchmark->id));
-
         return redirect('/');
     }
 
+    /**
+     * Validation for Index page form
+     * There must be at least 2 valid pages
+     * @param  \Illuminate\Http\Request
+     * @return \Illuminate\Http\Response
+     */
     public function validatePages(AddpagesRequest $request)
     {
         $accounts = $request->accounts;

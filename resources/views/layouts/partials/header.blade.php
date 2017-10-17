@@ -6,7 +6,7 @@
 		<div class="dropdown profile-dropdown">
 			<button class="media profile-trigger" class="media" type="button" data-toggle="dropdown">
 			<div class="media-left media-middle">
-				<span class="profile-img" style="background-image:url(assets/images/avatar.jpg)"></span>
+				<span class="profile-img" style="background-image:url({{ auth()->user()->image  }})"></span>
 			</div>
 			<div class="media-body media-middle hidden-xs">
 				<span class="profile-name">{{ auth()->user()->name }}</span>

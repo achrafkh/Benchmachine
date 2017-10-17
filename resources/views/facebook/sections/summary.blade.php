@@ -88,9 +88,15 @@
 			</ul>
 			<ul class="summary-block">
 				<li class="summary-data">
-					<span class="digit">{{ number_format(
+					<span class="digit">
+					@if(isset($averages->posts) && $averages->posts > 0)
+					{{ number_format(
 						$averages->interactions/$averages->posts
-					 , 0, '.', ' ') }}</span>
+					 , 0, '.', ' ') }}
+					@else
+					0
+					@endif
+					 </span>
 				</li>
 				<li class="summary-progress">
 				<!-- 	<span class="down">

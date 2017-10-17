@@ -27,8 +27,16 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    protected $appends = ['image'];
+
+    public function getImageAttribute()
+    {
+        return 'http://graph.facebook.com/' . $this->provider_id . '/picture';
+    }
+
     public function benchmarks()
     {
         return $this->hasMany(Benchmark::class);
     }
+
 }

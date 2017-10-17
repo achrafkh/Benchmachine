@@ -1,5 +1,6 @@
 <?php
 
+//Check if provided param is a laravel collection
 function isCollection($data)
 {
     if ($data instanceof Illuminate\Support\Collection) {
@@ -38,6 +39,7 @@ function number_shorten($number, $precision = 3, $divisors = null)
     return number_format($number / $divisor, $precision) . $shorthand;
 }
 
+// Get a post image using post real id
 function postImage($id)
 {
 
@@ -45,17 +47,12 @@ function postImage($id)
 
     // create curl resource
     $ch = curl_init();
-
     // set url
     curl_setopt($ch, CURLOPT_URL, $url);
-
     //return the transfer as a string
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-
     // $output contains the output string
     $output = curl_exec($ch);
-
-    // close curl resource to free up system resources
     curl_close($ch);
 
     $img = head(json_decode($output));
@@ -65,6 +62,7 @@ function postImage($id)
     return $img;
 }
 
+// Check if string is written in arabic
 function is_arabic($str)
 {
     if (mb_detect_encoding($str) !== 'UTF-8') {
@@ -93,9 +91,9 @@ function is_arabic($str)
     return false;
 }
 
+// StackOverflow, Only god knows wtf is this
 function uniord($u)
 {
-    // i just copied this function fron the php.net comments, but it should work fine!
     $k = mb_convert_encoding($u, 'UCS-2LE', 'UTF-8');
     $k1 = ord(substr($k, 0, 1));
     $k2 = ord(substr($k, 1, 1));

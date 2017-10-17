@@ -15,6 +15,6 @@
 	@include('facebook.sections.table', ['accounts' => $benchmark->accounts])
 	@include('facebook.sections.charts')
 	@include('facebook.sections.posts',['posts' => $benchmark->posts,'sort'=> 'engagement_rate' ])
-	@include('facebook.sections.posts',['posts' => $benchmark->posts,'sort'=> 'total_interactions' ])
+	{{-- @include('facebook.sections.posts',['posts' => $benchmark->posts,'sort'=> 'total_interactions' ]) --}}
 </div>
 @endsection

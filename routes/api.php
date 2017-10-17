@@ -12,3 +12,4 @@
  */
 
 Route::post('/pages/validate', 'BenchmarksController@validatePages');
+Route::get('/core/end-history/{token}', 'CoreController@benchmarkReady');

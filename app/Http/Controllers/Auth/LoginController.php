@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\User;
 use Auth;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Socialite;
 
 class LoginController extends Controller
@@ -20,8 +19,6 @@ class LoginController extends Controller
     | to conveniently provide its functionality to your applications.
     |
      */
-
-    use AuthenticatesUsers;
 
     /**
      * Where to redirect users after login.
@@ -64,15 +61,27 @@ class LoginController extends Controller
 
     /**
      * If a user has registered before using social auth, return the user
-     * else, create a new user object.
+     * else, if user tested the app but didnt register, register him  and return user object
+     * else create user and return object
      * @param  $user Socialite user object
      * @param $provider Social auth provider
      * @return  User
      */
     public function findOrCreateUser($user, $provider)
     {
-        $authUser = User::where('provider_id', $user->id)->first();
-        if ($authUser) {
+        $authUser = User::orwhere('provider_id', $user->id)->orwhere('email', $user->email)->first();
+
+        if ($authUser && isset($authUser->provider_id)) {
+            return $authUser;
+        }
+        if ($authUser && is_null($authUser->provider_id)) {
+            $authUser->name = $user->name;
+            $authUser->email = $user->email;
+            $authUser->token = $user->token;
+            $authUser->provider = $provider;
+            $authUser->provider_id = $user->id;
+            $authUser->save();
+
             return $authUser;
         }
         return User::create([
