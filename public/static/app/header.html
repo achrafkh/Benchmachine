@@ -1,0 +1,43 @@
+<header class="benchmark-header">
+	<div class="container">
+		<form action="|action|" method="POST">
+			|csrf|
+			<button type="submit" class="print-btn" waves-hover>
+			Print benchmark
+			</button>
+		</form>
+		<div class="dropdown profile-dropdown">
+			<button class="media profile-trigger" class="media" type="button" data-toggle="dropdown">
+			<div class="media-left media-middle">
+				<span class="profile-img" style="background-image:url(|image|)"></span>
+			</div>
+			<div class="media-body media-middle hidden-xs">
+				<span class="profile-name">|name|</span>
+				<span class="profile-type">Premium</span>
+			</div>
+			<div class="media-right media-middle">
+				<i class="icon-down-open-1"></i>
+			</div>
+			</button>
+			<ul class="dropdown-menu dropdown-menu-right">
+				<li>
+					<a href="|url|/history">History</a>
+				</li>
+				<li>
+					<a href="|url|/settings">Settings</a>
+				</li>
+				<li role="separator" class="divider"></li>
+				<li>
+					<a href="|url|/logout"
+						onclick="event.preventDefault();
+						document.getElementById('logout-form').submit();">
+						Logout
+					</a>
+					<form id="logout-form" action="|url|/logout" method="POST" style="display: none;">
+						|csrf|
+					</form>
+				</li>
+			</ul>
+		</div>
+	</div>
+</header>

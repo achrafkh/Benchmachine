@@ -9,6 +9,7 @@ use App\Http\Requests\AddpagesRequest;
 use Artisan;
 use Cache;
 use Carbon\Carbon;
+use File;
 use Illuminate\Http\Request;
 use PDF;
 use Storage;
@@ -43,6 +44,15 @@ class BenchmarksController extends Controller
         return view('facebook.benchmark', compact('benchmark'));
     }
 
+    public function showStatic($id)
+    {
+        $html = $this->repo->getBenchmarkHtml($id);
+
+        $html = str_insert($html, '<body class="">', getHtmlHeader(auth()->user()->name, auth()->user()->image, $id));
+
+        return view('facebook.benchmark_html', compact('html'));
+    }
+
     /**
      * Download A benchmark as PDF
      * This uses Dompdf to generate the file
@@ -54,7 +64,7 @@ class BenchmarksController extends Controller
         $benchmark = $this->repo->getBenchmark($id);
 
         $pdf = PDF::loadView('facebook.pdf', compact('benchmark'));
-        return $pdf->download('invoice.pdf');
+        return $pdf->download('report.pdf');
     }
 
     /**
@@ -69,9 +79,9 @@ class BenchmarksController extends Controller
         if (env('SECRET') != strtoupper($secret)) {
             abort(401, 'UNAUTHORIZED');
         }
-        $benchmark = $this->repo->getBenchmark($id);
 
-        return view('facebook.pdf', compact('benchmark'));
+        $html = $this->repo->getBenchmarkHtml($id);
+        return view('facebook.benchmark_html', compact('html'));
     }
 
     /**

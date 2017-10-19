@@ -1,4 +1,39 @@
 <?php
+function getHtmlHeader($name, $image, $id)
+{
+    $header = file_get_contents(public_path() . '/static/app/header.html');
+    $header = str_replace('|name|', $name, $header);
+    $header = str_replace('|image|', $image, $header);
+    $header = str_replace('|action|', url('/benchmarks/wkdownload/' . $id), $header);
+    $header = str_replace('|url|', url('/'), $header);
+
+    $header = str_replace('|csrf|', csrf_field(), $header);
+
+    return replace($header);
+}
+
+//Adds a string after first occurence
+function str_insert($str, $search, $insert)
+{
+    $index = strpos($str, $search);
+    if (false === $index) {
+        return $str;
+    }
+    return substr_replace($str, $search . $insert, $index, strlen($search));
+}
+
+function replace($html)
+{
+    $preg = [
+        "/\n([\S])/" => '$1',
+        "/\r/" => '',
+        "/\n/" => '',
+        "/\t/" => '',
+        "/ +/" => ' ',
+        "/> +</" => '><',
+    ];
+    return preg_replace(array_keys($preg), array_values($preg), $html);
+}
 
 //Check if provided param is a laravel collection
 function isCollection($data)

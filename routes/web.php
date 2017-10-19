@@ -3,6 +3,8 @@
 // Test route
 Route::get('testpay/{amount}/{cur?}', 'PaymentController@testPayment');
 
+Route::get('check/{fname}', 'BenchmarksController@tt');
+
 /*
  * Authentication Routes
  */
@@ -25,10 +27,11 @@ Route::middleware(['auth'])->group(function () {
      ** Benchmarks Routes
      **/
     Route::prefix('benchmarks')->group(function () {
-        Route::get('{id}', 'BenchmarksController@show')->name('showBench');
+        Route::get('{id}', 'BenchmarksController@showStatic')->name('showBench');
         Route::get('gen/{id}', 'BenchmarksController@generate')->name('Generate');
         Route::get('download/{id}', 'BenchmarksController@download')->name('showBench');
         Route::get('wkdownload/{id}', 'BenchmarksController@wkdownload')->name('wkdownload');
+        Route::post('wkdownload/{id}', 'BenchmarksController@wkdownload')->name('wkdownloadPost');
 
         Route::post('create', 'BenchmarksController@create')->name('newBench');
         Route::post('create-demo', 'BenchmarksController@createDemo')->name('newDemoBench');
