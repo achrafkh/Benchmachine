@@ -39,4 +39,42 @@ class User extends Authenticatable
         return $this->hasMany(Benchmark::class);
     }
 
+    public function details()
+    {
+        return $this->hasOne(UserDetails::class);
+    }
+
+    public function hasDetails()
+    {
+        if (!$this->details) {
+            return false;
+        }
+        $bool = $this->details()->whereNotNull('phone')->where('phone', '<>', '')
+            ->whereNotNull('country')->where('country', '<>', '')
+            ->whereNotNull('city')->where('city', '<>', '')
+            ->whereNotNull('zip')->where('zip', '<>', '')
+            ->whereNotNull('address')->exists();
+
+        return $bool;
+    }
+
+    public function getPayementDetails()
+    {
+
+        if (null == $this->details) {
+            $this->load('details');
+        }
+
+        $params['phone'] = $this->details->phone;
+        $params['email'] = $this->email;
+        $params['user_id'] = $this->id;
+        $params['last_name'] = head(explode(' ', $this->name));
+        $params['first_name'] = last(explode(' ', $this->name));
+        $params['address'] = $this->details->address;
+        $params['zip_code'] = $this->details->zip;
+        $params['city'] = $this->details->city;
+        $params['country'] = $this->details->country;
+
+        return $params;
+    }
 }

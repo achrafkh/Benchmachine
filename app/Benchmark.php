@@ -26,7 +26,7 @@ class Benchmark extends Model
 
     public function accounts()
     {
-        return $this->hasMany(Account::class);
+        return $this->belongsToMany(Account::class, 'account_benchmark')->withTimestamps();
     }
 
     public function updateTitle($title)
@@ -35,6 +35,12 @@ class Benchmark extends Model
             return true;
         }
         $this->title = $title;
+        return $this->save();
+    }
+
+    public function markAsReady()
+    {
+        $this->status = true;
         return $this->save();
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Acme\Wrapers;
 
 use App\Acme\Wrapers\DAO;
+use App\Benchmark as Benchi;
 use App\Classes\Benchmark;
 use StdClass;
 
@@ -23,6 +24,12 @@ class Utils
         return $this->prepareBenchmark($response->data);
     }
 
+    /**
+     * Get Benchmark data and map them to Benchmark object
+     * Sum/set values
+     * @param Stdclass $data Benchmark data
+     * @return App\Classes\Benchmark instance
+     */
     public function prepareBenchmark($data)
     {
         $benchmark = new Benchmark;
@@ -57,11 +64,14 @@ class Utils
         return $benchmark;
     }
 
+    /**
+     * Get An array of posts and map interactions
+     * @param Array $posts Posts Array
+     * @return Illuminate\Support\Collection instance
+     */
     public function mapPost($posts)
     {
-
         return collect($posts)->map(function ($post) {
-
             if (is_array($post)) {
                 $ints = json_decode($post['interactions'], true);
                 $post['likes'] = $ints['facebook::likes'];
@@ -75,8 +85,30 @@ class Utils
                 $post->comments = $ints['facebook::comments'];
                 $post->total_interactions = ($post->likes + $post->shares + $post->comments);
             }
-
             return $post;
         });
+    }
+
+    /**
+     * Check if data is ready for a certain benchmark
+     * @param App\Benchmark $benchmark Get benchmark isntance
+     * @return bool
+     */
+    public function benchmarkIsReady(Benchi $benchmark)
+    {
+        // if accounts are not already loaded load them
+        if (null == $benchmark->accounts) {
+            $benchmark->load('accounts');
+        }
+        // get accounts ids in an array
+        $page_ids = $benchmark->accounts->pluck('id')->toarray();
+
+        // check if data is collected for this pages
+        $response = $this->api->dataAvailable($page_ids);
+        //if ready return true
+        if (isset($response->ready) && $response->ready) {
+            return true;
+        }
+        return false;
     }
 };

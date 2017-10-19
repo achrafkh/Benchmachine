@@ -36,6 +36,5 @@ class GenerateBenchmark implements ShouldQueue
     {
         $response = $api->getBenchmarkById($this->id);
         Storage::put('benchmarks/' . $this->id . '.json', json_encode($response->data));
-
     }
 }

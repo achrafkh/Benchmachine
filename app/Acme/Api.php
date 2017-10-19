@@ -18,12 +18,11 @@ class Api
     }
 
     /**
-     * Render a benchmark to the browser
-     * also it adds the benchmark to cache for certain amount of time
-     * @param  $call Integer Benchmark id
-     * @param  $params Integer Benchmark id
+     * Execute a http call
+     * @param  $call Initial query
+     * @param  $params Array PArams will be added to query
      * @param  $headers Array Headers
-     * @param  $method String Http request methot
+     * @param  $method String Http request method
      * @return \Illuminate\Http\Response
      */
     public function _get($call, $params = [], $headers = [], $method = 'GET')

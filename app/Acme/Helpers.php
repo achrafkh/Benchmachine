@@ -6,12 +6,16 @@ function isCollection($data)
     if ($data instanceof Illuminate\Support\Collection) {
         return true;
     }
+    if ($data instanceof Illuminate\Database\Eloquent\Collection) {
+        return true;
+    }
+
     return false;
 }
 
+// Shorten a given Number EX: Convert 3000 to 3k etc
 function number_shorten($number, $precision = 3, $divisors = null)
 {
-
     // Setup default $divisors if not provided
     if (!isset($divisors)) {
         $divisors = [
@@ -42,7 +46,6 @@ function number_shorten($number, $precision = 3, $divisors = null)
 // Get a post image using post real id
 function postImage($id)
 {
-
     $url = 'https://graph.facebook.com/' . $id . '?fields=full_picture&access_token=' . ((auth()->check()) ? auth()->user()->token : '');
 
     // create curl resource
@@ -84,8 +87,9 @@ function is_arabic($str)
         }
         $total_count++;
     }
-
-    if (($arabic_count / $total_count) > 0.1) {
+    // if there is more than 1% words writen in arabic return true
+    $pct = 0.1;
+    if (($arabic_count / $total_count) > $pct) {
         return true;
     }
     return false;

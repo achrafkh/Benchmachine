@@ -25,7 +25,6 @@ class BenchmarksController extends Controller
      */
     public function __construct(DAO $api, Utils $repo)
     {
-        $this->middleware('auth')->except(['render', 'validatePages']);
         $this->api = $api;
         $this->repo = $repo;
     }
@@ -65,13 +64,11 @@ class BenchmarksController extends Controller
      * @param  $secret String Secret code to make sure that the call is internal
      * @return \Illuminate\Http\Response
      */
-    public function render($id, $secret = '')
+    public function render($id, $secret)
     {
-        // too add , check if the provided secret is = to secret in Cache/or file
-        //if (env('SECRET') != $secret) {
-        //unauthorized
-        // abort(401);
-        //}
+        if (env('SECRET') != strtoupper($secret)) {
+            abort(401, 'UNAUTHORIZED');
+        }
         $benchmark = $this->repo->getBenchmark($id);
 
         return view('facebook.pdf', compact('benchmark'));
@@ -103,7 +100,7 @@ class BenchmarksController extends Controller
      * @param  \Illuminate\Http\Request
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function createDemo(Request $request)
     {
         $accounts = $request->accounts;
 
@@ -116,24 +113,31 @@ class BenchmarksController extends Controller
         $since = Carbon::now()->subDays(8)->toDateString();
         $until = Carbon::now()->subDays(1)->toDateString();
 
-        // Add pages to kpeiz core to collect dat
-        $token = str_random(40);
-        $response = $this->api->addPages($accounts, $token);
+        $benchmark = $this->api->createBenchmark($accounts, $since, $until, $title);
 
-        $pages_ids = $response['account_ids'];
-        $status = $response['status'];
+        return redirect('/home');
+    }
 
-        $benchmark = Benchmark::create([
-            'user_id' => auth()->user()->id,
-            'temp_id' => $token,
-            'title' => $title,
-            'since' => $since,
-            'until' => $until,
-            'status' => $status,
-        ]);
+    /**
+     * Create a benchmark using the provided data in the request
+     * This is for the Non paid benchmarks (free)
+     * @param  \Illuminate\Http\Request
+     * @return \Illuminate\Http\Response
+     */
+    public function create(Request $request)
+    {
+        $accounts = $request->accounts;
 
-        $benchmark->save();
-        $benchmark->accounts()->saveMany($pages_ids);
+        $title = 'My Benchmark';
+
+        if ($request->has('title')) {
+            $title = $request->title;
+        }
+
+        $since = Carbon::parse($request->since)->toDateString();
+        $until = Carbon::parse($request->until)->toDateString();
+
+        $benchmark = $this->api->createBenchmark($accounts, $since, $until, $title);
 
         return redirect('/');
     }

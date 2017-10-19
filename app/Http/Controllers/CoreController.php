@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Benchmark;
-use App\Mail\NotifyUser;
-use Mail;
 
 class CoreController extends Controller
 {
@@ -16,9 +14,15 @@ class CoreController extends Controller
      * @param String $token Temporary token
      * @return void
      */
-    public function benchmarkReady($token)
+    public function benchmarkReady($token, $id)
     {
-        $benchmark = Benchmark::with('user')->where('temp_id', $token)->first();
+        $benchmark = Benchmark::with('user', 'accounts')->where('temp_id', $token)->first();
+
+        if (!$benchmark->isReady()) {
+            // maybe % or smth for a progress bar or time estimation
+            return false;
+        }
+
         $benchmark->temp_id = null;
         $benchmark->status = 1;
         $benchmark->save();

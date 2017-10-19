@@ -17,13 +17,18 @@ class DAO
         $this->api = $api;
     }
 
+    /**
+     * Retrieve Benchmark data From kpeiz Core using a benchmark id
+     * @param Integer $id Benchmark id
+     * @return stdclass Benchmark data
+     */
     public function getBenchmarkById($id)
     {
         $benchmark = Benchmark::with('accounts')->find($id);
         if (!$benchmark) {
             return null;
         }
-        $pages_ids = $benchmark->accounts->pluck('remote_id')->toarray();
+        $pages_ids = $benchmark->accounts->pluck('id')->toarray();
 
         $data = $this->getBenchmarkByPagesIds($pages_ids, $benchmark->since, $benchmark->until);
 
@@ -38,6 +43,13 @@ class DAO
         return $data;
     }
 
+    /**
+     * Retrieve Benchmark data From kpeiz Core using Accounts ids & date range
+     * @param Array $ids Page remote ids (Ids in kpeiz)
+     * @param DateString $since Benchmark data starts from
+     * @param DateString $until Benchmark data end at
+     * @return stdclass Benchmark data
+     */
     public function getBenchmarkByPagesIds($ids, $since, $until)
     {
         if (is_array($ids)) {
@@ -52,6 +64,13 @@ class DAO
         return $this->api->post('custom-benchmark', $params);
     }
 
+    /**
+     * Addes pages to kpeiz core
+     * token is used to notify the client after kpeiz core is done collecting data
+     * @param Array $pages Pages Links
+     * @param string $token benchmark temporary identifier
+     * @return Array account_ids & status (CZ Pages migh be already ready in kpeiz core)
+     */
     public function addPages($pages = [], $token = null)
     {
         $account_ids = collect([]);
@@ -70,7 +89,7 @@ class DAO
             }
 
             $account = new Account;
-            $account->remote_id = $response->data->social_account_id;
+            $account->id = $response->data->social_account_id;
             $account->real_id = $response->data->social_account_real_id;
 
             if (!$response->data->exits) {
@@ -84,11 +103,65 @@ class DAO
         }
         if ($token) {
             $this->api->post('restore-if-deleted-bench', [
-                'account_ids' => $account_ids->pluck('remote_id')->toarray(),
+                'account_ids' => $account_ids->pluck('id')->toarray(),
                 'bench_temp_id' => $token,
+            ]);
+            $this->api->post('add-custom-tag', [
+                'account_ids' => $account_ids->pluck('id')->toarray(),
+                'tag' => 'benchmark_machine',
             ]);
         }
 
         return compact('status', 'account_ids');
+    }
+
+    /**
+     * Create abenchmark for current authenticated user
+     * @param Array $accounts Account links
+     * @param string $since Start date
+     * @param string $until End date
+     * @param string $title Benchmark title
+     * @return App\Benchmark model
+     */
+    public function createBenchmark($accounts, $since, $until, $title = 'My Benchmark')
+    {
+        // Add pages to kpeiz core to collect dat
+        $token = str_random(40);
+        // the token will be used as a temporary ID to check if collecting data is done
+        // when data collecting is done, the benchmark with this token will be marked as ready
+        $response = $this->addPages($accounts, $token);
+
+        $pages = $response['account_ids'];
+        $status = $response['status'];
+
+        $pages->each(function ($account) {
+            Account::updateOrCreate(['id' => $account->id], ['real_id' => $account->real_id]);
+        });
+
+        $benchmark = Benchmark::create([
+            'user_id' => auth()->user()->id,
+            'temp_id' => $token,
+            'title' => $title,
+            'since' => $since,
+            'until' => $until,
+            'status' => $status,
+        ]);
+
+        $benchmark->save();
+
+        $benchmark->accounts()->sync($pages->pluck('id')->toarray());
+
+        return $benchmark;
+    }
+
+    /**
+     * Check if provided pages ids are ready (if core is done collecting data)
+     * @param Array $pages_ids Page ids
+     * @return Stdclass $response
+     */
+    public function dataAvailable($pages_ids)
+    {
+        // check kpeiz core if pages with this ids are ready
+        return $this->api->post('pages-available', ['pages_ids' => $pages_ids]);
     }
 }

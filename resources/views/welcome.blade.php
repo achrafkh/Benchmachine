@@ -1,6 +1,5 @@
 @extends('layouts.master')
 @section('content')
-
 <div class="home-page">
     <div class="landing">
         <div class="landing-wrap">
@@ -46,7 +45,7 @@
         <img class="cloud cloud-2" src="/assets/images/cloud_2.png" alt="">
     </div>
     <div class="home-form">
-        <form id="submit_pages" action="/benchmarks/create" method="POST" >
+        <form id="submit_pages" action="{{ route('newDemoBench') }}" method="POST" >
          {{ csrf_field() }}
             <div class="hf-header">
                 <h2>
@@ -66,7 +65,8 @@
                     </div>
                     <div id="f_0" class="media-body fb-inner error_c">
                         <h4 class="fb-nb">First page</h4>
-                        <input id="fb_page_0" class="fb-input" type="text" name="accounts[]" placeholder="https://www.facebook.com/exemple">
+                        <input id="fb_page_0" class="fb-input" type="text" name="accounts[]"
+                        placeholder="https://www.facebook.com/exemple">
                     </div>
                 </div>
                 <div class="media fb-box">
@@ -75,7 +75,8 @@
                     </div>
                     <div id="f_1" class="media-body fb-inner error_c">
                         <h4 class="fb-nb">Second page</h4>
-                        <input id="fb_page_1" class="fb-input" type="text" name="accounts[]" placeholder="https://www.facebook.com/exemple">
+                        <input id="fb_page_1" class="fb-input" type="text" name="accounts[]"
+                        placeholder="https://www.facebook.com/exemple">
                     </div>
                 </div>
             </div>
@@ -96,58 +97,4 @@
         </form>
     </div>
 </div>
-@endsection
-
-
-@section('js')
-<script type="text/javascript">
-$("#trigger").unbind('click').bind("click", function (event) {
-    $('#min').css('display','none');
-    $('.error_c').css('border-style', 'none');
-    event.preventDefault();
-    var form = $('#submit_pages');
-    var pages = $('#submit_pages').serializeArray();
-    if(pages.length < 10){
-        pages.splice(pages.length - 1, 1);
-    }
-
-    $.ajax({
-        url: '/api/pages/validate',
-        type: 'post',
-        statusCode: {
-            422: function (response) {
-                $.each(response.responseJSON.errors, function (key, value) {
-                    var index = key.split(".");
-                    $('#f_'+index[1]).css('border-color', '#ffc1c1').css('border-style', 'solid');
-                });
-            }
-        },
-        data: pages,
-        success: function (data) {
-            if (data.hasOwnProperty('min')) {
-              $('#min').css('display','block');
-              return false;
-            }
-            if (data.hasOwnProperty('pages')) {
-                $.each(data.pages, function( index, value ) {
-                    console.log('missing p');
-                    console.log(value);
-                });
-            return false;
-            }
-
-            if(data.hasOwnProperty('success'))
-            {
-                console.log('success')
-               form.submit();
-            }
-        },
-        error: function (data) {
-            console.log(data.responseJSON)
-        }
-
-    });
-});
-
-</script>
 @endsection

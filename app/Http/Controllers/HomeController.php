@@ -7,7 +7,6 @@ use App\Acme\Wrapers\Utils;
 class HomeController extends Controller
 {
     protected $repo;
-
     /**
      * Create a new controller instance.
      * @param Utils $repo An instance of Utils class

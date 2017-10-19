@@ -6,8 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Account extends Model
 {
+    public $incrementing = false;
+
     protected $fillable = [
-        'remote_id', 'real_id', 'benchmark_id',
+        'id', 'real_id',
     ];
 
     /**
@@ -21,6 +23,6 @@ class Account extends Model
 
     public function benchmark()
     {
-        return $this->belongsTo(Benchmark::class);
+        return $this->belongsToMany(Benchmark::class, 'account_benchmark')->withTimestamps();
     }
 }

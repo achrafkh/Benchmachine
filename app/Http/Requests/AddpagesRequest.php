@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 
 class AddpagesRequest extends FormRequest
@@ -37,8 +38,15 @@ class AddpagesRequest extends FormRequest
         //Start generating rules
         $rules = [];
         for ($i = 0; $i < count($this->accounts); $i++) {
-            $rules['accounts.' . $i] = 'url';
+            $rules['accounts.' . $i] = 'required|url';
         }
+
+        if (isset($this->since)) {
+            $now = Carbon::now()->toDateString();
+            $rules['since'] = 'required|date|before:until';
+            $rules['until'] = 'required|date|after:since|before:' . $now;
+        }
+
         return $rules;
     }
 }
