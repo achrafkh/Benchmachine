@@ -56,16 +56,16 @@ class Gateway
 
     public function test()
     {
-        $params['PAYID'] = '456465654';
+        $params['PAYID'] = 'machine-4aeaz5646s5654';
         $params['TESTPARAM_1'] = 'sdqd';
         $params['TESTPARAM_2'] = 'sqdsqdsqd';
         $params['TESTPARAM_3'] = 'sdqsqdsqdd';
-
         $output = $this->post(trim(env('PAY_CLIENT'), '/') . '/payement/notification', $params);
+
         if ((!$output) || ($output != $params['PAYID'])) {
             dd('eerrr');
         }
 
-        return redirect()->away('http://kanalytik.client/payement/done/' . $params['PAYID']);
+        return redirect()->away(trim(env('PAY_CLIENT'), '/') . '/payement/done/' . $params['PAYID']);
     }
 }

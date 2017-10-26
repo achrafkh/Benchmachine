@@ -23,10 +23,10 @@
 			</button>
 			<ul class="dropdown-menu dropdown-menu-right">
 				<li>
-					<a href="">History</a>
+					<a href="/home">History</a>
 				</li>
 				<li>
-					<a href="">Settings</a>
+					<a href="/settings">Settings</a>
 				</li>
 				<li role="separator" class="divider"></li>
 				<li>
