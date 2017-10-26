@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Acme\Wrapers\Utils;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Monolog\Handler\StreamHandler;
@@ -41,7 +42,7 @@ class GeneratePdf extends Command
      *
      * @return mixed
      */
-    public function handle()
+    public function handle(Utils $dao)
     {
         $id = $this->argument('id');
         $this->log->info('Generating pdf started for benchmark ' . $id);
@@ -59,6 +60,7 @@ class GeneratePdf extends Command
         if (!$process->isSuccessful()) {
             $this->log->info('pdf created Successfully' . $process->getOutput());
         }
+        $dao->getBenchmarkHtml($id);
         $this->log->info('pdf created Successfully');
     }
 }

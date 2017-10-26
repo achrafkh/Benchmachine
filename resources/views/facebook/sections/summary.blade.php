@@ -15,11 +15,11 @@
 					<span class="digit">{{ number_format($averages->page_engagement, 3, '.', ',') }}</span>
 				</li>
 				<li class="summary-progress">
-					<!-- <span class="up">
-						+0.1%
+					<span class=" {{ $variations->averages->page_engagement->class }}">
+						 {{ $variations->averages->page_engagement->sign . $variations->averages->page_engagement->prct }}%
 						<i class="icon-down-dir"></i>
 						<i class="icon-up-dir"></i>
-					</span> -->
+					</span>
 				</li>
 				<li class="summary-cap">
 					Page average engagement rate
@@ -31,11 +31,11 @@
 					<span class="digit">{{ number_format($averages->average_page_engagement, 3, '.', ',') }}</span>
 				</li>
 				<li class="summary-progress">
-					<<!-- span>
-						0%
+					<span class=" {{ $variations->averages->average_page_engagement->class }}">
+						 {{ $variations->averages->average_page_engagement->sign . $variations->averages->average_page_engagement->prct }}%
 						<i class="icon-down-dir"></i>
 						<i class="icon-up-dir"></i>
-					</span> -->
+					</span>
 				</li>
 				<li class="summary-cap">
 					Posts average engagement rate
@@ -46,11 +46,11 @@
 					<span class="digit">{{ number_format($averages->fans, 0, '.', ' ') }}</span>
 				</li>
 				<li class="summary-progress">
-					<!-- <span class="up">
-						+17.5%
+					<span class=" {{ $variations->averages->fans->class }}">
+						 {{ $variations->averages->fans->sign . $variations->averages->fans->prct }}%
 						<i class="icon-down-dir"></i>
 						<i class="icon-up-dir"></i>
-					</span> -->
+					</span>
 				</li>
 				<li class="summary-cap">
 					Average total fans number
@@ -61,11 +61,11 @@
 					<span class="digit">{{ number_format($averages->absolute_fans, 0, '.', ' ') }}</span>
 				</li>
 				<li class="summary-progress">
-					<!-- <span class="down">
-						-4.7%
+					<span class=" {{ $variations->averages->absolute_fans->class }}">
+						 {{ $variations->averages->absolute_fans->sign . $variations->averages->absolute_fans->prct }}%
 						<i class="icon-down-dir"></i>
 						<i class="icon-up-dir"></i>
-					</span> -->
+					</span>
 				</li>
 				<li class="summary-cap">
 					Average new fans number
@@ -76,11 +76,11 @@
 					<span class="digit">{{ number_format($averages->posts, 0, '.', ' ') }}</span>
 				</li>
 				<li class="summary-progress">
-					<!-- <span class="up">
-						+1.6%
+					<span class=" {{ $variations->averages->posts->class }}">
+						 {{ $variations->averages->posts->sign . $variations->averages->posts->prct }}%
 						<i class="icon-down-dir"></i>
 						<i class="icon-up-dir"></i>
-					</span> -->
+					</span>
 				</li>
 				<li class="summary-cap">
 					Average posts number by page
@@ -89,21 +89,15 @@
 			<ul class="summary-block">
 				<li class="summary-data">
 					<span class="digit">
-					@if(isset($averages->posts) && $averages->posts > 0)
-					{{ number_format(
-						$averages->interactions/$averages->posts
-					 , 0, '.', ' ') }}
-					@else
-					0
-					@endif
+ 							{{ number_format($averages->post_interactions_avg, 0, '.', ' ') }}
 					 </span>
 				</li>
 				<li class="summary-progress">
-				<!-- 	<span class="down">
-						-2.1%
+					<span class=" {{ $variations->averages->post_interactions_avg->class }}">
+						 {{ $variations->averages->post_interactions_avg->sign . $variations->averages->post_interactions_avg->prct }}%
 						<i class="icon-down-dir"></i>
 						<i class="icon-up-dir"></i>
-					</span> -->
+					</span>
 				</li>
 				<li class="summary-cap">
 					Nombre des interactions moyen par post
@@ -114,11 +108,11 @@
 					<span class="digit">{{ number_format($averages->interactions, 0, '.', ' ') }}</span>
 				</li>
 				<li class="summary-progress">
-					<!-- <span class="up">
-						+9.4%
+					<span class=" {{ $variations->averages->interactions->class }}">
+						 {{ $variations->averages->interactions->sign . $variations->averages->interactions->prct }}%
 						<i class="icon-down-dir"></i>
 						<i class="icon-up-dir"></i>
-					</span> -->
+					</span>
 				</li>
 				<li class="summary-cap">
 					Average interaction number by page
@@ -129,11 +123,11 @@
 					<span class="digit">{{ number_format($averages->likes, 0, '.', ' ') }}</span>
 				</li>
 				<li class="summary-progress">
-				<!-- 	<span class="up">
-						+5.1%
+					<span class=" {{ $variations->averages->likes->class }}">
+						 {{ $variations->averages->likes->sign . $variations->averages->likes->prct }}%
 						<i class="icon-down-dir"></i>
 						<i class="icon-up-dir"></i>
-					</span> -->
+					</span>
 				</li>
 				<li class="summary-cap">
 					Average likes number by page
@@ -144,11 +138,11 @@
 					<span class="digit">{{ number_format($averages->comments, 0, '.', ' ') }}</span>
 				</li>
 				<li class="summary-progress">
-				<!-- 	<span class="down">
-						-5.1%
+					<span class=" {{ $variations->averages->comments->class }}">
+						 {{ $variations->averages->comments->sign . $variations->averages->comments->prct }}%
 						<i class="icon-down-dir"></i>
 						<i class="icon-up-dir"></i>
-					</span> -->
+					</span>
 				</li>
 				<li class="summary-cap">
 					Average comments number by page
@@ -159,11 +153,11 @@
 					<span class="digit">{{ number_format($averages->shares, 0, '.', ' ') }}</span>
 				</li>
 				<li class="summary-progress">
-					<!-- <span class="up">
-						+4.9%
+					<span class=" {{ $variations->averages->shares->class }}">
+						 {{ $variations->averages->shares->sign . $variations->averages->shares->prct }}%
 						<i class="icon-down-dir"></i>
 						<i class="icon-up-dir"></i>
-					</span> -->
+					</span>
 				</li>
 				<li class="summary-cap">
 					Average shares number by page

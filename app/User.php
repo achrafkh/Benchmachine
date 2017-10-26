@@ -53,6 +53,7 @@ class User extends Authenticatable
             ->whereNotNull('country')->where('country', '<>', '')
             ->whereNotNull('city')->where('city', '<>', '')
             ->whereNotNull('zip')->where('zip', '<>', '')
+            ->whereNotNull('email')->where('email', '<>', '')
             ->whereNotNull('address')->exists();
 
         return $bool;
@@ -66,7 +67,7 @@ class User extends Authenticatable
         }
 
         $params['phone'] = $this->details->phone;
-        $params['email'] = $this->email;
+        $params['email'] = $this->details->email;
         $params['user_id'] = $this->id;
         $params['last_name'] = head(explode(' ', $this->name));
         $params['first_name'] = last(explode(' ', $this->name));
@@ -76,5 +77,17 @@ class User extends Authenticatable
         $params['country'] = $this->details->country;
 
         return $params;
+    }
+
+    public function getValidEmail()
+    {
+        if (null == $this->details) {
+            $this->load('details');
+        }
+        if (!$this->hasDetails()) {
+            return $this->email;
+        }
+
+        return $this->details->email;
     }
 }

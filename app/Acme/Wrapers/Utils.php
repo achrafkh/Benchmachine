@@ -26,11 +26,11 @@ class Utils
 
     public function getBenchmarkHtml($id)
     {
-        $file = public_path() . '/static/' . $id . '.html';
+        $file = public_path() . '/static/benchmark-' . $id . '.html';
         if (!file_exists($file)) {
             $benchmark = $this->getBenchmark($id);
             $html = view('facebook.pdf', compact('benchmark'))->render();
-            file_put_contents(public_path() . '/static/' . $id . '.html', replace($html));
+            file_put_contents(public_path() . '/static/benchmark-' . $id . '.html', replace($html));
         } else {
             $html = file_get_contents($file);
         }
@@ -45,6 +45,7 @@ class Utils
      */
     public function prepareBenchmark($data)
     {
+
         $benchmark = new Benchmark;
 
         $posts = $this->mapPost($data->most_engaged_posts)->sortByDesc('engagement_rate');
@@ -55,9 +56,40 @@ class Utils
 
         unset($data->details);
 
+        $old_accounts = collect($data->old);
+        unset($data->old);
+
         $accounts = collect($data);
         $benchmark->setAccounts($accounts);
 
+        $benchmark->createCharts();
+
+        $summary = $this->getSummary($accounts);
+        $old_summary = $this->getSummary($old_accounts);
+
+        $benchmark->setAverages($summary['averages']);
+        $benchmark->setSum($summary['sum']);
+
+        $variations = $this->calculateVariation((array) $old_summary, (array) $summary);
+        $benchmark->setVariations($variations);
+
+        return $benchmark;
+    }
+
+    public function calculateVariation($old, $new)
+    {
+        $variations = [];
+
+        foreach ($new as $key => $value) {
+            foreach ($value as $index => $val) {
+                $variations[$key][$index] = calcVariation($old[$key]->{$index}, $val);
+            }
+        }
+        return json_decode(json_encode($variations));
+    }
+
+    public function getSummary($accounts)
+    {
         $keys = config('helpers.averages');
         $sum_keys = config('helpers.sum');
 
@@ -71,10 +103,7 @@ class Utils
             }
         }
 
-        $benchmark->setaverages($averages);
-        $benchmark->setSum($sum);
-
-        return $benchmark;
+        return compact('averages', 'sum');
     }
 
     /**
@@ -118,6 +147,7 @@ class Utils
 
         // check if data is collected for this pages
         $response = $this->api->dataAvailable($page_ids);
+
         //if ready return true
         if (isset($response->ready) && $response->ready) {
             return true;

@@ -9,11 +9,11 @@
 			</span>
 		</div>
 		<div class="row charts-wrap">
-			<?php for ($i = 0; $i < 2; $i++) {?>
+			@foreach($benchmark->charts as $chart)
 			<div class="col-md-6 chart">
 				<div class="chart-content">
-					<h3 class="chart-cap">Total fans number</h3>
-					<canvas id="canvas-<?=$i?>"></canvas>
+					<h3 class="chart-cap"> {{ $chart['title'] }} </h3>
+					<canvas id="{{ $chart['id'] }}"></canvas>
 				</div>
 				<ul class="chart-stats">
 					<li>
@@ -26,7 +26,13 @@
 					</li>
 				</ul>
 			</div>
-			<?php }?>
+			@endforeach
 		</div>
 	</div>
 </div>
+
+@section('js')
+	@foreach($benchmark->charts as $chart)
+		@include('facebook.charts.bar',$chart)
+	@endforeach
+@endsection

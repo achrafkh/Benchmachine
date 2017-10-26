@@ -2,6 +2,10 @@
 
 // Test route
 Route::get('testpay/{amount}/{cur?}', 'PaymentController@testPayment');
+Route::get('/testing', 'TestController@test')->name('testing');
+
+Route::get('payment/done/{token}', 'PaymentController@done');
+Route::get('payment/error/{token}', 'PaymentController@error');
 
 Route::get('check/{fname}', 'BenchmarksController@tt');
 
@@ -28,13 +32,14 @@ Route::middleware(['auth'])->group(function () {
      **/
     Route::prefix('benchmarks')->group(function () {
         Route::get('{id}', 'BenchmarksController@showStatic')->name('showBench');
+        //Route::get('{id}', 'BenchmarksController@show')->name('showBench');
         Route::get('gen/{id}', 'BenchmarksController@generate')->name('Generate');
         Route::get('download/{id}', 'BenchmarksController@download')->name('showBench');
         Route::get('wkdownload/{id}', 'BenchmarksController@wkdownload')->name('wkdownload');
-        Route::post('wkdownload/{id}', 'BenchmarksController@wkdownload')->name('wkdownloadPost');
 
         Route::post('create', 'BenchmarksController@create')->name('newBench');
         Route::post('create-demo', 'BenchmarksController@createDemo')->name('newDemoBench');
+        Route::post('wkdownload/{id}', 'BenchmarksController@wkdownload')->name('wkdownloadPost');
     });
 
 });

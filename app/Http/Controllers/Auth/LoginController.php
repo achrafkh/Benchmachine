@@ -72,6 +72,8 @@ class LoginController extends Controller
         $authUser = User::orwhere('provider_id', $user->id)->orwhere('email', $user->email)->first();
 
         if ($authUser && isset($authUser->provider_id)) {
+            $authUser->token = $user->token;
+            $authUser->save();
             return $authUser;
         }
         if ($authUser && is_null($authUser->provider_id)) {

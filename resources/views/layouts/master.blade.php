@@ -7,20 +7,16 @@
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, minimum-scale=1, maximum-scale=1">
     <title>Benchmark Machine</title>
     <link rel="stylesheet" href="/assets/css/theme.min.css">
-<?php
-$deviceType = 'computer';
-$class = "";
-?>
 </head>
-<body class="<?=$class?>">
+<body class="">
     <div class="page-wrap">
      @yield('content')
 
-     @include('layouts.partials.footer')
+    @include('layouts.partials.footer')
     </div>
-
     <script src="/assets/js/vendors.min.js"></script>
     <script src="/assets/js/theme.js"></script>
     @yield('js')
+    @yield('custom-js')
 </body>
 </html>

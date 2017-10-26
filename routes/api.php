@@ -11,5 +11,7 @@
 |
  */
 
+Route::post('payement/callback', 'PaymentController@callback');
 Route::post('/pages/validate', 'BenchmarksController@validatePages');
 Route::get('/core/end-history/{token}/{id}', 'CoreController@benchmarkReady');
+Route::post('/benchmarks/update-title', 'BenchmarksController@updateTitle')->name('updateTitle');

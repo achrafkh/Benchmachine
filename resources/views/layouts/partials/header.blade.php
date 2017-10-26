@@ -1,8 +1,13 @@
 <header class="benchmark-header">
 	<div class="container">
-		<button class="print-btn" waves-hover>
-		Print benchmark
-		</button>
+	@if(isset($id))
+		<form action="{{url('/benchmarks/wkdownload/' . $id)}}" method="POST">
+		{{ csrf_field() }}
+			<button id="print_button"  class="print-btn" waves-hover>
+			Print benchmark
+			</button>
+		</form>
+	@endif
 		<div class="dropdown profile-dropdown">
 			<button class="media profile-trigger" class="media" type="button" data-toggle="dropdown">
 			<div class="media-left media-middle">

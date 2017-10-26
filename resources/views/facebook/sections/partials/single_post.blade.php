@@ -1,7 +1,5 @@
 <div class="col-lg-3 col-md-4 col-sm-6 col-ms-6">
 	<a class="post" target="_blank" href="https://www.facebook.com/{{ $post->social_post_real_id }}">
-
-
 	@if($post->social_post_type != 'status')
 	<?php $style = true;?>
 		<div class="post-img" style="background-image:url({{ postImage($post->social_post_real_id)  }})"></div>

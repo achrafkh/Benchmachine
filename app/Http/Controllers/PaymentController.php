@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Acme\Gateway;
+use Cache;
+use Illuminate\Http\Request;
 
 class PaymentController extends Controller
 {
@@ -19,6 +21,7 @@ class PaymentController extends Controller
 
     public function testPayment($amount, $cur = 'TND')
     {
+
         $user = auth()->user();
         if (!$user->hasDetails()) {
             abort(401, 'User have no details');
@@ -32,5 +35,23 @@ class PaymentController extends Controller
         $user = auth()->user()->getPayementDetails();
 
         return $this->gateway->pay(array_merge($user, $params));
+    }
+
+    public function callback(Request $request)
+    {
+        $response['token'] = str_random(40);
+        $response['status'] = 200;
+
+        // Save in DB
+        Cache::put($response['token'], $request->all(), 20);
+
+        return response()->json($response);
+    }
+
+    public function done($token)
+    {
+        //Check if token exists in DB
+        //Put it in Session and redirect
+        dd(Cache::get($token));
     }
 }

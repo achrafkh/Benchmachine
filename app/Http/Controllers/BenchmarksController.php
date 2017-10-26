@@ -11,6 +11,7 @@ use Cache;
 use Carbon\Carbon;
 use File;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use PDF;
 use Storage;
 
@@ -41,9 +42,16 @@ class BenchmarksController extends Controller
         $benchmark = Cache::remember($id, env('CACHE_TIME'), function () use ($id) {
             return $this->repo->getBenchmark($id);
         });
+
         return view('facebook.benchmark', compact('benchmark'));
     }
 
+    /**
+     * Render a benchmark to the browser
+     * Generates a Static html file for current benchmark
+     * @param  $id Integer Benchmark id
+     * @return \Illuminate\Http\Response
+     */
     public function showStatic($id)
     {
         $html = $this->repo->getBenchmarkHtml($id);
@@ -62,8 +70,8 @@ class BenchmarksController extends Controller
     public function download($id)
     {
         $benchmark = $this->repo->getBenchmark($id);
-
         $pdf = PDF::loadView('facebook.pdf', compact('benchmark'));
+
         return $pdf->download('report.pdf');
     }
 
@@ -172,5 +180,29 @@ class BenchmarksController extends Controller
         }
 
         return response()->json(['success' => true]);
+    }
+
+    public function updateTitle(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'title' => 'min:4|max:60',
+            'id' => 'exists:benchmarks,id',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 200,
+                'msg' => 'error',
+                'errors' => $validator->errors()->first(),
+            ]);
+        }
+
+        Benchmark::where('id', $request->id)
+            ->update(['title' => $request->title]);
+
+        return response()->json([
+            'status' => 200,
+            'msg' => 'success',
+        ]);
     }
 }

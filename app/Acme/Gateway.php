@@ -53,4 +53,19 @@ class Gateway
         }
         return redirect()->away($redirect_url . $response->token);
     }
+
+    public function test()
+    {
+        $params['PAYID'] = '456465654';
+        $params['TESTPARAM_1'] = 'sdqd';
+        $params['TESTPARAM_2'] = 'sqdsqdsqd';
+        $params['TESTPARAM_3'] = 'sdqsqdsqdd';
+
+        $output = $this->post(trim(env('PAY_CLIENT'), '/') . '/payement/notification', $params);
+        if ((!$output) || ($output != $params['PAYID'])) {
+            dd('eerrr');
+        }
+
+        return redirect()->away('http://kanalytik.client/payement/done/' . $params['PAYID']);
+    }
 }

@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Acme\Wrapers\Utils;
 use App\Benchmark;
 use App\Mail\NotifyUser;
+use Artisan;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Mail;
@@ -63,12 +64,18 @@ class UpdateBenchmarkStatus extends Command
         // loop through all benchmarks
         $benchmarks->each(function ($benchmark) use ($core) {
             // Check if benchmark is ready
-            if ($test = $core->benchmarkIsReady($benchmark)) {
+            $ready = $core->benchmarkIsReady($benchmark);
+            if ($ready) {
                 // update Benchmark status if benchmark ready
                 $benchmark->markAsReady();
                 //notify user
-                Mail::to($benchmark->user->email)
+                Mail::to($benchmark->user->getValidEmail())
                     ->send(new NotifyUser($benchmark));
+
+                Artisan::call('make:pdf', [
+                    'id' => $benchmark->id,
+                ]);
+
                 $this->log->info('Benchmark ID : ' . $benchmark->id . ' Is ready');
             }
         });

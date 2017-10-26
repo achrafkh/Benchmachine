@@ -12,6 +12,10 @@ class DAO
 {
     protected $api;
 
+    /**
+     * DAO constructor.
+     * @param \App\Acme\Wrapers\ApiAdapter $api
+     */
     public function __construct(ApiAdapter $api)
     {
         $this->api = $api;
@@ -32,23 +36,49 @@ class DAO
 
         $data = $this->getBenchmarkByPagesIds($pages_ids, $benchmark->since, $benchmark->until);
 
+        $vars = $this->getVariations($pages_ids, $benchmark->since, $benchmark->until);
+        $data->data->old = $vars;
         if (isset($data->data)) {
             $details = new StdClass;
+            $details->id = $benchmark->id;
             $details->title = $benchmark->title;
             $details->since = Carbon::parse($benchmark->since);
             $details->until = Carbon::parse($benchmark->until);
 
             $data->data->details = $details;
         }
+
         return $data;
     }
 
     /**
+     * @param $ids
+     * @param $since
+     * @param $until
+     * @return mixed
+     */
+    public function getVariations($ids, $since, $until)
+    {
+
+        $until = Carbon::parse($until);
+        $since = Carbon::parse($since);
+
+        $difference = $until->diffInDays($since);
+        $until->subdays($difference);
+        $since->subdays($difference);
+
+        $data = $this->getBenchmarkByPagesIds($ids, $since->toDateString(), $until->toDateString());
+
+        unset($data->data->most_engaged_posts);
+        return $data->data;
+    }
+
+    /**
      * Retrieve Benchmark data From kpeiz Core using Accounts ids & date range
-     * @param Array $ids Page remote ids (Ids in kpeiz)
-     * @param DateString $since Benchmark data starts from
-     * @param DateString $until Benchmark data end at
-     * @return stdclass Benchmark data
+     * @param $ids
+     * @param $since
+     * @param $until
+     * @return \Illuminate\Http\Response
      */
     public function getBenchmarkByPagesIds($ids, $since, $until)
     {
@@ -108,7 +138,7 @@ class DAO
             ]);
             $this->api->post('add-custom-tag', [
                 'account_ids' => $account_ids->pluck('id')->toarray(),
-                'tag' => 'benchmark_machine',
+                'tag' => config('utils.tag'),
             ]);
         }
 

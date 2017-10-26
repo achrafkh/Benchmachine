@@ -1,4 +1,52 @@
 <?php
+
+/**
+ * calculated variation between two numbers and return an array
+ * @param $old
+ * @param $new
+ * @param bool $test
+ * @return array
+ */
+function calcVariation($old, $new, $test = false)
+{
+    $class = '';
+    $sign = '';
+    $prct = 0;
+    if ($new > $old) {
+        $class = 'up';
+        $sign = '+';
+        if($old != 0){
+            $prct = round((($new - $old) / $old) * 100, 1);
+        }
+
+    } elseif ($new < $old) {
+        $class = 'down';
+        $sign = '-';
+        if($new != 0){
+            $prct = round((($old - $new) / $new) * 100, 1);
+        }
+    }
+
+    return compact('class', 'sign', 'prct');
+}
+
+/**
+ * Echos the provided data on the browser
+ */
+function d()
+{
+    array_map(function ($x) {
+        (new Illuminate\Support\Debug\Dumper)->dump($x);
+    }, func_get_args());
+}
+
+/**
+ * will return header html (for static render)
+ * @param $name
+ * @param $image
+ * @param $id
+ * @return mixed
+ */
 function getHtmlHeader($name, $image, $id)
 {
     $header = file_get_contents(public_path() . '/static/app/header.html');
@@ -22,6 +70,7 @@ function str_insert($str, $search, $insert)
     return substr_replace($str, $search . $insert, $index, strlen($search));
 }
 
+// empty white spaces
 function replace($html)
 {
     $preg = [
@@ -79,9 +128,16 @@ function number_shorten($number, $precision = 3, $divisors = null)
 }
 
 // Get a post image using post real id
-function postImage($id)
+function postImage($id, $token = null)
 {
-    $url = 'https://graph.facebook.com/' . $id . '?fields=full_picture&access_token=' . ((auth()->check()) ? auth()->user()->token : '');
+
+    $app_token = env('FACEBOOK_ID') . '|' . env('FACEBOOK_SECRET');
+    $fetch_token = ((auth()->check()) ? auth()->user()->token : $app_token);
+
+    if (isset($token)) {
+        $fetch_token = $app_token;
+    }
+    $url = 'https://graph.facebook.com/' . $id . '?fields=full_picture&access_token=' . $fetch_token;
 
     // create curl resource
     $ch = curl_init();
@@ -92,7 +148,11 @@ function postImage($id)
     // $output contains the output string
     $output = curl_exec($ch);
     curl_close($ch);
+    $resp = json_decode($output);
 
+    if (isset($resp->error) && (null == $token)) {
+        return postImage($id, $app_token);
+    }
     $img = head(json_decode($output));
     if (!is_string($img)) {
         return '';
