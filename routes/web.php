@@ -1,11 +1,11 @@
 <?php
 
 // Test route
-Route::get('testpay/{amount}/{cur?}', 'PaymentController@testPayment');
 Route::get('/testing', 'TestController@test')->name('testing');
 
 Route::get('payment/done/{token}', 'PaymentController@done');
 Route::get('payment/error/{token}', 'PaymentController@error');
+Route::post('payment/pay/{id}', 'PaymentController@Initpayment');
 
 Route::get('check/{fname}', 'BenchmarksController@tt');
 

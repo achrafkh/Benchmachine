@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Acme\Gateway;
+use App\Order;
+use Artisan;
 use Cache;
 use Illuminate\Http\Request;
 
@@ -19,17 +21,18 @@ class PaymentController extends Controller
         $this->gateway = $gateway;
     }
 
-    public function testPayment($amount, $cur = 'TND')
+    public function Initpayment($id)
     {
-
         $user = auth()->user();
+        $order = Order::with('benchmark')->find($id);
         if (!$user->hasDetails()) {
             abort(401, 'User have no details');
         }
 
-        $params['currency'] = strtoupper($cur);
-        $params['amount'] = $amount;
-        $params['order_desc'] = 'Benchmark for 6 pages - From : 2017-05-05 | To :  2017-10-10 ';
+        //$params['currency'] = strtoupper($cur);
+        $params['currency'] = 'EUR';
+        $params['amount'] = inEuro($order->total);
+        $params['order_desc'] = 'Benchmark for 6 pages - From : ' . $order->benchmark->from . ' | To :  ' . $order->benchmark->from;
         $params['order_id'] = 'machine-' . str_random(40);
 
         $user = auth()->user()->getPayementDetails();
@@ -52,6 +55,21 @@ class PaymentController extends Controller
     {
         //Check if token exists in DB
         //Put it in Session and redirect
-        dd(Cache::get($token));
+        $data = Cache::get($token);
+        $order = Order::with('benchmark')->find($data)->first();
+        $order->benchmark->updateStatus(1);
+        $order->status = 1;
+        $order->save();
+
+        Artisan::call('fetch:benchmark', [
+            'id' => $order->benchmark->id,
+        ]);
+
+        Cache::forget($token);
+
+        return redirect('/home');
+        if (is_null($data)) {
+            abort(404);
+        }
     }
 }

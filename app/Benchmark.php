@@ -24,6 +24,17 @@ class Benchmark extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function order()
+    {
+        return $this->hasOne(Order::class);
+    }
+
+    public function updateStatus($status)
+    {
+        $this->status = $status;
+        $this->save();
+    }
+
     public function accounts()
     {
         return $this->belongsToMany(Account::class, 'account_benchmark')->withTimestamps();
@@ -40,7 +51,17 @@ class Benchmark extends Model
 
     public function markAsReady()
     {
-        $this->status = true;
+        $this->status = 2;
         return $this->save();
+    }
+
+    public function getStatus()
+    {
+        if (1 == $this->status) {
+            return ['class' => 'info', 'text' => 'Processing'];
+        } elseif (2 == $this->status) {
+            return ['class' => 'success', 'text' => 'Ready'];
+        }
+        return ['class' => 'warning', 'text' => 'Unpaid'];
     }
 }

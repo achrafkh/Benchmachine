@@ -34,7 +34,8 @@ class HomeController extends Controller
      */
     public function home()
     {
-        $benchmarks = auth()->user()->benchmarks()->with('accounts')->get();
+        $benchmarks = auth()->user()->benchmarks()->with('accounts', 'order')->get();
+
         return view('home', compact('benchmarks'));
     }
 

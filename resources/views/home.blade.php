@@ -34,12 +34,19 @@
                                         <td>{{ $benchmark->created_at }}</td>
                                         <td>{{ $benchmark->since }}</td>
                                         <td>{{ $benchmark->until }}</td>
-                                        <td><span class="label label-{{ ($benchmark->status) ? 'success'  : 'warning' }}">
-                                        {{ ($benchmark->status) ? 'Ready'  : 'Processing' }}</span></td>
+                                        <td><span class="label label-{{ $benchmark->getStatus()['class'] }}">
+                                       {{ $benchmark->getStatus()['text'] }}</span></td>
                                         <td>
-                                            <a class="btn btn-primary btn-sm" target="_blank" href="/benchmarks/{{ $benchmark->id }}" @if(!$benchmark->status) disabled  @endif >View</a>
-                                            <a class="btn btn-primary btn-sm" target="_blank" href="/benchmarks/download/{{ $benchmark->id }}"
-                                            @if(!$benchmark->status) disabled  @endif >Download</a>
+                                        @if($benchmark->status == 0)
+                                        <form class="inline" action="payment/pay/{{ $benchmark->order->id }}" method="POST" style="">
+                                             {{ csrf_field() }}
+                                            <button type="submit" class="btn btn-primary btn-sm" >Pay</button>
+                                        </form>
+                                        @endif
+                                            <a class="btn btn-primary btn-sm" target="_blank"
+                                            href="@if($benchmark->status == 2) /benchmarks/{{ $benchmark->id }}  @else javascript::void(0) @endif" @if($benchmark->status != 2) disabled  @endif >View</a>
+                                            <a class="btn btn-primary btn-sm" target="_blank" href="@if($benchmark->status == 2) /benchmarks/download/{{ $benchmark->id }} @else javascript::void(0) @endif"
+                                            @if($benchmark->status != 2) disabled  @endif >Download</a>
                                         </td>
                                     </tr>
                                     @endforeach

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Account;
 use App\Acme\Wrapers\DAO;
 use App\Acme\Wrapers\Utils;
 use App\Benchmark;
 use App\Http\Requests\AddpagesRequest;
+use App\Order;
 use Artisan;
 use Cache;
 use Carbon\Carbon;
@@ -131,7 +133,7 @@ class BenchmarksController extends Controller
         $since = Carbon::now()->subDays(8)->toDateString();
         $until = Carbon::now()->subDays(1)->toDateString();
 
-        $benchmark = $this->api->createBenchmark($accounts, $since, $until, $title);
+        $benchmark = $this->api->prepareBenchmark($accounts, $since, $until, $title);
 
         return redirect('/home');
     }
@@ -144,7 +146,7 @@ class BenchmarksController extends Controller
      */
     public function create(Request $request)
     {
-        $accounts = $request->accounts;
+        $accounts = $request->account_ids;
 
         $title = 'My Benchmark';
 
@@ -155,9 +157,17 @@ class BenchmarksController extends Controller
         $since = Carbon::parse($request->since)->toDateString();
         $until = Carbon::parse($request->until)->toDateString();
 
-        $benchmark = $this->api->createBenchmark($accounts, $since, $until, $title);
+        $benchmark = $this->api->prepareBenchmark($accounts, $since, $until, $title);
 
-        return redirect('/');
+        $order = Order::create([
+            'user_id' => auth()->user()->id,
+            'benchmark_id' => $benchmark->id,
+            'total' => 25,
+            'id' => 'machine-' . str_random(30),
+            'status' => 0,
+        ]);
+
+        return redirect('/home');
     }
 
     /**
@@ -174,12 +184,13 @@ class BenchmarksController extends Controller
         }
 
         $response = $this->api->addPages($accounts);
-
         if (isset($response['pages'])) {
             return response()->json(['pages' => $response['pages']]);
         }
-
-        return response()->json(['success' => true]);
+        $response['account_ids']->each(function ($account) {
+            Account::updateOrCreate(['id' => $account->id], ['real_id' => $account->real_id]);
+        });
+        return response()->json(['success' => true, 'ids' => $response['account_ids']->pluck('id')->toarray()]);
     }
 
     public function updateTitle(Request $request)
@@ -199,6 +210,11 @@ class BenchmarksController extends Controller
 
         Benchmark::where('id', $request->id)
             ->update(['title' => $request->title]);
+
+        // Delete cached view file
+        $file = public_path() . '/static/benchmark-' . $request->id . '.html';
+
+        unlink($file);
 
         return response()->json([
             'status' => 200,

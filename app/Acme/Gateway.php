@@ -54,18 +54,16 @@ class Gateway
         return redirect()->away($redirect_url . $response->token);
     }
 
-    public function test()
+    public function process($id)
     {
-        $params['PAYID'] = 'machine-4aeaz5646s5654';
-        $params['TESTPARAM_1'] = 'sdqd';
-        $params['TESTPARAM_2'] = 'sqdsqdsqd';
-        $params['TESTPARAM_3'] = 'sdqsqdsqdd';
+        $params['PAYID'] = $id;
+
         $output = $this->post(trim(env('PAY_CLIENT'), '/') . '/payement/notification', $params);
 
         if ((!$output) || ($output != $params['PAYID'])) {
-            dd('eerrr');
+            dd($output);
         }
 
-        return redirect()->away(trim(env('PAY_CLIENT'), '/') . '/payement/done/' . $params['PAYID']);
+        return redirect()->away(trim(env('PAY_CLIENT'), '/') . '/payement/done');
     }
 }

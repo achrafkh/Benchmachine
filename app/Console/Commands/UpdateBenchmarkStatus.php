@@ -57,7 +57,7 @@ class UpdateBenchmarkStatus extends Command
             $this->log->info('Checking benchmark ID: ' . $id);
         } else {
             // else check all non ready benchmarks
-            $benchmarks = Benchmark::where('status', false)->with('accounts', 'user')->get();
+            $benchmarks = Benchmark::where('status', 1)->with('accounts', 'user')->get();
             $this->log->info('Checking all Benchmarks');
         }
 

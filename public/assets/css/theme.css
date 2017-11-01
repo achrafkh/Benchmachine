@@ -19,7 +19,9 @@
     Homepage:  http://thedesignoffice.org/project/modern-pictograms/
 
 */
-
+.inline{
+	display: inline;
+}
 @font-face {
 	font-family: 'fontello';
 	src: url("fonts/fontello/fontello.eot?537543");

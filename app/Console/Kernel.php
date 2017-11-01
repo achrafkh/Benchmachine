@@ -14,6 +14,8 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         \App\Console\Commands\UpdateBenchmarkStatus::class,
+        \App\Console\Commands\GeneratePdf::class,
+        \App\Console\Commands\fetchBenchmarkData::class,
     ];
 
     /**

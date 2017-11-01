@@ -145,6 +145,20 @@ class DAO
         return compact('status', 'account_ids');
     }
 
+    public function fetchDataForBenchmark($benchmark_id)
+    {
+        $benchmark = Benchmark::with('accounts')->find($benchmark_id);
+
+        $this->api->post('restore-if-deleted-bench', [
+            'account_ids' => $benchmark->accounts->pluck('id')->toarray(),
+            'bench_temp_id' => $benchmark->temp_id,
+        ]);
+        $this->api->post('add-custom-tag', [
+            'account_ids' => $benchmark->accounts->pluck('id')->toarray(),
+            'tag' => config('utils.tag'),
+        ]);
+    }
+
     /**
      * Create abenchmark for current authenticated user
      * @param Array $accounts Account links
@@ -153,21 +167,23 @@ class DAO
      * @param string $title Benchmark title
      * @return App\Benchmark model
      */
-    public function createBenchmark($accounts, $since, $until, $title = 'My Benchmark')
+    public function createBenchmark($accounts)
     {
-        // Add pages to kpeiz core to collect dat
-        $token = str_random(40);
-        // the token will be used as a temporary ID to check if collecting data is done
-        // when data collecting is done, the benchmark with this token will be marked as ready
         $response = $this->addPages($accounts, $token);
 
         $pages = $response['account_ids'];
         $status = $response['status'];
 
-        $pages->each(function ($account) {
-            Account::updateOrCreate(['id' => $account->id], ['real_id' => $account->real_id]);
-        });
+        return $benchmark;
+    }
 
+    public function prepareBenchmark($accounts, $since, $until, $title = 'My Benchmark')
+    {
+        // Add pages to kpeiz core to collect dat
+        $token = str_random(40);
+        $status = 0;
+        // the token will be used as a temporary ID to check if collecting data is done
+        // when data collecting is done, the benchmark with this token will be marked as ready
         $benchmark = Benchmark::create([
             'user_id' => auth()->user()->id,
             'temp_id' => $token,
@@ -179,7 +195,7 @@ class DAO
 
         $benchmark->save();
 
-        $benchmark->accounts()->sync($pages->pluck('id')->toarray());
+        $benchmark->accounts()->sync($accounts);
 
         return $benchmark;
     }

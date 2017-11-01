@@ -38,7 +38,7 @@ return [
     'facebook' => [
         'client_id' => env('FACEBOOK_ID'),
         'client_secret' => env('FACEBOOK_SECRET'),
-        'redirect' => 'http://machine.kpeiz.dev/auth/facebook/callback',
+        'redirect' => env('APP_URL') . '/auth/facebook/callback',
     ],
 
 ];

@@ -98,11 +98,16 @@ $("#trigger").unbind('click').bind("click", function (event) {
             return false;
             }
 
-            if(data.hasOwnProperty('success'))
-            {
-                console.log('success')
-               form.submit();
-            }
+			if (data.hasOwnProperty('success')) {
+				$.each(data.ids, function (key, value) {
+					console.log(value);
+					$('<input />').attr('type', 'hidden')
+						.attr('name', "account_ids[]")
+						.attr('value', value)
+						.appendTo(form);
+				});
+				form.submit();
+			}
         },
         error: function (data) {
             console.log(data.responseJSON)

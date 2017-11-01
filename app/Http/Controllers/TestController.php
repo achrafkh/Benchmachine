@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Acme\Gateway;
+use App\Order;
 
 class TestController extends Controller
 {
@@ -15,6 +16,7 @@ class TestController extends Controller
 
     public function test()
     {
-        return $this->gateway->test();
+        $order = Order::first();
+        return $this->gateway->process($order->id);
     }
 }

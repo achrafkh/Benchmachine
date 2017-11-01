@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBenchmarksTable extends Migration
+class CreateOrdersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,15 @@ class CreateBenchmarksTable extends Migration
      */
     public function up()
     {
-        Schema::create('benchmarks', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create('orders', function (Blueprint $table) {
+            $table->string('id')->primary();
+            $table->float('total', 8, 2);
+            $table->boolean('status')->dafult(false);
+            $table->integer('benchmark_id')->index()->unsigned();
             $table->integer('user_id')->index()->unsigned();
-            $table->string('title')->defaul('My benchmark');
-            $table->string('temp_id')->nullable();
-            $table->integer('status')->index();
-            $table->date('since')->index();
-            $table->date('until')->index();
             $table->timestamps();
 
-            $table->index(['created_at', 'status']);
-
+            $table->foreign('benchmark_id')->references('id')->on('benchmarks')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
     }
@@ -36,6 +33,6 @@ class CreateBenchmarksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('benchmarks');
+        Schema::dropIfExists('orders');
     }
 }

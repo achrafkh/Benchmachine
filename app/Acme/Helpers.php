@@ -1,28 +1,46 @@
 <?php
 
+function call($url)
+{
+    // create curl resource
+    $ch = curl_init();
+    // set url
+    curl_setopt($ch, CURLOPT_URL, $url);
+    //return the transfer as a string
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    // $output contains the output string
+    $output = curl_exec($ch);
+    curl_close($ch);
+
+    return json_decode($output);
+}
+
+function inEuro($price)
+{
+    $taux = call('http://free.currencyconverterapi.com/api/v3/convert?q=EUR_TND&compact=y')->EUR_TND->val;
+
+    return $taux * $price;
+}
+
 /**
  * calculated variation between two numbers and return an array
- * @param $old
- * @param $new
- * @param bool $test
- * @return array
  */
 function calcVariation($old, $new, $test = false)
 {
     $class = '';
     $sign = '';
     $prct = 0;
+
     if ($new > $old) {
         $class = 'up';
         $sign = '+';
-        if($old != 0){
+        if (0 != $old) {
             $prct = round((($new - $old) / $old) * 100, 1);
         }
-
     } elseif ($new < $old) {
         $class = 'down';
         $sign = '-';
-        if($new != 0){
+        if (0 != $new) {
             $prct = round((($old - $new) / $new) * 100, 1);
         }
     }
@@ -31,7 +49,7 @@ function calcVariation($old, $new, $test = false)
 }
 
 /**
- * Echos the provided data on the browser
+ * Dumps the provided data on the browser
  */
 function d()
 {
@@ -42,10 +60,6 @@ function d()
 
 /**
  * will return header html (for static render)
- * @param $name
- * @param $image
- * @param $id
- * @return mixed
  */
 function getHtmlHeader($name, $image, $id)
 {
@@ -70,7 +84,7 @@ function str_insert($str, $search, $insert)
     return substr_replace($str, $search . $insert, $index, strlen($search));
 }
 
-// empty white spaces
+// empty white spaces in html
 function replace($html)
 {
     $preg = [
@@ -130,7 +144,6 @@ function number_shorten($number, $precision = 3, $divisors = null)
 // Get a post image using post real id
 function postImage($id, $token = null)
 {
-
     $app_token = env('FACEBOOK_ID') . '|' . env('FACEBOOK_SECRET');
     $fetch_token = ((auth()->check()) ? auth()->user()->token : $app_token);
 
