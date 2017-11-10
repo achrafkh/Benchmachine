@@ -24,6 +24,7 @@ class AddpagesRequest extends FormRequest
      */
     public function rules()
     {
+        //dd($this->all());
         $accs = $this->accounts;
 
         // Remove emty strings
@@ -45,6 +46,9 @@ class AddpagesRequest extends FormRequest
             $now = Carbon::now()->toDateString();
             $rules['since'] = 'required|date|before:until';
             $rules['until'] = 'required|date|after:since|before:' . $now;
+        }
+        if (isset($this->email)) {
+            $rules['email'] = 'email';
         }
 
         return $rules;

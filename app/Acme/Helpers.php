@@ -1,5 +1,15 @@
 <?php
 
+function cpost($url, $params)
+{
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($params));
+    $response = curl_exec($ch);
+    curl_close($ch);
+    return json_decode($response);
+}
+
 function call($url)
 {
     // create curl resource
@@ -63,7 +73,7 @@ function d()
  */
 function getHtmlHeader($name, $image, $id)
 {
-    $header = file_get_contents(public_path() . '/static/app/header.html');
+    $header = file_get_contents(public_path() . '/static/header.html');
     $header = str_replace('|name|', $name, $header);
     $header = str_replace('|image|', $image, $header);
     $header = str_replace('|action|', url('/benchmarks/wkdownload/' . $id), $header);

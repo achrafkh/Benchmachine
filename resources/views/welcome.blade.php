@@ -81,11 +81,12 @@
                 </div>
             </div>
             <div class="media mail">
-
-                <div class="media-body mail-wrap">
+                <div  class="media-body mail-wrap">
                 @if(auth()->guest())
                     <h4 class="mail-cap">E-mail</h4>
-                    <input class="mail-input" type="text" name="mail-input" placeholder="Add your e-mail">
+                    <input id="email" class="mail-input" type="text" name="email" placeholder="Add your e-mail" >
+                @else
+                    <input id="email" class="mail-input" type="hidden" name="email" value="{{ auth()->user()->getValidEmail() }}" >
                 @endif
                 </div>
                 <div class="media-right mail-submit">

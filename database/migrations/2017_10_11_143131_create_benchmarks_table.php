@@ -15,7 +15,7 @@ class CreateBenchmarksTable extends Migration
     {
         Schema::create('benchmarks', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->index()->unsigned();
+            $table->integer('user_id')->index()->unsigned()->nullable();
             $table->string('title')->defaul('My benchmark');
             $table->string('temp_id')->nullable();
             $table->integer('status')->index();

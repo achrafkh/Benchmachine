@@ -2,7 +2,9 @@
 
 namespace App;
 
+use App\Mail\NotifyUser;
 use Illuminate\Database\Eloquent\Model;
+use Mail;
 
 class Benchmark extends Model
 {
@@ -16,7 +18,7 @@ class Benchmark extends Model
      * @var array
      */
     protected $hidden = [
-
+        //
     ];
 
     public function user()
@@ -42,17 +44,22 @@ class Benchmark extends Model
 
     public function updateTitle($title)
     {
-        if ($title == $this->title && trim($title) == '') {
+        if (ucfirst($title) == $this->title && trim($title) == '') {
             return true;
         }
-        $this->title = $title;
+        $this->title = ucfirst($title);
         return $this->save();
     }
 
-    public function markAsReady()
+    public function markAsReady($email = null)
     {
         $this->status = 2;
-        return $this->save();
+        $bool = $this->save();
+
+        if ($email) {
+            $this->SendReadyEmail($email);
+        }
+        return $bool;
     }
 
     public function getStatus()
@@ -63,5 +70,11 @@ class Benchmark extends Model
             return ['class' => 'success', 'text' => 'Ready'];
         }
         return ['class' => 'warning', 'text' => 'Unpaid'];
+    }
+
+    public function SendReadyEmail($email)
+    {
+        Mail::to($email)
+            ->send(new NotifyUser($this));
     }
 }

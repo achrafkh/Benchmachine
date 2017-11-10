@@ -70,9 +70,9 @@ $("#trigger").unbind('click').bind("click", function (event) {
     event.preventDefault();
     var form = $('#submit_pages');
     var pages = $('#submit_pages').serializeArray();
-    if(pages.length < 10){
-        pages.splice(pages.length - 1, 1);
-    }
+   
+    console.log(pages);
+    
     $.ajax({
         url: '/api/pages/validate',
         type: 'post',
@@ -86,10 +86,12 @@ $("#trigger").unbind('click').bind("click", function (event) {
         },
         data: pages,
         success: function (data) {
+        	console.log(data);
             if (data.hasOwnProperty('min')) {
               $('#min').css('display','block');
               return false;
             }
+
             if (data.hasOwnProperty('pages')) {
                 $.each(data.pages, function( index, value ) {
                     console.log('missing p');
@@ -97,7 +99,10 @@ $("#trigger").unbind('click').bind("click", function (event) {
                 });
             return false;
             }
-
+            if (data.hasOwnProperty('email')) {
+              $('#email').css('border-color', '#ffc1c1').css('border-style', 'solid');
+              return false;
+            }
 			if (data.hasOwnProperty('success')) {
 				$.each(data.ids, function (key, value) {
 					console.log(value);

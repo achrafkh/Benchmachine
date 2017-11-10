@@ -31,6 +31,7 @@ class NotifyUser extends Mailable implements ShouldQueue
      */
     public function build()
     {
+        $this->subject('Your Benchmark is ready');
         return $this->view('emails.benchmark_ready');
     }
 }

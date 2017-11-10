@@ -56,6 +56,18 @@ class BenchmarksController extends Controller
      */
     public function showStatic($id)
     {
+        $benchmark = Benchmark::with('accounts')->find($id);
+        $benchmark_ids = $benchmark->accounts->pluck('id')->toarray();
+
+        $response = cpost(env('CORE') . '/platform/check-pages', ['pages_ids' => $benchmark_ids]);
+
+        if ((1 == $response->status) && (2 != $benchmark->status)) {
+            $benchmark->markAsReady();
+        }
+        if (2 != $benchmark->status) {
+            return view('facebook.loading', compact('benchmark', 'benchmark_ids'));
+        }
+
         $html = $this->repo->getBenchmarkHtml($id);
 
         $html = str_insert($html, '<body class="">', getHtmlHeader(auth()->user()->name, auth()->user()->image, $id));
@@ -120,30 +132,6 @@ class BenchmarksController extends Controller
      * @param  \Illuminate\Http\Request
      * @return \Illuminate\Http\Response
      */
-    public function createDemo(Request $request)
-    {
-        $accounts = $request->accounts;
-
-        $title = 'My Benchmark';
-
-        if ($request->has('title')) {
-            $title = $request->title;
-        }
-
-        $since = Carbon::now()->subDays(8)->toDateString();
-        $until = Carbon::now()->subDays(1)->toDateString();
-
-        $benchmark = $this->api->prepareBenchmark($accounts, $since, $until, $title);
-
-        return redirect('/home');
-    }
-
-    /**
-     * Create a benchmark using the provided data in the request
-     * This is for the Non paid benchmarks (free)
-     * @param  \Illuminate\Http\Request
-     * @return \Illuminate\Http\Response
-     */
     public function create(Request $request)
     {
         $accounts = $request->account_ids;
@@ -157,7 +145,7 @@ class BenchmarksController extends Controller
         $since = Carbon::parse($request->since)->toDateString();
         $until = Carbon::parse($request->until)->toDateString();
 
-        $benchmark = $this->api->prepareBenchmark($accounts, $since, $until, $title);
+        $benchmark = $this->api->prepareBenchmark($accounts, $since, $until, $title, auth()->user()->id);
 
         $order = Order::create([
             'user_id' => auth()->user()->id,
@@ -212,7 +200,7 @@ class BenchmarksController extends Controller
             ->update(['title' => $request->title]);
 
         // Delete cached view file
-        $file = public_path() . '/static/benchmark-' . $request->id . '.html';
+        $file = public_path() . '/static/app/benchmark-' . $request->id . '.html';
 
         unlink($file);
 

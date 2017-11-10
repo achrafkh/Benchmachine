@@ -37,7 +37,7 @@
                                         <td><span class="label label-{{ $benchmark->getStatus()['class'] }}">
                                        {{ $benchmark->getStatus()['text'] }}</span></td>
                                         <td>
-                                        @if($benchmark->status == 0)
+                                        @if($benchmark->status == 0 && isset($benchmark->order))
                                         <form class="inline" action="payment/pay/{{ $benchmark->order->id }}" method="POST" style="">
                                              {{ csrf_field() }}
                                             <button type="submit" class="btn btn-primary btn-sm" >Pay</button>
@@ -72,6 +72,7 @@
                 <div class="home-form">
                     <form id="submit_pages" action="{{ route('newBench') }}" method="POST" >
                         {{ csrf_field() }}
+                        <input required="" id="email" class="mail-input" type="hidden" name="email" value="{{ auth()->user()->getValidEmail() }}" >
                         <div class="hf-header">
                             <h2>
                             Add facebook pages
@@ -108,6 +109,7 @@
                             </div>
                         </div>
                         <div class="media mail">
+
                             <div class="media-right mail-submit">
                                 <button class="btn btn-primary" id="trigger" type="button" waves-hover>
                                 Generate

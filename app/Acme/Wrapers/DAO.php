@@ -37,7 +37,9 @@ class DAO
         $data = $this->getBenchmarkByPagesIds($pages_ids, $benchmark->since, $benchmark->until);
 
         $vars = $this->getVariations($pages_ids, $benchmark->since, $benchmark->until);
+
         $data->data->old = $vars;
+
         if (isset($data->data)) {
             $details = new StdClass;
             $details->id = $benchmark->id;
@@ -177,7 +179,7 @@ class DAO
         return $benchmark;
     }
 
-    public function prepareBenchmark($accounts, $since, $until, $title = 'My Benchmark')
+    public function prepareBenchmark($accounts, $since, $until, $title = 'My Benchmark', $user_id = null)
     {
         // Add pages to kpeiz core to collect dat
         $token = str_random(40);
@@ -185,7 +187,7 @@ class DAO
         // the token will be used as a temporary ID to check if collecting data is done
         // when data collecting is done, the benchmark with this token will be marked as ready
         $benchmark = Benchmark::create([
-            'user_id' => auth()->user()->id,
+            'user_id' => $user_id,
             'temp_id' => $token,
             'title' => $title,
             'since' => $since,

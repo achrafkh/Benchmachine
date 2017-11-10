@@ -11,11 +11,19 @@
 		<div class="dropdown profile-dropdown">
 			<button class="media profile-trigger" class="media" type="button" data-toggle="dropdown">
 			<div class="media-left media-middle">
+			@if(auth()->check())
 				<span class="profile-img" style="background-image:url({{ auth()->user()->image  }})"></span>
+			@else
+				<span class="profile-img" style="background-image:url('')"></span>
+			@endif
 			</div>
 			<div class="media-body media-middle hidden-xs">
+			@if(auth()->check())
 				<span class="profile-name">{{ auth()->user()->name }}</span>
 				<span class="profile-type">Premium</span>
+			@else
+				<span class="profile-name">Guest</span>
+			@endif
 			</div>
 			<div class="media-right media-middle">
 				<i class="icon-down-open-1"></i>

@@ -1,5 +1,7 @@
 <?php
 
+Route::post('api/pages/validate', 'HomeController@validatePages');
+
 // Test route
 Route::get('/testing', 'TestController@test')->name('testing');
 
@@ -21,6 +23,9 @@ Route::post('logout', 'Auth\LoginController@logout')->name('logout');
  */
 Route::get('/', 'HomeController@index')->name('login');
 Route::get('benchmarks/render/{id}/{secret}', 'BenchmarksController@render')->name('Render');
+
+Route::get('benchmarks/init/{id}', 'HomeController@showDemoStatic')->name('showDemoBench');
+Route::post('create-demo', 'HomeController@createDemo')->name('newDemoBench');
 /*
  * Authentication is required to access this routes
  */
@@ -38,7 +43,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('wkdownload/{id}', 'BenchmarksController@wkdownload')->name('wkdownload');
 
         Route::post('create', 'BenchmarksController@create')->name('newBench');
-        Route::post('create-demo', 'BenchmarksController@createDemo')->name('newDemoBench');
+
         Route::post('wkdownload/{id}', 'BenchmarksController@wkdownload')->name('wkdownloadPost');
     });
 

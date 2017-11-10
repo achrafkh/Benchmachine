@@ -16,7 +16,7 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->string('id')->primary();
             $table->float('total', 8, 2);
-            $table->boolean('status')->dafult(false);
+            $table->boolean('status')->default(false);
             $table->integer('benchmark_id')->index()->unsigned();
             $table->integer('user_id')->index()->unsigned();
             $table->timestamps();

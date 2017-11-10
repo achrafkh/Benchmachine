@@ -4,11 +4,9 @@ namespace App\Console\Commands;
 
 use App\Acme\Wrapers\Utils;
 use App\Benchmark;
-use App\Mail\NotifyUser;
 use Artisan;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
-use Mail;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger as Monolog;
 
@@ -69,8 +67,8 @@ class UpdateBenchmarkStatus extends Command
                 // update Benchmark status if benchmark ready
                 $benchmark->markAsReady();
                 //notify user
-                Mail::to($benchmark->user->getValidEmail())
-                    ->send(new NotifyUser($benchmark));
+                //Mail::to($benchmark->user->getValidEmail())
+                //->send(new NotifyUser($benchmark));
 
                 Artisan::call('make:pdf', [
                     'id' => $benchmark->id,
