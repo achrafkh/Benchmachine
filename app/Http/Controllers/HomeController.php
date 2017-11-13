@@ -35,6 +35,17 @@ class HomeController extends Controller
         return view('welcome');
     }
 
+    public function saveDetails(Request $request)
+    {
+
+        $response = auth()->user()->saveData($request->all());
+
+        if (!$response) {
+            return response()->json(['status' => 0]);
+        }
+        return response()->json(['status' => 1]);
+    }
+
     public function showDemoStatic($id)
     {
         $benchmark = Benchmark::with('accounts')->find($id);

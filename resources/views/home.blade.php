@@ -38,7 +38,7 @@
                                        {{ $benchmark->getStatus()['text'] }}</span></td>
                                         <td>
                                         @if($benchmark->status == 0 && isset($benchmark->order))
-                                        <form class="inline" action="payment/pay/{{ $benchmark->order->id }}" method="POST" style="">
+                                        <form class="inline pay-form" action="payment/pay/{{ $benchmark->order->id }}" data-id="{{ $benchmark->order->id }}" method="POST" style="">
                                              {{ csrf_field() }}
                                             <button type="submit" class="btn btn-primary btn-sm" >Pay</button>
                                         </form>
@@ -125,4 +125,82 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="DetailsModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+            <h3 class="modal-title" id="lineModalLabel">My Modal</h3>
+        </div>
+        <div class="modal-body">
+
+            <!-- content goes here -->
+            <form id="saveDetails">
+              <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input type="email" class="form-control" name="email" placeholder="Enter email">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Phone number</label>
+                <input type="text" class="form-control" name="phone"  placeholder="Phone">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Country</label>
+                <input type="text" class="form-control" name="country"  placeholder="Country">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">City</label>
+                <input type="text" class="form-control" name="city" placeholder="City">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Address</label>
+                <input type="text" class="form-control" name="address"  placeholder="Address">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">address2</label>
+                <input type="text" class="form-control" name="address2"  placeholder="Address 2">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Zip</label>
+                <input type="text" class="form-control" name="zip" placeholder="Zip">
+              </div>
+              <button type="submit" class="btn btn-default btn-hover-green" role="button">Save</button>
+            </form>
+
+        </div>
+        <div class="modal-footer">
+
+        </div>
+    </div>
+  </div>
+</div>
+@endsection
+
+
+@section('custom-js')
+@if(!auth()->user()->hasDetails())
+<script type="text/javascript">
+var id = '';
+var url = {!! json_encode(url('payment/pay/')) !!};
+
+     $(".pay-form").submit(function (e) {
+            e.preventDefault();
+            id = $(this).data('id');
+            $('#DetailsModal').modal('show');
+     });
+     $("#saveDetails").submit(function (e) {
+            e.preventDefault();
+            $.post( "/api/details", $(this).serialize() , function(e){
+                if(e.status == 0){
+                    console.log('err')
+                }
+                if(e.status == 1){
+                    window.location.href = url+'/'+id;
+                }
+            });
+     });
+</script>
+@endif
+
 @endsection

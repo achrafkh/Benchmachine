@@ -1,6 +1,7 @@
 <?php
 
 Route::post('api/pages/validate', 'HomeController@validatePages');
+Route::post('api/details', 'HomeController@saveDetails');
 
 // Test route
 Route::get('/testing', 'TestController@test')->name('testing');
@@ -8,6 +9,7 @@ Route::get('/testing', 'TestController@test')->name('testing');
 Route::get('payment/done/{token}', 'PaymentController@done');
 Route::get('payment/error/{token}', 'PaymentController@error');
 Route::post('payment/pay/{id}', 'PaymentController@Initpayment');
+Route::get('payment/pay/{id}', 'PaymentController@getInitpayment');
 
 Route::get('check/{fname}', 'BenchmarksController@tt');
 

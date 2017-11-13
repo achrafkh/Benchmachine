@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\UserDetails;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -89,5 +90,11 @@ class User extends Authenticatable
         }
 
         return $this->details->email;
+    }
+
+    public function saveData($data = [])
+    {
+        $data['user_id'] = $this->id;
+        return UserDetails::create($data);
     }
 }

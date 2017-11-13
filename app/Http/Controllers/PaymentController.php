@@ -40,6 +40,25 @@ class PaymentController extends Controller
         return $this->gateway->pay(array_merge($user, $params));
     }
 
+    public function getInitpayment($id)
+    {
+        $user = auth()->user();
+        $order = Order::with('benchmark')->find($id);
+        if (!$user->hasDetails()) {
+            abort(401, 'User have no details');
+        }
+
+        //$params['currency'] = strtoupper($cur);
+        $params['currency'] = 'EUR';
+        $params['amount'] = inEuro($order->total);
+        $params['order_desc'] = 'Benchmark for 6 pages - From : ' . $order->benchmark->from . ' | To :  ' . $order->benchmark->from;
+        $params['order_id'] = 'machine-' . str_random(40);
+
+        $user = auth()->user()->getPayementDetails();
+
+        return $this->gateway->pay(array_merge($user, $params));
+    }
+
     public function callback(Request $request)
     {
         $response['token'] = str_random(40);
