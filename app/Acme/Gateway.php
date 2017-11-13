@@ -64,6 +64,6 @@ class Gateway
             dd($output);
         }
 
-        return redirect()->away(trim(env('PAY_CLIENT'), '/') . '/payement/done');
+        return redirect()->away(trim(env('PAY_CLIENT'), '/') . '/payement/done/' . $output);
     }
 }
