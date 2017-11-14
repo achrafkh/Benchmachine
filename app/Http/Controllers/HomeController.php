@@ -25,7 +25,7 @@ class HomeController extends Controller
         $this->api = $api;
         $this->repo = $repo;
 
-        $this->middleware('guest', ["except" => ["home"]]);
+        $this->middleware('guest', ["except" => ["home", "validatePages"]]);
     }
 
     /**
