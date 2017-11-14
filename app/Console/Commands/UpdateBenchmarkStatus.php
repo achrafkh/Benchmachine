@@ -65,10 +65,12 @@ class UpdateBenchmarkStatus extends Command
             $ready = $core->benchmarkIsReady($benchmark);
             if ($ready) {
                 // update Benchmark status if benchmark ready
-                $benchmark->markAsReady();
-                //notify user
-                //Mail::to($benchmark->user->getValidEmail())
-                //->send(new NotifyUser($benchmark));
+                $email = false;
+
+                if (isset($benchmark->user)) {
+                    $email = $benchmark->user->getValidEmail();
+                }
+                $benchmark->markAsReady($email);
 
                 Artisan::call('make:pdf', [
                     'id' => $benchmark->id,
