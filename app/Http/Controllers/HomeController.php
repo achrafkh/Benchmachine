@@ -82,10 +82,16 @@ class HomeController extends Controller
         if (!$request->has('email')) {
             return response()->json(['email' => true]);
         }
+
         $response = $this->api->addPages($accounts);
 
         if (isset($response['pages'])) {
-            return response()->json(['pages' => $response['pages']]);
+            $resp = [];
+            foreach ($response['pages'] as $page) {
+                $key = array_search($page, $accounts);
+                $resp[$key] = $page;
+            }
+            return response()->json(['pages' => $resp]);
         }
         $response['account_ids']->each(function ($account) {
             Account::updateOrCreate(['id' => $account->id], ['real_id' => $account->real_id]);

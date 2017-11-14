@@ -70,9 +70,6 @@ $("#trigger").unbind('click').bind("click", function (event) {
     event.preventDefault();
     var form = $('#submit_pages');
     var pages = $('#submit_pages').serializeArray();
-   
-    console.log(pages);
-    
     $.ajax({
         url: '/api/pages/validate',
         type: 'post',
@@ -86,16 +83,14 @@ $("#trigger").unbind('click').bind("click", function (event) {
         },
         data: pages,
         success: function (data) {
-        	console.log(data);
+        	console.log(data)
             if (data.hasOwnProperty('min')) {
               $('#min').css('display','block');
               return false;
             }
-
             if (data.hasOwnProperty('pages')) {
                 $.each(data.pages, function( index, value ) {
-                    console.log('missing p');
-                    console.log(value);
+             		$('#f_'+index).css('border-color', '#ffc1c1').css('border-style', 'solid');
                 });
             return false;
             }
