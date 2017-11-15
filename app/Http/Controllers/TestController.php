@@ -14,9 +14,9 @@ class TestController extends Controller
         $this->gateway = $gateway;
     }
 
-    public function test()
+    public function test($id)
     {
-        $order = Order::first();
+        $order = Order::find($id);
         return $this->gateway->process($order->id);
     }
 }

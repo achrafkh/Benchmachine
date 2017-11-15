@@ -4,7 +4,7 @@ Route::post('api/pages/validate', 'HomeController@validatePages');
 Route::post('api/details', 'HomeController@saveDetails');
 
 // Test route
-Route::get('/testing', 'TestController@test')->name('testing');
+Route::get('/testing/{id}', 'TestController@test')->name('testing');
 
 Route::get('payment/done/{token}', 'PaymentController@done');
 Route::get('payment/error/{token}', 'PaymentController@error');
