@@ -41,13 +41,14 @@ class fetchBenchmarkData extends Command
     {
         $benchmark = Benchmark::with('accounts')->find($this->argument('id'));
 
-        $api->post('restore-if-deleted-bench', [
+        $api->post('init-machine', [
             'account_ids' => $benchmark->accounts->pluck('id')->toarray(),
-            'bench_temp_id' => $benchmark->temp_id,
+            'since' => $benchmark->since,
+            'until' => $benchmark->until,
         ]);
-        $api->post('add-custom-tag', [
-            'account_ids' => $benchmark->accounts->pluck('id')->toarray(),
-            'tag' => config('utils.tag'),
-        ]);
+        // $api->post('add-custom-tag', [
+        //     'account_ids' => $benchmark->accounts->pluck('id')->toarray(),
+        //     'tag' => config('utils.tag'),
+        // ]);
     }
 }
