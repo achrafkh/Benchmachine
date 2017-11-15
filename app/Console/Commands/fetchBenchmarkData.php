@@ -4,7 +4,7 @@ namespace App\Console\Commands;
 
 use App\Acme\Wrapers\ApiAdapter;
 use App\Benchmark;
-use Carbon;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 
 class fetchBenchmarkData extends Command
