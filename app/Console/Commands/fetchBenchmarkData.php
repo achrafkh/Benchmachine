@@ -41,9 +41,22 @@ class fetchBenchmarkData extends Command
     {
         $benchmark = Benchmark::with('accounts')->find($this->argument('id'));
 
+        // Collect data from double periode to be able to compare two periode
+        // for exemple to make a benchmark for last 7 days, we need data from 14 days
+        // so we can calculate variation between last periode and the current one
+
+        $since = Carbon::parse($benchmark->since);
+        $until = Carbon::parse($benchmark->until);
+
+        // get difference in days
+        $days = $until->diffInDays($since);
+
+        // Subtract those days from since
+        $since->subDays($days);
+
         $api->post('init-machine', [
             'account_ids' => $benchmark->accounts->pluck('id')->toarray(),
-            'since' => $benchmark->since,
+            'since' => $since->toDateString(),
             'until' => $benchmark->until,
         ]);
         // $api->post('add-custom-tag', [
