@@ -52,8 +52,10 @@ footer{
                                         @endif
                                             <a class="btn btn-primary btn-sm" target="_blank"
                                             href="@if($benchmark->status == 2) /benchmarks/{{ $benchmark->id }}  @else javascript::void(0) @endif" @if($benchmark->status != 2) disabled  @endif >View</a>
-                                            <a class="btn btn-primary btn-sm" target="_blank" href="@if($benchmark->status == 2) /benchmarks/download/{{ $benchmark->id }} @else javascript::void(0) @endif"
+                                            {{--
+                                                <a class="btn btn-primary btn-sm" target="_blank" href="@if($benchmark->status == 2) /benchmarks/download/{{ $benchmark->id }} @else javascript::void(0) @endif"
                                             @if($benchmark->status != 2) disabled  @endif >Download</a>
+                                            --}}
                                         </td>
                                     </tr>
                                     @endforeach
