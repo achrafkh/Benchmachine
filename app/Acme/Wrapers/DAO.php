@@ -174,7 +174,7 @@ class DAO
     {
         // Add pages to kpeiz core to collect dat
         $token = str_random(40);
-        $status = 0;
+        $status = 2;
         // the token will be used as a temporary ID to check if collecting data is done
         // when data collecting is done, the benchmark with this token will be marked as ready
         $benchmark = Benchmark::create([

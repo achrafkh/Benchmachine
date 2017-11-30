@@ -300,7 +300,7 @@ footer{
 
 @endsection
 @section('custom-js')
-<!-- <script type="text/javascript">
+<script type="text/javascript">
 $( document ).ready(function() {
 	function recursive_ajax(){
 	    console.log("begin");
@@ -320,5 +320,5 @@ $( document ).ready(function() {
 	}
 	recursive_ajax();
 });
-</script> -->
+</script>
 @endsection
