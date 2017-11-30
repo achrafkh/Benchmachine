@@ -9,7 +9,7 @@
 			</span>
 		</div>
 		<div class="row posts-wrap">
-		@foreach($posts->sortBy($sort)->take(4) as $post)
+		@foreach($posts->sortByDesc($sort)->take(4) as $post)
 			@include('facebook.sections.partials.single_post')
 		@endforeach
 		</div>

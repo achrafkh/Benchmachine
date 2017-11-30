@@ -15,6 +15,7 @@ class Benchmark
     public $variations;
     public $sum;
     public $accounts;
+    public $interactions;
     public $posts;
     public $charts = [];
 
@@ -31,6 +32,11 @@ class Benchmark
     public function setAccounts($accounts)
     {
         $this->accounts = (isCollection($accounts) ? $accounts : collect($accounts));
+    }
+
+    public function setInteractions($interactions)
+    {
+        $this->interactions = $interactions;
     }
 
     public function setPosts($posts)
@@ -63,8 +69,13 @@ class Benchmark
         $charts = config('utils.charts');
 
         foreach ($charts as $chart) {
-            $this->charts[] = $this->buildBarChart($chart);
+            $this->charts['bar'][] = $this->buildBarChart($chart);
         }
+
+        $this->charts['pie'][] = $this->postsNumberChart();
+        $this->charts['pie'][] = $this->postsAvreageChart();
+
+        $this->charts['grouped_bar'][] = $this->totalInteractionsType();
     }
 
     /**
@@ -88,7 +99,95 @@ class Benchmark
             $chart->data[] = $account->{$data['field']}->value;
             $chart->labels[] = str_limit($account->social_account_name->title, 15);
         }
+        return (array) $chart;
+    }
+
+    public function postsNumberChart($data = [])
+    {
+        $chart = new Chart;
+        if (!isset($data['id'])) {
+            $data['id'] = str_random(5);
+        }
+        $chart->id = 'canvas-' . $data['id'];
+        $chart->title_en = 'Total Nombre des publication';
+        if ($chart->title_en) {
+            $chart->title = 'Total Nombre des publication';
+        }
+        $chart->label = 'Total Nombre des publication';
+
+        $count = [];
+        foreach ($this->accounts as $key => $account) {
+            $chart->data[] = $this->posts->where('social_post_account', $key)->count();
+            $chart->labels[] = str_limit($account->social_account_name->title, 15);
+        }
 
         return (array) $chart;
+    }
+
+    public function postsAvreageChart($data = [])
+    {
+        $chart = new Chart;
+        if (!isset($data['id'])) {
+            $data['id'] = str_random(5);
+        }
+        $chart->id = 'canvas-' . $data['id'];
+        $chart->title_en = 'Moyene des publication par jour';
+        if ($chart->title_en) {
+            $chart->title = 'Moyene des publication par jour';
+        }
+        $chart->label = 'Moyene des publication par jour';
+
+        $count = [];
+        foreach ($this->accounts as $key => $account) {
+            $posts_count = $this->posts->where('social_post_account', $key)->count();
+            $days = $this->details->since->diffInDays($this->details->until);
+
+            $chart->data[] = number_format(($posts_count / $days), 1);
+            $chart->labels[] = str_limit($account->social_account_name->title, 15);
+        }
+
+        return (array) $chart;
+    }
+
+    public function totalInteractionsType($data = [])
+    {
+        $chart = new Chart;
+        if (!isset($data['id'])) {
+            $data['id'] = str_random(5);
+        }
+        $chart->id = 'canvas-' . $data['id'];
+        $chart->title_en = 'Total Interactions par type';
+        if ($chart->title_en) {
+            $chart->title = 'Total Interactions par type';
+        }
+        $chart->label = 'Total Interactions par type';
+
+        $count = [];
+
+        $stat = ['likes', 'comments', 'shares'];
+
+        $colors = config('utils.colors');
+
+        $details = [];
+
+        foreach ($this->accounts as $key => $account) {
+            $chart->labels[] = str_limit($account->social_account_name->title, 15);
+            $details['likes'][] = collect($this->interactions->{$key})->sum('likes');
+            $details['comments'][] = collect($this->interactions->{$key})->sum('comments');
+            $details['shares'][] = collect($this->interactions->{$key})->sum('shares');
+        }
+        foreach ($stat as $index => $v) {
+            $chart->data[] = [
+                'label' => $v,
+                'backgroundColor' => $colors[$index],
+                'data' => $details[$v],
+            ];
+        }
+        return (array) $chart;
+    }
+
+    public function InteractionProgressionChart()
+    {
+        //
     }
 }

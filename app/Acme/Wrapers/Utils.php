@@ -56,6 +56,10 @@ class Utils
 
         unset($data->details);
 
+        $interactions = $data->interactions;
+        $benchmark->setInteractions($interactions);
+        unset($data->interactions);
+
         $old_accounts = collect($data->old);
         unset($data->old);
 

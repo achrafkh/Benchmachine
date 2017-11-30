@@ -81,14 +81,6 @@
                 </div>
             </div>
             <div class="media mail">
-                <div  class="media-body mail-wrap">
-                @if(auth()->guest())
-                    <h4 class="mail-cap">E-mail</h4>
-                    <input id="email" class="mail-input" type="text" name="email" placeholder="Add your e-mail" >
-                @else
-                    <input id="email" class="mail-input" type="hidden" name="email" value="{{ auth()->user()->getValidEmail() }}" >
-                @endif
-                </div>
                 <div class="media-right mail-submit">
                     <button id="trigger" type="button" waves-hover>
                     Generate
@@ -98,4 +90,74 @@
         </form>
     </div>
 </div>
+@endsection
+
+
+@section('js')
+
+<script type="text/javascript">
+var auth = {!! json_encode(auth()->check()) !!}
+
+        $("#trigger").unbind('click').bind("click", function (event) {
+        $('#min').css('display', 'none');
+        $('.error_c').css('border-style', 'none');
+        event.preventDefault();
+        var form = $('#submit_pages');
+        var pages = $('#submit_pages').serializeArray();
+        $.ajax({
+            url: '/api/pages/validate',
+            type: 'post',
+            statusCode: {
+                422: function (response) {
+                    $.each(response.responseJSON.errors, function (key, value) {
+                        var index = key.split(".");
+                        $('#f_' + index[1]).css('border-color', '#ffc1c1').css('border-style', 'solid');
+                    });
+                }
+            },
+            data: pages,
+            success: function (data) {
+                console.log(data)
+                if (data.hasOwnProperty('min')) {
+                    $('#min').css('display', 'block');
+                    return false;
+                }
+                if (data.hasOwnProperty('pages')) {
+                    $.each(data.pages, function (index, value) {
+                        $('#f_' + index).css('border-color', '#ffc1c1').css('border-style', 'solid');
+                    });
+                    return false;
+                }
+                if (data.hasOwnProperty('email')) {
+                    $('#email').css('border-color', '#ffc1c1').css('border-style', 'solid');
+                    return false;
+                }
+                if (data.hasOwnProperty('success')) {
+                         $.each(data.ids, function (key, value) {
+                            console.log(value);
+                            $('<input />').attr('type', 'hidden')
+                                    .attr('name', "account_ids[]")
+                                        .attr('value', value)
+                                        .appendTo(form);
+                            });
+                           $.post( {!! json_encode(route('newDemoBench')) !!}, pages ).done(function( data ) {
+                                if(auth){
+                                    window.location.href = {!! json_encode(url('/benchmarks/') ) !!}+'/'+data;
+                                    return false;
+
+                                } else {
+                                     window.location.href = {!! json_encode(url('/auth/facebook')) !!};
+                                }
+                            });
+                            event.preventDefault();
+
+                        }
+                    },
+                    error: function (data) {
+                        console.log(data.responseJSON)
+                    }
+                });
+            });
+</script>
+
 @endsection

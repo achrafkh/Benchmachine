@@ -1,5 +1,20 @@
 $(document).ready(function() {
+	$.fn.isOnScreen = function(){
+        var win = $(window);
+        var viewport = {
+            top : win.scrollTop(),
+            left : win.scrollLeft()
+        };
+        viewport.right = viewport.left + win.width();
+        viewport.bottom = viewport.top + win.height();
 
+        var bounds = this.offset();
+        bounds.right = bounds.left + this.outerWidth();
+        bounds.bottom = bounds.top + this.outerHeight();
+        viewport.bottom = viewport.bottom * 0.88;
+
+        return (!(viewport.right < bounds.left || viewport.left > bounds.right || viewport.bottom < bounds.top || viewport.top > bounds.bottom));
+    };
 	/*
 	-----------------------------------------
 	Tooltip
@@ -63,59 +78,32 @@ $(document).ready(function() {
 			index++
 		}
 	});
-
-$("#trigger").unbind('click').bind("click", function (event) {
-    $('#min').css('display','none');
-    $('.error_c').css('border-style', 'none');
-    event.preventDefault();
-    var form = $('#submit_pages');
-    var pages = $('#submit_pages').serializeArray();
-    $.ajax({
-        url: '/api/pages/validate',
-        type: 'post',
-        statusCode: {
-            422: function (response) {
-                $.each(response.responseJSON.errors, function (key, value) {
-                    var index = key.split(".");
-                    $('#f_'+index[1]).css('border-color', '#ffc1c1').css('border-style', 'solid');
-                });
-            }
-        },
-        data: pages,
-        success: function (data) {
-        	console.log(data)
-            if (data.hasOwnProperty('min')) {
-              $('#min').css('display','block');
-              return false;
-            }
-            if (data.hasOwnProperty('pages')) {
-                $.each(data.pages, function( index, value ) {
-             		$('#f_'+index).css('border-color', '#ffc1c1').css('border-style', 'solid');
-                });
-            return false;
-            }
-            if (data.hasOwnProperty('email')) {
-              $('#email').css('border-color', '#ffc1c1').css('border-style', 'solid');
-              return false;
-            }
-			if (data.hasOwnProperty('success')) {
-				$.each(data.ids, function (key, value) {
-					console.log(value);
-					$('<input />').attr('type', 'hidden')
-						.attr('name', "account_ids[]")
-						.attr('value', value)
-						.appendTo(form);
-				});
-				form.submit();
-			}
-        },
-        error: function (data) {
-            console.log(data.responseJSON)
-        }
-    });
 });
+function timeDiff(v1,v2)
+{
+	var date1 = new Date(v1);
+	var date2 = new Date(v2);
+	var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+	return diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
+}
 
+Date.prototype.format = function(format) //author: meizz
+{
+  var o = {
+    "M+" : this.getMonth()+1, //month
+    "d+" : this.getDate(),    //day
+    "h+" : this.getHours(),   //hour
+    "m+" : this.getMinutes(), //minute
+    "s+" : this.getSeconds(), //second
+    "q+" : Math.floor((this.getMonth()+3)/3),  //quarter
+    "S" : this.getMilliseconds() //millisecond
+  }
 
-
-
-});
+  if(/(y+)/.test(format)) format=format.replace(RegExp.$1,
+    (this.getFullYear()+"").substr(4 - RegExp.$1.length));
+  for(var k in o)if(new RegExp("("+ k +")").test(format))
+    format = format.replace(RegExp.$1,
+      RegExp.$1.length==1 ? o[k] :
+        ("00"+ o[k]).substr((""+ o[k]).length));
+  return format;
+}

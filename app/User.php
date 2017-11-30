@@ -60,6 +60,12 @@ class User extends Authenticatable
         return $bool;
     }
 
+    public function hasEmail()
+    {
+        return $this->details()
+            ->whereNotNull('email')->where('email', '<>', '')->exists();
+    }
+
     public function getPayementDetails()
     {
 
@@ -85,11 +91,25 @@ class User extends Authenticatable
         if (null == $this->details) {
             $this->load('details');
         }
-        if (!$this->hasDetails()) {
+        if (!$this->hasEmail()) {
             return $this->email;
         }
 
         return $this->details->email;
+    }
+
+    public function setEmail($email)
+    {
+        if ($this->hasEmail()) {
+            $details = $this->details()->first();
+
+            $details->email = $email;
+        } else {
+            $details = new UserDetails;
+            $details->email = $email;
+            $details->user_id = $this->id;
+        }
+        return $details->save();
     }
 
     public function saveData($data = [])

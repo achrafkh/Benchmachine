@@ -133,16 +133,6 @@ class DAO
         if ($errors['error']) {
             return $errors;
         }
-        if ($token) {
-            $this->api->post('restore-if-deleted-bench', [
-                'account_ids' => $account_ids->pluck('id')->toarray(),
-                'bench_temp_id' => $token,
-            ]);
-            $this->api->post('add-custom-tag', [
-                'account_ids' => $account_ids->pluck('id')->toarray(),
-                'tag' => config('utils.tag'),
-            ]);
-        }
 
         return compact('status', 'account_ids');
     }
@@ -151,14 +141,15 @@ class DAO
     {
         $benchmark = Benchmark::with('accounts')->find($benchmark_id);
 
-        $this->api->post('restore-if-deleted-bench', [
+        $this->api->post('init-machine', [
             'account_ids' => $benchmark->accounts->pluck('id')->toarray(),
-            'bench_temp_id' => $benchmark->temp_id,
+            'since' => $benchmark->since,
+            'until' => $benchmark->until,
         ]);
-        $this->api->post('add-custom-tag', [
-            'account_ids' => $benchmark->accounts->pluck('id')->toarray(),
-            'tag' => config('utils.tag'),
-        ]);
+        // $this->api->post('add-custom-tag', [
+        //     'account_ids' => $benchmark->accounts->pluck('id')->toarray(),
+        //     'tag' => config('utils.tag'),
+        // ]);
     }
 
     /**

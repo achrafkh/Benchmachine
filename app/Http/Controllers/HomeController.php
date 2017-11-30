@@ -10,6 +10,8 @@ use App\Http\Requests\AddpagesRequest;
 use Artisan;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Session;
 
 class HomeController extends Controller
 {
@@ -25,7 +27,7 @@ class HomeController extends Controller
         $this->api = $api;
         $this->repo = $repo;
 
-        $this->middleware('guest', ["except" => ["home", "validatePages"]]);
+        $this->middleware('auth', ["except" => ["index", "validatePages", "createDemo"]]);
     }
 
     /**
@@ -54,7 +56,7 @@ class HomeController extends Controller
         $benchmark_ids = $benchmark->accounts->pluck('id')->toarray();
 
         $response = cpost(env('CORE') . '/platform/check-pages', ['pages_ids' => $benchmark_ids]);
-        // dd($response, $benchmark->toarray());
+
         if ((1 == $response->status) && (2 != $benchmark->status)) {
             $benchmark->markAsReady();
         }
@@ -81,12 +83,10 @@ class HomeController extends Controller
         if (count($accounts) < 2) {
             return response()->json(['min' => true]);
         }
-        if (!$request->has('email')) {
-            return response()->json(['email' => true]);
-        }
 
         $response = $this->api->addPages($accounts);
 
+        // If isset pages that means there are errors in this links
         if (isset($response['pages'])) {
             $resp = [];
             foreach ($response['pages'] as $page) {
@@ -129,14 +129,13 @@ class HomeController extends Controller
         $status = $response['status'];
 
         $benchmark = $this->api->prepareBenchmark($accounts, $since, $until, $title);
-        if (1 == $status) {
-            $benchmark->markAsReady($email);
-        } else {
-            Artisan::call('fetch:benchmark', [
-                'id' => $benchmark->id,
-            ]);
-        }
-        return redirect('/benchmarks/init/' . $benchmark->id);
+
+        Artisan::call('fetch:benchmark', [
+            'id' => $benchmark->id,
+        ]);
+        Session::put('benchmark', $benchmark->id);
+
+        return response()->json($benchmark->id);
     }
 
     /**
@@ -149,5 +148,22 @@ class HomeController extends Controller
         $benchmarks = auth()->user()->benchmarks()->with('accounts', 'order')->get();
 
         return view('home', compact('benchmarks'));
+    }
+
+    public function editEmail(Request $request)
+    {
+
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+        ]);
+
+        if ($validator->fails()) {
+            Session::flash('flash', ['class' => 'danger', 'msg' => $validator->errors()->first()]);
+        } else {
+
+            auth()->user()->setEmail($request->email);
+        }
+
+        return redirect()->back();
     }
 }

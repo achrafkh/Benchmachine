@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Benchmark;
 use App\Http\Controllers\Controller;
 use App\User;
 use Auth;
+use Session;
 use Socialite;
 
 class LoginController extends Controller
@@ -53,9 +55,19 @@ class LoginController extends Controller
     public function handleProviderCallback($provider)
     {
         $user = Socialite::driver($provider)->user();
-
+        $bench_id = Session::get('benchmark');
         $authUser = $this->findOrCreateUser($user, $provider);
         Auth::login($authUser, true);
+        if (!is_null($bench_id)) {
+            $benchmark = Benchmark::find(Session::get('benchmark'));
+            $benchmark->user_id = Auth::id();
+            $benchmark->save();
+            Session::forget('benchmark');
+            Session::put('new_benchmark', $bench_id);
+
+            return redirect('/benchmarks/' . $bench_id);
+        }
+
         return redirect($this->redirectTo);
     }
 

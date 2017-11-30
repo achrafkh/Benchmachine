@@ -9,7 +9,7 @@
 			</span>
 		</div>
 		<div class="row charts-wrap">
-			@foreach($benchmark->charts as $chart)
+			@foreach(collect($benchmark->charts)->collapse() as $chart)
 			<div class="col-md-6 chart">
 				<div class="chart-content">
 					<h3 class="chart-cap"> {{ $chart['title'] }} </h3>
@@ -27,12 +27,53 @@
 				</ul>
 			</div>
 			@endforeach
+			<div class="col-md-6 chart">
+				<div class="chart-content">
+					<h3 class="chart-cap"> Avreage posts engagement rate </h3>
+					<canvas  id="testing1"></canvas>
+				</div>
+				<ul class="chart-stats">
+					<li>
+						<span class="chart-stats-digit">1199982</span>
+						<span class="chart-stats-cap">Total</span>
+					</li>
+					<li>
+						<span class="chart-stats-digit">149997.75</span>
+						<span class="chart-stats-cap">Average</span>
+					</li>
+				</ul>
+			</div>
+			<div class="col-md-12 chart">
+				<div class="chart-content">
+					<h3 class="chart-cap"> Interactions progress </h3>
+					<canvas id="testing2" ></canvas>
+				</div>
+				<ul class="chart-stats">
+					<li>
+						<span class="chart-stats-digit">1199982</span>
+						<span class="chart-stats-cap">Total</span>
+					</li>
+					<li>
+						<span class="chart-stats-digit">149997.75</span>
+						<span class="chart-stats-cap">Average</span>
+					</li>
+				</ul>
+			</div>
 		</div>
 	</div>
 </div>
 
 @section('js')
-	@foreach($benchmark->charts as $chart)
+	@foreach($benchmark->charts['bar'] as $chart)
 		@include('facebook.charts.bar',$chart)
 	@endforeach
+	@foreach($benchmark->charts['pie'] as $chart)
+		@include('facebook.charts.pie',$chart)
+	@endforeach
+	@foreach($benchmark->charts['grouped_bar'] as $chart)
+		@include('facebook.charts.grouped_bar',$chart)
+	@endforeach
+
+	@include('facebook.charts.line', ['id' => 'testing1'])
+	@include('facebook.charts.line' , ['id' => 'testing2'])
 @endsection

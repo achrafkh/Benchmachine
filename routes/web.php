@@ -33,13 +33,15 @@ Route::post('create-demo', 'HomeController@createDemo')->name('newDemoBench');
  */
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', 'HomeController@home')->name('home');
+    Route::post('/email-edit', 'HomeController@editEmail')->name('editEmail');
+    Route::post('/payment/checkout', 'CheckoutController@checkout')->name('stripeCheckout');
 
     /**
      ** Benchmarks Routes
      **/
     Route::prefix('benchmarks')->group(function () {
-        Route::get('{id}', 'BenchmarksController@showStatic')->name('showBench');
-        //Route::get('{id}', 'BenchmarksController@show')->name('showBench');
+        Route::get('{id}', 'BenchmarksController@show')->name('showBench');
+        //Route::get('{id}', 'BenchmarksController@showStatic')->name('showBench');
         Route::get('gen/{id}', 'BenchmarksController@generate')->name('Generate');
         Route::get('download/{id}', 'BenchmarksController@download')->name('showBench');
         Route::get('wkdownload/{id}', 'BenchmarksController@wkdownload')->name('wkdownload');

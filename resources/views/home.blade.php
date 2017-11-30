@@ -1,13 +1,20 @@
 @extends('layouts.master')
 @section('content')
 @include('layouts.partials.header')
+<style type="text/css">
+footer{
+     bottom: 0;
+    position: fixed;
+    width: 100%;
+}
+</style>
 <div class="container" style="padding: 50px">
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default" >
-                <div class="panel-heading">Benchmarks
+                <!-- <div class="panel-heading">Benchmarks
                     <button type="button" class="btn btn-info btn-sm pull-right" data-toggle="modal" data-target="#myModal">New</button>
-                </div>
+                </div> -->
                 <div class="panel-body">
                     @if (session('status'))
                     <div class="alert alert-success">
@@ -60,6 +67,7 @@
     </div>
 </div>
 <!-- Modal -->
+{{--
 <div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <!-- Modal content-->
@@ -125,6 +133,7 @@
         </div>
     </div>
 </div>
+--}}
 
 <div class="modal fade" id="DetailsModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
   <div class="modal-dialog">

@@ -14,9 +14,11 @@
 
     @include('layouts.partials.footer')
     </div>
+    <script type="text/javascript"></script>
     <script src="/assets/js/vendors.min.js"></script>
     <script src="/assets/js/theme.js"></script>
     @yield('js')
+
     @yield('custom-js')
 </body>
 </html>
