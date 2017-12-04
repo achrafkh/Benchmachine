@@ -242,16 +242,16 @@ class Benchmark
                     $acc_stats[] = 0;
                 }
             }
-            $test = [];
-            $test['data'] = $acc_stats;
-            $test['label'] = $full_accounts[$account]['social_account_name']['title'];
-            $test['backgroundColor'] = $colors[$key];
-            $test['borderColor'] = $colors[$key];
+            $element = [];
+            $element['data'] = $acc_stats;
+            $element['label'] = $full_accounts[$account]['social_account_name']['title'];
+            $element['backgroundColor'] = $colors[$key];
+            $element['borderColor'] = $colors[$key];
 
-            $test['fill'] = false;
-            $test['yAxisID'] = 'y-axis-' . ($key + 1);
+            $element['fill'] = false;
+            $element['yAxisID'] = 'y-axis-1';
 
-            $output[] = $test;
+            $output[] = $element;
         }
         return compact('output', 'lables');
     }
@@ -321,7 +321,7 @@ class Benchmark
             $element['borderColor'] = $colors[$key];
 
             $element['fill'] = false;
-            $element['yAxisID'] = 'y-axis-' . ($key + 1);
+            $element['yAxisID'] = 'y-axis-1';
 
             $output[] = $element;
         }
@@ -336,7 +336,7 @@ class Benchmark
 
         $params['access-token'] = env('CLIENT_TOKEN');
         $params['user-id'] = auth()->user()->provider_id;
-        $params['insights'] = 'page_engagement';
+        $params['insights'] = 'average_page_engagement';
         $params['since'] = $this->details->since->toDateString();
         $params['until'] = $this->details->until->toDateString();
 

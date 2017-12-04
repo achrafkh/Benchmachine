@@ -7,7 +7,6 @@ use App\Acme\Wrapers\DAO;
 use App\Acme\Wrapers\Utils;
 use App\Benchmark;
 use App\Http\Requests\AddpagesRequest;
-use Artisan;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -96,6 +95,7 @@ class HomeController extends Controller
         }
 
         $response['account_ids']->each(function ($account) {
+
             Account::updateOrCreate(['id' => $account->id],
                 [
                     'real_id' => $account->real_id,
@@ -136,9 +136,9 @@ class HomeController extends Controller
 
         $benchmark = $this->api->prepareBenchmark($accounts, $since, $until, $title);
 
-        Artisan::call('fetch:benchmark', [
-            'id' => $benchmark->id,
-        ]);
+        // Artisan::call('fetch:benchmark', [
+        //     'id' => $benchmark->id,
+        // ]);
         Session::put('benchmark', $benchmark->id);
 
         return response()->json($benchmark->id);

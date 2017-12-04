@@ -190,7 +190,13 @@ class BenchmarksController extends Controller
             return response()->json(['pages' => $response['pages']]);
         }
         $response['account_ids']->each(function ($account) {
-            Account::updateOrCreate(['id' => $account->id], ['real_id' => $account->real_id]);
+            Account::updateOrCreate(['id' => $account->id],
+                [
+                    'real_id' => $account->real_id,
+                    'label' => $account->label,
+                    'title' => $account->title,
+                    'image' => $account->image,
+                ]);
         });
         return response()->json(['success' => true, 'ids' => $response['account_ids']->pluck('id')->toarray()]);
     }

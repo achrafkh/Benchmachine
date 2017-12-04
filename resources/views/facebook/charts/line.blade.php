@@ -31,6 +31,7 @@ function randomScalingFactor(){
                 },
                 scales: {
                     yAxes: [{
+                        beginAtZero:true,
                         type: "linear",
                         display: true,
                         position: "left",
