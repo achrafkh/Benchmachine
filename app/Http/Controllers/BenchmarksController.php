@@ -55,7 +55,6 @@ class BenchmarksController extends Controller
         if (2 != $benchmark->status) {
             return view('facebook.loading', compact('benchmark', 'benchmark_ids'));
         }
-
         $benchmark = Cache::remember($id, env('CACHE_TIME'), function () use ($id) {
             return $this->repo->getBenchmark($id);
         });
