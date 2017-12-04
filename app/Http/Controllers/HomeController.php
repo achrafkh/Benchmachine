@@ -136,9 +136,9 @@ class HomeController extends Controller
 
         $benchmark = $this->api->prepareBenchmark($accounts, $since, $until, $title);
 
-        // Artisan::call('fetch:benchmark', [
-        //     'id' => $benchmark->id,
-        // ]);
+        Artisan::call('fetch:benchmark', [
+            'id' => $benchmark->id,
+        ]);
         Session::put('benchmark', $benchmark->id);
 
         return response()->json($benchmark->id);
