@@ -15,7 +15,6 @@ use File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use PDF;
-use Storage;
 
 class BenchmarksController extends Controller
 {
@@ -130,13 +129,9 @@ class BenchmarksController extends Controller
     {
         $path = 'pdf/benchmark-' . $id . '.pdf';
 
-        if (!Storage::exists($path)) {
-            // Generate the pdf and save it to storage/app/pdf/
-            //File name will be benchmark-{id}.pdf
-            Artisan::call('make:pdf', [
-                'id' => $id,
-            ]);
-        }
+        Artisan::call('make:pdf', [
+            'id' => $id,
+        ]);
         return response()->file(storage_path('app/' . $path));
     }
 
