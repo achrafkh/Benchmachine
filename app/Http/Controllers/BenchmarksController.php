@@ -60,8 +60,6 @@ class BenchmarksController extends Controller
             return $this->repo->getBenchmark($id);
         });
 
-        //$benchmark = $this->repo->getBenchmark($id);
-
         return view('facebook.benchmark', compact('benchmark'));
     }
 

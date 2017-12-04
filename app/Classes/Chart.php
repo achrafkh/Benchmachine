@@ -9,6 +9,7 @@ class Chart
     public $colors;
     public $labels;
     public $title;
+    public $class;
     public $title_en = true;
     public $label;
 
@@ -17,6 +18,7 @@ class Chart
      */
     public function __construct()
     {
+        $this->class = 'col-md-6';
         $this->colors = config('utils.colors');
     }
 

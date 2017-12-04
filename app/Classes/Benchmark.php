@@ -76,6 +76,9 @@ class Benchmark
         $this->charts['pie'][] = $this->postsAvreageChart();
 
         $this->charts['grouped_bar'][] = $this->totalInteractionsType();
+
+        $this->charts['line'][] = $this->EngagmentChart();
+        $this->charts['line'][] = $this->InteractionProgressionChart();
     }
 
     /**
@@ -188,6 +191,159 @@ class Benchmark
 
     public function InteractionProgressionChart()
     {
-        //
+        $chart = new Chart;
+        $data['id'] = str_random(5);
+        $chart->id = 'canvas-' . $data['id'];
+        $chart->class = 'col-md-12';
+        $chart->title_en = 'Interactions';
+        if ($chart->title_en) {
+            $chart->title = 'Interactions';
+        }
+        $chart->label = 'Interactions';
+
+        $diff = ($this->details->since->diffInDays($this->details->until) / 2);
+
+        if ($diff < 30) {
+            $chartData = $this->getInteractionsByDays();
+        } elseif ($diff < 60) {
+            $chartData = $this->getInteractionsByDays();
+        } else {
+            $chartData = $this->getInteractionsByDays();
+        }
+
+        $chart->labels = $chartData['lables'];
+        $chart->data = $chartData['output'];
+        $chart->aspect = true;
+
+        return (array) $chart;
+    }
+
+    public function getInteractionsByDays()
+    {
+        $data = $this->interactions;
+        $colors = config('utils.colors');
+
+        $accounts = array_keys((array) $data);
+        $full_accounts = json_decode(json_encode($this->accounts), true);
+        $lables = [];
+        $time = $this->details->since->copy();
+
+        $output = [];
+        do {
+            $lables[] = $time->toDateString();
+            $time->addDays(1);
+        } while ($time->lte($this->details->until));
+        foreach ($accounts as $key => $account) {
+            $acc_stats = [];
+            foreach ($lables as $date) {
+                if (isset($data->{$account}->{$date})) {
+                    $acc_stats[] = $data->{$account}->{$date}->sum;
+                } else {
+                    $acc_stats[] = 0;
+                }
+            }
+            $test = [];
+            $test['data'] = $acc_stats;
+            $test['label'] = $full_accounts[$account]['social_account_name']['title'];
+            $test['backgroundColor'] = $colors[$key];
+            $test['borderColor'] = $colors[$key];
+
+            $test['fill'] = false;
+            $test['yAxisID'] = 'y-axis-' . ($key + 1);
+
+            $output[] = $test;
+        }
+        return compact('output', 'lables');
+    }
+
+    public function EngagmentChart()
+    {
+        $chart = new Chart;
+        $data['id'] = str_random(5);
+        $chart->id = 'canvas-' . $data['id'];
+        $chart->class = 'col-md-6';
+        $chart->title_en = 'Page ENgagment';
+        if ($chart->title_en) {
+            $chart->title = 'Page ENgagment';
+        }
+        $chart->label = 'Page ENgagment';
+
+        $diff = ($this->details->since->diffInDays($this->details->until) / 2);
+
+        if ($diff < 30) {
+            $chartData = $this->getEngagementByDays();
+        } elseif ($diff < 60) {
+            $chartData = $this->getEngagementByDays();
+        } else {
+            $chartData = $this->getEngagementByDays();
+        }
+
+        $chart->labels = $chartData['lables'];
+        $chart->data = $chartData['output'];
+        $chart->aspect = true;
+
+        return (array) $chart;
+    }
+
+    public function getEngagementByDays()
+    {
+        $accounts = array_keys((array) $this->interactions);
+
+        $full_accounts = json_decode(json_encode($this->accounts), true);
+
+        $colors = config('utils.colors');
+
+        $lables = [];
+        $time = $this->details->since->copy();
+
+        $output = [];
+        do {
+            $lables[] = $time->toDateString();
+            $time->addDays(1);
+        } while ($time->lte($this->details->until));
+
+        foreach ($accounts as $key => $account) {
+            $engagment = $this->getEngagment($account);
+
+            $acc_stats = [];
+            foreach ($lables as $date) {
+                if (!is_null($engagment->{$date})) {
+                    $acc_stats[] = number_format($engagment->{$date}, 3, '.', '');
+                } else {
+                    $acc_stats[] = 0;
+                }
+            }
+
+            $element = [];
+            $element['data'] = $acc_stats;
+            $element['label'] = $full_accounts[$account]['social_account_name']['title'];
+            $element['backgroundColor'] = $colors[$key];
+            $element['borderColor'] = $colors[$key];
+
+            $element['fill'] = false;
+            $element['yAxisID'] = 'y-axis-' . ($key + 1);
+
+            $output[] = $element;
+        }
+
+        return compact('output', 'lables');
+    }
+
+    public function getEngagment($id)
+    {
+
+        $api = new \App\Acme\Wrapers\ApiAdapter;
+
+        $params['access-token'] = env('CLIENT_TOKEN');
+        $params['user-id'] = auth()->user()->provider_id;
+        $params['insights'] = 'page_engagement';
+        $params['since'] = $this->details->since->toDateString();
+        $params['until'] = $this->details->until->toDateString();
+
+        $response = $api->get(env('CORE') . '/rest/insights/' . $id, $params);
+        if (!isset($response->data)) {
+            return [];
+        }
+        return head($response->data);
     }
 }

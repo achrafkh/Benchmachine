@@ -33,11 +33,15 @@
 	@include('facebook.sections.summary',['averages' => $benchmark->averages,'variations' => $benchmark->variations])
 	@include('facebook.sections.table', ['accounts' => $benchmark->accounts])
 	@include('facebook.sections.charts')
-	{{-- @include('facebook.sections.posts',['posts' => $benchmark->posts,'sort'=> 'likes' ])
-	@include('facebook.sections.posts',['posts' => $benchmark->posts,'sort'=> 'comments' ])
-	@include('facebook.sections.posts',['posts' => $benchmark->posts,'sort'=> 'shares' ])
-	@include('facebook.sections.posts',['posts' => $benchmark->posts,'sort'=> 'engagement_rate' ])
-	@include('facebook.sections.posts',['posts' => $benchmark->posts,'sort'=> 'total_interactions' ]) --}}
+	 {{--
+	 	 @include('facebook.sections.posts',['posts' => $benchmark->posts,'sort'=> 'likes' ])
+	 	@include('facebook.sections.posts',['posts' => $benchmark->posts,'sort'=> 'comments' ])
+	 	@include('facebook.sections.posts',['posts' => $benchmark->posts,'sort'=> 'shares' ])
+	 	@include('facebook.sections.posts',['posts' => $benchmark->posts,'sort'=> 'engagement_rate' ])
+	 	@include('facebook.sections.posts',['posts' => $benchmark->posts,'sort'=> 'total_interactions' ])
+
+	 --}}
+
 
 <hr>
 <div class="container" style="width: 50%; ">
@@ -76,7 +80,7 @@
 		</div>
 		<div class="col-md-6">
 			<div class="pull-right">
-				<strong>560 USD</strong>
+				<strong>5 USD</strong>
 			</div>
 		</div>
 	</div>
@@ -86,7 +90,7 @@
 		</div>
 		<div class="col-md-6">
 			<div class="pull-right">
-				<strong>30 USD</strong>
+				<strong>1 USD</strong>
 			</div>
 		</div>
 	</div>

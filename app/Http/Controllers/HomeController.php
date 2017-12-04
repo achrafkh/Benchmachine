@@ -26,7 +26,6 @@ class HomeController extends Controller
     {
         $this->api = $api;
         $this->repo = $repo;
-
         $this->middleware('auth', ["except" => ["index", "validatePages", "createDemo"]]);
     }
 
