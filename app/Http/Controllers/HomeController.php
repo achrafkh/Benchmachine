@@ -35,10 +35,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-
-        $benchmark = Benchmark::first();
-
-        dd($benchmark->SendReadyEmail('achrafkh@yandex.com'));
         return view('welcome');
     }
 
