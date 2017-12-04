@@ -12,10 +12,7 @@ function cpost($url, $params)
 
 function getLikes($id)
 {
-    $token = env('FACEBOOK_ID') . '|' . env('FACEBOOK_SECRET');
-    $result = call('https://graph.facebook.com/' . $id . '?fields=likes&access_token=' . $token);
-
-    return $result->likes;
+    return call(env('CORE') . '/platform/likes/' . $id);
 }
 
 function call($url)

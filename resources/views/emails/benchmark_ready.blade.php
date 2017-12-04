@@ -135,7 +135,7 @@
                                                         </tbody>
                                                     </table>
                                                 </td>
-                                                <td>{{ number_shorten(getLikes($account->real_id),1 ) }}</td>
+                                                <td>{{ number_shorten(getLikes($account->id),1 ) }}</td>
                                                <!--  <td>709 791</td> -->
                                             </tr>
                                         @endforeach

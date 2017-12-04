@@ -7,6 +7,7 @@ use App\Acme\Wrapers\DAO;
 use App\Acme\Wrapers\Utils;
 use App\Benchmark;
 use App\Http\Requests\AddpagesRequest;
+use Artisan;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
