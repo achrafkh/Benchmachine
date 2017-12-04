@@ -123,6 +123,9 @@ class DAO
             $account = new Account;
             $account->id = $response->data->social_account_id;
             $account->real_id = $response->data->social_account_real_id;
+            $account->image = $response->data->social_account_picture;
+            $account->label = $response->data->social_account_label;
+            $account->title = $response->data->social_account_title;
 
             if (!$response->data->exits) {
                 $status = 0;

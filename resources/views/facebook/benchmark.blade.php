@@ -33,14 +33,14 @@
 	@include('facebook.sections.summary',['averages' => $benchmark->averages,'variations' => $benchmark->variations])
 	@include('facebook.sections.table', ['accounts' => $benchmark->accounts])
 	@include('facebook.sections.charts')
-	 {{--
-	 	 @include('facebook.sections.posts',['posts' => $benchmark->posts,'sort'=> 'likes' ])
-	 	@include('facebook.sections.posts',['posts' => $benchmark->posts,'sort'=> 'comments' ])
-	 	@include('facebook.sections.posts',['posts' => $benchmark->posts,'sort'=> 'shares' ])
-	 	@include('facebook.sections.posts',['posts' => $benchmark->posts,'sort'=> 'engagement_rate' ])
-	 	@include('facebook.sections.posts',['posts' => $benchmark->posts,'sort'=> 'total_interactions' ])
 
-	 --}}
+ 	@include('facebook.sections.posts',['posts' => $benchmark->posts,'sort'=> 'likes' ])
+ 	@include('facebook.sections.posts',['posts' => $benchmark->posts,'sort'=> 'comments' ])
+ 	@include('facebook.sections.posts',['posts' => $benchmark->posts,'sort'=> 'shares' ])
+ 	@include('facebook.sections.posts',['posts' => $benchmark->posts,'sort'=> 'engagement_rate' ])
+ 	@include('facebook.sections.posts',['posts' => $benchmark->posts,'sort'=> 'total_interactions' ])
+
+
 
 
 <hr>

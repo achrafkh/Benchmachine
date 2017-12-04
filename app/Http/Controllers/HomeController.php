@@ -35,6 +35,10 @@ class HomeController extends Controller
      */
     public function index()
     {
+
+        $benchmark = Benchmark::first();
+
+        dd($benchmark->SendReadyEmail('achrafkh@yandex.com'));
         return view('welcome');
     }
 
@@ -94,8 +98,15 @@ class HomeController extends Controller
             }
             return response()->json(['pages' => $resp]);
         }
+
         $response['account_ids']->each(function ($account) {
-            Account::updateOrCreate(['id' => $account->id], ['real_id' => $account->real_id]);
+            Account::updateOrCreate(['id' => $account->id],
+                [
+                    'real_id' => $account->real_id,
+                    'label' => $account->label,
+                    'title' => $account->title,
+                    'image' => $account->image,
+                ]);
         });
         return response()->json(['success' => true, 'ids' => $response['account_ids']->pluck('id')->toarray()]);
     }

@@ -89,9 +89,9 @@
                     <table width="550" align="center" bgcolor="#fff">
                         <tbody>
                             <tr>
-                                <td height="140" background="banner-bg.jpg" valign="top" style="padding:30px;">
+                                <td height="140" background="{{ url('/mail/banner-bg.jpg') }}" valign="top" style="padding:30px;">
                                     <a href="http://kpeiz.digital/">
-                                        <img src="logo.png">
+                                        <img src="{{ url('/mail/logo.png') }}">
                                     </a>
                                 </td>
                             </tr>
@@ -112,101 +112,40 @@
                                             <tr>
                                                 <th>Facebook Pages</th>
                                                 <th>Fans</th>
-                                                <th>Interactions</th>
+                                               <!--  <th>Interactions</th> -->
                                             </tr>
                                         </thead>
                                         <tbody>
+                                        @foreach($benchmark->accounts as $account)
                                             <tr>
                                                 <td width="100%">
                                                     <table width="100%">
                                                         <tbody>
                                                             <tr>
                                                                 <td width="1" style="padding-right: 10px;">
-                                                                    <img class="fb-img" src="brand-2.jpg">
+                                                                    <img class="fb-img" src="{{ $account->image }}">
                                                                 </td>
                                                                 <td>
                                                                     <ul>
-                                                                        <li class="fb-name">Pepsi</li>
-                                                                        <li class="fb-id">PepsiArabia</li>
+                                                                        <li class="fb-name">{{ $account->title }}</li>
+                                                                        <li class="fb-id">{{ $account->label }}</li>
                                                                     </ul>
                                                                 </td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
                                                 </td>
-                                                <td>7M</td>
-                                                <td>709 791</td>
+                                                <td>{{ number_shorten(getLikes($account->real_id),1 ) }}</td>
+                                               <!--  <td>709 791</td> -->
                                             </tr>
-                                            <tr>
-                                                <td width="100%">
-                                                    <table width="100%">
-                                                        <tbody>
-                                                            <tr>
-                                                                <td width="1" style="padding-right: 10px;">
-                                                                    <img class="fb-img" src="brand-1.jpg">
-                                                                </td>
-                                                                <td>
-                                                                    <ul>
-                                                                        <li class="fb-name">Cocacola</li>
-                                                                        <li class="fb-id">cocacolatn</li>
-                                                                    </ul>
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </td>
-                                                <td>7M</td>
-                                                <td>709 791</td>
-                                            </tr>
-                                            <tr>
-                                                <td width="100%">
-                                                    <table width="100%">
-                                                        <tbody>
-                                                            <tr>
-                                                                <td width="1" style="padding-right: 10px;">
-                                                                    <img class="fb-img" src="brand-3.jpg">
-                                                                </td>
-                                                                <td>
-                                                                    <ul>
-                                                                        <li class="fb-name">Sprite</li>
-                                                                        <li class="fb-id">spritetunisia</li>
-                                                                    </ul>
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </td>
-                                                <td>7M</td>
-                                                <td>709 791</td>
-                                            </tr>
-                                            <tr>
-                                                <td width="100%">
-                                                    <table width="100%">
-                                                        <tbody>
-                                                            <tr>
-                                                                <td width="1" style="padding-right: 10px;">
-                                                                    <img class="fb-img" src="brand-4.jpg">
-                                                                </td>
-                                                                <td>
-                                                                    <ul>
-                                                                        <li class="fb-name">Fanta</li>
-                                                                        <li class="fb-id">fantatunisia</li>
-                                                                    </ul>
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </td>
-                                                <td>7M</td>
-                                                <td>709 791</td>
-                                            </tr>
+                                        @endforeach
                                         </tbody>
                                     </table>
                                 </td>
                             </tr>
                             <tr>
                                 <td align="center" style="padding: 40px;">
-                                    <a class="view-more" href="https://www.facebook.com/Kpeiz/">
+                                    <a class="view-more" href="{{ url('/benchmarks/'.$benchmark->id) }}">
                                         View full Benchmark
                                     </a>
                                 </td>
@@ -229,13 +168,13 @@
                             <tr>
                                 <td align="center">
                                     <a class="social-media" href="https://www.facebook.com/Kpeiz/">
-                                        <img src="facebook-icon.png">
+                                        <img src="/mail/facebook-icon.png">
                                     </a>
                                     <a class="social-media" href="https://twitter.com/kpeiz_digital">
-                                        <img src="twitter-icon.png">
+                                        <img src="/mail/twitter-icon.png">
                                     </a>
                                     <a class="social-media" href="https://www.instagram.com/kanalytik/">
-                                        <img src="instagram-icon.png">
+                                        <img src="/mail/instagram-icon.png">
                                     </a>
                                 </td>
                             </tr>

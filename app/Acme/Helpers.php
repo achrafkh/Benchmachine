@@ -10,6 +10,14 @@ function cpost($url, $params)
     return json_decode($response);
 }
 
+function getLikes($id)
+{
+    $token = env('FACEBOOK_ID') . '|' . env('FACEBOOK_SECRET');
+    $result = call('https://graph.facebook.com/' . $id . '?fields=likes&access_token=' . $token);
+
+    return $result->likes;
+}
+
 function call($url)
 {
     // create curl resource

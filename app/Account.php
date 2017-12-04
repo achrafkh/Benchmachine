@@ -9,7 +9,7 @@ class Account extends Model
     public $incrementing = false;
 
     protected $fillable = [
-        'id', 'real_id',
+        'id', 'real_id', 'image', 'label', 'title',
     ];
 
     /**
