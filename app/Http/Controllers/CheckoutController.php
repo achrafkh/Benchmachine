@@ -30,7 +30,7 @@ class CheckoutController extends Controller
     {
         try {
             $charge = \Stripe\Charge::create([
-                'amount' => config('price.usd').00,
+                'amount' => config('price.usd') . '00',
                 'currency' => 'usd',
                 "description" => "Benchmark",
                 "receipt_email" => auth()->user()->getValidEmail(),
