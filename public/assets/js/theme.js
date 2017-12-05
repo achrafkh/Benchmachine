@@ -107,3 +107,14 @@ Date.prototype.format = function(format) //author: meizz
         ("00"+ o[k]).substr((""+ o[k]).length));
   return format;
 }
+
+function startLoader()
+{
+	document.body.classList.add("loading");
+}
+
+function removeLoader()
+{
+	document.body.classList.remove("loading");
+}
+

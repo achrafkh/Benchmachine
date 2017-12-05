@@ -3,7 +3,7 @@
 	@if(isset($id))
 		<form action="{{url('/benchmarks/wkdownload/' . $id)}}" method="POST">
 		{{ csrf_field() }}
-			<button id="print_button"  class="print-btn" waves-hover>
+			<button id="print_button" target="_blank"  class="print-btn" waves-hover>
 			Print benchmark
 			</button>
 		</form>

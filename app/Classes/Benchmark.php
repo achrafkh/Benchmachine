@@ -192,7 +192,7 @@ class Benchmark
     public function InteractionProgressionChart()
     {
         $chart = new Chart;
-        $data['id'] = str_random(5);
+        $data['id'] = 'large_line';
         $chart->id = 'canvas-' . $data['id'];
         $chart->class = 'col-md-12';
         $chart->title_en = 'Interactions';
@@ -335,7 +335,7 @@ class Benchmark
         $api = new \App\Acme\Wrapers\ApiAdapter;
 
         $params['access-token'] = env('CLIENT_TOKEN');
-        $params['user-id'] = auth()->user()->provider_id;
+        $params['user-id'] = env('USER_ID');
         $params['insights'] = 'average_page_engagement';
         $params['since'] = $this->details->since->toDateString();
         $params['until'] = $this->details->until->toDateString();

@@ -1,11 +1,20 @@
 @extends('layouts.master')
 @section('content')
 @include('layouts.partials.header')
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
 <style type="text/css">
 footer{
      bottom: 0;
     position: fixed;
     width: 100%;
+}
+
+#DataTables_Table_0_filter > label > input[type="search"] {
+    border-style: inset;
+    border-width: thin;
+}
+#DataTables_Table_0_length > label > select {
+    background-color: white;
 }
 </style>
 <div class="container" style="padding: 50px">
@@ -22,8 +31,8 @@ footer{
                     </div>
                     @endif
                     <div class="row">
-                        <div class="span5">
-                            <table class="table table-striped table-condensed">
+                        <div class="span5" style="padding: 10px">
+                            <table class="table table-striped table-condensed datatables" >
                                 <thead>
                                     <tr>
                                         <th>Title</th>
@@ -31,7 +40,7 @@ footer{
                                         <th>From</th>
                                         <th>To</th>
                                         <th>Status</th>
-                                        <th>Actions</th>
+                                        <th class="no-sort">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -190,6 +199,17 @@ footer{
 
 
 @section('custom-js')
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('.datatables').DataTable({
+        columnDefs: [
+          { targets: 'no-sort', orderable: false }
+        ]
+    });
+} );
+</script>
+
 @if(!auth()->user()->hasDetails())
 <script type="text/javascript">
 var id = '';
@@ -204,7 +224,6 @@ var url = {!! json_encode(url('payment/pay/')) !!};
             e.preventDefault();
             $.post( "/api/details", $(this).serialize() , function(e){
                 if(e.status == 0){
-                    console.log('err')
                 }
                 if(e.status == 1){
                     window.location.href = url+'/'+id;

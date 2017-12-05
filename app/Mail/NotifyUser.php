@@ -23,7 +23,7 @@ class NotifyUser extends Mailable implements ShouldQueue
     {
 
         $this->benchmark = $benchmark;
-        $this->benchmark->load('accounts');
+        $this->benchmark->load('accounts', 'user');
     }
 
     /**

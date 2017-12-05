@@ -1,12 +1,4 @@
 <script type="text/javascript">
-$(window).scroll(function() {
-    if ($('#' + {!! json_encode($id) !!}).isOnScreen()) {
-        if ($('#' + {!! json_encode($id) !!}).data("generated")) {
-            return;
-        }
-        $('#' + {!!json_encode($id) !!}).data("generated", true);
-
-
 		var ctx = document.getElementById({!!json_encode($id) !!}).getContext("2d");
 
 		var data = {
@@ -18,6 +10,9 @@ $(window).scroll(function() {
 		    type: 'bar',
 		    data: data,
 		    options: {
+		    	responsive: false,
+                responsiveAnimationDuration: 0,
+                animation: { duration: 0 },
 		        barValueSpacing: 20,
 		        scales: {
 		            yAxes: [{
@@ -26,15 +21,11 @@ $(window).scroll(function() {
 		                }
 		            }]
 		        },
-			        animation:{
-	                  duration : Math.round(50000 / 17),
-	                },
+			        animation:false,
 	                legend: {
 	                    display: true,
 	                    position: 'bottom',
 	                },
             	},
 		});
-    }
-});
 </script>

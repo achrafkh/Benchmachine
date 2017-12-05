@@ -98,7 +98,7 @@
                             <tr>
                                 <td style="padding: 15px 40px;">
                                     <h1 class="title">
-                                        Hello, <b>Foulen</b>
+                                        Hello, <b>{{ isset($benchmark->user->name) ? $benchmark->user->name : '' }}</b>
                                     </h1>
                                     <p class="txt">
                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod incididunt ut labore et dolore magna aliqua. Ut enim ad minim.
@@ -168,13 +168,13 @@
                             <tr>
                                 <td align="center">
                                     <a class="social-media" href="https://www.facebook.com/Kpeiz/">
-                                        <img src="/mail/facebook-icon.png">
+                                        <img src="{{ url('/mail/facebook-icon.png') }}">
                                     </a>
                                     <a class="social-media" href="https://twitter.com/kpeiz_digital">
-                                        <img src="/mail/twitter-icon.png">
+                                        <img src="{{ url('/mail/twitter-icon.png')}} ">
                                     </a>
                                     <a class="social-media" href="https://www.instagram.com/kanalytik/">
-                                        <img src="/mail/instagram-icon.png">
+                                        <img src="{{ url('/mail/instagram-icon.png') }}">
                                     </a>
                                 </td>
                             </tr>

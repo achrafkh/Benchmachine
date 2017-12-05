@@ -12,7 +12,6 @@ Route::post('payment/pay/{id}', 'PaymentController@Initpayment');
 Route::get('payment/pay/{id}', 'PaymentController@getInitpayment');
 
 Route::get('check/{fname}', 'BenchmarksController@tt');
-
 /*
  * Authentication Routes
  */
@@ -25,7 +24,7 @@ Route::post('logout', 'Auth\LoginController@logout')->name('logout');
  */
 Route::get('/', 'HomeController@index')->name('login');
 Route::get('benchmarks/render/{id}/{secret}', 'BenchmarksController@render')->name('Render');
-
+Route::get('benchmarks/render/{id}', 'BenchmarksController@render');
 Route::get('benchmarks/init/{id}', 'HomeController@showDemoStatic')->name('showDemoBench');
 Route::post('create-demo', 'HomeController@createDemo')->name('newDemoBench');
 /*
@@ -40,6 +39,8 @@ Route::middleware(['auth'])->group(function () {
      ** Benchmarks Routes
      **/
     Route::prefix('benchmarks')->group(function () {
+
+        // Route::get('loading/{id}', 'BenchmarksController@loading');
         Route::get('{id}', 'BenchmarksController@show')->name('showBench');
         //Route::get('{id}', 'BenchmarksController@showStatic')->name('showBench');
         Route::get('gen/{id}', 'BenchmarksController@generate')->name('Generate');

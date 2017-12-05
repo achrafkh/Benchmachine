@@ -167,10 +167,9 @@ class HomeController extends Controller
         if ($validator->fails()) {
             Session::flash('flash', ['class' => 'danger', 'msg' => $validator->errors()->first()]);
         } else {
-
             auth()->user()->setEmail($request->email);
         }
-
+        Session::put('email-' . $request->id, true);
         return redirect()->back();
     }
 }

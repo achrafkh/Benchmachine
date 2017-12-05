@@ -99,6 +99,7 @@
 var auth = {!! json_encode(auth()->check()) !!}
 
         $("#trigger").unbind('click').bind("click", function (event) {
+        startLoader();
         $('#min').css('display', 'none');
         $('.error_c').css('border-style', 'none');
         event.preventDefault();
@@ -109,6 +110,7 @@ var auth = {!! json_encode(auth()->check()) !!}
             type: 'post',
             statusCode: {
                 422: function (response) {
+                    removeLoader();
                     $.each(response.responseJSON.errors, function (key, value) {
                         var index = key.split(".");
                         $('#f_' + index[1]).css('border-color', '#ffc1c1').css('border-style', 'solid');
@@ -117,24 +119,27 @@ var auth = {!! json_encode(auth()->check()) !!}
             },
             data: pages,
             success: function (data) {
-                console.log(data)
+
                 if (data.hasOwnProperty('min')) {
                     $('#min').css('display', 'block');
+                    removeLoader();
                     return false;
                 }
                 if (data.hasOwnProperty('pages')) {
                     $.each(data.pages, function (index, value) {
                         $('#f_' + index).css('border-color', '#ffc1c1').css('border-style', 'solid');
                     });
+                    removeLoader();
                     return false;
                 }
                 if (data.hasOwnProperty('email')) {
                     $('#email').css('border-color', '#ffc1c1').css('border-style', 'solid');
+                    removeLoader();
                     return false;
                 }
                 if (data.hasOwnProperty('success')) {
                          $.each(data.ids, function (key, value) {
-                            console.log(value);
+
                             $('<input />').attr('type', 'hidden')
                                     .attr('name', "account_ids[]")
                                         .attr('value', value)
@@ -150,10 +155,10 @@ var auth = {!! json_encode(auth()->check()) !!}
                                 }
                             });
                             event.preventDefault();
-
                         }
                     },
                     error: function (data) {
+                        removeLoader();
                         console.log(data.responseJSON)
                     }
                 });

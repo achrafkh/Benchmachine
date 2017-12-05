@@ -1,5 +1,20 @@
 @extends('layouts.master')
 @section('content')
+<style type="text/css">
+	@media print {
+body {
+   display:table;
+   table-layout:fixed;
+   padding-top:2.5cm;
+   padding-bottom:2.5cm;
+   height:auto;
+    }
+.brk {
+    page-break-before: always;
+  }
+}
+
+</style>
 <div class="benchmark-page">
 	<div class="benchmark-name">
 		<div class="container">
@@ -12,8 +27,13 @@
 	</div>
 	@include('facebook.sections.summary',['averages' => $benchmark->averages,'variations' => $benchmark->variations])
 	@include('facebook.sections.table', ['accounts' => $benchmark->accounts])
-	@include('facebook.sections.charts')
-	@include('facebook.sections.posts',['posts' => $benchmark->posts,'sort'=> 'engagement_rate' ])
+	@include('facebook.sections.charts_print')
+
+ 	@include('facebook.sections.posts',['posts' => $benchmark->posts,'sort'=> 'likes' ])
+ 	@include('facebook.sections.posts',['posts' => $benchmark->posts,'sort'=> 'comments' ])
+ 	@include('facebook.sections.posts',['posts' => $benchmark->posts,'sort'=> 'shares' ])
+ 	@include('facebook.sections.posts',['posts' => $benchmark->posts,'sort'=> 'engagement_rate' ])
+ 	@include('facebook.sections.posts',['posts' => $benchmark->posts,'sort'=> 'total_interactions' ])
 </div>
 @endsection
 @section('custom-js')

@@ -109,13 +109,14 @@ class BenchmarksController extends Controller
      * @param  $secret String Secret code to make sure that the call is internal
      * @return \Illuminate\Http\Response
      */
-    public function render($id, $secret)
+    public function render($id, $secret = '')
     {
-        if (env('SECRET') != strtoupper($secret)) {
-            abort(401, 'UNAUTHORIZED');
-        }
+        // if (env('SECRET') != strtoupper($secret)) {
+        //     abort(401, 'UNAUTHORIZED');
+        // }
 
         $html = $this->repo->getBenchmarkHtml($id);
+
         return view('facebook.benchmark_html', compact('html'));
     }
 

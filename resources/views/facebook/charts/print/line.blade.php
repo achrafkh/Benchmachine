@@ -1,13 +1,4 @@
 <script>
-function randomScalingFactor(){
- 	return Math.round(Number(Math.random(0,500) * 100));
- }
- $(window).scroll(function() {
-    if ($('#'+{!! json_encode($id) !!}).isOnScreen()) {
-        if ($('#'+{!! json_encode($id) !!}).data("generated")) {
-            return;
-        }
-        $('#'+{!! json_encode($id) !!}).data("generated", true);
     var lineChartData = {
         labels: {!! json_encode($labels) !!},
         datasets: {!! json_encode($data) !!}
@@ -16,11 +7,14 @@ function randomScalingFactor(){
         window.myLine = Chart.Line(ctx, {
             data: lineChartData,
             options: {
-            	maintainAspectRatio: {!! json_encode($aspect) !!},
-            	legend: {
-	                    display: true,
-	                    position: 'bottom',
-	              },
+                responsive: false,
+                responsiveAnimationDuration: 0,
+                animation: { duration: 0 },
+                maintainAspectRatio: {!! json_encode($aspect) !!},
+                legend: {
+                        display: true,
+                        position: 'bottom',
+                  },
                 responsive: true,
                 hoverMode: 'index',
                 stacked: false,
@@ -48,6 +42,4 @@ function randomScalingFactor(){
                 }
             }
         });
- }
-});
     </script>

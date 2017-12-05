@@ -1,22 +1,10 @@
 @extends('layouts.master')
 @section('content')
-<style type="text/css">
-.stripe-button {
-    color: #f8f8f8 !important;
-    background-color: #FF7212!important;
-    border-color: #e78a01!important;
-}
-.stripe-button:hover {
-    color: #fff;
-    background-color: #e78a01;
-    border-color: #e78a01;
-}
-</style>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css" rel="stylesheet" type="text/css" />
 <div class="benchmark-page">
 	 @include('layouts.partials.header',['id' => $benchmark->details->id])
 	<div class="benchmark-name">
-		<div class="container">
+		<div class="container animatedParent animateOnce" data-sequence="400">
 		@if(Session::has('flash'))
 		<div class="alert alert-{{ Session::get('flash')['class'] }}">
 		  {!! Session::get('flash')['msg'] !!}
@@ -27,9 +15,10 @@
 				<span>Title</span>
 			</h2>
 			<input id="original" type="hidden" name="o_title" value="{{ $benchmark->details->title }}">
-			<input id="title" type="text" name="title" placeholder="Benchmark" value="{{ isset($benchmark->details->title) ? $benchmark->details->title : '' }}">
+			<input class="animated bounceInDown" data-id="1" id="title" type="text" name="title" placeholder="Benchmark" value="{{ isset($benchmark->details->title) ? $benchmark->details->title : '' }}">
 		</div>
 	</div>
+
 	@include('facebook.sections.summary',['averages' => $benchmark->averages,'variations' => $benchmark->variations])
 	@include('facebook.sections.table', ['accounts' => $benchmark->accounts])
 	@include('facebook.sections.charts')
@@ -75,12 +64,12 @@
 	<div class="row">
 		<h2 style="font-size: 30px;color: #4d4d4d;margin-bottom: 10px;margin-top: 20px;padding-left: 15px;">Checkout</h2>
 		<br>
-		<div class="col-md-6">
-			Benchmark 90 Days
+		<div class="col-md-6" id="difTime">
+			<span>Benchmark {{ $benchmark->details->since->diffInDays($benchmark->details->until) }} Days</span>
 		</div>
 		<div class="col-md-6">
 			<div class="pull-right">
-				<strong>5 USD</strong>
+				<strong class="price">5 USD</strong>
 			</div>
 		</div>
 	</div>
@@ -90,7 +79,7 @@
 		</div>
 		<div class="col-md-6">
 			<div class="pull-right">
-				<strong>1 USD</strong>
+				<strong>0 USD</strong>
 			</div>
 		</div>
 	</div>
@@ -101,7 +90,7 @@
 		</div>
 		<div class="col-md-6">
 			<div class="pull-right">
-				<strong>590 USD</strong>
+				<strong class="price">5 USD</strong>
 			</div>
 		</div>
 		<p style="font-size: 13px;color: #a6a6a1;margin-top: 20px;padding-left: 15px;">*Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
@@ -115,16 +104,15 @@
 		<script
 		  src="https://checkout.stripe.com/checkout.js" class="stripe-button"
 		  data-key="pk_test_NwBR00CRQsOdtzDqa20ztBYl"
-		  data-amount="2000"
-		  data-name="Benchmark Bachine"
+		  data-amount="500"
+		  data-name="Benchmark Machine"
 		  data-panel-label="PAY"
-		  data-label="Buy now"
+		  data-label="Generate"
 		  data-email="{{ auth()->user()->getValidEmail() }}"
-		  data-description="96 Day benchmark"
 		  data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
 		  data-locale="auto"
 		  data-zip-code="false"
-		  data-currency="eur">
+		  data-currency="usd">
 		</script>
 	</form>
 	</div>
@@ -150,6 +138,7 @@ $( document ).ready(function() {
 	    format: 'yyyy-mm-dd',
     }).on('changeDate', function(event){
     	$('#until').val($('#datepicker-inline-until').datepicker("getFormattedDate"));
+
     	valideDates();
     });
 	$('#datepicker-inline-since').datepicker({
@@ -200,7 +189,8 @@ $('#title').focusout(throttle(function(e){
 
 function valideDates(){
 	$('#hideme').css('display','none');
-
+	$('.price').html('0 USD');
+	$('#difTime').html('<span>Benchmark 7 Days</span>');
 	if($('#since').val() == '' || $('#until').val() == ''){
 		return false;
 	}
@@ -212,7 +202,9 @@ function valideDates(){
 	if(timeDiff(since,until) < 8){
 		return false;
 	}
-
+	var diff = timeDiff( $('#since').val(), $('#until').val() );
+	$('#difTime').html('<span>Benchmark '+diff+' Days</span>');
+	$('.price').html('5 USD');
 	$('#hideme').css('display','block');
 	return true;
 }

@@ -3,10 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Acme\Wrapers\Utils;
-use Carbon\Carbon;
 use Illuminate\Console\Command;
-use Monolog\Handler\StreamHandler;
-use Monolog\Logger as Monolog;
 use Symfony\Component\Process\Process;
 
 class GeneratePdf extends Command
@@ -33,8 +30,8 @@ class GeneratePdf extends Command
     public function __construct()
     {
         parent::__construct();
-        $this->log = new Monolog("generate_pdf");
-        $this->log->pushHandler(new StreamHandler(storage_path('logs/pdf/' . Carbon::now()->toDateString() . '.log'), Monolog::INFO));
+        // $this->log = new Monolog("generate_pdf");
+        // $this->log->pushHandler(new StreamHandler(storage_path('logs/pdf/' . Carbon::now()->toDateString() . '.log'), Monolog::INFO));
     }
 
     /**
@@ -45,7 +42,7 @@ class GeneratePdf extends Command
     public function handle(Utils $dao)
     {
         $id = $this->argument('id');
-        $this->log->info('Generating pdf started for benchmark ' . $id);
+        //$this->log->info('Generating pdf started for benchmark ' . $id);
 
         $filename = 'benchmark-' . $id;
         $secret = env('SECRET');
@@ -58,9 +55,10 @@ class GeneratePdf extends Command
         $process->run();
 
         if (!$process->isSuccessful()) {
-            $this->log->info('pdf created Successfully' . $process->getOutput());
+            //dd($process->getOutput());
+            //$this->log->info('pdf created Successfully' . $process->getOutput());
         }
         $dao->getBenchmarkHtml($id);
-        $this->log->info('pdf created Successfully');
+        // $this->log->info('pdf created Successfully');
     }
 }

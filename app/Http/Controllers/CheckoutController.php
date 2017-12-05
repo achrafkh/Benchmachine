@@ -22,9 +22,9 @@ class CheckoutController extends Controller
     {
         try {
             $charge = \Stripe\Charge::create([
-                'amount' => 2000,
-                'currency' => 'eur',
-                "description" => "Benchmark for 96 days",
+                'amount' => 500,
+                'currency' => 'usd',
+                "description" => "Benchmark",
                 "receipt_email" => auth()->user()->getValidEmail(),
                 'source' => $request->stripeToken,
             ]);
