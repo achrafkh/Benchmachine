@@ -95,8 +95,47 @@
 		</div>
 		<p style="font-size: 13px;color: #a6a6a1;margin-top: 20px;padding-left: 15px;">*Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
 	</div>
+	<style type="text/css">
+.btn-sunny {
+color: #fff;
+background-color: #f4ad49;
+border-bottom:2px solid #c38a3a;
+}
+
+.btn-sunny:hover, .btn-sky.active:focus, .btn-sunny:focus, .open>.dropdown-toggle.btn-sunny {
+color: #fff;
+background-color: #f5b75f;
+border-bottom:2px solid #c4924c;
+outline: none;
+}
+
+
+.btn-sunny:active, .btn-sunny.active {
+color: #fff;
+background-color: #d69840;
+border-top:2px solid #ab7a33;
+margin-top: 2px;
+}
+.btn:focus,
+.btn:active:focus,
+.btn.active:focus {
+    outline: none;
+    outline-offset: 0px;
+}
+
+a {color:#fff;}
+a:hover {text-decoration:none; color:#fff;}
+.btn{
+    margin: 4px;
+    box-shadow: 1px 1px 5px #888888;
+}
+
+.btn-xs{
+    font-weight: 300;
+}
+	</style>
 	<div class="row">
-	<form style="display: none" id="hideme" action="{{ route('stripeCheckout') }}" method="POST" style="padding :10px 10px 10px 10px" class="pull-right">
+	<form   action="{{ route('stripeCheckout') }}" method="POST" style="padding :10px 10px 10px 10px" class="pull-right">
 		{{ csrf_field() }}
 		<input type="hidden" name="benchmark_id" value="{{$benchmark->details->id}}">
 		<input type="hidden" name="since" id="since">
@@ -114,6 +153,10 @@
 		  data-zip-code="false"
 		  data-currency="usd">
 		</script>
+		 <script>
+        document.getElementsByClassName("stripe-button-el")[0].style.display = 'none';
+	    </script>
+	    <button type="submit"  style="display:none" id="hideme" class="btn btn-sunny text-uppercase btn-md">Proceed</button>
 	</form>
 	</div>
 	<br>
@@ -123,7 +166,6 @@
 @section('custom-js')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
 <script type="text/javascript">
-
 var since = new Date();
 since.setDate(since.getDate() - 2);
 var until = new Date();
