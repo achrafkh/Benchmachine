@@ -29,9 +29,6 @@
  	@include('facebook.sections.posts',['posts' => $benchmark->posts,'sort'=> 'engagement_rate' ])
  	@include('facebook.sections.posts',['posts' => $benchmark->posts,'sort'=> 'total_interactions' ])
 
-
-
-
 <hr>
 <div class="container" style="width: 50%; ">
 	<div class="row">
@@ -143,7 +140,7 @@ a:hover {text-decoration:none; color:#fff;}
 		<script
 		  src="https://checkout.stripe.com/checkout.js" class="stripe-button"
 		  data-key="pk_test_NwBR00CRQsOdtzDqa20ztBYl"
-		  data-amount="500"
+		  data-amount="{{config('price.usd').'00'}}"
 		  data-name="Benchmark Machine"
 		  data-panel-label="PAY"
 		  data-label="Generate"

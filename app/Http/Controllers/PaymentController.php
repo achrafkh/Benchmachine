@@ -86,9 +86,9 @@ class PaymentController extends Controller
 
         Cache::forget($token);
 
-        return redirect('/home');
         if (is_null($data)) {
             abort(404);
         }
+        return redirect('/home');
     }
 }

@@ -12,17 +12,25 @@ use \Stripe\Stripe;
 class CheckoutController extends Controller
 {
     protected $stripe;
+    // init stripe client
     public function __construct(Stripe $stripe)
     {
         $this->stripe = $stripe;
         $this->stripe->setApiKey(env('STRIPE_SECRET'));
     }
 
+    /**
+     * Perform the payment using the token provided from stripe checkout payment form
+     * Update benchmark and refetch data
+     * Clean cache
+     * @param  Array , title and benchmark id
+     * @return \Illuminate\Http\Response
+     */
     public function checkout(Request $request)
     {
         try {
             $charge = \Stripe\Charge::create([
-                'amount' => 500,
+                'amount' => config('price.usd').00,
                 'currency' => 'usd',
                 "description" => "Benchmark",
                 "receipt_email" => auth()->user()->getValidEmail(),

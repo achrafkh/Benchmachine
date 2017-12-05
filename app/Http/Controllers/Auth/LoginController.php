@@ -58,6 +58,10 @@ class LoginController extends Controller
         $bench_id = Session::get('benchmark');
         $authUser = $this->findOrCreateUser($user, $provider);
         Auth::login($authUser, true);
+
+        // check if user added a benchmark before login
+        // if yes , set the relationship
+
         if (!is_null($bench_id)) {
             $benchmark = Benchmark::find(Session::get('benchmark'));
             $benchmark->user_id = Auth::id();

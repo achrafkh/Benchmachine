@@ -197,6 +197,12 @@ class BenchmarksController extends Controller
         return response()->json(['success' => true, 'ids' => $response['account_ids']->pluck('id')->toarray()]);
     }
 
+    /**
+     * Update benchmark title
+     * Delete cache after update
+     * @param  Array , title and benchmark id
+     * @return \Illuminate\Http\Response
+     */
     public function updateTitle(Request $request)
     {
         $validator = Validator::make($request->all(), [
