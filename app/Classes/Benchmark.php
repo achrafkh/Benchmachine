@@ -103,6 +103,11 @@ class Benchmark
             $chart->data[] = $account->{$data['field']}->value;
             $chart->labels[] = str_limit($account->social_account_name->title, 15);
         }
+
+        $data = collect($chart->data);
+        $chart->total = $data->sum();
+        $chart->avg = $data->avg();
+
         return (array) $chart;
     }
 
@@ -125,6 +130,10 @@ class Benchmark
             $chart->data[] = $this->posts->where('social_post_account', $key)->count();
             $chart->labels[] = str_limit($account->social_account_name->title, 15);
         }
+
+        $data = collect($chart->data);
+        $chart->total = $data->sum();
+        $chart->avg = $data->avg();
 
         return (array) $chart;
     }

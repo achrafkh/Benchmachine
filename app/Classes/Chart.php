@@ -8,6 +8,8 @@ class Chart
     public $data;
     public $colors;
     public $labels;
+    public $total;
+    public $avg;
     public $title;
     public $class;
     public $title_en = true;

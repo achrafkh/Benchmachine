@@ -15,15 +15,28 @@
 					<h3 class="chart-cap"> {{ $chart['title'] }} </h3>
 					<canvas id="{{ $chart['id'] }}"></canvas>
 				</div>
-				<ul class="chart-stats">
+				<ul class="chart-stats" style="min-height: 50px">
+					@if(isset($chart['total']))
 					<li>
-						<span class="chart-stats-digit">1199982</span>
+					@if(number_format($chart['total'], 0, '.', ' ') == 0)
+					<span class="chart-stats-digit">{{number_format($chart['total'], 3, '.', ',')  }}</span>
+					@else
+					<span class="chart-stats-digit">{{ number_format($chart['total'], 0, '.', ' ')  }}</span>
+					@endif
 						<span class="chart-stats-cap">Total</span>
 					</li>
+					@endif
+					@if(isset($chart['avg']))
 					<li>
-						<span class="chart-stats-digit">149997.75</span>
+					@if(number_format($chart['total'], 0, '.', ' ') == 0)
+					<span class="chart-stats-digit">{{  number_format($chart['avg'], 3, '.', ',') }}</span>
+					@else
+					<span class="chart-stats-digit">{{  number_format($chart['avg'], 0, '.', ' ') }}</span>
+					@endif
+
 						<span class="chart-stats-cap">Average</span>
 					</li>
+					@endif
 				</ul>
 			</div>
 			@endforeach

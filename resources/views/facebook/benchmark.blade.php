@@ -180,7 +180,7 @@ $( document ).ready(function() {
 	         number: nbr,
 	         easing: 'easeInQuad',
 	        },2000);
-	    }.bind(this), 1800 + (index * 100));
+	    }.bind(this), 1500 + (index * 100));
 	});
 	AOS.init({
       offset: 600,
