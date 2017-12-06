@@ -38,9 +38,9 @@ class HomeController extends Controller
         return view('welcome');
     }
 
+    // save user details
     public function saveDetails(Request $request)
     {
-
         $response = auth()->user()->saveData($request->all());
 
         if (!$response) {
@@ -49,6 +49,7 @@ class HomeController extends Controller
         return response()->json(['status' => 1]);
     }
 
+    //show 7 days benchmark (Geerates a static html file)
     public function showDemoStatic($id)
     {
         $benchmark = Benchmark::with('accounts')->find($id);

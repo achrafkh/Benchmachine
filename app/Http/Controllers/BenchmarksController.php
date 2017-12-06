@@ -73,9 +73,12 @@ class BenchmarksController extends Controller
         $benchmark_ids = $benchmark->accounts->pluck('id')->toarray();
 
         $response = cpost(env('CORE') . '/platform/check-pages', ['pages_ids' => $benchmark_ids]);
-        //dd($response);
+
         if ((1 == $response->status) && (2 != $benchmark->status)) {
-            $benchmark->markAsReady();
+            $benchmark->markAsReady(auth()->user()->getValidEmail());
+        }
+        if (0 == $response->status) {
+            return view('facebook.loading', compact('benchmark', 'benchmark_ids'));
         }
         if (2 != $benchmark->status) {
             return view('facebook.loading', compact('benchmark', 'benchmark_ids'));
@@ -221,13 +224,8 @@ class BenchmarksController extends Controller
         Benchmark::where('id', $request->id)
             ->update(['title' => $request->title]);
 
-        // Delete cached view file
-        $file = public_path() . '/static/app/benchmark-' . $request->id . '.html';
-        if (file_exists($file)) {
-            unlink($file);
-        }
+        cleanCache($request->id);
 
-        Cache::forget($request->id);
         return response()->json([
             'status' => 200,
             'msg' => 'success',

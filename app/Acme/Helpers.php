@@ -1,5 +1,18 @@
 <?php
+use Cache;
 
+function cleanCache($id)
+{
+    Cache::forget($id);
+    $file = public_path() . '/static/app/benchmark-' . $id . '.html';
+    if (file_exists($file)) {
+        unlink($file);
+    }
+
+    return true;
+}
+
+// Post request to url + params
 function cpost($url, $params)
 {
     $ch = curl_init($url);
@@ -10,11 +23,13 @@ function cpost($url, $params)
     return json_decode($response);
 }
 
+// get a page likes number from kpeiz core
 function getLikes($id)
 {
     return call(env('CORE') . '/platform/likes/' . $id);
 }
 
+// get request for a url
 function call($url)
 {
     // create curl resource

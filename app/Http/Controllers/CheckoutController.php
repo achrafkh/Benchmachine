@@ -49,7 +49,8 @@ class CheckoutController extends Controller
         Artisan::call('fetch:benchmark', [
             'id' => $benchmark->id,
         ]);
-        Cache::forget($benchmark->id);
+
+        cleanCache($benchmark->id);
 
         Session::flash('flash', ['class' => 'success', 'msg' => 'Thank you for your payement']);
         return redirect('/benchmarks/' . $request->benchmark_id);

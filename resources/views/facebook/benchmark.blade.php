@@ -2,7 +2,9 @@
 @section('content')
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css" rel="stylesheet" type="text/css" />
 <div class="benchmark-page">
+	@if(!isset($static))
 	 @include('layouts.partials.header',['id' => $benchmark->details->id])
+	@endif
 	<div class="benchmark-name">
 		<div class="container animatedParent animateOnce" data-sequence="400">
 		@if(Session::has('flash'))
@@ -203,7 +205,7 @@ var timer = null;
 	};
 }
 $('#title').focusout(throttle(function(e){
-	var original = $('#original').val()
+	var original = $('#original').val();
 	if(original === $(this).val()){
 		return false;
 	}

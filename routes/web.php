@@ -39,10 +39,8 @@ Route::middleware(['auth'])->group(function () {
      ** Benchmarks Routes
      **/
     Route::prefix('benchmarks')->group(function () {
-
-        // Route::get('loading/{id}', 'BenchmarksController@loading');
-        Route::get('{id}', 'BenchmarksController@show')->name('showBench');
-        //Route::get('{id}', 'BenchmarksController@showStatic')->name('showBench');
+        //Route::get('{id}', 'BenchmarksController@show')->name('showBench');
+        Route::get('{id}', 'BenchmarksController@showStatic')->name('showBench');
         Route::get('gen/{id}', 'BenchmarksController@generate')->name('Generate');
         Route::get('download/{id}', 'BenchmarksController@download')->name('showBench');
         Route::get('wkdownload/{id}', 'BenchmarksController@wkdownload')->name('wkdownload');

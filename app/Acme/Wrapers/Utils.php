@@ -29,7 +29,8 @@ class Utils
         $file = public_path() . '/static/app/benchmark-' . $id . '.html';
         if (!file_exists($file)) {
             $benchmark = $this->getBenchmark($id);
-            $html = view('facebook.pdf', compact('benchmark'))->render();
+            $static = true;
+            $html = view('facebook.benchmark', compact('benchmark', 'static'))->render();
             file_put_contents(public_path() . '/static/app/benchmark-' . $id . '.html', replace($html));
         } else {
             $html = file_get_contents($file);

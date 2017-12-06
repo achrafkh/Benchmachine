@@ -44,6 +44,7 @@ class Benchmark
         $this->posts = (isCollection($posts) ? $posts : collect($posts));
     }
 
+    //Process data from last months and set them to this isntance
     public function setVariations($variations)
     {
         $this->variations = $variations;
@@ -62,7 +63,7 @@ class Benchmark
     }
 
     /**
-     * loop and create charts
+     * Create Charts (add data to charts property)
      */
     public function createCharts()
     {
@@ -105,6 +106,7 @@ class Benchmark
         return (array) $chart;
     }
 
+    // Pie chart for posts number in the defined periode of time
     public function postsNumberChart($data = [])
     {
         $chart = new Chart;
@@ -127,6 +129,7 @@ class Benchmark
         return (array) $chart;
     }
 
+    // Pie chart for avreage posts per page in the defined periode of time
     public function postsAvreageChart($data = [])
     {
         $chart = new Chart;
@@ -152,6 +155,7 @@ class Benchmark
         return (array) $chart;
     }
 
+    // bar chart for Interactions by type(likes comments & shares) for all pages in the defined periode of time
     public function totalInteractionsType($data = [])
     {
         $chart = new Chart;
@@ -189,6 +193,7 @@ class Benchmark
         return (array) $chart;
     }
 
+    // Line chart for total Interactions in the defined periode of time
     public function InteractionProgressionChart()
     {
         $chart = new Chart;
@@ -218,6 +223,8 @@ class Benchmark
         return (array) $chart;
     }
 
+    // Generates a line chart data for interaction progress
+    // for the future will add yearly data & monthly
     public function getInteractionsByDays()
     {
         $data = $this->interactions;
@@ -329,9 +336,9 @@ class Benchmark
         return compact('output', 'lables');
     }
 
+    // Get engagment for all pages for certain periode from kpeiz core
     public function getEngagment($id)
     {
-
         $api = new \App\Acme\Wrapers\ApiAdapter;
 
         $params['access-token'] = env('CLIENT_TOKEN');
