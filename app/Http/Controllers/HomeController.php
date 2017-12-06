@@ -135,8 +135,11 @@ class HomeController extends Controller
 
         $accounts = $response['account_ids']->pluck('id');
         $status = $response['status'];
-
-        $benchmark = $this->api->prepareBenchmark($accounts, $since, $until, $title);
+        $user_id = null;
+        if (auth()->check()) {
+            $user_id = auth()->user()->id;
+        }
+        $benchmark = $this->api->prepareBenchmark($accounts, $since, $until, $title, $user_id);
 
         Artisan::call('fetch:benchmark', [
             'id' => $benchmark->id,

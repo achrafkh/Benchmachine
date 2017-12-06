@@ -24,13 +24,18 @@ class Utils
         return $this->prepareBenchmark($response->data);
     }
 
-    public function getBenchmarkHtml($id)
+    public function getBenchmarkHtml($id, $print = false)
     {
         $file = public_path() . '/static/app/benchmark-' . $id . '.html';
         if (!file_exists($file)) {
             $benchmark = $this->getBenchmark($id);
             $static = true;
-            $html = view('facebook.benchmark', compact('benchmark', 'static'))->render();
+            if ($print) {
+                $html = view('facebook.benchmark', compact('benchmark', 'static', 'print'))->render();
+            } else {
+                $html = view('facebook.benchmark', compact('benchmark', 'static'))->render();
+            }
+
             file_put_contents(public_path() . '/static/app/benchmark-' . $id . '.html', replace($html));
         } else {
             $html = file_get_contents($file);

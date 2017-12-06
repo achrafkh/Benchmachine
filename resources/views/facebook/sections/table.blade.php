@@ -1,5 +1,5 @@
-<div class="section table-section">
-	<div class="container">
+<div class="section table-section" data-aos="fade-up" data-aos-once="true" data-aos-duration="500">
+	<div class="container" >
 		<div class="section-header">
 			<h2 class="section-title">
 			Data

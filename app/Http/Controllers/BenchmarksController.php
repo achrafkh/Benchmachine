@@ -41,6 +41,7 @@ class BenchmarksController extends Controller
     public function show($id)
     {
         $benchmark = Benchmark::with('accounts')->find($id);
+
         $benchmark_ids = $benchmark->accounts->pluck('id')->toarray();
 
         $response = cpost(env('CORE') . '/platform/check-pages', ['pages_ids' => $benchmark_ids]);
@@ -70,6 +71,17 @@ class BenchmarksController extends Controller
     public function showStatic($id)
     {
         $benchmark = Benchmark::with('accounts')->find($id);
+
+        $this->authorize('view', $benchmark);
+
+        $file = public_path() . '/static/app/benchmark-' . $id . '.html';
+
+        if (file_exists($file)) {
+            $html = $this->repo->getBenchmarkHtml($id);
+            $html = str_insert($html, '<body class="">', getHtmlHeader(auth()->user()->name, auth()->user()->image, $id));
+            return view('facebook.benchmark_html', compact('html'));
+        }
+
         $benchmark_ids = $benchmark->accounts->pluck('id')->toarray();
 
         $response = cpost(env('CORE') . '/platform/check-pages', ['pages_ids' => $benchmark_ids]);

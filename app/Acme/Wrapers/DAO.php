@@ -155,14 +155,6 @@ class DAO
         // ]);
     }
 
-    /**
-     * Create abenchmark for current authenticated user
-     * @param Array $accounts Account links
-     * @param string $since Start date
-     * @param string $until End date
-     * @param string $title Benchmark title
-     * @return App\Benchmark model
-     */
     public function createBenchmark($accounts)
     {
         $response = $this->addPages($accounts, $token);
@@ -173,13 +165,21 @@ class DAO
         return $benchmark;
     }
 
+    /**
+     * Create abenchmark for current authenticated user
+     * @param Array $accounts Account links
+     * @param string $since Start date
+     * @param string $until End date
+     * @param string $title Benchmark title
+     * @return App\Benchmark model
+     */
     public function prepareBenchmark($accounts, $since, $until, $title = 'My Benchmark', $user_id = null)
     {
         // Add pages to kpeiz core to collect dat
         $token = str_random(40);
         $status = 1;
-        // the token will be used as a temporary ID to check if collecting data is done
-        // when data collecting is done, the benchmark with this token will be marked as ready
+
+        // temp_id is uselss for now, might be usefull later
         $benchmark = Benchmark::create([
             'user_id' => $user_id,
             'temp_id' => $token,

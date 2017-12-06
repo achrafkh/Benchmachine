@@ -94,7 +94,14 @@
 
 
 @section('js')
-
+<!-- Global site tag (gtag.js) - Google AdWords: 825013547 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-825013547"></script>
+<script>
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
+ gtag('config', 'AW-825013547');
+</script>
 <script type="text/javascript">
 var auth = {!! json_encode(auth()->check()) !!}
 

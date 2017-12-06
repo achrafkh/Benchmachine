@@ -1,4 +1,4 @@
-<div class="section posts-section">
+<div class="section posts-section" data-aos="slide-up" data-aos-once="true">
 	<div class="container">
 		<div class="section-header">
 			<h2 class="section-title">

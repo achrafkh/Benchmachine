@@ -60,6 +60,11 @@ class User extends Authenticatable
         return $bool;
     }
 
+    public function isSuperAdmin()
+    {
+        return false;
+    }
+
     public function hasEmail()
     {
         return $this->details()

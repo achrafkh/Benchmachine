@@ -1,12 +1,13 @@
 @extends('layouts.master')
 @section('content')
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.2.0/aos.css">
 <div class="benchmark-page">
 	@if(!isset($static))
 	 @include('layouts.partials.header',['id' => $benchmark->details->id])
 	@endif
-	<div class="benchmark-name">
-		<div class="container animatedParent animateOnce" data-sequence="400">
+	<div class="benchmark-name" data-aos="fade-up" data-aos-once="true">
+		<div class="container">
 		@if(Session::has('flash'))
 		<div class="alert alert-{{ Session::get('flash')['class'] }}">
 		  {!! Session::get('flash')['msg'] !!}
@@ -30,9 +31,9 @@
  	@include('facebook.sections.posts',['posts' => $benchmark->posts,'sort'=> 'shares' ])
  	@include('facebook.sections.posts',['posts' => $benchmark->posts,'sort'=> 'engagement_rate' ])
  	@include('facebook.sections.posts',['posts' => $benchmark->posts,'sort'=> 'total_interactions' ])
-
+@if(!isset($print))
 <hr>
-<div class="container" style="width: 50%; ">
+<div class="container" style="width: 50%;"  data-aos="fade-up">
 	<div class="row">
 		<div class="text-center">
 			<h2 style="font-size: 32px;color: #4d4d4d;">Buy another <strong>BENCHMARK</strong></h2>
@@ -107,8 +108,6 @@ background-color: #f5b75f;
 border-bottom:2px solid #c4924c;
 outline: none;
 }
-
-
 .btn-sunny:active, .btn-sunny.active {
 color: #fff;
 background-color: #d69840;
@@ -160,17 +159,24 @@ a:hover {text-decoration:none; color:#fff;}
 	</div>
 	<br>
 </div>
-
+@endif
 @endsection
 @section('custom-js')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.2.0/aos.js"></script>
 <script type="text/javascript">
 var since = new Date();
 since.setDate(since.getDate() - 2);
 var until = new Date();
 until.setDate(until.getDate() - 1);
 $( document ).ready(function() {
-
+	AOS.init({
+      offset: 600,
+      duration: 1000,
+      easing: 'ease-in-sine',
+      delay: 500,
+      disable: 'mobile',
+    });
     $('#datepicker-inline-until').datepicker({
 	    todayHighlight: false,
 	    inline: true,

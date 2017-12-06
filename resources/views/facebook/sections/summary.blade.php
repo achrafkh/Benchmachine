@@ -1,4 +1,4 @@
-<div class="section summary-section">
+<div class="section summary-section" data-aos="flip-down" data-aos-once="true">
 	<div class="container">
 		<div class="section-header">
 			<h2 class="section-title">
