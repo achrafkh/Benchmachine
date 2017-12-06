@@ -1,6 +1,4 @@
 <?php
-use Cache;
-
 function cleanCache($id)
 {
     Cache::forget($id);
