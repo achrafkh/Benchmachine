@@ -17,6 +17,7 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('email')->index()->nullable();
+            $table->enum('role', ['root', 'admin', 'client'])->default('client');
             $table->string('password', 60)->nullable();
             $table->string('provider');
             $table->string('provider_id')->index();

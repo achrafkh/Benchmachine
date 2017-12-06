@@ -43,7 +43,7 @@
 			</ul>
 			<ul class="summary-block">
 				<li class="summary-data">
-					<span class="digit">{{ number_format($averages->fans, 0, '.', ' ') }}</span>
+					<span class="digit animateMe">{{ number_format($averages->fans, 0, '.', ' ') }}</span>
 				</li>
 				<li class="summary-progress">
 					<span class=" {{ $variations->averages->fans->class }}">
@@ -58,7 +58,7 @@
 			</ul>
 			<ul class="summary-block">
 				<li class="summary-data">
-					<span class="digit">{{ number_format($averages->absolute_fans, 0, '.', ' ') }}</span>
+					<span class="digit animateMe">{{ number_format($averages->absolute_fans, 0, '.', ' ') }}</span>
 				</li>
 				<li class="summary-progress">
 					<span class=" {{ $variations->averages->absolute_fans->class }}">
@@ -73,7 +73,7 @@
 			</ul>
 			<ul class="summary-block">
 				<li class="summary-data">
-					<span class="digit">{{ number_format($averages->posts, 0, '.', ' ') }}</span>
+					<span class="digit animateMe">{{ number_format($averages->posts, 0, '.', ' ') }}</span>
 				</li>
 				<li class="summary-progress">
 					<span class=" {{ $variations->averages->posts->class }}">
@@ -88,7 +88,7 @@
 			</ul>
 			<ul class="summary-block">
 				<li class="summary-data">
-					<span class="digit">
+					<span class="digit animateMe">
  							{{ number_format($averages->post_interactions_avg, 0, '.', ' ') }}
 					 </span>
 				</li>
@@ -105,7 +105,7 @@
 			</ul>
 			<ul class="summary-block">
 				<li class="summary-data">
-					<span class="digit">{{ number_format($averages->interactions, 0, '.', ' ') }}</span>
+					<span class="digit animateMe">{{ number_format($averages->interactions, 0, '.', ' ') }}</span>
 				</li>
 				<li class="summary-progress">
 					<span class=" {{ $variations->averages->interactions->class }}">
@@ -120,7 +120,7 @@
 			</ul>
 			<ul class="summary-block">
 				<li class="summary-data">
-					<span class="digit">{{ number_format($averages->likes, 0, '.', ' ') }}</span>
+					<span class="digit animateMe">{{ number_format($averages->likes, 0, '.', ' ') }}</span>
 				</li>
 				<li class="summary-progress">
 					<span class=" {{ $variations->averages->likes->class }}">
@@ -135,7 +135,7 @@
 			</ul>
 			<ul class="summary-block">
 				<li class="summary-data">
-					<span class="digit">{{ number_format($averages->comments, 0, '.', ' ') }}</span>
+					<span class="digit animateMe">{{ number_format($averages->comments, 0, '.', ' ') }}</span>
 				</li>
 				<li class="summary-progress">
 					<span class=" {{ $variations->averages->comments->class }}">
@@ -150,7 +150,7 @@
 			</ul>
 			<ul class="summary-block">
 				<li class="summary-data">
-					<span class="digit">{{ number_format($averages->shares, 0, '.', ' ') }}</span>
+					<span class="digit animateMe">{{ number_format($averages->shares, 0, '.', ' ') }}</span>
 				</li>
 				<li class="summary-progress">
 					<span class=" {{ $variations->averages->shares->class }}">

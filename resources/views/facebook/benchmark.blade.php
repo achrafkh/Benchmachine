@@ -164,12 +164,24 @@ a:hover {text-decoration:none; color:#fff;}
 @section('custom-js')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.2.0/aos.js"></script>
+<script type="text/javascript" src="/js/animate.js"></script>
 <script type="text/javascript">
 var since = new Date();
 since.setDate(since.getDate() - 2);
 var until = new Date();
 until.setDate(until.getDate() - 1);
+
 $( document ).ready(function() {
+	$( ".animateMe" ).each(function( index ) {
+		var nbr = parseInt( $(this).text().replace(/ /g,'') , 10);
+		$(this).text(0);
+		 setTimeout(function() {
+	        $(this).animateNumber({
+	         number: nbr,
+	         easing: 'easeInQuad',
+	        },2000);
+	    }.bind(this), 1800 + (index * 100));
+	});
 	AOS.init({
       offset: 600,
       duration: 1000,
@@ -255,5 +267,6 @@ function valideDates(){
 	$('#hideme').css('display','block');
 	return true;
 }
+
 </script>
 @endsection

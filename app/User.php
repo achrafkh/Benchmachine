@@ -50,19 +50,31 @@ class User extends Authenticatable
         if (!$this->details) {
             return false;
         }
-        $bool = $this->details()->whereNotNull('phone')->where('phone', '<>', '')
+        return $this->details()->whereNotNull('phone')->where('phone', '<>', '')
             ->whereNotNull('country')->where('country', '<>', '')
             ->whereNotNull('city')->where('city', '<>', '')
             ->whereNotNull('zip')->where('zip', '<>', '')
             ->whereNotNull('email')->where('email', '<>', '')
             ->whereNotNull('address')->exists();
-
-        return $bool;
     }
 
     public function isSuperAdmin()
     {
-        return false;
+        if ('root' != $this->role) {
+            return false;
+        }
+        return true;
+    }
+
+    public function hasRole($role)
+    {
+        if (!is_array($role)) {
+            $role = [$role];
+        }
+        if (!in_array($this->role, $array)) {
+            return false;
+        }
+        return true;
     }
 
     public function hasEmail()
