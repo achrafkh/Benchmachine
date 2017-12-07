@@ -65,8 +65,8 @@ class CheckoutController extends Controller
             $order = $benchmark->order;
         }
         $params['currency'] = 'TND';
-        $params['amount'] = inEuro($order->total);
-        $params['order_desc'] = 'Benchmark for 6 pages - From : ' . $benchmark->from . ' | To :  ' . $benchmark->from;
+        $params['amount'] = $order->total;
+        $params['order_desc'] = 'Benchmark for 6 pages - From : ' . $benchmark->since . ' | To :  ' . $benchmark->until;
         $params['order_id'] = $order->id;
 
         return $this->gpg->pay($params);
