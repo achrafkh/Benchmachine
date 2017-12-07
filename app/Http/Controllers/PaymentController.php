@@ -76,8 +76,6 @@ class PaymentController extends Controller
         //Put it in Session and redirect
         $data = Cache::get($token);
 
-        dd($data);
-
         $order = Order::with('benchmark')->find($data)->first();
         $order->benchmark->updateStatus(1);
         $order->status = 1;
@@ -87,6 +85,7 @@ class PaymentController extends Controller
             'id' => $order->benchmark->id,
         ]);
 
+        cleanCache($order->benchmark->id);
         Cache::forget($token);
 
         if (is_null($data)) {
