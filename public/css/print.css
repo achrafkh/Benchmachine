@@ -1,0 +1,102 @@
+@page {
+    size: A4 landscape;
+    margin: 0
+}
+@media print {
+    * {
+        -webkit-transition: none!important;
+        transition: none!important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact
+    }
+    .app,
+    .app-content,
+    .box,
+    .box-cell,
+    .box-inner,
+    .box-row,
+    .kpeiz-report,
+    body,
+    html {
+        width: 100% !important;
+        height: 100% !important;
+        float: none!important
+    }
+    #aside,
+    #box-header,
+    .navbar {
+        display: none!important
+    }
+    section {
+        display: block!important;
+        min-width: 297mm!important;
+        min-height: 273mm!important;
+        page-break-inside: avoid!important;
+        page-break-before: always!important;
+        float: none!important
+    }
+    section.last-section {
+        background-color: #303f9f!important
+    }
+    section.last-section .lg-logo {
+        max-width: 280px!important
+    }
+    [class^='col-md-'] {
+        float:left;
+    }
+    .kpeiz-report section.summary .section-content .summary-cell {
+        float: none;
+        display: table-cell;
+        vertical-align: middle
+    }
+    .kpeiz-report section.summary .section-content .summary-cell.p-lg-r {
+        padding-right: 75px;
+    }
+    .kpeiz-report section.summary .section-content .summary-cell.p-lg-l {
+        padding-left: 75px;
+        border-top: 0;
+        border-left: 1px solid #d7d7d7;
+    }
+    .fs-24 {
+        font-size: 34px;
+        line-height: 34px;
+    }
+    .fs-32 {
+        font-size: 42px;
+        line-height: 42px;
+    }
+    .fs-36 {
+        font-size: 46px;
+        line-height: 46px;
+    }
+    .stats-box .stats-caption {
+        font-size: 18px;
+        line-height: 18px
+    }
+    .summary .p-v{
+        padding-top:16px !important;
+        padding-bottom:16px !important;
+    }
+    .summary .brt-g{
+        border-top: 1px solid #d7d7d7 !important;
+    }
+    .kpeiz-report section .section-header .section-header-title{
+        font-size: 32px;
+        line-height: 32px;
+    }
+
+    .kpeiz-report section .section-header .section-header-title span{
+        font-size: 18px;
+    }
+
+    .kpeiz-report section .section-header .section-header-txt{
+        font-size: 16px;
+    }
+    .kpeiz-report section.last-section .lg-logo{
+        max-width: 375px !important;
+    }
+    .ktiba{
+        margin-left:50px !important;
+        width:89% !important;
+    }
+}

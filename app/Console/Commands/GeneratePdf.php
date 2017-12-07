@@ -47,6 +47,7 @@ class GeneratePdf extends Command
         $filename = 'benchmark-' . $id;
         $secret = env('SECRET');
         $url = url('/benchmarks/render/' . $id . '/' . $secret);
+
         $fullPath = storage_path('app/pdf/' . $filename . '.pdf');
 
         $cmd = 'xvfb-run wkhtmltopdf -L 0mm -R 0mm -T 0mm -B 0mm -O landscape --javascript-delay 2000 ' . $url . ' ' . $fullPath . ' 2>&1';
@@ -58,6 +59,7 @@ class GeneratePdf extends Command
             //dd($process->getOutput());
             //$this->log->info('pdf created Successfully' . $process->getOutput());
         }
+        cleanCache($id);
         $dao->getBenchmarkHtml($id);
         // $this->log->info('pdf created Successfully');
     }
