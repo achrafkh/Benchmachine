@@ -75,6 +75,9 @@ class PaymentController extends Controller
         //Check if token exists in DB
         //Put it in Session and redirect
         $data = Cache::get($token);
+
+        dd($data);
+
         $order = Order::with('benchmark')->find($data)->first();
         $order->benchmark->updateStatus(1);
         $order->status = 1;
