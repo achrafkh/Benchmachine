@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Acme\Gateway;
 use App\Benchmark;
+use App\Order;
 use Artisan;
 use Cache;
 use Illuminate\Http\Request;
@@ -13,9 +15,10 @@ class CheckoutController extends Controller
 {
     protected $stripe;
     // init stripe client
-    public function __construct(Stripe $stripe)
+    public function __construct(Stripe $stripe, Gateway $gateway)
     {
         $this->stripe = $stripe;
+        $this->gpg = $gateway;
         $this->stripe->setApiKey(env('STRIPE_SECRET'));
     }
 
@@ -40,7 +43,38 @@ class CheckoutController extends Controller
             Session::flash('flash', ['class' => 'danger', 'msg' => $e->getMessage()]);
             return redirect('/benchmarks/' . $request->benchmark_id);
         }
-        $benchmark = Benchmark::find($request->benchmark_id);
+        $this->processSuccessPayment($request->benchmark_id);
+
+        Session::flash('flash', ['class' => 'success', 'msg' => 'Thank you for your payement']);
+        return redirect('/benchmarks/' . $request->benchmark_id);
+    }
+
+    public function gpgCheckout(Request $request)
+    {
+        $benchmark = Benchmark::with('order')->find($request->benchmark_id);
+
+        if (is_null($benchmark->order)) {
+            $order = Order::create([
+                'id' => 'machine-' . str_random(40),
+                'total' => 10,
+                'status' => 0,
+                'benchmark_id' => $benchmark->id,
+                'user_id' => auth()->user()->id,
+            ]);
+        } else {
+            $order = $benchmark->order;
+        }
+        $params['currency'] = 'TND';
+        $params['amount'] = inEuro($order->total);
+        $params['order_desc'] = 'Benchmark for 6 pages - From : ' . $benchmark->from . ' | To :  ' . $benchmark->from;
+        $params['order_id'] = $order->id;
+
+        return $this->gpg->pay($params);
+    }
+
+    private function processSuccessPayment($id)
+    {
+        $benchmark = Benchmark::find($id);
         $benchmark->since = $request->since;
         $benchmark->until = $request->until;
         $benchmark->status = 1;
@@ -52,7 +86,6 @@ class CheckoutController extends Controller
 
         cleanCache($benchmark->id);
 
-        Session::flash('flash', ['class' => 'success', 'msg' => 'Thank you for your payement']);
-        return redirect('/benchmarks/' . $request->benchmark_id);
+        return true;
     }
 }

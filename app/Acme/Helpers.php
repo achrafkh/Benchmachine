@@ -10,6 +10,45 @@ function cleanCache($id)
     return true;
 }
 
+function getPaymentProvider()
+{
+    $country = getCountryByIp();
+
+    if ('TN' == $country) {
+        return 'gpg';
+    }
+    return 'stripe';
+}
+
+function getCountryByIp($ip = null)
+{
+    if (is_null($ip)) {
+        $ip = getUserIP();
+    }
+
+    if ('127.0.0.1' == $ip) {
+        $ip = '196.178.76.97';
+    }
+
+    return geoip_country_code_by_name($ip);
+}
+
+function getUserIP()
+{
+    $client = @$_SERVER['HTTP_CLIENT_IP'];
+    $forward = @$_SERVER['HTTP_X_FORWARDED_FOR'];
+    $remote = $_SERVER['REMOTE_ADDR'];
+
+    if (filter_var($client, FILTER_VALIDATE_IP)) {
+        $ip = $client;
+    } elseif (filter_var($forward, FILTER_VALIDATE_IP)) {
+        $ip = $forward;
+    } else {
+        $ip = $remote;
+    }
+    return $ip;
+}
+
 // Post request to url + params
 function cpost($url, $params)
 {

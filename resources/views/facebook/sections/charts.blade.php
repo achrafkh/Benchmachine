@@ -33,7 +33,6 @@
 					@else
 					<span class="chart-stats-digit">{{  number_format($chart['avg'], 0, '.', ' ') }}</span>
 					@endif
-
 						<span class="chart-stats-cap">Average</span>
 					</li>
 					@endif

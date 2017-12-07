@@ -33,7 +33,8 @@ Route::post('create-demo', 'HomeController@createDemo')->name('newDemoBench');
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', 'HomeController@home')->name('home');
     Route::post('/email-edit', 'HomeController@editEmail')->name('editEmail');
-    Route::post('/payment/checkout', 'CheckoutController@checkout')->name('stripeCheckout');
+    Route::post('/payment/stripecheckout', 'CheckoutController@checkout')->name('stripeCheckout');
+    Route::post('/payment/gpgcheckout', 'CheckoutController@gpgCheckout')->name('gpgCheckout');
 
     /**
      ** Benchmarks Routes
