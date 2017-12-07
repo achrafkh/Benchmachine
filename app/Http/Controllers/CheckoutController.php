@@ -64,6 +64,10 @@ class CheckoutController extends Controller
         } else {
             $order = $benchmark->order;
         }
+        $benchmark->since = $request->since;
+        $benchmark->until = $request->until;
+        $benchmark->save();
+
         $params['currency'] = 'TND';
         $params['amount'] = $order->total;
         $params['order_desc'] = 'Benchmark for 6 pages - From : ' . $benchmark->since . ' | To :  ' . $benchmark->until;
