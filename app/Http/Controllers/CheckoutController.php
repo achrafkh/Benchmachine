@@ -43,7 +43,7 @@ class CheckoutController extends Controller
             Session::flash('flash', ['class' => 'danger', 'msg' => $e->getMessage()]);
             return redirect('/benchmarks/' . $request->benchmark_id);
         }
-        $this->processSuccessPayment($request->benchmark_id);
+        $this->processSuccessPayment($request);
 
         Session::flash('flash', ['class' => 'success', 'msg' => 'Thank you for your payement']);
         return redirect('/benchmarks/' . $request->benchmark_id);
@@ -76,9 +76,9 @@ class CheckoutController extends Controller
         return $this->gpg->pay($params);
     }
 
-    private function processSuccessPayment($id)
+    private function processSuccessPayment($request)
     {
-        $benchmark = Benchmark::find($id);
+        $benchmark = Benchmark::find($request->id);
         $benchmark->since = $request->since;
         $benchmark->until = $request->until;
         $benchmark->status = 1;
