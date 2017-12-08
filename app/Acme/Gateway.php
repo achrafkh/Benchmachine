@@ -45,7 +45,7 @@ class Gateway
     {
         $post_url = '/gateway/pay';
         $redirect_url = trim(env('PAY_CLIENT'), '/') . '/gateway/process/';
-        dd($post_url, $params);
+        dd(trim(env('PAY_CLIENT'), '/'), $post_url, $params);
         $response = $this->post($post_url, $params);
 
         if (200 != $response->status) {
