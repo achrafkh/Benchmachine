@@ -12,11 +12,12 @@ function cleanCache($id)
 
 function getPaymentProvider()
 {
-    $country = getCountryByIp();
+    // $country = getCountryByIp();
 
-    if ('TN' == $country) {
-        return 'gpg';
-    }
+    // if ('TN' == $country) {
+    //     return 'gpg';
+    // }
+
     return 'stripe';
 }
 
