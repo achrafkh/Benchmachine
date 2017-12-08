@@ -43,6 +43,8 @@ class CheckoutController extends Controller
             Session::flash('flash', ['class' => 'danger', 'msg' => $e->getMessage()]);
             return redirect('/benchmarks/' . $request->benchmark_id);
         }
+
+        dd($request->all());
         $this->processSuccessPayment($request);
 
         Session::flash('flash', ['class' => 'success', 'msg' => 'Thank you for your payement']);
