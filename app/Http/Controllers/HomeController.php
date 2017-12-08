@@ -173,7 +173,17 @@ class HomeController extends Controller
         } else {
             auth()->user()->setEmail($request->email);
         }
+
         Session::put('email-' . $request->id, true);
+
         return redirect()->back();
+    }
+
+    public function showModal($id)
+    {
+        if (Session::has('email-' . $id)) {
+            return response()->json(0);
+        }
+        return response()->json(1);
     }
 }
