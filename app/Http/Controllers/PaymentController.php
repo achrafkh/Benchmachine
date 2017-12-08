@@ -86,11 +86,12 @@ class PaymentController extends Controller
         ]);
 
         cleanCache($order->benchmark->id);
+
         Cache::forget($token);
 
         if (is_null($data)) {
             abort(404);
         }
-        return redirect('/home');
+        return redirect('/benchmark/' . $order->benchmark->id);
     }
 }

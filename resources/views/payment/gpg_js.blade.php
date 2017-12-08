@@ -15,13 +15,7 @@ $( document ).ready(function() {
 	        },2000);
 	    }.bind(this), 1500 + (index * 100));
 	});
-	AOS.init({
-      offset: 600,
-      duration: 1000,
-      easing: 'ease-in-sine',
-      delay: 500,
-      disable: 'mobile',
-    });
+
     $('#datepicker-inline-until').datepicker({
 	    todayHighlight: false,
 	    inline: true,

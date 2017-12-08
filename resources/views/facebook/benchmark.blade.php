@@ -44,6 +44,19 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.2.0/aos.js"></script>
 <script type="text/javascript" src="/js/animate.js"></script>
+<script type="text/javascript">
+
+$( document ).ready(function() {
+    AOS.init({
+      offset: 100,
+      duration: 1000,
+      easing: 'ease-in-sine',
+      delay: 100,
+      disable: 'mobile',
+    });
+});
+</script>
+
 @include('payment.'.getPaymentProvider().'_js')
 @endif
 @foreach(collect($benchmark->charts)->collapse() as $chart)

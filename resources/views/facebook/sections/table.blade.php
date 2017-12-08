@@ -1,4 +1,4 @@
-<div class="section table-section" data-aos="fade-up" data-aos-once="true" data-aos-offset="400" data-aos-delay="200" data-aos-duration="400">
+<div class="section table-section" data-aos="fade-up" data-aos-once="true" data-aos-duration="400">
 	<div class="container" >
 		<div class="section-header">
 			<h2 class="section-title">
