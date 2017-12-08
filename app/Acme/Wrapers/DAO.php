@@ -69,7 +69,7 @@ class DAO
         $until->subdays($difference);
         $since->subdays($difference);
 
-        $data = $this->getBenchmarkByPagesIds($ids, $since->toDateString(), $until->toDateString());
+        $data = $this->getBenchmarkByPagesIds($ids, $since->toDateString(), $until->toDateString(), false);
 
         unset($data->data->most_engaged_posts);
         return $data->data;
@@ -82,7 +82,7 @@ class DAO
      * @param $until
      * @return \Illuminate\Http\Response
      */
-    public function getBenchmarkByPagesIds($ids, $since, $until)
+    public function getBenchmarkByPagesIds($ids, $since, $until, $posts = true)
     {
         if (is_array($ids)) {
             $ids = implode(',', $ids);
@@ -91,6 +91,7 @@ class DAO
         $params = [
             'since' => $since,
             'until' => $until,
+            'posts' => $variation,
             'social-accounts' => $ids,
         ];
         return $this->api->post('custom-benchmark', $params);

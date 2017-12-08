@@ -5,9 +5,7 @@
         <div class="landing-wrap">
             <div class="landing-inner">
                 @if(auth()->check())
-                <a class="landing-login" href="{{ url('/home') }}" waves-hover>
-                   Dashboard
-                </a>
+
                 @else
                 <a class="landing-login" href="{{ url('/auth/facebook') }}" waves-hover>
                     <i class="icon-facebook"></i>
@@ -18,15 +16,15 @@
                 Get a Free Market Overview Now
                 </h1>
                 <p class="landing-txt">
-                    Add the facebook pages you want to compare, wait for a moment and let the magic happen.
+                   Discover your key performances indicators, Learn  from social leaders and Set goals and baselines for performance and growth based on your direct competitors.
                 </p>
                @if(auth()->check())
-                <a style="color:white" href="{{ url('/auth/facebook') }}" class="landing-btn" waves-hover>
-                My Reports
+                <a style="color:white" href="{{ url('/home') }}" class="landing-btn" waves-hover>
+                My Benchmarks
                 </a>
                @else
                 <a style="color:white" href="{{ url('/auth/facebook') }}" class="landing-btn" waves-hover>
-                Get a glance
+                Download a default example
                 </a>
                @endif
                 <div class="video">
@@ -52,7 +50,7 @@
                 Add facebook pages
                 </h2>
                 <p>
-                    Copy paste the url of the facebook pages you want to compare. It only takes a few seconds.
+                    Discover your key performances indicators, Learn from social leaders and Set goals and baselines for performance and growth based on your direct competitors.
                 </p>
                 <div id="min" class="alert alert-danger" style="display: none">
                   <strong>Danger!</strong> Minimum : 2 pages.

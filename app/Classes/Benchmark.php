@@ -79,10 +79,9 @@ class Benchmark
         }
 
         $this->charts[$i][] = $this->postsNumberChart('pie');
-        $this->charts[$i][] = $this->postsAvreageChart('pie');
-        $i++;
+        //$this->charts[$i][] = $this->postsAvreageChart('pie');
         $this->charts[$i][] = $this->totalInteractionsType('grouped_bar');
-
+        $i++;
         $this->charts[$i][] = $this->EngagmentChart('line');
         $this->charts[$i][] = $this->InteractionProgressionChart('line');
     }
@@ -93,6 +92,7 @@ class Benchmark
      */
     public function buildBarChart($data, $type)
     {
+
         $chart = new Chart;
         if (!isset($data['id'])) {
             $data['id'] = str_random(5);
@@ -227,11 +227,11 @@ class Benchmark
         $diff = ($this->details->since->diffInDays($this->details->until) / 2);
 
         if ($diff < 30) {
-            $chartData = $this->getInteractionsByDays();
+            $chartData = $this->getInteractionsData(1);
         } elseif ($diff < 60) {
-            $chartData = $this->getInteractionsByDays();
+            $chartData = $this->getInteractionsData(7);
         } else {
-            $chartData = $this->getInteractionsByDays();
+            $chartData = $this->getInteractionsData(30);
         }
 
         $chart->labels = $chartData['lables'];
@@ -243,7 +243,7 @@ class Benchmark
 
     // Generates a line chart data for interaction progress
     // for the future will add yearly data & monthly
-    public function getInteractionsByDays()
+    public function getInteractionsData($days = 1)
     {
         $data = $this->interactions;
         $colors = config('utils.colors');
@@ -251,22 +251,35 @@ class Benchmark
         $accounts = array_keys((array) $data);
         $full_accounts = json_decode(json_encode($this->accounts), true);
         $lables = [];
+
         $time = $this->details->since->copy();
 
         $output = [];
         do {
             $lables[] = $time->toDateString();
-            $time->addDays(1);
+            if (1 == $days) {
+                $time->addDay();
+            } elseif (7 == $days) {
+                $time->addWeek();
+            } else {
+                $time->addMonth();
+            }
         } while ($time->lte($this->details->until));
+
+        $sum = 0;
+
         foreach ($accounts as $key => $account) {
+            $temp_data = $data->{$account};
+
             $acc_stats = [];
-            foreach ($lables as $date) {
-                if (isset($data->{$account}->{$date})) {
-                    $acc_stats[] = $data->{$account}->{$date}->sum;
-                } else {
-                    $acc_stats[] = 0;
+            foreach ($temp_data as $en_date => $el) {
+                $sum += $el->sum;
+                if (in_array($en_date, $lables)) {
+                    $acc_stats[] = number_format($sum, 3, '.', '');
+                    $sum = 0;
                 }
             }
+
             $element = [];
             $element['data'] = $acc_stats;
             $element['label'] = $full_accounts[$account]['social_account_name']['title'];
@@ -287,7 +300,7 @@ class Benchmark
         $data['id'] = str_random(5);
         $chart->id = 'canvas-' . $data['id'];
         $chart->type = $type;
-        $chart->class = 'col-md-6';
+        $chart->class = 'col-md-12';
         $chart->title_en = 'Page ENgagment';
         if ($chart->title_en) {
             $chart->title = 'Page ENgagment';
@@ -297,11 +310,11 @@ class Benchmark
         $diff = ($this->details->since->diffInDays($this->details->until) / 2);
 
         if ($diff < 30) {
-            $chartData = $this->getEngagementByDays();
+            $chartData = $this->getEngagementData(1);
         } elseif ($diff < 60) {
-            $chartData = $this->getEngagementByDays();
+            $chartData = $this->getEngagementData(7);
         } else {
-            $chartData = $this->getEngagementByDays();
+            $chartData = $this->getEngagementData(30);
         }
 
         $chart->labels = $chartData['lables'];
@@ -309,6 +322,61 @@ class Benchmark
         $chart->aspect = true;
 
         return (array) $chart;
+    }
+
+    public function getEngagementData($days = 1)
+    {
+        $accounts = array_keys((array) $this->interactions);
+
+        $full_accounts = json_decode(json_encode($this->accounts), true);
+
+        $colors = config('utils.colors');
+
+        $lables = [];
+        $time = $this->details->since->copy();
+
+        $output = [];
+        do {
+            $lables[] = $time->toDateString();
+            if (1 == $days) {
+                $time->addDay();
+            } elseif (7 == $days) {
+                $time->addWeek();
+            } else {
+                $time->addMonth();
+            }
+        } while ($time->lte($this->details->until));
+
+        foreach ($accounts as $key => $account) {
+            $engagment = $this->getEngagment($account);
+            $sum = 0;
+            $acc_stats = [];
+            foreach ($engagment as $en_date => $eng) {
+                if (is_null($eng)) {
+                    $eng = 0;
+                }
+
+                $sum += $eng;
+
+                if (in_array($en_date, $lables)) {
+                    $acc_stats[] = number_format($sum, 3, '.', '');
+                    $sum = 0;
+                }
+            }
+
+            $element = [];
+            $element['data'] = $acc_stats;
+            $element['label'] = $full_accounts[$account]['social_account_name']['title'];
+            $element['backgroundColor'] = $colors[$key];
+            $element['borderColor'] = $colors[$key];
+
+            $element['fill'] = false;
+            $element['yAxisID'] = 'y-axis-1';
+
+            $output[] = $element;
+        }
+
+        return compact('output', 'lables');
     }
 
     public function getEngagementByDays()

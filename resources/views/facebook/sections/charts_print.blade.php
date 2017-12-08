@@ -17,7 +17,7 @@
 			@endif
 				<div class="chart-content">
 					<h3 class="chart-cap"> {{ $chart['title'] }} </h3>
-					@if($chart['id'] != "canvas-large_line")
+					@if($chart['type'] != "line")
 					<canvas width="620" height="300" style="width: 620px;height: 300px;" id="{{ $chart['id'] }}"></canvas>
 					@else
 					<canvas width="1300" height="300" style="width: 1300px;height: 300px;" id="{{ $chart['id'] }}"></canvas>

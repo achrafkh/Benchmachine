@@ -37,7 +37,7 @@ function randomScalingFactor(){
                         id: "y-axis-1",
                     }, {
                         type: "linear",
-                        display: true,
+                        display: false,
                         position: "right",
                         id: "y-axis-2",
 
