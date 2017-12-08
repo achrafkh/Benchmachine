@@ -71,7 +71,6 @@ class DAO
 
         $data = $this->getBenchmarkByPagesIds($ids, $since->toDateString(), $until->toDateString(), false);
 
-        unset($data->data->most_engaged_posts);
         return $data->data;
     }
 

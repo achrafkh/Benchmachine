@@ -426,6 +426,7 @@ class Benchmark
     // Get engagment for all pages for certain periode from kpeiz core
     public function getEngagment($id)
     {
+
         $api = new \App\Acme\Wrapers\ApiAdapter;
 
         $params['access-token'] = env('CLIENT_TOKEN');
