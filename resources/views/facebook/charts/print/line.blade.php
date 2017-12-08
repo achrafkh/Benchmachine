@@ -7,7 +7,6 @@
         window.myLine = Chart.Line(ctx, {
             data: lineChartData,
             options: {
-                responsive: false,
                 responsiveAnimationDuration: 0,
                 animation: { duration: 0 },
                 maintainAspectRatio: {!! json_encode($aspect) !!},
@@ -15,7 +14,7 @@
                         display: true,
                         position: 'bottom',
                   },
-                responsive: true,
+                responsive: false,
                 hoverMode: 'index',
                 stacked: false,
                 title:{

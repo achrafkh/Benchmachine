@@ -68,30 +68,36 @@ class Benchmark
     public function createCharts()
     {
         $charts = config('utils.charts');
-
+        $i = 1;
+        $j = 1;
         foreach ($charts as $chart) {
-            $this->charts['bar'][] = $this->buildBarChart($chart);
+            $this->charts[$i][] = $this->buildBarChart($chart, 'bar');
+            if (2 == $j) {
+                $i++;
+            }
+            $j++;
         }
 
-        $this->charts['pie'][] = $this->postsNumberChart();
-        $this->charts['pie'][] = $this->postsAvreageChart();
+        $this->charts[$i][] = $this->postsNumberChart('pie');
+        $this->charts[$i][] = $this->postsAvreageChart('pie');
+        $i++;
+        $this->charts[$i][] = $this->totalInteractionsType('grouped_bar');
 
-        $this->charts['grouped_bar'][] = $this->totalInteractionsType();
-
-        $this->charts['line'][] = $this->EngagmentChart();
-        $this->charts['line'][] = $this->InteractionProgressionChart();
+        $this->charts[$i][] = $this->EngagmentChart('line');
+        $this->charts[$i][] = $this->InteractionProgressionChart('line');
     }
 
     /**
      * @param $data chart data (to be created)
      * @return array
      */
-    public function buildBarChart($data)
+    public function buildBarChart($data, $type)
     {
         $chart = new Chart;
         if (!isset($data['id'])) {
             $data['id'] = str_random(5);
         }
+        $chart->type = $type;
         $chart->id = 'canvas-' . $data['id'];
         $chart->title_en = $data['title_en'];
         if ($chart->title_en) {
@@ -112,12 +118,13 @@ class Benchmark
     }
 
     // Pie chart for posts number in the defined periode of time
-    public function postsNumberChart($data = [])
+    public function postsNumberChart($type)
     {
         $chart = new Chart;
-        if (!isset($data['id'])) {
-            $data['id'] = str_random(5);
-        }
+
+        $data['id'] = str_random(5);
+
+        $chart->type = $type;
         $chart->id = 'canvas-' . $data['id'];
         $chart->title_en = 'Total Nombre des publication';
         if ($chart->title_en) {
@@ -139,12 +146,12 @@ class Benchmark
     }
 
     // Pie chart for avreage posts per page in the defined periode of time
-    public function postsAvreageChart($data = [])
+    public function postsAvreageChart($type)
     {
         $chart = new Chart;
-        if (!isset($data['id'])) {
-            $data['id'] = str_random(5);
-        }
+        $data['id'] = str_random(5);
+
+        $chart->type = $type;
         $chart->id = 'canvas-' . $data['id'];
         $chart->title_en = 'Moyene des publication par jour';
         if ($chart->title_en) {
@@ -165,12 +172,13 @@ class Benchmark
     }
 
     // bar chart for Interactions by type(likes comments & shares) for all pages in the defined periode of time
-    public function totalInteractionsType($data = [])
+    public function totalInteractionsType($type)
     {
         $chart = new Chart;
-        if (!isset($data['id'])) {
-            $data['id'] = str_random(5);
-        }
+
+        $data['id'] = str_random(5);
+
+        $chart->type = $type;
         $chart->id = 'canvas-' . $data['id'];
         $chart->title_en = 'Total Interactions par type';
         if ($chart->title_en) {
@@ -203,12 +211,13 @@ class Benchmark
     }
 
     // Line chart for total Interactions in the defined periode of time
-    public function InteractionProgressionChart()
+    public function InteractionProgressionChart($type)
     {
         $chart = new Chart;
         $data['id'] = 'large_line';
         $chart->id = 'canvas-' . $data['id'];
         $chart->class = 'col-md-12';
+        $chart->type = $type;
         $chart->title_en = 'Interactions';
         if ($chart->title_en) {
             $chart->title = 'Interactions';
@@ -272,11 +281,12 @@ class Benchmark
         return compact('output', 'lables');
     }
 
-    public function EngagmentChart()
+    public function EngagmentChart($type)
     {
         $chart = new Chart;
         $data['id'] = str_random(5);
         $chart->id = 'canvas-' . $data['id'];
+        $chart->type = $type;
         $chart->class = 'col-md-6';
         $chart->title_en = 'Page ENgagment';
         if ($chart->title_en) {

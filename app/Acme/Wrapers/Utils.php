@@ -26,19 +26,29 @@ class Utils
 
     public function getBenchmarkHtml($id, $print = false)
     {
-        $file = public_path() . '/static/app/benchmark-' . $id . '.html';
+        if ($print) {
+            $file = public_path() . '/static/app/benchmark-' . $id . '_print.html';
+        } else {
+            $file = public_path() . '/static/app/benchmark-' . $id . '.html';
+        }
         if (!file_exists($file)) {
             $benchmark = $this->getBenchmark($id);
             $static = true;
-            if ($print) {
-                $html = view('facebook.benchmark', compact('benchmark', 'static', 'print'))->render();
-            } else {
-                $html = view('facebook.benchmark', compact('benchmark', 'static'))->render();
-            }
 
+            $html_print = view('facebook.benchmark_print', compact('benchmark', 'static', 'print'))->render();
+            $html = view('facebook.benchmark', compact('benchmark', 'static'))->render();
+
+            file_put_contents(public_path() . '/static/app/benchmark-' . $id . '_print.html', replace($html_print));
             file_put_contents(public_path() . '/static/app/benchmark-' . $id . '.html', replace($html));
         } else {
-            $html = file_get_contents($file);
+            if ($print) {
+                $html_print = file_get_contents($file);
+            } else {
+                $html = file_get_contents($file);
+            }
+        }
+        if ($print) {
+            return $html_print;
         }
         return $html;
     }

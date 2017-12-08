@@ -8,9 +8,9 @@
 				Benchmark overview (Sorted by {{ ucfirst(str_replace('_',' ',$sort)) }})
 			</span>
 		</div>
-		<div class="row posts-wrap animatedParent" data-sequence="500">
+		<div class="row posts-wrap">
 		@foreach($posts->sortByDesc($sort)->take(4) as $key => $post)
-			@include('facebook.sections.partials.single_post')
+			@include('facebook.sections.partials.single_post_print')
 		@endforeach
 		</div>
 	</div>

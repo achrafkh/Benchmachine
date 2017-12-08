@@ -59,8 +59,8 @@ class GeneratePdf extends Command
             //dd($process->getOutput());
             //$this->log->info('pdf created Successfully' . $process->getOutput());
         }
-        cleanCache($id);
-        $dao->getBenchmarkHtml($id);
+        // cleanCache($id);
+        // $dao->getBenchmarkHtml($id);
         // $this->log->info('pdf created Successfully');
     }
 }

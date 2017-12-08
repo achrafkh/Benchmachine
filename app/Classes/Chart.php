@@ -9,6 +9,7 @@ class Chart
     public $colors;
     public $labels;
     public $total;
+    public $type;
     public $avg;
     public $title;
     public $class;

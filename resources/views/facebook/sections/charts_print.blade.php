@@ -8,23 +8,19 @@
 				Benchmark overview
 			</span>
 		</div>
-		<div class="row charts-wrap ">
-			@foreach(collect($benchmark->charts)->collapse() as $chart)
+		<div class="row charts-wrap">
+			@foreach($charts as $chart)
 			@if($chart['id'] != "canvas-large_line")
-			<div class="{{ $chart['class'] }} chart " style="max-width: 50%;display: inline-block;">
+			<div class="{{ $chart['class'] }} chart">
 			@else
-			<div class="{{ $chart['class'] }} chart" style="max-width: 100%;display: inline-block;">
+			<div class="{{ $chart['class'] }} chart">
 			@endif
 				<div class="chart-content">
 					<h3 class="chart-cap"> {{ $chart['title'] }} </h3>
 					@if($chart['id'] != "canvas-large_line")
-					<div style="width: 620px; height: 370px;">
-						<canvas width="620" height="350" style="width: 620px; height: 350px;" id="{{ $chart['id'] }}"></canvas>
-					</div>
+					<canvas width="620" height="300" style="width: 620px;height: 300px;" id="{{ $chart['id'] }}"></canvas>
 					@else
-					<div style="width: 1270px; height: 370px;">
-						<canvas width="1270" height="350" style="width: 1270px; height: 350px;" id="{{ $chart['id'] }}"></canvas>
-					</div>
+					<canvas width="1300" height="300" style="width: 1300px;height: 300px;" id="{{ $chart['id'] }}"></canvas>
 					@endif
 				</div>
 				<ul class="chart-stats">
@@ -43,16 +39,4 @@
 	</div>
 </div>
 @section('js')
-	@foreach($benchmark->charts['bar'] as $chart)
-		@include('facebook.charts.print.bar',$chart)
-	@endforeach
-	@foreach($benchmark->charts['pie'] as $chart)
-		@include('facebook.charts.print.pie',$chart)
-	@endforeach
-	@foreach($benchmark->charts['grouped_bar'] as $chart)
-		@include('facebook.charts.print.grouped_bar',$chart)
-	@endforeach
-	@foreach($benchmark->charts['line'] as $chart)
-		@include('facebook.charts.print.line',$chart)
-	@endforeach
 @endsection

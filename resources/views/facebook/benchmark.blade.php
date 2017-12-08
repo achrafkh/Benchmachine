@@ -1,12 +1,7 @@
 @extends('layouts.master')
 @section('content')
-@if(isset($print))
-<link rel="stylesheet" type="text/css" href="/css/print.css">
-@else
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.2.0/aos.css">
-@endif
-
 <div class="benchmark-page">
 	@if(!isset($static))
 	 @include('layouts.partials.header',['id' => $benchmark->details->id])
@@ -29,16 +24,17 @@
 
 	@include('facebook.sections.summary',['averages' => $benchmark->averages,'variations' => $benchmark->variations])
 	@include('facebook.sections.table', ['accounts' => $benchmark->accounts])
-	@if(!isset($print))
-		@include('facebook.sections.charts')
-	@else
-		@include('facebook.sections.charts_print')
-	@endif
+
+	@include('facebook.sections.charts')
+
  	@include('facebook.sections.posts',['posts' => $benchmark->posts,'sort'=> 'likes' ])
  	@include('facebook.sections.posts',['posts' => $benchmark->posts,'sort'=> 'comments' ])
  	@include('facebook.sections.posts',['posts' => $benchmark->posts,'sort'=> 'shares' ])
  	@include('facebook.sections.posts',['posts' => $benchmark->posts,'sort'=> 'engagement_rate' ])
  	@include('facebook.sections.posts',['posts' => $benchmark->posts,'sort'=> 'total_interactions' ])
+
+
+
 @if(!isset($print))
 @include('payment.'.getPaymentProvider())
 @endif
@@ -50,4 +46,7 @@
 <script type="text/javascript" src="/js/animate.js"></script>
 @include('payment.'.getPaymentProvider().'_js')
 @endif
+@foreach(collect($benchmark->charts)->collapse() as $chart)
+	@include('facebook.charts.'.$chart['type'], $chart)
+@endforeach
 @endsection

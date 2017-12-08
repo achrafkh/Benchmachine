@@ -42,19 +42,3 @@
 		</div>
 	</div>
 </div>
-@section('js')
-
-	@foreach($benchmark->charts['bar'] as $chart)
-		@include('facebook.charts.bar',$chart)
-	@endforeach
-	@foreach($benchmark->charts['pie'] as $chart)
-		@include('facebook.charts.pie',$chart)
-	@endforeach
-	@foreach($benchmark->charts['grouped_bar'] as $chart)
-		@include('facebook.charts.grouped_bar',$chart)
-	@endforeach
-	@foreach($benchmark->charts['line'] as $chart)
-		@include('facebook.charts.line',$chart)
-	@endforeach
-
-@endsection

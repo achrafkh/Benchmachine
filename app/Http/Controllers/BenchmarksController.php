@@ -129,7 +129,7 @@ class BenchmarksController extends Controller
         // if (env('SECRET') != strtoupper($secret)) {
         //     abort(401, 'UNAUTHORIZED');
         // }
-        cleanCache($id);
+
         $html = $this->repo->getBenchmarkHtml($id, true);
 
         return view('facebook.benchmark_html', compact('html'));

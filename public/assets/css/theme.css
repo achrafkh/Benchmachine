@@ -10441,7 +10441,7 @@ td.visible-xs {
 *,
 *:before,
 *:after {
-	background: transparent !important;
+	/* background: transparent !important; */
 	color: #000 !important;
 	-webkit-box-shadow: none !important;
 	-moz-box-shadow: none !important;
@@ -10454,9 +10454,9 @@ a:visited {
 	text-decoration: underline;
 }
 
-a[href]:after {
+/*a[href]:after {
 	content: " (" attr(href) ")";
-}
+}*/
 
 abbr[title]:after {
 	content: " (" attr(title) ")";
