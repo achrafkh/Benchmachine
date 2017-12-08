@@ -33,6 +33,8 @@ class Gateway
                     ->getContents());
         } catch (\Exception $e) {
             return phpinfo();
+
+            exit();
             dd($e->getMessage());
             return json_decode($e->getResponse()->getBody()->getContents());
         }
