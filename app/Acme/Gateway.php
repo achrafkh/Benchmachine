@@ -32,6 +32,7 @@ class Gateway
                     ->getBody()
                     ->getContents());
         } catch (\Exception $e) {
+            dd($e->getMessage());
             return json_decode($e->getResponse()->getBody()->getContents());
         }
     }
@@ -45,7 +46,7 @@ class Gateway
     {
         $post_url = '/gateway/pay';
         $redirect_url = trim(env('PAY_CLIENT'), '/') . '/gateway/process/';
-        dd(trim(env('PAY_CLIENT'), '/'), $post_url, $params);
+
         $response = $this->post($post_url, $params);
 
         if (200 != $response->status) {
