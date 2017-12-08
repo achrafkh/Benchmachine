@@ -91,7 +91,7 @@ class DAO
         $params = [
             'since' => $since,
             'until' => $until,
-            'posts' => $variation,
+            'posts' => $posts,
             'social-accounts' => $ids,
         ];
         return $this->api->post('custom-benchmark', $params);
