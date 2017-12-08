@@ -14,8 +14,7 @@ class Gateway
      */
     public function __construct()
     {
-        $this->client = new Client(['base_uri' => trim(env('PAY_CLIENT'), '/')]);
-        $this->client->setDefaultOption('verify', false);
+        $this->client = new Client(['base_uri' => trim(env('PAY_CLIENT'), '/'), 'verify' => false]);
     }
 
     /**
