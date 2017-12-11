@@ -52,6 +52,5 @@
 		  value.resize();
 		})
 	 }
-
 </script>
 @endsection
