@@ -28,4 +28,6 @@
 	                },
             	},
 		});
+
+		othercharts.push(myBarChart);
 </script>

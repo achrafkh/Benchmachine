@@ -108,6 +108,7 @@ $.get( "/api/show-modal/"+bench_id, function( data ) {
 @include('payment.'.getPaymentProvider().'_js')
 @endif
 <script type="text/javascript">
+  var othercharts = [];
   var charts = [];
 </script>
 @foreach(collect($benchmark->charts)->collapse() as $chart)

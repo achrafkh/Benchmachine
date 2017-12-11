@@ -35,6 +35,7 @@ $(window).scroll(function() {
 	                },
             	},
 		});
+		 othercharts.push(myBarChart);
     }
 });
 </script>

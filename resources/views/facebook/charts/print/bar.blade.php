@@ -1,5 +1,5 @@
 <script type="text/javascript">
-        new Chart(document.getElementById({!! json_encode($id) !!}), {
+        var mychart =new Chart(document.getElementById({!! json_encode($id) !!}), {
             type: 'bar',
 
             data: {
@@ -34,4 +34,6 @@
                 },
             }
         });
+
+        othercharts.push(mychart);
 </script>

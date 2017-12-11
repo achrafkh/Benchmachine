@@ -19,4 +19,6 @@
                 }]
               }
         });
+
+            othercharts.push(myChart);
 </script>

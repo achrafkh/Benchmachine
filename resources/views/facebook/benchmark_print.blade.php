@@ -1,8 +1,6 @@
 @extends('layouts.master')
 @section('content')
 <link rel="stylesheet" type="text/css" href="/css/print.css">
-
-
 <div class="benchmark-page">
 	@if(!isset($static))
 	 @include('layouts.partials.header',['id' => $benchmark->details->id])
@@ -41,7 +39,19 @@
 @if(!isset($print))
 @include('payment.'.getPaymentProvider().'_js')
 @endif
+<script type="text/javascript">
+	var othercharts = [];
+</script>
 @foreach(collect($benchmark->charts)->collapse() as $chart)
 	@include('facebook.charts.print.'.$chart['type'], $chart)
 @endforeach
+
+<script type="text/javascript">
+	 function onBeforePrint(){
+	 	$.each(othercharts, function( index, value ) {
+		  value.resize();
+		})
+	 }
+
+</script>
 @endsection

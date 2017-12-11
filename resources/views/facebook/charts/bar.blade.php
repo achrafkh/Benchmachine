@@ -5,7 +5,7 @@ $(window).scroll(function() {
             return;
         }
         $('#' + {!!json_encode($id) !!}).data("generated", true);
-        new Chart(document.getElementById({!! json_encode($id) !!}), {
+        var mychart = new Chart(document.getElementById({!! json_encode($id) !!}), {
             type: 'bar',
 
             data: {
@@ -40,6 +40,8 @@ $(window).scroll(function() {
                 },
             }
         });
+
+        othercharts.push(mychart);
     }
 });
 </script>

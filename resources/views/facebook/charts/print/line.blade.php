@@ -41,4 +41,6 @@
                 }
             }
         });
+
+       othercharts.push(window.myLine);
     </script>
