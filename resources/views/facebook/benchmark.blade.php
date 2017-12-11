@@ -27,11 +27,11 @@
 
 	@include('facebook.sections.charts')
 
- 	@include('facebook.sections.posts',['posts' => $benchmark->posts,'sort'=> 'likes' ])
- 	@include('facebook.sections.posts',['posts' => $benchmark->posts,'sort'=> 'comments' ])
- 	@include('facebook.sections.posts',['posts' => $benchmark->posts,'sort'=> 'shares' ])
- 	@include('facebook.sections.posts',['posts' => $benchmark->posts,'sort'=> 'engagement_rate' ])
- 	@include('facebook.sections.posts',['posts' => $benchmark->posts,'sort'=> 'total_interactions' ])
+ 	@include('facebook.sections.posts',['posts' => $benchmark->posts,'sort'=> 'likes','sort_title' => 'Most Liked' ])
+ 	@include('facebook.sections.posts',['posts' => $benchmark->posts,'sort'=> 'comments','sort_title' => 'Most Commented' ])
+ 	@include('facebook.sections.posts',['posts' => $benchmark->posts,'sort'=> 'shares','sort_title' => 'Most Shared' ])
+ 	@include('facebook.sections.posts',['posts' => $benchmark->posts,'sort'=> 'engagement_rate','sort_title' => 'Most Engaged' ])
+ 	@include('facebook.sections.posts',['posts' => $benchmark->posts,'sort'=> 'total_interactions','sort_title' => 'TOP posts by interactions' ])
 
 @if(!Session::has('email-'. $benchmark->details->id ))
   <div class="modal fade" id="myModalNorm" tabindex="-1" role="dialog"
@@ -68,7 +68,7 @@
           data-dismiss="modal">
           Close
           </button>
-          <button type="button" class="btn btn-primary">
+          <button type="button" class="btn btn-sunny">
           Save changes
           </button>
         </div> -->
@@ -107,7 +107,52 @@ $.get( "/api/show-modal/"+bench_id, function( data ) {
 
 @include('payment.'.getPaymentProvider().'_js')
 @endif
+<script type="text/javascript">
+  var charts = [];
+</script>
 @foreach(collect($benchmark->charts)->collapse() as $chart)
 	@include('facebook.charts.'.$chart['type'], $chart)
 @endforeach
+
+
+<script type="text/javascript">
+
+$('.canvas-engagment').unbind('click').bind('click', function (e) {
+  $('.canvas-engagment').removeClass("btn-sunny").addClass("btn-default");
+  $(this).removeClass("btn-default").addClass("btn-sunny");
+  $.post( "/api/update-eng",  {periode: $(this).val() ,benchmark: {!! json_encode($benchmark)  !!}} ,function(e) {
+    startLoader();
+  })
+  .done(function(e) {
+    var chartObject = charts[0];
+    chartObject.data.datasets = e.output;
+    chartObject.data.labels = e.lables;
+    chartObject.update();
+    removeLoader();
+  })
+  .fail(function(e) {
+    removeLoader();
+    alert('Something went wrong');
+  })
+});
+$('.canvas-interactions').unbind('click').bind('click', function (e) {
+  $('.canvas-interactions').removeClass("btn-sunny").addClass("btn-default");
+  $(this).removeClass("btn-default").addClass("btn-sunny");
+  $.post( "/api/update-int",  {periode: $(this).val() ,benchmark: {!! json_encode($benchmark)  !!}} ,function(e) {
+    startLoader();
+  })
+  .done(function(e) {
+    var chartObject = charts[1];
+    chartObject.data.datasets = e.output;
+    chartObject.data.labels = e.lables;
+    chartObject.update();
+    removeLoader();
+  })
+  .fail(function(e) {
+    removeLoader();
+    alert('Something went wrong');
+  })
+});
+</script>
+
 @endsection

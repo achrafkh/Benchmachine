@@ -33,9 +33,9 @@
 				<li>
 					<a href="/home">History</a>
 				</li>
-				<li>
+				<!-- <li>
 					<a href="/settings">Settings</a>
-				</li>
+				</li> -->
 				<li role="separator" class="divider"></li>
 				<li>
 					<a href="{{ route('logout') }}"

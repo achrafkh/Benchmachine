@@ -33,6 +33,7 @@ class Utils
         }
         if (!file_exists($file)) {
             $benchmark = $this->getBenchmark($id);
+
             $static = true;
 
             $html_print = view('facebook.benchmark_print', compact('benchmark', 'static', 'print'))->render();

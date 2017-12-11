@@ -214,7 +214,7 @@ class Benchmark
     public function InteractionProgressionChart($type)
     {
         $chart = new Chart;
-        $data['id'] = 'large_line';
+        $data['id'] = 'interactions';
         $chart->id = 'canvas-' . $data['id'];
         $chart->class = 'col-md-12';
         $chart->type = $type;
@@ -297,7 +297,7 @@ class Benchmark
     public function EngagmentChart($type)
     {
         $chart = new Chart;
-        $data['id'] = str_random(5);
+        $data['id'] = 'engagment';
         $chart->id = 'canvas-' . $data['id'];
         $chart->type = $type;
         $chart->class = 'col-md-12';

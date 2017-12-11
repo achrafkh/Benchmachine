@@ -2,10 +2,10 @@
 	<div class="container">
 		<div class="section-header">
 			<h2 class="section-title">
-			Best Posts
+			{{ ucfirst($sort_title) }}
 			</h2>
-			<span class="section-cap">
-				Benchmark overview (Sorted by {{ ucfirst(str_replace('_',' ',$sort)) }})
+			<span class="section-cap" style="text-transform: uppercase;">
+				Best posts
 			</span>
 		</div>
 		<div class="row posts-wrap">

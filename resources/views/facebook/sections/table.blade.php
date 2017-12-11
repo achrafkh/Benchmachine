@@ -38,7 +38,7 @@ $nbr_rep = 'Taux de réponse';
 								<span class="table-fbpage-img" style="background-image:url(http://graph.facebook.com/{{$account->social_account_name->real_id}}/picture)"></span>
 							</div>
 							<div class="media-body media-middle">
-								<span class="table-fbpage-name">{{ $account->social_account_name->title }}</span>
+								<a target="_blank" href="https://www.facebook.com/{{ $account->social_account_name->label }}"><span class="table-fbpage-name">{{ $account->social_account_name->title }}</span></a>
 								<span class="table-fbpage-id">{{ $account->social_account_name->label }}</span>
 							</div>
 						</div>
@@ -47,8 +47,8 @@ $nbr_rep = 'Taux de réponse';
 					<td><span class="table-digit up">{{ is_null($account->absolute_fans->value) ? 0 : $account->absolute_fans->value }}</span></td>
 					<td><span class="table-digit">{{ is_null($account->fans_local->value) ? 0 : $account->fans_local->value }}</span></td>
 					<td><span class="table-digit">{{ is_null($account->posts->value) ? 0 : $account->posts->value }}</span></td>
-					<td><span class="table-digit">{{ is_null($account->{$nbr_pub}->value) ? 0 : $account->{$nbr_pub}->value }}</span></td>
-					<td><span class="table-digit">{{ is_null($account->{$nbr_rep}->value) ? 0 : $account->{$nbr_rep}->value}}</span></td>
+					<td><span class="table-digit">{{ $account->{$nbr_pub}->value }}</span></td>
+					<td><span class="table-digit">{{ ($account->likes->value + $account->comments->value + $account->shares->value) }}</span></td>
 					<td><span class="table-digit">{{ $account->likes->value }}</span></td>
 					<td><span class="table-digit">{{ $account->comments->value }}</span></td>
 					<td><span class="table-digit">{{ $account->shares->value }}</span></td>

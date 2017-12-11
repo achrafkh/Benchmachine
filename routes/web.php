@@ -3,6 +3,8 @@
 Route::post('api/pages/validate', 'HomeController@validatePages');
 Route::post('api/details', 'HomeController@saveDetails');
 Route::get('api/show-modal/{id}', 'HomeController@showModal');
+Route::post('/api/update-int', 'ChartsApiController@interactionsData');
+Route::post('/api/update-eng', 'ChartsApiController@engagmentData');
 
 // Test route
 Route::get('/testing/{id}', 'TestController@test')->name('testing');

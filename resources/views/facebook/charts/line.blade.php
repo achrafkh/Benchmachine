@@ -1,7 +1,6 @@
 <script>
-function randomScalingFactor(){
- 	return Math.round(Number(Math.random(0,500) * 100));
- }
+
+
  $(window).scroll(function() {
     if ($('#'+{!! json_encode($id) !!}).isOnScreen()) {
         if ($('#'+{!! json_encode($id) !!}).data("generated")) {
@@ -12,6 +11,7 @@ function randomScalingFactor(){
         labels: {!! json_encode($labels) !!},
         datasets: {!! json_encode($data) !!}
     };
+        var the_id = {!! json_encode($id) !!};
         var ctx = document.getElementById({!! json_encode($id) !!}).getContext("2d");
         window.myLine = Chart.Line(ctx, {
             data: lineChartData,
@@ -48,6 +48,12 @@ function randomScalingFactor(){
                 }
             }
         });
+        if(the_id == 'canvas-engagment'){
+            charts[0] = window.myLine;
+        } else {
+            charts[1] = window.myLine;
+        }
+
  }
 });
     </script>

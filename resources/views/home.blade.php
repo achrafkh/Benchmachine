@@ -204,6 +204,9 @@ footer{
 $(document).ready(function() {
     $('.datatables').DataTable({
         columnDefs: [
+          { "type": "numeric-comma", targets: 1 },
+          { "type": "percent", targets: 11 },
+          { "type": "percent", targets: 10 },
           { targets: 'no-sort', orderable: false }
         ]
     });

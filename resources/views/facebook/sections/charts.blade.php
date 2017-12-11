@@ -8,11 +8,31 @@
 				Benchmark overview
 			</span>
 		</div>
+		<style type="text/css">
+			.btn2{
+				margin :0px !important;
+				border-radius: 50% !important;
+  				box-shadow: none !important;
+  				border-radius:0!important;
+			}
+			.chart-cap{
+				display: inline-block!important;
+			}
+		</style>
 		<div class="row charts-wrap">
 			@foreach(collect($benchmark->charts)->collapse() as $chart)
 			<div class="{{ $chart['class'] }} chart">
 				<div class="chart-content">
-					<h3 class="chart-cap"> {{ $chart['title'] }} </h3>
+					<div style="margin-bottom: 5px;">
+						<h3 class="chart-cap"> {{ $chart['title'] }} </h3>
+						@if($chart['type'] == 'line')
+						<div class="pull-right" class="btn-group" role="group" >
+							<button type="button" class="btn btn2 btn-default {{ $chart['id'] }}" value="1">Days</button>
+							<button type="button" class="btn btn2 btn-default {{ $chart['id'] }}" value="7">Weeks</button>
+							<button type="button" class="btn btn2 btn-default {{ $chart['id'] }}" value="30">Months</button>
+						</div>
+						@endif
+					</div>
 					<canvas id="{{ $chart['id'] }}"></canvas>
 				</div>
 				<ul class="chart-stats" style="min-height: 50px">
