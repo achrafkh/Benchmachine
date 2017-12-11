@@ -1,4 +1,4 @@
-<div class="section posts-section" data-aos="slide-up" data-aos-once="true" data-aos-duration="800" data-aos-delay="200" data-aos-offset="240">
+<div class="section posts-section" data-aos="slide-up" data-aos-once="true" data-aos-duration="1000" data-aos-delay="300" data-aos-offset="350">
 	<div class="container">
 		<div class="section-header">
 			<h2 class="section-title">
