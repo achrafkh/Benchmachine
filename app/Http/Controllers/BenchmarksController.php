@@ -72,7 +72,7 @@ class BenchmarksController extends Controller
     {
         $benchmark = Benchmark::with('accounts')->find($id);
 
-        $this->authorize('view', $benchmark);
+        //$this->authorize('view', $benchmark);
 
         $file = public_path() . '/static/app/benchmark-' . $id . '.html';
 
