@@ -9,7 +9,7 @@
 	@endif
 	@include('facebook.sections.summary_print',['averages' => $benchmark->averages,'variations' => $benchmark->variations])
 
-	@include('facebook.sections.table', ['accounts' => $benchmark->accounts])
+	@include('facebook.sections.table_print', ['accounts' => $benchmark->accounts])
 
 
 	@foreach($benchmark->charts as $test => $pack)
