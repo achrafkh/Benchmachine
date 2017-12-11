@@ -7,10 +7,6 @@
 		  {!! Session::get('flash')['msg'] !!}
 		</div>
 		@endif
-			<h2>
-				<i class="icon-pencil-alt"></i>
-				<span>Title</span>
-			</h2>
 			<input id="original" type="hidden" name="o_title" value="{{ $benchmark->details->title }}">
 			<input class="animated bounceInDown" data-id="1" id="title" type="text" name="title" placeholder="Benchmark" value="{{ isset($benchmark->details->title) ? $benchmark->details->title : '' }}">
 		</div>
