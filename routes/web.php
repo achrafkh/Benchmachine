@@ -2,19 +2,18 @@
 
 Route::post('api/pages/validate', 'HomeController@validatePages');
 Route::post('api/details', 'HomeController@saveDetails');
-Route::get('api/show-modal/{id}', 'HomeController@showModal');
 Route::post('/api/update-int', 'ChartsApiController@interactionsData');
 Route::post('/api/update-eng', 'ChartsApiController@engagmentData');
 
-// Test route
-Route::get('/testing/{id}', 'TestController@test')->name('testing');
+Route::get('api/show-modal/{id}', 'HomeController@showModal');
+
+Route::get('/default/{print}', 'HomeController@defaultBenchmark')->name('defaultBench');
 
 Route::get('payment/done/{token}', 'PaymentController@done');
 Route::get('payment/error/{token}', 'PaymentController@error');
 Route::post('payment/pay/{id}', 'PaymentController@Initpayment');
 Route::get('payment/pay/{id}', 'PaymentController@getInitpayment');
 
-Route::get('check/{fname}', 'BenchmarksController@tt');
 /*
  * Authentication Routes
  */
@@ -26,8 +25,7 @@ Route::post('logout', 'Auth\LoginController@logout')->name('logout');
  * Authentication is NOT required to access this routes
  */
 Route::get('/', 'HomeController@index')->name('login');
-Route::get('benchmarks/render/{id}/{secret}', 'BenchmarksController@render')->name('Render');
-Route::get('benchmarks/render/{id}', 'BenchmarksController@render');
+Route::get('benchmarks/render/{id}/{col}/{type}/{date}', 'BenchmarksController@render')->name('Render');
 Route::get('benchmarks/init/{id}', 'HomeController@showDemoStatic')->name('showDemoBench');
 Route::post('create-demo', 'HomeController@createDemo')->name('newDemoBench');
 /*

@@ -19,44 +19,46 @@
 				display: inline-block!important;
 			}
 		</style>
-		<div class="row charts-wrap">
+		<div class="row nm-7">
 			@foreach(collect($benchmark->charts)->collapse() as $chart)
-			<div class="{{ $chart['class'] }} chart">
-				<div class="chart-content">
-					<div style="margin-bottom: 5px;">
-						<h3 class="chart-cap"> {{ $chart['title'] }} </h3>
-						@if($chart['type'] == 'line')
-						<div class="pull-right" class="btn-group" role="group" >
-							<button type="button" class="btn btn2 btn-default {{ $chart['id'] }}" value="1">Days</button>
-							<button type="button" class="btn btn2 btn-default {{ $chart['id'] }}" value="7">Weeks</button>
-							<button type="button" class="btn btn2 btn-default {{ $chart['id'] }}" value="30">Months</button>
+			<div class="{{ $chart['class'] }} p-h-7">
+				<div class="chart">
+					<div class="chart-content">
+						<div style="margin-bottom: 5px;">
+							<h3 class="chart-cap"> {{ $chart['title'] }} </h3>
+							@if($chart['type'] == 'line')
+							<div class="pull-right" class="btn-group" role="group" >
+								<button type="button" class="btn btn2 btn-default {{ $chart['id'] }}" value="1">Days</button>
+								<button type="button" class="btn btn2 btn-default {{ $chart['id'] }}" value="7">Weeks</button>
+								<button type="button" class="btn btn2 btn-default {{ $chart['id'] }}" value="30">Months</button>
+							</div>
+							@endif
 						</div>
-						@endif
+						<canvas id="{{ $chart['id'] }}"></canvas>
 					</div>
-					<canvas id="{{ $chart['id'] }}"></canvas>
+					<ul class="chart-stats" style="min-height: 50px">
+						@if(isset($chart['total']))
+						<li>
+						@if(number_format($chart['total'], 0, '.', ' ') == 0)
+						<span class="chart-stats-digit">{{number_format($chart['total'], 3, '.', ',')  }}</span>
+						@else
+						<span class="chart-stats-digit">{{ number_format($chart['total'], 0, '.', ' ')  }}</span>
+						@endif
+							<span class="chart-stats-cap">Total</span>
+						</li>
+						@endif
+						@if(isset($chart['avg']))
+						<li>
+						@if(number_format($chart['total'], 0, '.', ' ') == 0)
+						<span class="chart-stats-digit">{{  number_format($chart['avg'], 3, '.', ',') }}</span>
+						@else
+						<span class="chart-stats-digit">{{  number_format($chart['avg'], 0, '.', ' ') }}</span>
+						@endif
+							<span class="chart-stats-cap">Average</span>
+						</li>
+						@endif
+					</ul>
 				</div>
-				<ul class="chart-stats" style="min-height: 50px">
-					@if(isset($chart['total']))
-					<li>
-					@if(number_format($chart['total'], 0, '.', ' ') == 0)
-					<span class="chart-stats-digit">{{number_format($chart['total'], 3, '.', ',')  }}</span>
-					@else
-					<span class="chart-stats-digit">{{ number_format($chart['total'], 0, '.', ' ')  }}</span>
-					@endif
-						<span class="chart-stats-cap">Total</span>
-					</li>
-					@endif
-					@if(isset($chart['avg']))
-					<li>
-					@if(number_format($chart['total'], 0, '.', ' ') == 0)
-					<span class="chart-stats-digit">{{  number_format($chart['avg'], 3, '.', ',') }}</span>
-					@else
-					<span class="chart-stats-digit">{{  number_format($chart['avg'], 0, '.', ' ') }}</span>
-					@endif
-						<span class="chart-stats-cap">Average</span>
-					</li>
-					@endif
-				</ul>
 			</div>
 			@endforeach
 		</div>

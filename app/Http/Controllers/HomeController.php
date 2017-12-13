@@ -26,7 +26,7 @@ class HomeController extends Controller
     {
         $this->api = $api;
         $this->repo = $repo;
-        $this->middleware('auth', ["except" => ["index", "validatePages", "createDemo"]]);
+        $this->middleware('auth', ["except" => ["index", "validatePages", "createDemo", "defaultBenchmark"]]);
     }
 
     /**
@@ -36,6 +36,18 @@ class HomeController extends Controller
     public function index()
     {
         return view('welcome');
+    }
+
+    public function defaultBenchmark($print = 'no')
+    {
+        if ('yes' == $print) {
+            $html = file_get_contents(public_path() . '/example_print.html');
+        } else {
+            $html = file_get_contents(public_path() . '/example.html');
+            $html = str_insert($html, '<body class="">', getHtmlHeader(auth()->user()->name, auth()->user()->image, 'default'));
+        }
+
+        return view('facebook.benchmark_html', compact('html'));
     }
 
     // save user details

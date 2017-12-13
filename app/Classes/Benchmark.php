@@ -65,7 +65,7 @@ class Benchmark
     /**
      * Create Charts (add data to charts property)
      */
-    public function createCharts()
+    public function createCharts($days = 1)
     {
         $charts = config('utils.charts');
         $i = 1;
@@ -82,8 +82,8 @@ class Benchmark
         //$this->charts[$i][] = $this->postsAvreageChart('pie');
         $this->charts[$i][] = $this->totalInteractionsType('grouped_bar');
         $i++;
-        $this->charts[$i][] = $this->EngagmentChart('line');
-        $this->charts[$i][] = $this->InteractionProgressionChart('line');
+        $this->charts[$i][] = $this->EngagmentChart('line', $days);
+        $this->charts[$i][] = $this->InteractionProgressionChart('line', $days);
     }
 
     /**
@@ -211,7 +211,7 @@ class Benchmark
     }
 
     // Line chart for total Interactions in the defined periode of time
-    public function InteractionProgressionChart($type)
+    public function InteractionProgressionChart($type, $days = 1)
     {
         $chart = new Chart;
         $data['id'] = 'interactions';
@@ -226,13 +226,7 @@ class Benchmark
 
         $diff = ($this->details->since->diffInDays($this->details->until) / 2);
 
-        if ($diff < 30) {
-            $chartData = $this->getInteractionsData(1);
-        } elseif ($diff < 60) {
-            $chartData = $this->getInteractionsData(7);
-        } else {
-            $chartData = $this->getInteractionsData(30);
-        }
+        $chartData = $this->getInteractionsData($days);
 
         $chart->labels = $chartData['lables'];
         $chart->data = $chartData['output'];
@@ -294,7 +288,7 @@ class Benchmark
         return compact('output', 'lables');
     }
 
-    public function EngagmentChart($type)
+    public function EngagmentChart($type, $days)
     {
         $chart = new Chart;
         $data['id'] = 'engagment';
@@ -309,13 +303,7 @@ class Benchmark
 
         $diff = ($this->details->since->diffInDays($this->details->until) / 2);
 
-        if ($diff < 30) {
-            $chartData = $this->getEngagementData(1);
-        } elseif ($diff < 60) {
-            $chartData = $this->getEngagementData(7);
-        } else {
-            $chartData = $this->getEngagementData(30);
-        }
+        $chartData = $this->getEngagementData($days);
 
         $chart->labels = $chartData['lables'];
         $chart->data = $chartData['output'];

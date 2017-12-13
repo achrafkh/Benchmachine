@@ -23,7 +23,7 @@
                 My Benchmarks
                 </a>
                @else
-                <a style="color:white" href="{{ url('/auth/facebook') }}" class="landing-btn" waves-hover>
+                <a style="color:white" href="{{ url('/default/no') }}" class="landing-btn" waves-hover>
                 Download a default example
                 </a>
                @endif

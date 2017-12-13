@@ -6,8 +6,26 @@ function cleanCache($id)
     if (file_exists($file)) {
         unlink($file);
     }
+    $file = public_path() . '/static/app/benchmark-' . $id . '_print.html';
+    if (file_exists($file)) {
+        unlink($file);
+    }
 
     return true;
+}
+
+function getCacheId()
+{
+    $data = func_get_args();
+    $cacheId = '';
+    foreach ($data as $elemnt) {
+        if (is_bool($elemnt)) {
+            $elemnt = 'true';
+        }
+
+        $cacheId .= trim($elemnt) . '-';
+    }
+    return trim($cacheId, '-');
 }
 
 function getPaymentProvider()

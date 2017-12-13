@@ -107,7 +107,7 @@ a:hover {text-decoration:none; color:#fff;}
 		<script
 		  src="https://checkout.stripe.com/checkout.js" class="stripe-button"
 		  data-key="pk_test_NwBR00CRQsOdtzDqa20ztBYl"
-		  data-amount="{{config('price.usd').'00'}}"
+		  data-amount="500"
 		  data-name="Benchmark Machine"
 		  data-panel-label="PAY"
 		  data-label="Generate"

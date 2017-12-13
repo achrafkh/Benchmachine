@@ -8,7 +8,7 @@
 				Best posts
 			</span>
 		</div>
-		<div class="row posts-wrap">
+		<div class="row nm-7">
 		@foreach($posts->sortByDesc($sort)->take(4) as $key => $post)
 			@include('facebook.sections.partials.single_post_print')
 		@endforeach

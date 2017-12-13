@@ -5,6 +5,7 @@ namespace App\Acme\Wrapers;
 use App\Account;
 use App\Acme\Wrapers\ApiAdapter;
 use App\Benchmark;
+use Cache;
 use Carbon\Carbon;
 use StdClass;
 
@@ -87,13 +88,18 @@ class DAO
             $ids = implode(',', $ids);
         }
 
+        $cacheId = getCacheId($ids, $since, $until, $posts);
+
         $params = [
             'since' => $since,
             'until' => $until,
             'posts' => $posts,
             'social-accounts' => $ids,
         ];
-        return $this->api->post('custom-benchmark', $params);
+
+        return Cache::remember('corebench-' . $cacheId, env('CACHE_TIME'), function () use ($params) {
+            return $this->api->post('custom-benchmark', $params);
+        });
     }
 
     /**

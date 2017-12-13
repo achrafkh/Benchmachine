@@ -16,15 +16,15 @@ class Utils
         $this->api = $api;
     }
 
-    public function getBenchmark($id)
+    public function getBenchmark($id, $days = 1)
     {
 
         $response = $this->api->getBenchmarkById($id);
 
-        return $this->prepareBenchmark($response->data);
+        return $this->prepareBenchmark($response->data, $days);
     }
 
-    public function getBenchmarkHtml($id, $print = false)
+    public function getBenchmarkHtml($id, $print = false, $data = [])
     {
         if ($print) {
             $file = public_path() . '/static/app/benchmark-' . $id . '_print.html';
@@ -32,15 +32,23 @@ class Utils
             $file = public_path() . '/static/app/benchmark-' . $id . '.html';
         }
         if (!file_exists($file)) {
-            $benchmark = $this->getBenchmark($id);
+            if (isset($data['date'])) {
+                $days = $data['date'];
+            } else {
+                $days = 1;
+            }
+            $benchmark = $this->getBenchmark($id, $days);
 
             $static = true;
 
             $html_print = view('facebook.benchmark_print', compact('benchmark', 'static', 'print'))->render();
-            $html = view('facebook.benchmark', compact('benchmark', 'static'))->render();
 
             file_put_contents(public_path() . '/static/app/benchmark-' . $id . '_print.html', replace($html_print));
-            file_put_contents(public_path() . '/static/app/benchmark-' . $id . '.html', replace($html));
+
+            if (!$print) {
+                $html = view('facebook.benchmark', compact('benchmark', 'static'))->render();
+                file_put_contents(public_path() . '/static/app/benchmark-' . $id . '.html', replace($html));
+            }
         } else {
             if ($print) {
                 $html_print = file_get_contents($file);
@@ -60,7 +68,7 @@ class Utils
      * @param Stdclass $data Benchmark data
      * @return App\Classes\Benchmark instance
      */
-    public function prepareBenchmark($data)
+    public function prepareBenchmark($data, $days = 1)
     {
 
         $benchmark = new Benchmark;
@@ -83,7 +91,7 @@ class Utils
         $accounts = collect($data);
         $benchmark->setAccounts($accounts);
 
-        $benchmark->createCharts();
+        $benchmark->createCharts($days);
 
         $summary = $this->getSummary($accounts);
         $old_summary = $this->getSummary($old_accounts);

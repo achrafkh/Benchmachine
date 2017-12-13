@@ -15,6 +15,7 @@ use File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use PDF;
+use Symfony\Component\Process\Process;
 
 class BenchmarksController extends Controller
 {
@@ -124,13 +125,10 @@ class BenchmarksController extends Controller
      * @param  $secret String Secret code to make sure that the call is internal
      * @return \Illuminate\Http\Response
      */
-    public function render($id, $secret = '')
+    public function render($id, $col, $type, $date)
     {
-        // if (env('SECRET') != strtoupper($secret)) {
-        //     abort(401, 'UNAUTHORIZED');
-        // }
-
-        $html = $this->repo->getBenchmarkHtml($id, true);
+        cleanCache($id);
+        $html = $this->repo->getBenchmarkHtml($id, true, compact('col', 'type', 'date'));
 
         return view('facebook.benchmark_html', compact('html'));
     }
@@ -141,14 +139,33 @@ class BenchmarksController extends Controller
      * @param  $id Integer Benchmark id
      * @return \Illuminate\Http\Response
      */
-    public function wkdownload($id)
+    public function wkdownload($id, Request $request)
     {
+
+        if ('default' == $id) {
+            $url = url('/default/yes');
+
+            $fullPath = storage_path('app/pdf/default.pdf');
+
+            $cmd = 'xvfb-run wkhtmltopdf -L 0mm -R 0mm -T 0mm -B 0mm -O landscape --javascript-delay 2000 ' . $url . ' ' . $fullPath . ' 2>&1';
+
+            $process = new Process($cmd);
+            $process->run();
+
+            return response()->download(storage_path('app/pdf/default.pdf'));
+        }
+
         $path = 'pdf/benchmark-' . $id . '.pdf';
+        $data = $request->except('_token');
 
         Artisan::call('make:pdf', [
             'id' => $id,
+            'col' => $data['col'],
+            'type' => $data['type'],
+            'date' => $data['chatdate'],
         ]);
-        return response()->file(storage_path('app/' . $path));
+
+        return response()->download(storage_path('app/' . $path));
     }
 
     /**

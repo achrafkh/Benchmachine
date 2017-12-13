@@ -7,6 +7,7 @@ until.setDate(until.getDate() - 1);
 $( document ).ready(function() {
 	$( ".animateMe" ).each(function( index ) {
 		var nbr = parseInt( $(this).text().replace(/ /g,'') , 10);
+		console.log(nbr);
 		$(this).text(0);
 		 setTimeout(function() {
 	        $(this).animateNumber({
@@ -15,7 +16,6 @@ $( document ).ready(function() {
 	        },2000);
 	    }.bind(this), 1500 + (index * 100));
 	});
-
     $('#datepicker-inline-until').datepicker({
 	    todayHighlight: false,
 	    inline: true,

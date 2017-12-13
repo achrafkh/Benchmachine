@@ -1,10 +1,16 @@
 <header class="benchmark-header">
 	<div class="container">
 	@if(isset($id))
-		<form action="{{url('/benchmarks/wkdownload/' . $id)}}" method="POST">
+		<form id="printpdf" action="{{url('/benchmarks/wkdownload/' . $id)}}" method="POST">
 		{{ csrf_field() }}
-			<button id="print_button" target="_blank"  class="print-btn" waves-hover>
-			Print benchmark
+			<input type="hidden" id="type" name="type" value="desc">
+			<input type="hidden" id="col" name="col" value="1">
+			<input type="hidden" id="chartdate" name="chatdate" value="1">
+			<button type="submit" class="print-btn" waves-hover>
+				<svg role="img" title="printer" width="22" height="22">
+	        		<use xlink:href="/assets/images/svg-icons.svg#icon-printer"/>
+	        	</svg>
+				<span class="hidden-xs">Print benchmark</span>
 			</button>
 		</form>
 	@endif

@@ -11,6 +11,13 @@
 		<table id="table" class="data-table">
 			<thead>
 				<tr>
+					<th></th>
+					<th colspan="3">Fans</th>
+					<th colspan="2">Posts</th>
+					<th colspan="4">Interactions</th>
+					<th colspan="2">Av Engagement</th>
+				</tr>
+				<tr>
 					<th data-sortable="true">Facebook pages</th>
 					<th data-sortable="true">Total</th>
 					<th data-sortable="true">New</th>
@@ -21,7 +28,7 @@
 					<th data-sortable="true">Likes</th>
 					<th data-sortable="true">Comments</th>
 					<th data-sortable="true">Share</th>
-					<th data-sortable="true">Page</th>
+					<th data-sortable="true">Pages</th>
 					<th data-sortable="true">Posts</th>
 				</tr>
 			</thead>
@@ -43,17 +50,17 @@ $nbr_rep = 'Taux de réponse';
 							</div>
 						</div>
 					</td>
-					<td><span class="table-digit">{{ $account->fans->value }}</span></td>
-					<td><span class="table-digit up">{{ is_null($account->absolute_fans->value) ? 0 : $account->absolute_fans->value }}</span></td>
-					<td><span class="table-digit">{{ is_null($account->fans_local->value) ? 0 : $account->fans_local->value }}</span></td>
-					<td><span class="table-digit">{{ is_null($account->posts->value) ? 0 : $account->posts->value }}</span></td>
-					<td><span class="table-digit">{{ $account->{$nbr_pub}->value }}</span></td>
-					<td><span class="table-digit">{{ ($account->likes->value + $account->comments->value + $account->shares->value) }}</span></td>
-					<td><span class="table-digit">{{ $account->likes->value }}</span></td>
-					<td><span class="table-digit">{{ $account->comments->value }}</span></td>
-					<td><span class="table-digit">{{ $account->shares->value }}</span></td>
-					<td><span class="table-digit">{{ number_format($account->page_engagement->value, 3, '.', ',')  }}%</span></td>
-					<td><span class="table-digit"> {{number_format($account->average_page_engagement->value, 3, '.', ',') }} %</span></td>
+					<td class="table-digit">{{ $account->fans->value }}</td>
+					<td class="table-digit">{{ is_null($account->absolute_fans->value) ? 0 : $account->absolute_fans->value }}</td>
+					<td class="table-digit">{{ is_null($account->fans_local->value) ? 0 : $account->fans_local->value }}</td>
+					<td class="table-digit">{{ is_null($account->posts->value) ? 0 : $account->posts->value }}</td>
+					<td class="table-digit">{{ $account->{$nbr_pub}->value }}</td>
+					<td class="table-digit">{{ ($account->likes->value + $account->comments->value + $account->shares->value) }}</td>
+					<td class="table-digit">{{ $account->likes->value }}</td>
+					<td class="table-digit">{{ $account->comments->value }}</td>
+					<td class="table-digit">{{ $account->shares->value }}</td>
+					<td class="table-digit">{{ number_format($account->page_engagement->value, 3, '.', ',')  }}%</td>
+					<td class="table-digit"> {{number_format($account->average_page_engagement->value, 3, '.', ',') }} %</td>
 				</tr>
 			@endforeach
 			</tbody>

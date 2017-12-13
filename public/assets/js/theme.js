@@ -48,8 +48,27 @@ $(document).ready(function() {
 	-----------------------------------------
 	*/
 
-	$('#table').bootstrapTable();
+	$('#table').bootstrapTable({
+		onSort: function (col, type) {
+		    $('#type').val(type);
+	  		$('#col').val(col);
+	    }
+	});
 
+	
+	// $('#table').DataTable({
+	// 	"paging":   false,
+ //        "ordering": true,
+ //        "info":     false,
+ //        "bFilter": false,
+ //        columnDefs: [
+ //          { targets: 'no-sort', orderable: false }
+ //        ]
+ //    });
+	// var order = null;
+	// $('#table').on('order.dt', function () {
+	// 	order = $('#table').dataTable().fnSettings().aaSorting;
+	// });
 	/*
 	-----------------------------------------
 	Focus
