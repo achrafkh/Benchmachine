@@ -34,7 +34,7 @@ class Api
                     ->request($method, $call, ['query' => array_merge($headers, $params)])->getBody()->getContents());
 
         } catch (\Exception $e) {
-            return json_decode($e->getResponse()->getBody()->getContents());
+            return json_decode($e->getMessage());
         }
     }
 }
