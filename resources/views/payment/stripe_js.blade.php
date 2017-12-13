@@ -7,7 +7,6 @@ until.setDate(until.getDate() - 1);
 $( document ).ready(function() {
 	$( ".animateMe" ).each(function( index ) {
 		var nbr = parseInt( $(this).text().replace(/ /g,'') , 10);
-		console.log(nbr);
 		$(this).text(0);
 		 setTimeout(function() {
 	        $(this).animateNumber({

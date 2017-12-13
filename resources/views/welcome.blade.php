@@ -30,8 +30,8 @@
                 <div class="video">
                     <div class="video-inner">
                         <video autoplay="" loop="" muted="" playsinline="" poster="https://sbks-www.s3.amazonaws.com/www/storage/www/video/video-posters/dashboard-poster.png">
-                            <source src="https://sbks-www.s3.amazonaws.com/www/storage/www/video/suite-measurement/dashboard-video.mp4" type="video/mp4">
-                            <source src="https://sbks-www.s3.amazonaws.com/www/storage/www/video/suite-measurement/dashboard-video.webm" type="video/webm">
+                            <source src="{{ url('/front.mp4') }}" type="video/mp4">
+                            <source src="{{ url('/front.mp4') }}">
                             Your browser does not support the video tag.
                         </video>
                         <img class="video-screen" src="/assets/images/md-screen.png" alt="">
