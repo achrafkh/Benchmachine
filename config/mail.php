@@ -56,8 +56,8 @@ return [
      */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'contact@kpeiz.digital'),
-        'name' => env('MAIL_FROM_NAME', 'Kpeiz'),
+        'address' => env('MAIL_FROM_ADDRESS', 'facebookbenchmark@facebookbenchmark.com'),
+        'name' => env('MAIL_FROM_NAME', 'Facebook Benchmark'),
     ],
 
     /*

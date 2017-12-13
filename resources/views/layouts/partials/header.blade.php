@@ -26,7 +26,7 @@
 			<div class="media-body media-middle hidden-xs">
 			@if(auth()->check())
 				<span class="profile-name">{{ auth()->user()->name }}</span>
-				<span class="profile-type">Premium</span>
+				{{-- <span class="profile-type">Premium</span> --}}
 			@else
 				<span class="profile-name">Guest</span>
 			@endif

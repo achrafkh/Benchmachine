@@ -29,7 +29,7 @@
                @endif
                 <div class="video">
                     <div class="video-inner">
-                        <video autoplay="" loop="" muted="" playsinline="" poster="https://sbks-www.s3.amazonaws.com/www/storage/www/video/video-posters/dashboard-poster.png">
+                        <video autoplay="" loop="" muted="" playsinline="" poster="{{url('/images/background.png')}}">
                             <source src="{{ url('/front.mp4') }}" type="video/mp4">
                             <source src="{{ url('/front.mp4') }}">
                             Your browser does not support the video tag.
