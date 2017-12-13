@@ -1,10 +1,6 @@
 @extends('layouts.master')
 @section('content')
 <link rel="stylesheet" type="text/css" href="/css/print.css">
-<style type="text/css">
-@media print {
-a[href]:after { content: none !important; }
-</style>
 <div class="benchmark-page">
 	@if(!isset($static))
 	 @include('layouts.partials.header',['id' => $benchmark->details->id])
@@ -47,16 +43,27 @@ a[href]:after { content: none !important; }
 @endif
 <script type="text/javascript">
 	var othercharts = [];
+	var col = 1;
+	var type = "desc";
 </script>
 @foreach(collect($benchmark->charts)->collapse() as $chart)
 	@include('facebook.charts.print.'.$chart['type'], $chart)
 @endforeach
 
+@if(isset($data['col']) && isset($data['type']))
 <script type="text/javascript">
-	 function onBeforePrint(){
-	 	$.each(othercharts, function( index, value ) {
-		  value.resize();
-		})
-	 }
+col = {!! json_encode($data['col']) !!};
+type = {!! json_encode($data['type']) !!};
+</script>
+@endif
+<script type="text/javascript">
+$('#dt-tbl').DataTable({
+		"paging":   false,
+		"searching": false,
+        "info":     false,
+        "autoWidth": false,
+        "order": [[ col, type ]]
+});
+
 </script>
 @endsection

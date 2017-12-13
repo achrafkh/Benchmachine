@@ -62,17 +62,20 @@
     .summary-block{
         width: 20% !important;
     }
-    a[href]:after { content: none !important; }
 
+    .data-table {white-space: nowrap;}
+    .data-table thead tr th{padding: 8px 10px;}
+    .benchmark-page{
+        padding: 0;
+    }
+    .benchmark-name input{
+        font-size: 72px;
+        height: 115px;
+        padding: 0;
+    }
+
+    table.dataTable thead tr th{
+        background-image: none !important;
+    }
 }
 
-
-
-    .post-img{
-    background-size: 275px 200px !important;
-    background-repeat: no-repeat !important;
-    }
-    .brand-img{
-        background-size: 40px 40px !important;
-        background-repeat: no-repeat !important;
-    }

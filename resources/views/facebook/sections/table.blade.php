@@ -19,7 +19,7 @@
 				</tr>
 				<tr>
 					<th data-sortable="true">Facebook pages</th>
-					<th data-sortable="true" data-sort-order="desc" data-sort-name="total" data-sort="true">Total</th>
+					<th data-sortable="true">Total</th>
 					<th data-sortable="true">New</th>
 					<th data-sortable="true">Local</th>
 					<th data-sortable="true">Admin</th>

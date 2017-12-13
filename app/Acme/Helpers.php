@@ -24,6 +24,16 @@ function cleanCache($id)
     return true;
 }
 
+function cleanPrintCache($id)
+{
+    $file = public_path() . '/static/app/benchmark-' . $id . '_print.html';
+    if (file_exists($file)) {
+        unlink($file);
+    }
+
+    return true;
+}
+
 function getCacheId()
 {
     $data = func_get_args();

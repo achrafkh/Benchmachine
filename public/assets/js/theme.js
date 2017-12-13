@@ -44,31 +44,19 @@ $(document).ready(function() {
 
 	/*
 	-----------------------------------------
-	Bootstrap Table
+	Datatables Table
 	-----------------------------------------
 	*/
 
-	$('#table').bootstrapTable({
-		onSort: function (col, type) {
-		    $('#type').val(type);
-	  		$('#col').val(col);
-	    }
+	$('#table').DataTable({
+		paging:   false,
+		ordering: true,
+		info:     false,
+		searching: false,
+		autoWidth: false,
 	});
 
-	
-	// $('#table').DataTable({
-	// 	"paging":   false,
- //        "ordering": true,
- //        "info":     false,
- //        "bFilter": false,
- //        columnDefs: [
- //          { targets: 'no-sort', orderable: false }
- //        ]
- //    });
-	// var order = null;
-	// $('#table').on('order.dt', function () {
-	// 	order = $('#table').dataTable().fnSettings().aaSorting;
-	// });
+
 	/*
 	-----------------------------------------
 	Focus

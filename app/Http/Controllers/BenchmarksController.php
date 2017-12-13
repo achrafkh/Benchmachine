@@ -127,7 +127,8 @@ class BenchmarksController extends Controller
      */
     public function render($id, $col, $type, $date)
     {
-        cleanCache($id);
+        cleanPrintCache($id);
+
         $html = $this->repo->getBenchmarkHtml($id, true, compact('col', 'type', 'date'));
 
         return view('facebook.benchmark_html', compact('html'));

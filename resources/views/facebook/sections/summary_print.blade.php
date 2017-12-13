@@ -13,7 +13,7 @@
 	</div>
 		<div class="section-header">
 			<h2 class="section-title">
-			Summary
+				Summary
 			</h2>
 			<span class="section-cap">
 				Benchmark overview

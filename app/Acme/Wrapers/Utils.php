@@ -41,7 +41,7 @@ class Utils
 
             $static = true;
 
-            $html_print = view('facebook.benchmark_print', compact('benchmark', 'static', 'print'))->render();
+            $html_print = view('facebook.benchmark_print', compact('benchmark', 'static', 'print', 'data'))->render();
 
             file_put_contents(public_path() . '/static/app/benchmark-' . $id . '_print.html', replace($html_print));
 

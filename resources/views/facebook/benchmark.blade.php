@@ -1,6 +1,5 @@
 @extends('layouts.master')
 @section('content')
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.2.0/aos.css">
 <div class="benchmark-page">
@@ -85,7 +84,6 @@
 @endsection
 @section('custom-js')
 @if(!isset($print))
-<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.2.0/aos.js"></script>
 <script type="text/javascript" src="/js/animate.js"></script>
@@ -120,22 +118,28 @@ $.get( "/api/show-modal/"+bench_id, function( data ) {
 
 
 <script type="text/javascript">
+
+var order = null;
+$('#table').on('order.dt', function () {
+  order = $('#table').dataTable().fnSettings().aaSorting[0];
+  $('#col').val(order[0]);
+  $('#type').val(order[1]);
+});
+
 $('.canvas-engagment').unbind('click').bind('click', function (e) {
   $('#chartdate').val($(this).val());
   $('.canvas-engagment').removeClass("btn-sunny").addClass("btn-default");
   $(this).removeClass("btn-default").addClass("btn-sunny");
   $.post( "/api/update-eng",  {periode: $(this).val() ,benchmark: {!! json_encode($benchmark)  !!}} ,function(e) {
-    startLoader();
+
   })
   .done(function(e) {
     var chartObject = charts[0];
     chartObject.data.datasets = e.output;
     chartObject.data.labels = e.lables;
     chartObject.update();
-    removeLoader();
   })
   .fail(function(e) {
-    removeLoader();
     alert('Something went wrong');
   })
 });
@@ -144,17 +148,15 @@ $('.canvas-interactions').unbind('click').bind('click', function (e) {
   $('.canvas-interactions').removeClass("btn-sunny").addClass("btn-default");
   $(this).removeClass("btn-default").addClass("btn-sunny");
   $.post( "/api/update-int",  {periode: $(this).val() ,benchmark: {!! json_encode($benchmark)  !!}} ,function(e) {
-    startLoader();
+
   })
   .done(function(e) {
     var chartObject = charts[1];
     chartObject.data.datasets = e.output;
     chartObject.data.labels = e.lables;
     chartObject.update();
-    removeLoader();
   })
   .fail(function(e) {
-    removeLoader();
     alert('Something went wrong');
   })
 });

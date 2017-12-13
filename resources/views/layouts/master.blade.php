@@ -23,7 +23,7 @@
     <script type="text/javascript">
         $(".print-btn").unbind().click(function() {
           startLoader();
-          setTimeout(removeLoader, 15000)
+          setTimeout(removeLoader, 5000)
         });
     </script>
 </body>
