@@ -44,7 +44,10 @@ class HomeController extends Controller
             $html = file_get_contents(public_path() . '/example_print.html');
         } else {
             $html = file_get_contents(public_path() . '/example.html');
-            $html = str_insert($html, '<body class="">', getHtmlHeader(auth()->user()->name, auth()->user()->image, 'default'));
+            $user_name = (auth()->check()) ? auth()->user()->name : 'Guest';
+            $user_image = (auth()->check()) ? auth()->user()->image : 'https://api.drupal.org/sites/default/files/default-avatar.png';
+
+            $html = str_insert($html, '<body class="">', getHtmlHeader($user_name, $user_image, 'default'));
         }
 
         return view('facebook.benchmark_html', compact('html'));
