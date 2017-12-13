@@ -1,6 +1,10 @@
 @extends('layouts.master')
 @section('content')
 <link rel="stylesheet" type="text/css" href="/css/print.css">
+<style type="text/css">
+@media print {
+a[href]:after { content: none !important; }
+</style>
 <div class="benchmark-page">
 	@if(!isset($static))
 	 @include('layouts.partials.header',['id' => $benchmark->details->id])
@@ -31,6 +35,8 @@
 			@include('facebook.sections.posts_print',['posts' => $benchmark->posts,'sort'=> 'total_interactions' ])
 		</div>
 	</div>
+
+
 @if(!isset($print))
 @include('payment.'.getPaymentProvider())
 @endif

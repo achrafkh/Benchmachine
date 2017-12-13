@@ -2,12 +2,12 @@
 	<a class="post" target="_blank" href="https://www.facebook.com/{{ $post->social_post_real_id }}">
 	@if($post->social_post_type != 'status')
 	<?php $style = true;?>
-		<div class="post-img" style="background-image:url({{ postImage($post->social_post_real_id)  }})"></div>
+		<div class="post-img" style="background-image:url({{ postImage($post->social_post_real_id)  }}) !important;"></div>
 	@endif
 		<div class="post-content" >
 			<div class="media post-brand">
 				<div class="media-left media-middle">
-					<span class="brand-img" style="background-image:url({{ $post->account_picture  }})"></span>
+					<span class="brand-img" style="background-image:url({{ $post->account_picture  }}) !important;"></span>
 				</div>
 				<div class="media-body media-middle">
 					<span class="brand-name">{{ $post->account_name }}</span>

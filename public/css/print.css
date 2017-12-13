@@ -62,4 +62,21 @@
     .summary-block{
         width: 20% !important;
     }
+    a[href]:after { content: none !important; }
+
 }
+
+
+
+    .post-img{
+    background-size: 275px 200px !important;
+    background-repeat: no-repeat !important;
+    }
+    .brand-img{
+        background-size: 40px 40px !important;
+        background-repeat: no-repeat !important;
+    }
+    .table-fbpage-img{
+        background-size: 60px 60px !important;
+        background-repeat: no-repeat !important;
+    }

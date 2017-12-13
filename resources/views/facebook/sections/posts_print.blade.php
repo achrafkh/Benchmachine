@@ -7,7 +7,7 @@
 	</span>
 </div>
 <div class="row nm-7 animatedParent" data-sequence="500">
-	@foreach($posts->sortByDesc($sort)->take(4) as $key => $post)
-	@include('facebook.sections.partials.single_post')
+	@foreach($posts->flatten()->sortByDesc($sort)->take(4) as $key => $post)
+	@include('facebook.sections.partials.single_post_print')
 	@endforeach
 </div>

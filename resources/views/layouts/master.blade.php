@@ -5,7 +5,7 @@
     <meta name="theme-color" content="#0363c5" />
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, minimum-scale=1, maximum-scale=1">
     <title>Benchmark Machine</title>
-    <link rel="stylesheet" href="/assets/css/theme.css">
+    <link rel="stylesheet" href="/assets/css/theme.min.css">
     <link type="text/css" rel="stylesheet" href="/css/loader.css">
 </head>
 <body class="">
@@ -23,7 +23,7 @@
     <script type="text/javascript">
         $(".print-btn").unbind().click(function() {
           startLoader();
-          setTimeout(removeLoader, 10000)
+          setTimeout(removeLoader, 15000)
         });
     </script>
 </body>

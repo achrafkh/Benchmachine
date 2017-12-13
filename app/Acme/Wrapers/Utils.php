@@ -70,10 +70,9 @@ class Utils
      */
     public function prepareBenchmark($data, $days = 1)
     {
-
         $benchmark = new Benchmark;
 
-        $posts = $this->mapPost($data->most_engaged_posts)->sortByDesc('engagement_rate');
+        $posts = $data->most_engaged_posts;
         unset($data->most_engaged_posts);
 
         $benchmark->setposts($posts);
