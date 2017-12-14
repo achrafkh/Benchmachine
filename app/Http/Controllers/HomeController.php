@@ -31,9 +31,9 @@ class HomeController extends Controller
         $this->middleware('auth', ["except" => ["index", "validatePages", "createDemo", "defaultBenchmark"]]);
     }
 
-    public function mail()
+    public function mail($email)
     {
-        $test = Mail::to(auth()->user())->send(new WelcomeMail());
+        $test = Mail::to($email)->send(new WelcomeMail());
 
         dd($test);
     }
