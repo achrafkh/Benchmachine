@@ -7,10 +7,12 @@ use App\Acme\Wrapers\DAO;
 use App\Acme\Wrapers\Utils;
 use App\Benchmark;
 use App\Http\Requests\AddpagesRequest;
+use App\Mail\WelcomeMail;
 use Artisan;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Mail;
 use Session;
 
 class HomeController extends Controller
@@ -27,6 +29,13 @@ class HomeController extends Controller
         $this->api = $api;
         $this->repo = $repo;
         $this->middleware('auth', ["except" => ["index", "validatePages", "createDemo", "defaultBenchmark"]]);
+    }
+
+    public function mail()
+    {
+        $test = Mail::to(auth()->user())->send(new WelcomeMail());
+
+        dd($test);
     }
 
     /**

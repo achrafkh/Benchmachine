@@ -14,6 +14,8 @@ Route::get('payment/error/{token}', 'PaymentController@error');
 Route::post('payment/pay/{id}', 'PaymentController@Initpayment');
 Route::get('payment/pay/{id}', 'PaymentController@getInitpayment');
 
+Route::get('/mailee', 'HomeController@mail');
+
 /*
  * Authentication Routes
  */
@@ -25,7 +27,7 @@ Route::post('logout', 'Auth\LoginController@logout')->name('logout');
  * Authentication is NOT required to access this routes
  */
 Route::get('/', 'HomeController@index')->name('login');
-Route::get('benchmarks/render/{id}/{col}/{type}/{date}', 'BenchmarksController@render')->name('Render');
+Route::get('benchmarks/render/{id}/{col}/{type}/{date_en}/{date_in}', 'BenchmarksController@render')->name('Render');
 Route::get('benchmarks/init/{id}', 'HomeController@showDemoStatic')->name('showDemoBench');
 Route::post('create-demo', 'HomeController@createDemo')->name('newDemoBench');
 /*

@@ -23,16 +23,28 @@
 					<canvas width="1300" height="300" style="width: 1300px;height: 300px;" id="{{ $chart['id'] }}"></canvas>
 					@endif
 				</div>
-				<ul class="chart-stats">
-					<li>
-						<span class="chart-stats-digit">1199982</span>
-						<span class="chart-stats-cap">Total</span>
-					</li>
-					<li>
-						<span class="chart-stats-digit">149997.75</span>
-						<span class="chart-stats-cap">Average</span>
-					</li>
-				</ul>
+				<ul class="chart-stats" style="min-height: 50px">
+						@if(isset($chart['total']))
+						<li>
+						@if(number_format($chart['total'], 0, '.', ' ') == 0)
+						<span class="chart-stats-digit">{{number_format($chart['total'], 3, '.', ',')  }}</span>
+						@else
+						<span class="chart-stats-digit">{{ number_format($chart['total'], 0, '.', ' ')  }}</span>
+						@endif
+							<span class="chart-stats-cap">Total</span>
+						</li>
+						@endif
+						@if(isset($chart['avg']))
+						<li>
+						@if(number_format($chart['total'], 0, '.', ' ') == 0)
+						<span class="chart-stats-digit">{{  number_format($chart['avg'], 3, '.', ',') }}</span>
+						@else
+						<span class="chart-stats-digit">{{  number_format($chart['avg'], 0, '.', ' ') }}</span>
+						@endif
+							<span class="chart-stats-cap">Average</span>
+						</li>
+						@endif
+					</ul>
 			</div>
 			@endforeach
 		</div>

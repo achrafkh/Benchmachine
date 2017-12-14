@@ -13,7 +13,7 @@ class GeneratePdf extends Command
      *
      * @var string
      */
-    protected $signature = 'make:pdf {id} {col?} {type?} {date?}';
+    protected $signature = 'make:pdf {id} {col?} {type?} {date_en?} {date_in?}';
 
     /**
      * The console command description.
@@ -45,13 +45,14 @@ class GeneratePdf extends Command
 
         //$this->log->info('Generating pdf started for benchmark ' . $id);
 
-        $date = is_null($this->argument('date')) ? 7 : $this->argument('date');
+        $date_en = is_null($this->argument('date_en')) ? 7 : $this->argument('date_en');
+        $date_in = is_null($this->argument('date_in')) ? 7 : $this->argument('date_in');
         $col = is_null($this->argument('col')) ? 1 : $this->argument('col');
         $type = is_null($this->argument('type')) ? 'desc' : $this->argument('type');
 
         $filename = 'benchmark-' . $id;
 
-        $url = url('/benchmarks/render/' . $id . '/' . $col . '/' . $type . '/' . $date);
+        $url = url('/benchmarks/render/' . $id . '/' . $col . '/' . $type . '/' . $date_en . '/' . $date_in);
 
         $fullPath = storage_path('app/pdf/' . $filename . '.pdf');
 

@@ -125,11 +125,11 @@ class BenchmarksController extends Controller
      * @param  $secret String Secret code to make sure that the call is internal
      * @return \Illuminate\Http\Response
      */
-    public function render($id, $col, $type, $date)
+    public function render($id, $col, $type, $date_en, $date_in)
     {
         cleanPrintCache($id);
 
-        $html = $this->repo->getBenchmarkHtml($id, true, compact('col', 'type', 'date'));
+        $html = $this->repo->getBenchmarkHtml($id, true, compact('col', 'type', 'date_en', 'date_in'));
 
         return view('facebook.benchmark_html', compact('html'));
     }
@@ -163,7 +163,8 @@ class BenchmarksController extends Controller
             'id' => $id,
             'col' => $data['col'],
             'type' => $data['type'],
-            'date' => $data['chatdate'],
+            'date_en' => $data['chartdate_en'],
+            'date_in' => $data['chartdate_in'],
         ]);
 
         return response()->download(storage_path('app/' . $path));

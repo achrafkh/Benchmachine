@@ -5,7 +5,8 @@
 		{{ csrf_field() }}
 			<input type="hidden" id="type" name="type" value="desc">
 			<input type="hidden" id="col" name="col" value="1">
-			<input type="hidden" id="chartdate" name="chatdate" value="1">
+			<input type="hidden" id="chartdate_en" name="chartdate_en" value="1">
+			<input type="hidden" id="chartdate_in" name="chartdate_in" value="1">
 			<button type="submit" class="print-btn" waves-hover>
 				<svg role="img" title="printer" width="22" height="22">
 	        		<use xlink:href="/assets/images/svg-icons.svg#icon-printer"/>

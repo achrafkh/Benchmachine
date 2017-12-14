@@ -16,12 +16,12 @@ class Utils
         $this->api = $api;
     }
 
-    public function getBenchmark($id, $days = 1)
+    public function getBenchmark($id, $days_en = 1, $days_in = 1)
     {
 
         $response = $this->api->getBenchmarkById($id);
 
-        return $this->prepareBenchmark($response->data, $days);
+        return $this->prepareBenchmark($response->data, $days_en, $days_in);
     }
 
     public function getBenchmarkHtml($id, $print = false, $data = [])
@@ -32,12 +32,17 @@ class Utils
             $file = public_path() . '/static/app/benchmark-' . $id . '.html';
         }
         if (!file_exists($file)) {
-            if (isset($data['date'])) {
-                $days = $data['date'];
+            if (isset($data['date_en'])) {
+                $days_en = $data['date_en'];
             } else {
-                $days = 1;
+                $days_en = 1;
             }
-            $benchmark = $this->getBenchmark($id, $days);
+            if (isset($data['date_in'])) {
+                $days_in = $data['date_in'];
+            } else {
+                $days_in = 1;
+            }
+            $benchmark = $this->getBenchmark($id, $days_en, $days_in);
 
             $static = true;
 
@@ -68,8 +73,9 @@ class Utils
      * @param Stdclass $data Benchmark data
      * @return App\Classes\Benchmark instance
      */
-    public function prepareBenchmark($data, $days = 1)
+    public function prepareBenchmark($data, $days_en, $days_in)
     {
+
         $benchmark = new Benchmark;
 
         $posts = $data->most_engaged_posts;
@@ -90,7 +96,7 @@ class Utils
         $accounts = collect($data);
         $benchmark->setAccounts($accounts);
 
-        $benchmark->createCharts($days);
+        $benchmark->createCharts($days_en, $days_in);
 
         $summary = $this->getSummary($accounts);
         $old_summary = $this->getSummary($old_accounts);

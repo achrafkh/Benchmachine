@@ -65,7 +65,7 @@ class Benchmark
     /**
      * Create Charts (add data to charts property)
      */
-    public function createCharts($days = 1)
+    public function createCharts($days_en = 1, $days_in = 1)
     {
         $charts = config('utils.charts');
         $i = 1;
@@ -82,8 +82,8 @@ class Benchmark
         //$this->charts[$i][] = $this->postsAvreageChart('pie');
         $this->charts[$i][] = $this->totalInteractionsType('grouped_bar');
         $i++;
-        $this->charts[$i][] = $this->EngagmentChart('line', $days);
-        $this->charts[$i][] = $this->InteractionProgressionChart('line', $days);
+        $this->charts[$i][] = $this->EngagmentChart('line', $days_en);
+        $this->charts[$i][] = $this->InteractionProgressionChart('line', $days_in);
     }
 
     /**
