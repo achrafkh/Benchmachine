@@ -26,6 +26,7 @@ class Utils
 
     public function getBenchmarkHtml($id, $print = false, $data = [])
     {
+        $class = "benchmark_page";
         if ($print) {
             $file = public_path() . '/static/app/benchmark-' . $id . '_print.html';
         } else {
@@ -46,12 +47,12 @@ class Utils
 
             $static = true;
 
-            $html_print = view('facebook.benchmark_print', compact('benchmark', 'static', 'print', 'data'))->render();
+            $html_print = view('facebook.benchmark_print', compact('benchmark', 'static', 'print', 'data', 'class'))->render();
 
             file_put_contents(public_path() . '/static/app/benchmark-' . $id . '_print.html', replace($html_print));
 
             if (!$print) {
-                $html = view('facebook.benchmark', compact('benchmark', 'static'))->render();
+                $html = view('facebook.benchmark', compact('benchmark', 'static', 'class'))->render();
                 file_put_contents(public_path() . '/static/app/benchmark-' . $id . '.html', replace($html));
             }
         } else {

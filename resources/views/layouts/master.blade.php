@@ -9,7 +9,7 @@
     <link type="text/css" rel="stylesheet" href="/css/loader.css">
 </head>
 <body class="">
-    <div class="page-wrap">
+    <div class="page-wrap {{ $class or '' }}">
      @yield('content')
 
     @include('layouts.partials.footer')

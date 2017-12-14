@@ -34,7 +34,7 @@
 				<span class="post-stats-digit">{{ number_shorten($post->likes, 1) }}</span>
 				<span class="post-stats-cap">Likes</span>
 			</li>
-			<li data-toggle="tooltip" data-placement="bottom" data-html="true" title="{{ $post->shares }} <br> Comments">
+			<li data-toggle="tooltip" data-placement="bottom" data-html="true" title="{{ $post->comments }} <br> Comments">
 				<span class="post-stats-digit">{{ $post->comments }}</span>
 				<span class="post-stats-cap">Cmnt</span>
 			</li>

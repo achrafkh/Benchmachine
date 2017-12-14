@@ -14,8 +14,6 @@ Route::get('payment/error/{token}', 'PaymentController@error');
 Route::post('payment/pay/{id}', 'PaymentController@Initpayment');
 Route::get('payment/pay/{id}', 'PaymentController@getInitpayment');
 
-Route::get('/mailee/{email}', 'HomeController@mail');
-
 /*
  * Authentication Routes
  */

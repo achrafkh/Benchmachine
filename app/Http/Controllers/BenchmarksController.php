@@ -73,7 +73,7 @@ class BenchmarksController extends Controller
     {
         $benchmark = Benchmark::with('accounts')->find($id);
 
-        //$this->authorize('view', $benchmark);
+        $this->authorize('view', $benchmark);
 
         $file = public_path() . '/static/app/benchmark-' . $id . '.html';
 
@@ -90,6 +90,7 @@ class BenchmarksController extends Controller
         if ((1 == $response->status) && (2 != $benchmark->status)) {
             $benchmark->markAsReady(auth()->user()->getValidEmail());
         }
+
         if (0 == $response->status) {
             return view('facebook.loading', compact('benchmark', 'benchmark_ids'));
         }

@@ -78,12 +78,10 @@
                     </div>
                 </div>
             </div>
-            <div class="media mail">
-                <div class="media-right mail-submit">
-                    <button id="trigger" type="button" waves-hover>
-                    Generate
-                    </button>
-                </div>
+            <div class="hf-sub">
+                <button id="trigger" type="button" waves-hover>
+                Generate
+                </button>
             </div>
         </form>
     </div>

@@ -19,15 +19,15 @@
 				Benchmark overview
 			</span>
 		</div>
-		<div class="summary-wrap">
-			<ul class="summary-block">
+		<div class="summary-wrap active">
+			<ul class="summary-block ">
 				<li class="summary-data">
 					<span class="perc">%</span>
 					<span class="digit">{{ number_format($averages->page_engagement, 3, '.', ',') }}</span>
 				</li>
 				<li class="summary-progress">
 					<span class=" {{ $variations->averages->page_engagement->class }}">
-						 {{ $variations->averages->page_engagement->sign . $variations->averages->page_engagement->prct }}%
+						 {{ $variations->averages->page_engagement->prct }}%
 						<i class="icon-down-dir"></i>
 						<i class="icon-up-dir"></i>
 					</span>
@@ -43,7 +43,7 @@
 				</li>
 				<li class="summary-progress">
 					<span class=" {{ $variations->averages->average_page_engagement->class }}">
-						 {{ $variations->averages->average_page_engagement->sign . $variations->averages->average_page_engagement->prct }}%
+						 {{ $variations->averages->average_page_engagement->prct }}%
 						<i class="icon-down-dir"></i>
 						<i class="icon-up-dir"></i>
 					</span>
@@ -58,7 +58,7 @@
 				</li>
 				<li class="summary-progress">
 					<span class=" {{ $variations->averages->fans->class }}">
-						 {{ $variations->averages->fans->sign . $variations->averages->fans->prct }}%
+						 {{ $variations->averages->fans->prct }}%
 						<i class="icon-down-dir"></i>
 						<i class="icon-up-dir"></i>
 					</span>
@@ -73,7 +73,7 @@
 				</li>
 				<li class="summary-progress">
 					<span class=" {{ $variations->averages->absolute_fans->class }}">
-						 {{ $variations->averages->absolute_fans->sign . $variations->averages->absolute_fans->prct }}%
+						 {{  $variations->averages->absolute_fans->prct }}%
 						<i class="icon-down-dir"></i>
 						<i class="icon-up-dir"></i>
 					</span>
@@ -88,7 +88,7 @@
 				</li>
 				<li class="summary-progress">
 					<span class=" {{ $variations->averages->posts->class }}">
-						 {{ $variations->averages->posts->sign . $variations->averages->posts->prct }}%
+						 {{ $variations->averages->posts->prct }}%
 						<i class="icon-down-dir"></i>
 						<i class="icon-up-dir"></i>
 					</span>
@@ -105,7 +105,7 @@
 				</li>
 				<li class="summary-progress">
 					<span class=" {{ $variations->averages->post_interactions_avg->class }}">
-						 {{ $variations->averages->post_interactions_avg->sign . $variations->averages->post_interactions_avg->prct }}%
+						 {{  $variations->averages->post_interactions_avg->prct }}%
 						<i class="icon-down-dir"></i>
 						<i class="icon-up-dir"></i>
 					</span>
@@ -120,7 +120,7 @@
 				</li>
 				<li class="summary-progress">
 					<span class=" {{ $variations->averages->interactions->class }}">
-						 {{ $variations->averages->interactions->sign . $variations->averages->interactions->prct }}%
+						 {{ $variations->averages->interactions->prct }}%
 						<i class="icon-down-dir"></i>
 						<i class="icon-up-dir"></i>
 					</span>
@@ -135,7 +135,7 @@
 				</li>
 				<li class="summary-progress">
 					<span class=" {{ $variations->averages->likes->class }}">
-						 {{ $variations->averages->likes->sign . $variations->averages->likes->prct }}%
+						 {{ $variations->averages->likes->prct }}%
 						<i class="icon-down-dir"></i>
 						<i class="icon-up-dir"></i>
 					</span>
@@ -150,7 +150,7 @@
 				</li>
 				<li class="summary-progress">
 					<span class=" {{ $variations->averages->comments->class }}">
-						 {{ $variations->averages->comments->sign . $variations->averages->comments->prct }}%
+						 {{ $variations->averages->comments->prct }}%
 						<i class="icon-down-dir"></i>
 						<i class="icon-up-dir"></i>
 					</span>
@@ -165,7 +165,7 @@
 				</li>
 				<li class="summary-progress">
 					<span class=" {{ $variations->averages->shares->class }}">
-						 {{ $variations->averages->shares->sign . $variations->averages->shares->prct }}%
+						 {{  $variations->averages->shares->prct }}%
 						<i class="icon-down-dir"></i>
 						<i class="icon-up-dir"></i>
 					</span>

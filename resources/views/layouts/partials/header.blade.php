@@ -1,4 +1,4 @@
-<header class="benchmark-header">
+<header class="header">
 	<div class="container">
 	@if(isset($id))
 		<form id="printpdf" action="{{url('/benchmarks/wkdownload/' . $id)}}" method="POST">

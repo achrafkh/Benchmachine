@@ -101,12 +101,14 @@ class ChartsApiController extends Controller
         $days = $request->periode;
 
         $original_bench = $request->benchmark;
+
         $since = $original_bench['details']['since']['date'];
         unset($original_bench['details']['since']);
         $until = $original_bench['details']['until']['date'];
         unset($original_bench['details']['until']);
         $original_bench['details']['until'] = '';
         $original_bench['details']['since'] = '';
+
         $original_bench = json_decode(json_encode($original_bench));
 
         $original_bench->details->since = Carbon::parse($since);
