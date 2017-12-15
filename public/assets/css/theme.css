@@ -3744,8 +3744,11 @@ tbody.collapse.in {
 	background-color: #e5e5e5;
 }
 
-.dropdown-menu > li > a {
+.dropdown-menu > li > a,
+.dropdown-menu > li > button {
+	background-color: transparent;
 	display: block;
+	width: 100%;
 	padding: 3px 20px;
 	clear: both;
 	font-weight: normal;
@@ -3755,7 +3758,9 @@ tbody.collapse.in {
 }
 
 .dropdown-menu > li > a:hover,
-.dropdown-menu > li > a:focus {
+.dropdown-menu > li > a:focus,
+.dropdown-menu > li > button:hover,
+.dropdown-menu > li > button:focus {
 	text-decoration: none;
 	color: #262626;
 	background-color: #f5f5f5;
@@ -3763,7 +3768,10 @@ tbody.collapse.in {
 
 .dropdown-menu > .active > a,
 .dropdown-menu > .active > a:hover,
-.dropdown-menu > .active > a:focus {
+.dropdown-menu > .active > a:focus,
+.dropdown-menu > .active > button,
+.dropdown-menu > .active > button:hover,
+.dropdown-menu > .active > button:focus {
 	color: #fff;
 	text-decoration: none;
 	outline: 0;
@@ -3772,12 +3780,17 @@ tbody.collapse.in {
 
 .dropdown-menu > .disabled > a,
 .dropdown-menu > .disabled > a:hover,
-.dropdown-menu > .disabled > a:focus {
+.dropdown-menu > .disabled > a:focus,
+.dropdown-menu > .disabled > button,
+.dropdown-menu > .disabled > button:hover,
+.dropdown-menu > .disabled > button:focus {
 	color: #777777;
 }
 
 .dropdown-menu > .disabled > a:hover,
-.dropdown-menu > .disabled > a:focus {
+.dropdown-menu > .disabled > a:focus,
+.dropdown-menu > .disabled > button:hover,
+.dropdown-menu > .disabled > button:focus {
 	text-decoration: none;
 	background-color: transparent;
 	background-image: none;
@@ -3789,7 +3802,8 @@ tbody.collapse.in {
 	display: block;
 }
 
-.open > a {
+.open > a,
+.open > button {
 	outline: 0;
 }
 
@@ -8832,6 +8846,27 @@ Size
 
 /*
 -----------------------------------------
+Colors
+-----------------------------------------
+*/
+
+.bg-orange {
+	background-color: #fb761d !important;
+	color: #fff !important;
+}
+
+.bg-blue {
+	background-color: #1286fa !important;
+	color: #fff !important;
+}
+
+.bg-green {
+	background-color: #20d077 !important;
+	color: #fff !important;
+}
+
+/*
+-----------------------------------------
 Facebook Inputs
 -----------------------------------------
 */
@@ -9759,7 +9794,7 @@ Header
 	font-family: "open-sans-medium";
 	font-size: 13px;
 	color: #4d4d4d;
-	max-width: 100px;
+	max-width: 150px;
 	overflow: hidden;
 	white-space: nowrap;
 	-o-text-overflow: ellipsis;
@@ -9995,6 +10030,10 @@ Layout
 -----------------------------------------
 */
 
+body.no-scroll {
+	overflow: hidden;
+}
+
 .page-wrap {
 	position: relative;
 	padding-top: 62px;
@@ -10018,6 +10057,208 @@ Layout
 Sidebar layout
 -----------------------------------------
 */
+
+.sidebar {
+	position: fixed;
+	top: 0;
+	right: 0;
+	background-color: #fff;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	-moz-box-orient: vertical;
+	-moz-box-direction: normal;
+	-ms-flex-direction: column;
+	flex-direction: column;
+	height: 100%;
+	width: 300px;
+	z-index: 100;
+	-webkit-transform: translate(100%, 0);
+	-moz-transform: translate(100%, 0);
+	-ms-transform: translate(100%, 0);
+	-o-transform: translate(100%, 0);
+	transform: translate(100%, 0);
+	-webkit-transition: all 0.2s ease-in-out;
+	-moz-transition: all 0.2s ease-in-out;
+	-o-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
+}
+
+.sidebar .sidebar-header {
+	position: relative;
+	padding: 24px 60px 24px 20px;
+	border-bottom: 1px solid #ecebeb;
+}
+
+.sidebar .sidebar-header .sidebar-title {
+	font-family: "open-sans-bold";
+	font-size: 13px;
+	line-height: 13px;
+	color: #4d4d4d;
+	margin: 0;
+	text-transform: uppercase;
+}
+
+.sidebar .sidebar-header .sidebar-close {
+	position: absolute;
+	top: 50%;
+	right: 0;
+	background-color: transparent;
+	font-size: 0;
+	padding: 21px 20px;
+	-webkit-transform: translate(0, -50%);
+	-moz-transform: translate(0, -50%);
+	-ms-transform: translate(0, -50%);
+	-o-transform: translate(0, -50%);
+	transform: translate(0, -50%);
+}
+
+.sidebar .sidebar-header .sidebar-close .svg {
+	fill: #9f9e9e;
+}
+
+.sidebar .sidebar-search {
+	background-color: #fafafa;
+	padding: 15px 20px;
+	border-bottom: 1px solid #ecebeb;
+}
+
+.sidebar .sidebar-search .search-wrap {
+	position: relative;
+	background-color: #fff;
+}
+
+.sidebar .sidebar-search .search-wrap .form-control {
+	position: relative;
+	background-color: transparent;
+	font-family: "open-sans-medium";
+	font-size: 13px;
+	color: #9f9e9e;
+	border: 1px solid #ecebeb;
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+	z-index: 1;
+}
+
+.sidebar .sidebar-search .search-wrap .form-control::-webkit-input-placeholder {
+	color: #9f9e9e;
+}
+
+.sidebar .sidebar-search .search-wrap .form-control::-moz-placeholder {
+	color: #9f9e9e;
+}
+
+.sidebar .sidebar-search .search-wrap .form-control:-ms-input-placeholder {
+	color: #9f9e9e;
+}
+
+.sidebar .sidebar-search .search-wrap .form-control:-moz-placeholder {
+	color: #9f9e9e;
+}
+
+.sidebar .sidebar-search .search-wrap .svg {
+	position: absolute;
+	top: 50%;
+	right: 12px;
+	fill: #9f9e9e;
+	-webkit-transform: translate(0, -50%);
+	-moz-transform: translate(0, -50%);
+	-ms-transform: translate(0, -50%);
+	-o-transform: translate(0, -50%);
+	transform: translate(0, -50%);
+}
+
+.sidebar .sidebar-body {
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
+	-moz-box-flex: 1;
+	-ms-flex: 1;
+	flex: 1;
+	overflow-y: auto;
+}
+
+.sidebar .sidebar-body .sidebar-item {
+	display: block;
+	padding: 15px 20px;
+	margin: 0;
+	border-bottom: 1px solid #ecebeb;
+	text-decoration: none;
+}
+
+.sidebar .sidebar-body .sidebar-item .si-name {
+	font-family: "open-sans-medium";
+	font-size: 13px;
+	line-height: 13px;
+	color: #4d4d4d;
+	max-width: 200px;
+	margin-bottom: 3px;
+	white-space: nowrap;
+	overflow: hidden;
+	-o-text-overflow: ellipsis;
+	text-overflow: ellipsis;
+}
+
+.sidebar .sidebar-body .sidebar-item .si-date {
+	font-family: "open-sans-medium";
+	font-size: 11px;
+	line-height: 11px;
+	color: #9f9e9e;
+}
+
+.sidebar .sidebar-body .sidebar-item .si-badge {
+	background-color: #fafafa;
+	display: inline-block;
+	font-family: "open-sans-medium";
+	font-size: 10px;
+	line-height: 10px;
+	color: #4d4d4d;
+	padding: 5px 10px 6px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+
+.sidebar .sidebar-body .sidebar-item:hover {
+	background-color: #fafafa;
+}
+
+.sidebar.active {
+	-webkit-transform: translate(0%, 0);
+	-moz-transform: translate(0%, 0);
+	-ms-transform: translate(0%, 0);
+	-o-transform: translate(0%, 0);
+	transform: translate(0%, 0);
+}
+
+.sidebar-backlayer {
+	position: fixed;
+	top: 0;
+	left: 0;
+	background-color: rgba(0, 0, 0, 0.35);
+	height: 100%;
+	width: 100%;
+	opacity: 0;
+	visibility: hidden;
+	z-index: 99;
+	-webkit-transition: all 0.2s ease-in-out;
+	-moz-transition: all 0.2s ease-in-out;
+	-o-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
+}
+
+.sidebar-backlayer.active {
+	opacity: 1;
+	visibility: visible;
+}
 
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
 

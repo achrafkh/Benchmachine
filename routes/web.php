@@ -36,6 +36,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/email-edit', 'HomeController@editEmail')->name('editEmail');
     Route::post('/payment/stripecheckout', 'CheckoutController@checkout')->name('stripeCheckout');
     Route::post('/payment/gpgcheckout', 'CheckoutController@gpgCheckout')->name('gpgCheckout');
+    Route::get('/api/benchmarks', 'BenchmarksController@getBenchmarks');
 
     /**
      ** Benchmarks Routes

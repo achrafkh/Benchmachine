@@ -38,7 +38,7 @@
 			</button>
 			<ul class="dropdown-menu dropdown-menu-right">
 				<li>
-					<a href="/home">History</a>
+					<button class="sidebar-trigger" type="button">My Benchmarks</button>
 				</li>
 				<!-- <li>
 					<a href="/settings">Settings</a>

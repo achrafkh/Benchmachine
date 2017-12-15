@@ -25,6 +25,26 @@ $(document).ready(function() {
 
 	/*
 	-----------------------------------------
+	Triggers
+	-----------------------------------------
+	*/
+
+	$('.sidebar-trigger').on('click', function(){
+		if(!$('.sidebar').hasClass('active')){
+			$('body').addClass('no-scroll');
+			$('.sidebar, .sidebar-backlayer').addClass('active');
+		}
+	})
+	$('.sidebar-close').on('click', function(){
+		if($('.sidebar').hasClass('active')){
+			$('body').removeClass('no-scroll');
+			$('.sidebar, .sidebar-backlayer').removeClass('active');
+		}
+	})
+
+
+	/*
+	-----------------------------------------
 	Waves
 	-----------------------------------------
 	*/

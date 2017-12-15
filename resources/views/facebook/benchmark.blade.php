@@ -7,6 +7,7 @@
 	@if(!isset($static))
 	 @include('layouts.partials.header',['id' => $benchmark->details->id])
 	@endif
+  @include('layouts.partials.sidebar')
 	<div class="benchmark-name" data-aos="fade-up" data-aos-once="true">
 		<div class="container">
 		@if(Session::has('flash'))

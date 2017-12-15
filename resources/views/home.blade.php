@@ -1,6 +1,7 @@
 @extends('layouts.master')
 @section('content')
 @include('layouts.partials.header')
+@include('layouts.partials.sidebar')
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
 <style type="text/css">
 footer{
@@ -53,12 +54,6 @@ footer{
                                         <td><span class="label label-{{ $benchmark->getStatus()['class'] }}">
                                        {{ $benchmark->getStatus()['text'] }}</span></td>
                                         <td>
-                                        @if($benchmark->status == 0 && isset($benchmark->order))
-                                        <form class="inline pay-form" action="payment/pay/{{ $benchmark->order->id }}" data-id="{{ $benchmark->order->id }}" method="POST" style="">
-                                             {{ csrf_field() }}
-                                            <button type="submit" class="btn btn-primary btn-sm" >Pay</button>
-                                        </form>
-                                        @endif
                                             <a class="btn btn-primary btn-sm" target="_blank"
                                             href="@if($benchmark->status == 2) /benchmarks/{{ $benchmark->id }}  @else javascript::void(0) @endif" @if($benchmark->status != 2) disabled  @endif >View</a>
                                             {{--

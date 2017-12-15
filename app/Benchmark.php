@@ -65,11 +65,9 @@ class Benchmark extends Model
     public function getStatus()
     {
         if (1 == $this->status) {
-            return ['class' => 'info', 'text' => 'Processing'];
-        } elseif (2 == $this->status) {
-            return ['class' => 'success', 'text' => 'Ready'];
+            return ['class' => 'warning', 'text' => 'Pending'];
         }
-        return ['class' => 'warning', 'text' => 'Unpaid'];
+        return ['class' => 'success', 'text' => 'Ready'];
     }
 
     public function SendReadyEmail($email)

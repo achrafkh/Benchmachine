@@ -33,6 +33,13 @@ class BenchmarksController extends Controller
         $this->repo = $repo;
     }
 
+    public function getBenchmarks()
+    {
+        $benchmarks = auth()->user()->benchmarks()->with('accounts', 'order')->get();
+
+        return response()->json($benchmarks);
+    }
+
     /**
      * Render a benchmark to the browser
      * also it adds the benchmark to cache for certain amount of time

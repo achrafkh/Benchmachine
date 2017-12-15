@@ -21,6 +21,15 @@
 
     @yield('custom-js')
     <script type="text/javascript">
+
+
+        $(".sidebar-trigger").unbind().click(function() {
+           updateBenchmarks();
+        });
+
+        $(".sidebar-item").unbind().click(function() {
+          startLoader();
+        });
         $(".print-btn").unbind().click(function() {
           startLoader();
           setTimeout(removeLoader, 5000)
