@@ -35,50 +35,6 @@
   @include('facebook.sections.posts',['posts' => $benchmark->posts,'sort'=> 'engagement_rate','sort_title' => 'Most Engaged' ])
   @include('facebook.sections.posts',['posts' => $benchmark->posts,'sort'=> 'total_interactions','sort_title' => 'TOP posts by interactions' ])
 
-
-@if(!Session::has('email-'. $benchmark->details->id ))
-  <div class="modal fade" id="myModalNorm" tabindex="-1" role="dialog"
-    aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <!-- Modal Header -->
-        <div class="modal-header">
-          <button type="button" class="close"
-          data-dismiss="modal">
-          <span aria-hidden="true">&times;</span>
-          <span class="sr-only">Close</span>
-          </button>
-          <h4 class="modal-title" id="myModalLabel">
-          Get notified
-          </h4>
-        </div>
-        <!-- Modal Body -->
-        <div class="modal-body">
-          <form role="form" id="change_email" method="POST" action="{{ route('editEmail') }}">
-            {{ csrf_field() }}
-            <div class="form-group">
-            <input type="hidden" name="id" value="{{ $benchmark->details->id }}">
-              <label for="exampleInputEmail1" style="margin-bottom: 10px">Email address</label>
-              <input required="" type="email" class="form-control" name="email"
-              id="email" value="{{ auth()->user()->getValidEmail() }}" placeholder="Enter email"/>
-            </div>
-            <button type="submit" class="btn btn-warning">save</button>
-          </form>
-        </div>
-        <!-- Modal Footer -->
-       <!--  <div class="modal-footer">
-    <button type="button" class="btn btn-default"
-          data-dismiss="modal">
-          Close
-          </button>
-          <button type="button" class="btn btn-sunny">
-          Save changes
-          </button>
-        </div> -->
-      </div>
-    </div>
-  </div>
-@endif
 @if(!isset($print))
 @include('payment.'.getPaymentProvider())
 @endif

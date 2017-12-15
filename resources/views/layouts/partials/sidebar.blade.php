@@ -1,7 +1,7 @@
 <div class="sidebar">
 	<div class="sidebar-header">
-		<h2 class="sidebar-title">
-			My Benchmarks (5)
+		<h2 class="sidebar-title" id="countBench">
+
 		</h2>
 		<button class="sidebar-close" type="button">
 			<svg class="svg" role="img" title="right-arrow" width="20" height="20">
@@ -28,6 +28,7 @@
 function updateBenchmarks(){
 	var parent = $('#listParent');
 	$.get( "/api/benchmarks", function( data ) {}).then(function(data){
+		$('#countBench').text('My Benchmarks ('+data.length+')');
 		if(data.length == 0 ){
 			parent.append('<div class="media sidebar-item"><ul class="media-body media-middle"><li class="si-name text-center">You have no benchmarks yet</li></ul></div>');
 			return false;
