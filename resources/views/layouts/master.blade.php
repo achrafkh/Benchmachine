@@ -21,7 +21,10 @@
 
     @yield('custom-js')
     <script type="text/javascript">
-
+        $( ".track" ).click(function() {
+          ga('send', 'event', $(this).data('section'), $(this).data('name'), $(this).data('desc'));
+          fbq($(this).data('name'),$(this).data('desc'));
+        });
 
         $(".sidebar-trigger").unbind().click(function() {
            updateBenchmarks();
