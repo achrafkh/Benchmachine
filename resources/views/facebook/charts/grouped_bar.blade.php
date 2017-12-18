@@ -35,7 +35,8 @@ $(window).scroll(function() {
 	                },
             	},
 		});
-		 othercharts.push(myBarChart);
+		AOS.refresh();
+		othercharts.push(myBarChart);
     }
 });
 </script>

@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('content')
-@include('layouts.partials.header')
-@include('layouts.partials.sidebar')
+@include('layouts.partials.header',['hidden_sidebar' => true])
+
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
 <style type="text/css">
 footer{

@@ -40,8 +40,10 @@ $(window).scroll(function() {
                 },
             }
         });
-
+        AOS.refresh();
         othercharts.push(mychart);
     }
 });
+
+
 </script>

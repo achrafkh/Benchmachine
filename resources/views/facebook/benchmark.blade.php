@@ -8,7 +8,7 @@
 	 @include('layouts.partials.header',['id' => $benchmark->details->id])
 	@endif
   @include('layouts.partials.sidebar')
-	<div class="benchmark-name" data-aos="fade-up" data-aos-once="true">
+	<div class="benchmark-name" data-aos="fade-up" data-aos-once="true" data-aos-duration="800" data-aos-delay="0" data-aos-offset="0">
 		<div class="container">
 		@if(Session::has('flash'))
 		<div class="alert alert-{{ Session::get('flash')['class'] }}">
@@ -58,7 +58,6 @@ $.get( "/api/show-modal/"+bench_id, function( data ) {
       duration: 1000,
       easing: 'ease-in-sine',
       delay: 100,
-      disable: 'mobile',
     });
 });
 </script>

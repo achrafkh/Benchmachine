@@ -1,4 +1,4 @@
-<div class="section summary-section" data-aos="flip-down" data-aos-once="true" data-aos-duration="2000" data-aos-delay="300">
+<div class="section summary-section" data-aos="fade-up" data-aos-once="true" data-aos-duration="800" data-aos-delay="200">
 	<div class="container">
 		<div class="section-header">
 			<h2 class="section-title">

@@ -1,5 +1,5 @@
 <hr>
-<div class="container" style="width: 50%;"  data-aos="fade-up" data-aos-duration="600" data-aos-delay="100" data-aos-offset="100">
+<div class="container" style="width: 50%;"  data-aos="fade-up" data-aos-once="true" data-aos-duration="800" data-aos-delay="0" data-aos-offset="0">
 	<div class="row">
 		<div class="text-center">
 			<h2 style="font-size: 32px;color: #4d4d4d;">Buy another <strong>BENCHMARK</strong></h2>

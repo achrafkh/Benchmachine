@@ -1,20 +1,5 @@
 $(document).ready(function() {
-	$.fn.isOnScreen = function(){
-        var win = $(window);
-        var viewport = {
-            top : win.scrollTop(),
-            left : win.scrollLeft()
-        };
-        viewport.right = viewport.left + win.width();
-        viewport.bottom = viewport.top + win.height();
 
-        var bounds = this.offset();
-        bounds.right = bounds.left + this.outerWidth();
-        bounds.bottom = bounds.top + this.outerHeight();
-        viewport.bottom = viewport.bottom * 0.88;
-
-        return (!(viewport.right < bounds.left || viewport.left > bounds.right || viewport.bottom < bounds.top || viewport.top > bounds.bottom));
-    };
 	/*
 	-----------------------------------------
 	Tooltip
@@ -22,6 +7,16 @@ $(document).ready(function() {
 	*/
 
 	$('[data-toggle="tooltip"]').tooltip();
+
+	/*
+	-----------------------------------------
+	Svg polyfill
+	-----------------------------------------
+	*/
+
+	svg4everybody({
+		polyfill: true,
+	});
 
 	/*
 	-----------------------------------------
@@ -35,7 +30,7 @@ $(document).ready(function() {
 			$('.sidebar, .sidebar-backlayer').addClass('active');
 		}
 	})
-	$('.sidebar-close').on('click', function(){
+	$('.sidebar-close, .sidebar-backlayer').on('click', function(){
 		if($('.sidebar').hasClass('active')){
 			$('body').removeClass('no-scroll');
 			$('.sidebar, .sidebar-backlayer').removeClass('active');
@@ -137,14 +132,28 @@ Date.prototype.format = function(format) //author: meizz
         ("00"+ o[k]).substr((""+ o[k]).length));
   return format;
 }
+$.fn.isOnScreen = function(){
+        var win = $(window);
+        var viewport = {
+            top : win.scrollTop(),
+            left : win.scrollLeft()
+        };
+        viewport.right = viewport.left + win.width();
+        viewport.bottom = viewport.top + win.height();
 
+        var bounds = this.offset();
+        bounds.right = bounds.left + this.outerWidth();
+        bounds.bottom = bounds.top + this.outerHeight();
+        viewport.bottom = viewport.bottom * 0.88;
+
+        return (!(viewport.right < bounds.left || viewport.left > bounds.right || viewport.bottom < bounds.top || viewport.top > bounds.bottom));
+    };
 function startLoader()
 {
-	document.body.classList.add("loading");
+	
 }
 
 function removeLoader()
 {
-	document.body.classList.remove("loading");
 }
 

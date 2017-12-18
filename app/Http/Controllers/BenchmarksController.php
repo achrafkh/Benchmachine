@@ -79,7 +79,7 @@ class BenchmarksController extends Controller
     public function showStatic($id)
     {
         $benchmark = Benchmark::with('accounts')->find($id);
-
+        $class = 'benchmark_page';
         $this->authorize('view', $benchmark);
 
         $file = public_path() . '/static/app/benchmark-' . $id . '.html';
@@ -99,10 +99,10 @@ class BenchmarksController extends Controller
         }
 
         if (0 == $response->status) {
-            return view('facebook.loading', compact('benchmark', 'benchmark_ids'));
+            return view('facebook.loading', compact('benchmark', 'benchmark_ids', 'class'));
         }
         if (2 != $benchmark->status) {
-            return view('facebook.loading', compact('benchmark', 'benchmark_ids'));
+            return view('facebook.loading', compact('benchmark', 'benchmark_ids', 'class'));
         }
 
         $html = $this->repo->getBenchmarkHtml($id);

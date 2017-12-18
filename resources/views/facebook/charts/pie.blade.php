@@ -25,6 +25,7 @@ $(window).scroll(function() {
                 }]
               }
         });
+        AOS.refresh();
         othercharts.push(myChart);
     }
 });

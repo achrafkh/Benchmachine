@@ -53,7 +53,7 @@
         } else {
             charts[1] = window.myLine;
         }
-
+        AOS.refresh();
  }
 });
     </script>

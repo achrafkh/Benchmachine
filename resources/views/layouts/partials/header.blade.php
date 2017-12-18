@@ -1,5 +1,12 @@
 <header class="header">
 	<div class="container">
+
+		<a class="logo" href="/">
+			<svg class="svg" role="img" title="logo">
+        		<use xlink:href="/assets/images/svg-icons.svg#logo"/>
+        	</svg>
+		</a>
+
 	@if(isset($id))
 		<form id="printpdf" action="{{url('/benchmarks/wkdownload/' . $id)}}" method="POST">
 		{{ csrf_field() }}
@@ -37,23 +44,37 @@
 			</div>
 			</button>
 			<ul class="dropdown-menu dropdown-menu-right">
-				<li>
-					<button class="sidebar-trigger" type="button">My Benchmarks</button>
-				</li>
+				@if(!isset($hidden_sidebar))
+					<li>
+						<button class="sidebar-trigger" type="button">
+							<svg class="svg" role="img" title="report" width="20" height="20">
+				        		<use xlink:href="/assets/images/svg-icons.svg#icon-report"/>
+				        	</svg>
+							<span>My Benchmarks</span>
+						</button>
+					</li>
+				@endif
 				<!-- <li>
-					<a href="/settings">Settings</a>
+					<a href="">
+						<svg class="svg" role="img" title="settings" width="20" height="20">
+			        		<use xlink:href="assets/images/svg-icons.svg#icon-settings"/>
+			        	</svg>
+						<span>Settings</span>
+					</a>
 				</li> -->
-				<li role="separator" class="divider"></li>
 				<li>
-					<a href="{{ route('logout') }}"
+					<a href="/logout"
 						onclick="event.preventDefault();
 						document.getElementById('logout-form').submit();">
-						Logout
+						<svg class="svg" role="img" title="power-button" width="20" height="20">
+			        		<use xlink:href="/assets/images/svg-icons.svg#icon-power-button"/>
+			        	</svg>
+						<span>Log out</span>
 					</a>
-					<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+				</li>
+					<form id="logout-form" action="/logout" method="POST" style="display: none;">
 						{{ csrf_field() }}
 					</form>
-				</li>
 			</ul>
 		</div>
 	</div>

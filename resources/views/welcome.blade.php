@@ -4,6 +4,12 @@
     <div class="landing">
         <div class="landing-wrap">
             <div class="landing-inner">
+                <a class="landing-logo" href=".">
+                    <img class="hidden-xs" src="assets/images/logo.png">
+                    <svg class="svg visible-xs" role="img" title="logo">
+                        <use xlink:href="/assets/images/svg-icons.svg#logo"/>
+                    </svg>
+                </a>
                 @if(auth()->check())
 
                 @else
