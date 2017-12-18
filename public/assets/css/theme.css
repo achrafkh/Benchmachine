@@ -24,12 +24,24 @@ Vendors
     License:   SIL (http://scripts.sil.org/OFL)
     Homepage:  http://thedesignoffice.org/project/modern-pictograms/
 
+    ## MFG Labs
+    Copyright (C) 2012 by Daniel Bruce
+    Author:    MFG Labs
+    License:   SIL (http://scripts.sil.org/OFL)
+    Homepage:  http://www.mfglabs.com/
+
+    ## Fontelico
+    Copyright (C) 2012 by Fontello project
+    Author:    Crowdsourced, for Fontello project
+    License:   SIL (http://scripts.sil.org/OFL)
+    Homepage:  http://fontello.com
+
 */
 
 @font-face {
 	font-family: 'fontello';
-	src: url("../fonts/fontello/fontello.eot?537543");
-	src: url("../fonts/fontello/fontello.eot?537543#iefix") format("embedded-opentype"), url("../fonts/fontello/fontello.woff2?537543") format("woff2"), url("../fonts/fontello/fontello.woff?537543") format("woff"), url("../fonts/fontello/fontello.ttf?537543") format("truetype"), url("../fonts/fontello/fontello.svg?537543#fontello") format("svg");
+	src: url("../fonts/fontello/fontello.eot?1810335");
+	src: url("../fonts/fontello/fontello.eot?1810335#iefix") format("embedded-opentype"), url("../fonts/fontello/fontello.woff2?1810335") format("woff2"), url("../fonts/fontello/fontello.woff?1810335") format("woff"), url("../fonts/fontello/fontello.ttf?1810335") format("truetype"), url("../fonts/fontello/fontello.svg?1810335#fontello") format("svg");
 	font-weight: normal;
 	font-style: normal;
 }
@@ -51,7 +63,7 @@ Vendors
 	-moz-osx-font-smoothing: grayscale;
 }
 
-.icon-down-dir:before {
+.icon-pencil-alt:before {
 	content: '\e800';
 }
 
@@ -63,8 +75,20 @@ Vendors
 	content: '\e802';
 }
 
-.icon-pencil-alt:before {
+.icon-ok:before {
 	content: '\e803';
+}
+
+.icon-cancel:before {
+	content: '\e804';
+}
+
+.icon-down-dir:before {
+	content: '\e805';
+}
+
+.icon-spin5:before {
+	content: '\e838';
 }
 
 .icon-twitter:before {
@@ -77,6 +101,16 @@ Vendors
 
 .icon-instagram:before {
 	content: '\f16d';
+}
+
+/* Animation example, for spinners */
+
+.animate-spin {
+	display: inline-block;
+	-webkit-animation: spin 2s infinite linear;
+	-moz-animation: spin 2s infinite linear;
+	-o-animation: spin 2s infinite linear;
+	animation: spin 2s infinite linear;
 }
 
 /*!
@@ -8888,7 +8922,7 @@ Facebook Inputs
 	background-color: #fff;
 	vertical-align: middle;
 	color: #3b5998;
-	padding: 8px;
+	padding: 18px;
 	-webkit-transition: all 0.2s ease-in-out;
 	-moz-transition: all 0.2s ease-in-out;
 	-o-transition: all 0.2s ease-in-out;
@@ -8896,12 +8930,44 @@ Facebook Inputs
 }
 
 .fb-wrap .fb-box .fb-icon i {
-	position: relative;
+	position: absolute;
+	top: 50%;
+	left: 50%;
 	font-size: 0;
+	opacity: 0;
+	-webkit-transform: translate(-50%, -50%);
+	-moz-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	-o-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	-webkit-transition: all 0.2s ease-in-out;
+	-moz-transition: all 0.2s ease-in-out;
+	-o-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
 }
 
 .fb-wrap .fb-box .fb-icon i:before {
 	font-size: 18px;
+}
+
+.fb-wrap .fb-box .fb-icon i.icon-facebook {
+	opacity: 1;
+}
+
+.fb-wrap .fb-box .fb-icon i.icon-spin5 {
+	-webkit-transform-origin: 0% 0%;
+	-moz-transform-origin: 0% 0%;
+	-ms-transform-origin: 0% 0%;
+	-o-transform-origin: 0% 0%;
+	transform-origin: 0% 0%;
+}
+
+.fb-wrap .fb-box .fb-icon i.icon-spin5:before {
+	-webkit-transform: translate(-50%, -50%);
+	-moz-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	-o-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
 }
 
 .fb-wrap .fb-box .fb-icon:before {
@@ -8978,9 +9044,38 @@ Facebook Inputs
 	bottom: 0;
 }
 
-.fb-wrap .fb-box:first-child:after {
-	content: "";
-	top: 0;
+.fb-wrap .fb-box.loading .fb-icon i.icon-facebook,
+.fb-wrap .fb-box.success .fb-icon i.icon-facebook,
+.fb-wrap .fb-box.error .fb-icon i.icon-facebook {
+	opacity: 0;
+}
+
+.fb-wrap .fb-box.loading .fb-icon .icon-spin5 {
+	opacity: 1;
+}
+
+.fb-wrap .fb-box.success .fb-icon {
+	color: #20d077;
+}
+
+.fb-wrap .fb-box.success .fb-icon:before {
+	background-color: #20d077;
+}
+
+.fb-wrap .fb-box.success .fb-icon .icon-ok {
+	opacity: 1;
+}
+
+.fb-wrap .fb-box.error .fb-icon {
+	color: #ff0078;
+}
+
+.fb-wrap .fb-box.error .fb-icon:before {
+	background-color: #ff0078;
+}
+
+.fb-wrap .fb-box.error .fb-icon .icon-cancel {
+	opacity: 1;
 }
 
 .fb-wrap .fb-box.focused {
@@ -9006,6 +9101,11 @@ Facebook Inputs
 .fb-wrap .fb-box.focused:before,
 .fb-wrap .fb-box.focused:after {
 	opacity: 0;
+}
+
+.fb-wrap .fb-box:first-child:after {
+	content: "";
+	top: 0;
 }
 
 /*
@@ -10006,22 +10106,61 @@ Home
 }
 
 .home-page .home-form .hf-sub {
-	max-width: 250px;
-	margin: 40px auto 0;
-}
-
-.home-page .home-form .hf-sub button {
+	position: relative;
 	background-color: #fb761d;
-	display: block;
-	font-family: "open-sans-bold";
-	font-size: 12px;
+	display: inline-block;
+	font-size: 0;
 	color: #fff;
-	width: 100%;
-	padding: 12px 30px;
+	padding: 12px 40px;
+	margin: 40px auto 0;
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;
 	text-transform: uppercase;
+	-webkit-transition: all 0.2s ease-in-out;
+	-moz-transition: all 0.2s ease-in-out;
+	-o-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
+}
+
+.home-page .home-form .hf-sub span {
+	font-family: "open-sans-bold";
+	font-size: 12px;
+}
+
+.home-page .home-form .hf-sub span.hf-sub-txt2 {
+	display: none;
+}
+
+.home-page .home-form .hf-sub i {
+	position: absolute;
+	top: 11px;
+	right: 20px;
+	opacity: 0;
+	-webkit-transition: opacity 0.2s ease-in-out;
+	-moz-transition: opacity 0.2s ease-in-out;
+	-o-transition: opacity 0.2s ease-in-out;
+	transition: opacity 0.2s ease-in-out;
+}
+
+.home-page .home-form .hf-sub i:before {
+	font-size: 19px;
+}
+
+.home-page .home-form .hf-sub.loading {
+	padding: 12px 60px 12px 40px;
+}
+
+.home-page .home-form .hf-sub.loading span.hf-sub-txt1 {
+	display: none;
+}
+
+.home-page .home-form .hf-sub.loading span.hf-sub-txt2 {
+	display: block;
+}
+
+.home-page .home-form .hf-sub.loading i {
+	opacity: 1;
 }
 
 /*
@@ -12051,6 +12190,66 @@ td.visible-print {
 
 .hidden-print {
 	display: none !important;
+}
+
+}
+
+@-webkit-keyframes spin {
+
+0% {
+	-webkit-transform: rotate(0deg);
+	transform: rotate(0deg);
+}
+
+100% {
+	-webkit-transform: rotate(359deg);
+	transform: rotate(359deg);
+}
+
+}
+
+@-moz-keyframes spin {
+
+0% {
+	-moz-transform: rotate(0deg);
+	transform: rotate(0deg);
+}
+
+100% {
+	-moz-transform: rotate(359deg);
+	transform: rotate(359deg);
+}
+
+}
+
+@-o-keyframes spin {
+
+0% {
+	-o-transform: rotate(0deg);
+	transform: rotate(0deg);
+}
+
+100% {
+	-o-transform: rotate(359deg);
+	transform: rotate(359deg);
+}
+
+}
+
+@keyframes spin {
+
+0% {
+	-webkit-transform: rotate(0deg);
+	-moz-transform: rotate(0deg);
+	-o-transform: rotate(0deg);
+	transform: rotate(0deg);
+}
+
+100% {
+	-webkit-transform: rotate(359deg);
+	-moz-transform: rotate(359deg);
+	-o-transform: rotate(359deg);
+	transform: rotate(359deg);
 }
 
 }

@@ -114,13 +114,13 @@ class DAO
         $account_ids = collect([]);
         $errors['error'] = false;
         $status = 1;
-        foreach ($pages as $url) {
+        foreach ($pages as $key => $url) {
             if (null == $url) {
                 continue;
             }
             $response = $this->api->get('account/facebook', ['input' => $url]);
 
-            if (500 == $response->status) {
+            if (is_null($response) || 500 == $response->status) {
                 $errors['error'] = true;
                 $errors['pages'][] = $url;
                 continue;

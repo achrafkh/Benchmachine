@@ -95,6 +95,9 @@ $(document).ready(function() {
 				'<div class="media fb-box">\
 					<div class="media-left fb-icon">\
 						<i class="icon-facebook"></i>\
+						<i class="icon-ok"></i>\
+						<i class="icon-cancel"></i>\
+						<i class="icon-spin5 animate-spin"></i>\
 					</div>\
 					<div id="f_'+(index +1)+'" class="media-body fb-inner error_c">\
 						<h4 class="fb-nb">'+ nb[index+1] +' page</h4>\

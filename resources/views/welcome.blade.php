@@ -60,6 +60,9 @@
                 <div class="media fb-box focused">
                     <div class="media-left fb-icon">
                         <i class="icon-facebook"></i>
+                        <i class="icon-ok"></i>
+                        <i class="icon-cancel"></i>
+                        <i class="icon-spin5 animate-spin"></i>
                     </div>
                     <div id="f_0" class="media-body fb-inner error_c">
                         <h4 class="fb-nb">First page</h4>
@@ -70,6 +73,9 @@
                 <div class="media fb-box">
                     <div class="media-left fb-icon">
                         <i class="icon-facebook"></i>
+                        <i class="icon-ok"></i>
+                        <i class="icon-cancel"></i>
+                        <i class="icon-spin5 animate-spin"></i>
                     </div>
                     <div id="f_1" class="media-body fb-inner error_c">
                         <h4 class="fb-nb">Second page</h4>
@@ -78,9 +84,11 @@
                     </div>
                 </div>
             </div>
-            <div class="hf-sub">
-                <button id="trigger" type="button" waves-hover>
-                Generate
+            <div class="text-center">
+                <button id="trigger" class="hf-sub" type="submit" waves-hover>
+                    <span class="hf-sub-txt1">Generate Benchmark</span>
+                    <span class="hf-sub-txt2">Benchmark Generating</span>
+                    <i class="icon-spin5 animate-spin"></i>
                 </button>
             </div>
         </form>
@@ -108,11 +116,18 @@ onload=function(){
 </script>
 <script type="text/javascript">
 var auth = {!! json_encode(auth()->check()) !!}
-
+var mainButton = $("#trigger");
         $("#trigger").unbind('click').bind("click", function (event) {
-        startLoader();
+        mainButton.addClass('loading');
+        $('.fb-box').removeClass('error');
+        $('.fb-box').removeClass('success');
+        $('.fb-box').removeClass('loading');
+
+        $('.fb-box').addClass('loading');
+
+
         $('#min').css('display', 'none');
-        $('.error_c').css('border-style', 'none');
+
         event.preventDefault();
         var form = $('#submit_pages');
         var pages = $('#submit_pages').serializeArray();
@@ -121,36 +136,35 @@ var auth = {!! json_encode(auth()->check()) !!}
             type: 'post',
             statusCode: {
                 422: function (response) {
-                    removeLoader();
+                    $('.fb-box').removeClass('loading');
+                    $('.fb-box').addClass('success');
                     $.each(response.responseJSON.errors, function (key, value) {
                         var index = key.split(".");
-                        $('#f_' + index[1]).css('border-color', '#ffc1c1').css('border-style', 'solid');
+                        $('#f_' + index[1]).closest( "div.fb-box" ).removeClass('success').addClass('error');
                     });
+                    $('.fb-box').last().removeClass('error').removeClass('success').removeClass('loading');
+                    mainButton.removeClass('loading');
                 }
             },
             data: pages,
             success: function (data) {
-
+                $('.fb-box').removeClass('loading');
+                $('.fb-box').addClass('success');
+                $('.fb-box').last().removeClass('error').removeClass('success').removeClass('loading');
                 if (data.hasOwnProperty('min')) {
                     $('#min').css('display', 'block');
-                    removeLoader();
+                    mainButton.removeClass('loading');
                     return false;
                 }
                 if (data.hasOwnProperty('pages')) {
                     $.each(data.pages, function (index, value) {
-                        $('#f_' + index).css('border-color', '#ffc1c1').css('border-style', 'solid');
+                        $('#f_' + index).closest( "div.fb-box" ).removeClass('success').addClass('error');
                     });
-                    removeLoader();
-                    return false;
-                }
-                if (data.hasOwnProperty('email')) {
-                    $('#email').css('border-color', '#ffc1c1').css('border-style', 'solid');
-                    removeLoader();
+                    mainButton.removeClass('loading');
                     return false;
                 }
                 if (data.hasOwnProperty('success')) {
                          $.each(data.ids, function (key, value) {
-
                             $('<input />').attr('type', 'hidden')
                                     .attr('name', "account_ids[]")
                                         .attr('value', value)
@@ -169,7 +183,6 @@ var auth = {!! json_encode(auth()->check()) !!}
                         }
                     },
                     error: function (data) {
-                        removeLoader();
                         console.log(data.responseJSON)
                     }
                 });
