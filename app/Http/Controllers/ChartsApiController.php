@@ -9,7 +9,7 @@ class ChartsApiController extends Controller
 {
     public function engagmentData(Request $request)
     {
-        ini_set('memory_limit', '512M');
+
         $days = $request->periode;
 
         $original_bench = $request->benchmark;
@@ -24,10 +24,15 @@ class ChartsApiController extends Controller
         $original_bench->details->since = Carbon::parse($since);
         $original_bench->details->until = Carbon::parse($until);
 
+        $test['conversion'] = microtime(true) - $_SERVER["REQUEST_TIME_FLOAT"];
+
         $accounts = array_keys((array) $original_bench->interactions);
+
+        $test['keys'] = microtime(true) - $_SERVER["REQUEST_TIME_FLOAT"];
 
         $full_accounts = json_decode(json_encode($original_bench->accounts), true);
 
+        $test['decode'] = microtime(true) - $_SERVER["REQUEST_TIME_FLOAT"];
         $colors = config('utils.colors');
 
         $lables = [];
@@ -74,7 +79,9 @@ class ChartsApiController extends Controller
 
             $output[] = $element;
         }
+        $test['proccess'] = microtime(true) - $_SERVER["REQUEST_TIME_FLOAT"];
 
+        return response()->json($test);
         return response()->json(compact('output', 'lables'));
     }
 
