@@ -10,22 +10,22 @@ class ChartsApiController extends Controller
     public function engagmentData(Request $request)
     {
 
-        $days = $request->periode;
+        // $days = $request->periode;
 
-        $original_bench = $request->benchmark;
-        $since = $original_bench['details']['since']['date'];
-        unset($original_bench['details']['since']);
-        $until = $original_bench['details']['until']['date'];
-        unset($original_bench['details']['until']);
-        $original_bench['details']['until'] = '';
-        $original_bench['details']['since'] = '';
-        $original_bench = json_decode(json_encode($original_bench));
+        // $original_bench = $request->benchmark;
+        // $since = $original_bench['details']['since']['date'];
+        // unset($original_bench['details']['since']);
+        // $until = $original_bench['details']['until']['date'];
+        // unset($original_bench['details']['until']);
+        // $original_bench['details']['until'] = '';
+        // $original_bench['details']['since'] = '';
+        // $original_bench = json_decode(json_encode($original_bench));
 
-        $original_bench->details->since = Carbon::parse($since);
-        $original_bench->details->until = Carbon::parse($until);
+        // $original_bench->details->since = Carbon::parse($since);
+        // $original_bench->details->until = Carbon::parse($until);
 
         $test['conversion'] = microtime(true) - $_SERVER["REQUEST_TIME_FLOAT"];
-
+        return $test;
         $accounts = array_keys((array) $original_bench->interactions);
 
         $test['keys'] = microtime(true) - $_SERVER["REQUEST_TIME_FLOAT"];
