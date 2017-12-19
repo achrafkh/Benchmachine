@@ -56,6 +56,12 @@ class DAO
             $data->data->details = $details;
         }
 
+        $engagment = new Stdclass;
+        foreach ($pages_ids as $id2) {
+            $engagment->{$id2} = getEngagment($id2, $benchmark->since, $benchmark->until);
+        }
+        $data->data->engagment = $engagment;
+
         Storage::put('cache/benchmarks/benchmark-' . $id . '.json', json_encode($data));
 
         return $data;

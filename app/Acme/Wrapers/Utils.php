@@ -79,6 +79,9 @@ class Utils
 
         $benchmark = new Benchmark;
 
+        $benchmark->engagment = $data->engagment;
+        unset($data->engagment);
+
         $posts = $data->most_engaged_posts;
         unset($data->most_engaged_posts);
 
@@ -102,12 +105,6 @@ class Utils
 
         $accounts = collect($data);
         $benchmark->setAccounts($accounts);
-
-        $engagment = new Stdclass;
-        foreach ($benchmark->accounts->keys() as $id) {
-            $engagment->{$id} = getEngagment($id, $benchmark->details->since->toDateString(), $benchmark->details->until->toDateString());
-        }
-        $benchmark->engagment = $engagment;
 
         $benchmark->createCharts($days_en, $days_in);
 

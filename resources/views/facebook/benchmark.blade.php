@@ -87,7 +87,7 @@ $('.canvas-engagment').unbind('click').bind('click', function (e) {
   $('#chartdate_en').val($(this).val());
   $('.canvas-engagment').removeClass("btn-sunny").addClass("btn-default");
   $(this).removeClass("btn-default").addClass("btn-sunny");
-  $.post( "/api/update-eng",  {periode: $(this).val() ,benchmark: {!! json_encode($benchmark)  !!}} ,function(e) {
+  $.post( "/api/update-eng",  {periode: $(this).val() ,id: {!! json_encode($benchmark->details->id)  !!}} ,function(e) {
 
   })
   .done(function(e) {
@@ -108,7 +108,7 @@ $('.canvas-interactions').unbind('click').bind('click', function (e) {
   $('#chartdate_in').val($(this).val());
   $('.canvas-interactions').removeClass("btn-sunny").addClass("btn-default");
   $(this).removeClass("btn-default").addClass("btn-sunny");
-  $.post( "/api/update-int",  {periode: $(this).val() ,benchmark: {!! json_encode($benchmark)  !!}} ,function(e) {
+  $.post( "/api/update-int",  {periode: $(this).val() ,id: {!! json_encode($benchmark->details->id)  !!}} ,function(e) {
 
   })
   .done(function(e) {
