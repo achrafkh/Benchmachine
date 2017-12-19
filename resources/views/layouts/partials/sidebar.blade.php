@@ -35,7 +35,7 @@ function updateBenchmarks(){
 		}
 		parent.empty();
 		$.each(data,function(i,v){
-			parent.append(getDom(v,i));
+			parent.append(getDom(v,(i+1)));
 		});
 	});
 }
