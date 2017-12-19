@@ -3,7 +3,6 @@
 namespace App\Classes;
 
 use App\Classes\Chart;
-use Carbon\Carbon;
 
 /**
  * Class Benchmark
@@ -17,6 +16,7 @@ class Benchmark
     public $sum;
     public $accounts;
     public $interactions;
+    public $engagment;
     public $posts;
     public $charts = [];
 
@@ -68,11 +68,6 @@ class Benchmark
      */
     public function createCharts($days_en = 1, $days_in = 1)
     {
-        $class_name = '\stdClass';
-        if ($this->details->since instanceof $class_name) {
-            $this->details->since = Carbon::parse(head($this->details->since));
-            $this->details->until = Carbon::parse(head($this->details->until));
-        }
 
         $charts = config('utils.charts');
         $i = 1;
@@ -343,7 +338,8 @@ class Benchmark
         } while ($time->lte($this->details->until));
 
         foreach ($accounts as $key => $account) {
-            $engagment = $this->getEngagment($account);
+            $engagment = $this->engagment->{$account};
+
             $sum = 0;
             $acc_stats = [];
             foreach ($engagment as $en_date => $eng) {

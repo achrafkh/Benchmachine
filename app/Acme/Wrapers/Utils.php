@@ -5,6 +5,7 @@ namespace App\Acme\Wrapers;
 use App\Acme\Wrapers\DAO;
 use App\Benchmark as Benchi;
 use App\Classes\Benchmark;
+use Carbon\Carbon;
 use StdClass;
 
 class Utils
@@ -86,6 +87,12 @@ class Utils
 
         unset($data->details);
 
+        $class_name = '\stdClass';
+        if ($benchmark->details->since instanceof $class_name) {
+            $benchmark->details->since = Carbon::parse(head($benchmark->details->since));
+            $benchmark->details->until = Carbon::parse(head($benchmark->details->until));
+        }
+
         $interactions = $data->interactions;
         $benchmark->setInteractions($interactions);
         unset($data->interactions);
@@ -95,6 +102,12 @@ class Utils
 
         $accounts = collect($data);
         $benchmark->setAccounts($accounts);
+
+        $engagment = new Stdclass;
+        foreach ($benchmark->accounts->keys() as $id) {
+            $engagment->{$id} = getEngagment($id, $benchmark->details->since->toDateString(), $benchmark->details->until->toDateString());
+        }
+        $benchmark->engagment = $engagment;
 
         $benchmark->createCharts($days_en, $days_in);
 

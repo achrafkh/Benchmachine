@@ -1,4 +1,23 @@
 <?php
+
+function getEngagment($id, $since, $until)
+{
+
+    $api = new \App\Acme\Wrapers\ApiAdapter;
+
+    $params['access-token'] = env('CLIENT_TOKEN');
+    $params['user-id'] = env('USER_ID');
+    $params['insights'] = 'average_page_engagement';
+    $params['since'] = $since;
+    $params['until'] = $until;
+
+    $response = $api->get(env('CORE') . '/rest/insights/' . $id, $params);
+    if (!isset($response->data)) {
+        return [];
+    }
+    return head($response->data);
+}
+
 function array_sort_by_column(&$arr, $col, $dir = SORT_DESC)
 {
     $sort_col = [];
