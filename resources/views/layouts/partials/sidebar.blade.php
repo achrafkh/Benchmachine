@@ -35,7 +35,7 @@ function updateBenchmarks(){
 		}
 		parent.empty();
 		$.each(data,function(i,v){
-			parent.append(getDom(v));
+			parent.append(getDom(v,i));
 		});
 	});
 }
@@ -52,8 +52,12 @@ function getStatus(status,className = false){
 		return 'green';
 	}
 }
-function getDom(benchmark){
-	var string = '<a data-title="'+benchmark.title+'" class="media sidebar-item" href="/benchmarks/'+benchmark.id+'"><ul class="media-body media-middle"><li class="si-name">'+benchmark.title+'</li><li class="si-date">'+benchmark.since +' - '+benchmark.until+'</li></ul><div class="media-right media-middle"><span class="si-badge bg-'+getStatus(benchmark.status,true)+'">'+getStatus(benchmark.status)+'</span></div></a>';
+function getDom(benchmark,index){
+	var title = benchmark.title;
+	if(title == 'Benchmark'){
+		title += ' #'+index;
+	}
+	var string = '<a data-title="'+title+'" class="media sidebar-item" href="/benchmarks/'+benchmark.id+'"><ul class="media-body media-middle"><li class="si-name">'+title+'</li><li class="si-date">'+benchmark.since +' - '+benchmark.until+'</li></ul><div class="media-right media-middle"><span class="si-badge bg-'+getStatus(benchmark.status,true)+'">'+getStatus(benchmark.status)+'</span></div></a>';
 	return string;
 }
 

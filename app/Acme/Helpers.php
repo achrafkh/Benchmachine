@@ -9,7 +9,7 @@ function array_sort_by_column(&$arr, $col, $dir = SORT_DESC)
     array_multisort($sort_col, $dir, $arr);
 }
 
-function cleanCache($id)
+function cleanCache($id, $data = true)
 {
     Cache::forget($id);
     $file = public_path() . '/static/app/benchmark-' . $id . '.html';
@@ -17,10 +17,13 @@ function cleanCache($id)
         unlink($file);
     }
     $file = public_path() . '/static/app/benchmark-' . $id . '_print.html';
+
     if (file_exists($file)) {
         unlink($file);
     }
-
+    if ($data) {
+        Storage::delete('cache/benchmarks/benchmark-' . $id . '.json');
+    }
     return true;
 }
 
@@ -91,7 +94,24 @@ function getUserIP()
 // Post request to url + params
 function cpost($url, $params)
 {
+    $params['access-token'] = env('CLIENT_TOKEN');
+    $params['user-id'] = env('USER_ID');
+
     $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($params));
+    $response = curl_exec($ch);
+    curl_close($ch);
+    return json_decode($response);
+}
+
+function cDelete($url, $params)
+{
+    $params['access-token'] = env('CLIENT_TOKEN');
+    $params['user-id'] = env('USER_ID');
+
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($params));
     $response = curl_exec($ch);
@@ -250,6 +270,7 @@ function number_shorten($number, $precision = 3, $divisors = null)
 // Get a post image using post real id
 function postImage($id, $token = null)
 {
+
     $app_token = env('FACEBOOK_ID') . '|' . env('FACEBOOK_SECRET');
     $fetch_token = ((auth()->check()) ? auth()->user()->token : $app_token);
 
@@ -271,6 +292,9 @@ function postImage($id, $token = null)
 
     if (isset($resp->error) && (null == $token)) {
         return postImage($id, $app_token);
+    }
+    if (!$output) {
+        return '';
     }
     $img = head(json_decode($output));
     if (!is_string($img)) {

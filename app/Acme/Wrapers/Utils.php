@@ -18,7 +18,6 @@ class Utils
 
     public function getBenchmark($id, $days_en = 1, $days_in = 1)
     {
-
         $response = $this->api->getBenchmarkById($id);
 
         return $this->prepareBenchmark($response->data, $days_en, $days_in);

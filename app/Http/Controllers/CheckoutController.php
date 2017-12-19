@@ -93,7 +93,7 @@ class CheckoutController extends Controller
             'id' => $benchmark->id,
         ]);
 
-        cleanCache($benchmark->id);
+        cleanCache($benchmark->id, true);
 
         return true;
     }

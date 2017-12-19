@@ -8345,6 +8345,50 @@ Components
 
 /*
 -----------------------------------------
+Buttons
+-----------------------------------------
+*/
+
+.mbtn {
+	position: relative;
+	background-color: #fb761d;
+	font-size: 0;
+	color: #fff;
+	min-height: 37px;
+	padding: 10px 30px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	text-transform: uppercase;
+}
+
+.mbtn span,
+.mbtn .svg {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.mbtn span {
+	font-family: "open-sans-bold";
+	font-size: 12px;
+}
+
+.mbtn.mbtn-icon {
+	padding: 7px 10px;
+}
+
+.mbtn.mbtn-icon span {
+	padding: 0 25px 0 20px;
+}
+
+.mbtn.mbtn-icon .svg {
+	fill: #fff;
+	width: 22px;
+	height: 22px;
+}
+
+/*
+-----------------------------------------
 Chart Block
 -----------------------------------------
 */
@@ -9222,55 +9266,6 @@ h6 {
 
 /*
 -----------------------------------------
-Preloader
------------------------------------------
-*/
-
-.preloader {
-	display: -webkit-box;
-	display: -webkit-flex;
-	display: -moz-box;
-	display: -ms-flexbox;
-	display: flex;
-	-webkit-box-pack: center;
-	-webkit-justify-content: center;
-	-moz-box-pack: center;
-	-ms-flex-pack: center;
-	justify-content: center;
-	-webkit-box-align: center;
-	-webkit-align-items: center;
-	-moz-box-align: center;
-	-ms-flex-align: center;
-	align-items: center;
-	height: -webkit-calc(100vh - 107px);
-	height: -moz-calc(100vh - 107px);
-	height: calc(100vh - 107px);
-	min-height: 200px;
-}
-
-.preloader .preloader-inner span {
-	display: block;
-	font-family: "open-sans-bold";
-	font-size: 14px;
-	color: #4d4d4d;
-	margin-top: 3px;
-	text-transform: uppercase;
-}
-
-.preloader .preloader-inner .svg {
-	stroke: #fb761d;
-	width: 65px;
-	height: 65px;
-	stroke-dasharray: 450% 450%;
-	stroke-dashoffset: 450%;
-	-webkit-animation: preloader 2s infinite ease-in-out;
-	-moz-animation: preloader 2s infinite ease-in-out;
-	-o-animation: preloader 2s infinite ease-in-out;
-	animation: preloader 2s infinite ease-in-out;
-}
-
-/*
------------------------------------------
 Bootstrap Table
 -----------------------------------------
 */
@@ -9969,32 +9964,8 @@ Header
 }
 
 .header .print-btn {
-	position: relative;
-	background-color: #fb761d;
 	float: left;
-	color: #fff;
-	padding: 7px 10px;
 	margin: 12px 15px 11px;
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 3px;
-	text-transform: uppercase;
-}
-
-.header .print-btn svg,
-.header .print-btn span {
-	display: inline-block;
-	vertical-align: middle;
-}
-
-.header .print-btn svg {
-	fill: #fff;
-}
-
-.header .print-btn span {
-	font-family: "open-sans-bold";
-	font-size: 12px;
-	padding: 0 25px 0 20px;
 }
 
 .header .profile-dropdown {
@@ -10346,6 +10317,161 @@ body.no-scroll {
 
 .page-wrap.benchmark_page .section {
 	padding: 0 0 60px;
+}
+
+.page-wrap.pending_page {
+	background-color: #fafafa;
+}
+
+/*
+-----------------------------------------
+Pending page
+-----------------------------------------
+*/
+
+.pending-wrapper {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	-moz-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	-moz-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	height: -webkit-calc(100vh - 107px);
+	height: -moz-calc(100vh - 107px);
+	height: calc(100vh - 107px);
+	min-height: 375px;
+	text-align: center;
+}
+
+.pending-wrapper .pending-content h1 {
+	display: block;
+	font-family: "open-sans-bold";
+	font-size: 14px;
+	color: #4d4d4d;
+	margin: 7px 0 0;
+	text-transform: uppercase;
+}
+
+.pending-wrapper .pending-content p {
+	font-family: "open-sans-medium";
+	font-size: 13px;
+	color: #9f9e9e;
+	margin: 10px 0;
+}
+
+.pending-wrapper .pending-content .svg {
+	stroke: #fb761d;
+	width: 65px;
+	height: 65px;
+	stroke-dasharray: 450% 450%;
+	stroke-dashoffset: 450%;
+	-webkit-animation: preloader 2s infinite ease-in-out;
+	-moz-animation: preloader 2s infinite ease-in-out;
+	-o-animation: preloader 2s infinite ease-in-out;
+	animation: preloader 2s infinite ease-in-out;
+}
+
+.pending-wrapper .pending-notif {
+	margin-top: 40px;
+}
+
+.pending-wrapper .pending-notif .pending-checkbox input[type="checkbox"] {
+	display: none;
+}
+
+.pending-wrapper .pending-notif .pending-checkbox input[type="checkbox"] + label {
+	position: relative;
+	display: inline-block;
+	font-family: "open-sans-medium";
+	font-size: 13px;
+	color: #9f9e9e;
+	font-weight: normal;
+	padding-left: 25px;
+	margin: 0 0 10px;
+	cursor: pointer;
+}
+
+.pending-wrapper .pending-notif .pending-checkbox input[type="checkbox"] + label:before,
+.pending-wrapper .pending-notif .pending-checkbox input[type="checkbox"] + label:after {
+	content: '';
+	position: absolute;
+	display: block;
+}
+
+.pending-wrapper .pending-notif .pending-checkbox input[type="checkbox"] + label:before {
+	top: 0;
+	left: 0;
+	background-color: #fff;
+	width: 17px;
+	height: 17px;
+	border: 1px solid #d4d4d4;
+}
+
+.pending-wrapper .pending-notif .pending-checkbox input[type="checkbox"] + label:after {
+	top: -2px;
+	left: 2px;
+	width: 18px;
+	height: 10px;
+	opacity: 0;
+	border-left: 3px solid #fb761d;
+	border-bottom: 3px solid #fb761d;
+	z-index: 1;
+	-webkit-transform: rotate(-45deg);
+	-moz-transform: rotate(-45deg);
+	-ms-transform: rotate(-45deg);
+	-o-transform: rotate(-45deg);
+	transform: rotate(-45deg);
+	-webkit-transition: all 0.1s ease-in-out;
+	-moz-transition: all 0.1s ease-in-out;
+	-o-transition: all 0.1s ease-in-out;
+	transition: all 0.1s ease-in-out;
+}
+
+.pending-wrapper .pending-notif .pending-checkbox input[type="checkbox"]:checked + label:after {
+	opacity: 1;
+}
+
+.pending-wrapper .pending-notif .notif-input {
+	font-family: "open-sans-medium";
+	font-size: 12px;
+	color: #9f9e9e;
+	height: 38px;
+	max-width: 325px;
+	padding: 6px 12px;
+	margin: auto;
+	border: 1px solid #d4d4d4;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+
+.pending-wrapper .pending-notif .notif-input::-webkit-input-placeholder {
+	color: #9f9e9e;
+}
+
+.pending-wrapper .pending-notif .notif-input::-moz-placeholder {
+	color: #9f9e9e;
+}
+
+.pending-wrapper .pending-notif .notif-input:-ms-input-placeholder {
+	color: #9f9e9e;
+}
+
+.pending-wrapper .pending-notif .notif-input:-moz-placeholder {
+	color: #9f9e9e;
+}
+
+.pending-wrapper .pending-notif .notif-sub {
+	margin-top: 15px;
 }
 
 /*

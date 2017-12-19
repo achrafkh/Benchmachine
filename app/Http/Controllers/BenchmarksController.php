@@ -78,8 +78,11 @@ class BenchmarksController extends Controller
      */
     public function showStatic($id)
     {
+
         $benchmark = Benchmark::with('accounts')->find($id);
-        $class = 'benchmark_page';
+
+        $class = 'pending_page';
+
         $this->authorize('view', $benchmark);
 
         $file = public_path() . '/static/app/benchmark-' . $id . '.html';
@@ -93,18 +96,18 @@ class BenchmarksController extends Controller
         $benchmark_ids = $benchmark->accounts->pluck('id')->toarray();
 
         $response = cpost(env('CORE') . '/platform/check-pages', ['pages_ids' => $benchmark_ids]);
+        if (isset($response)) {
+            if ((1 == $response->status) && (2 != $benchmark->status)) {
+                $benchmark->markAsReady(auth()->user()->getValidEmail());
+            }
 
-        if ((1 == $response->status) && (2 != $benchmark->status)) {
-            $benchmark->markAsReady(auth()->user()->getValidEmail());
+            if (0 == $response->status) {
+                return view('facebook.loading', compact('benchmark', 'benchmark_ids', 'class'));
+            }
+            if (2 != $benchmark->status) {
+                return view('facebook.loading', compact('benchmark', 'benchmark_ids', 'class'));
+            }
         }
-
-        if (0 == $response->status) {
-            return view('facebook.loading', compact('benchmark', 'benchmark_ids', 'class'));
-        }
-        if (2 != $benchmark->status) {
-            return view('facebook.loading', compact('benchmark', 'benchmark_ids', 'class'));
-        }
-
         $html = $this->repo->getBenchmarkHtml($id);
 
         $html = str_insert($html, '<body class="">', getHtmlHeader(auth()->user()->name, auth()->user()->image, $id));
@@ -188,7 +191,7 @@ class BenchmarksController extends Controller
     {
         $accounts = $request->account_ids;
 
-        $title = 'My Benchmark';
+        $title = 'Benchmark';
 
         if ($request->has('title')) {
             $title = $request->title;
@@ -263,7 +266,7 @@ class BenchmarksController extends Controller
         Benchmark::where('id', $request->id)
             ->update(['title' => $request->title]);
 
-        cleanCache($request->id);
+        cleanCache($request->id, false);
 
         return response()->json([
             'status' => 200,

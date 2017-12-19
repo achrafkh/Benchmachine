@@ -134,7 +134,7 @@ class HomeController extends Controller
     {
         $accounts = $request->accounts;
 
-        $title = 'My Benchmark';
+        $title = 'Benchmark';
 
         if ($request->has('title')) {
             $title = $request->title;

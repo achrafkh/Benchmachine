@@ -4,6 +4,7 @@
 	<?php $style = true;?>
 		<div class="post-img" style="background-image:url({{ postImage($post->social_post_real_id)  }}) !important;"></div>
 	@endif
+
 		<div class="post-content" >
 			<div class="media post-brand">
 				<div class="media-left media-middle">
@@ -14,6 +15,7 @@
 					<span class="post-date">{{ $post->social_post_date }}</span>
 				</div>
 			</div>
+
 			@if(isset($post->social_post_message) && trim($post->social_post_message) != '')
 					@if(is_arabic($post->social_post_message))
 					<p class="post-txt" style="text-align: right;{{ isset($style) ? '' : 'height:255px;'  }}">

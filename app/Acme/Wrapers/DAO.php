@@ -7,7 +7,9 @@ use App\Acme\Wrapers\ApiAdapter;
 use App\Benchmark;
 use Cache;
 use Carbon\Carbon;
+use DB;
 use StdClass;
+use Storage;
 
 class DAO
 {
@@ -29,6 +31,9 @@ class DAO
      */
     public function getBenchmarkById($id)
     {
+        if (Storage::has('cache/benchmarks/benchmark-' . $id . '.json')) {
+            return json_decode(Storage::get('cache/benchmarks/benchmark-' . $id . '.json'));
+        }
         $benchmark = Benchmark::with('accounts')->find($id);
         if (!$benchmark) {
             return null;
@@ -50,6 +55,8 @@ class DAO
 
             $data->data->details = $details;
         }
+
+        Storage::put('cache/benchmarks/benchmark-' . $id . '.json', json_encode($data));
 
         return $data;
     }
@@ -114,6 +121,7 @@ class DAO
         $account_ids = collect([]);
         $errors['error'] = false;
         $status = 1;
+        $toBeDeleted = [];
         foreach ($pages as $key => $url) {
             if (null == $url) {
                 continue;
@@ -124,6 +132,20 @@ class DAO
                 $errors['error'] = true;
                 $errors['pages'][] = $url;
                 continue;
+            }
+
+            if (!$response->data->exits) {
+                $exists = DB::table('new_pages')->where('page_id', $response->data->social_account_id)->exists();
+
+                if (!$exists) {
+                    DB::table('new_pages')->insert(
+                        [
+                            'page_id' => $response->data->social_account_id,
+                            'created_at' => Carbon::now(),
+                            'updated_at' => Carbon::now(),
+                        ]
+                    );
+                }
             }
 
             $account = new Account;
