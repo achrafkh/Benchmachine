@@ -13,7 +13,6 @@ class ChartsApiController extends Controller
         $days = $request->periode;
         $original_bench = json_decode(Storage::get('cache/benchmarks/benchmark-' . $request->id . '.json'));
 
-        $original_bench = json_decode(Storage::get('cache/benchmarks/benchmark-2.json'));
         unset($original_bench->data->old);
         unset($original_bench->data->most_engaged_posts);
 
@@ -103,7 +102,6 @@ class ChartsApiController extends Controller
         $days = $request->periode;
         $original_bench = json_decode(Storage::get('cache/benchmarks/benchmark-' . $request->id . '.json'));
 
-        $original_bench = json_decode(Storage::get('cache/benchmarks/benchmark-2.json'));
         unset($original_bench->data->old);
         unset($original_bench->data->most_engaged_posts);
         $data = $original_bench->data->interactions;
