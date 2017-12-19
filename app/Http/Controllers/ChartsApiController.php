@@ -9,6 +9,7 @@ class ChartsApiController extends Controller
 {
     public function engagmentData(Request $request)
     {
+        ini_set('memory_limit', '512M');
         $days = $request->periode;
 
         $original_bench = $request->benchmark;
@@ -97,7 +98,7 @@ class ChartsApiController extends Controller
 
     public function interactionsData(Request $request)
     {
-
+        ini_set('memory_limit', '512M');
         $days = $request->periode;
 
         $original_bench = $request->benchmark;
