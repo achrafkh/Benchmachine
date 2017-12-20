@@ -46,7 +46,7 @@
 			<ul class="dropdown-menu dropdown-menu-right">
 				@if(!isset($hidden_sidebar))
 					<li>
-						<button class="sidebar-trigger" type="button">
+						<button onclick="updateBenchmarks()" class="sidebar-trigger" type="button">
 							<svg class="svg" role="img" title="report" width="20" height="20">
 				        		<use xlink:href="/assets/images/svg-icons.svg#icon-report"/>
 				        	</svg>
