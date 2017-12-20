@@ -17,6 +17,7 @@ $(window).scroll(function() {
                 }]
             },
             options: {
+                showXLabels: 10,
                 animation:{
                   duration : Math.round(50000 / 17),
                 },
@@ -31,7 +32,9 @@ $(window).scroll(function() {
                     xAxes: [{
                         stacked: false,
                         ticks: {
-                            autoSkip: false
+                            autoSkip: false,
+                            maxTicksLimit: 20,
+                            showXLabels: 10
                         }
                     }],
                     yAxes: [{
