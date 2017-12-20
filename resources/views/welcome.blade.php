@@ -11,7 +11,9 @@
                     </svg>
                 </a>
                 @if(auth()->check())
-
+                <a class="landing-login" href="{{ url('/home') }}" waves-hover>
+                    Dashboard
+                </a>
                 @else
                 <a class="landing-login" href="{{ url('/auth/facebook') }}" waves-hover>
                     <i class="icon-facebook"></i>
