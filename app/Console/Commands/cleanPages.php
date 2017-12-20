@@ -47,6 +47,7 @@ class cleanPages extends Command
         $this->log->info('Started Pages Cleanup');
 
         $pages_ids = DB::table('new_pages')->pluck('page_id')->toarray();
+
         if (count($pages_ids)) {
             $response = cpost(env('CORE') . '/rest/delete-accounts', ['social-accounts' => $pages_ids]);
         }

@@ -6,6 +6,7 @@ use App\Benchmark;
 use App\Http\Controllers\Controller;
 use App\User;
 use Auth;
+use Illuminate\Http\Request;
 use Session;
 use Socialite;
 
@@ -52,9 +53,13 @@ class LoginController extends Controller
      *
      * @return Response
      */
-    public function handleProviderCallback($provider)
+    public function handleProviderCallback($provider, Request $request)
     {
+        $state = $request->get('state');
+        $request->session()->put('state', $state);
+
         $user = Socialite::driver($provider)->user();
+
         $bench_id = Session::get('benchmark');
         $authUser = $this->findOrCreateUser($user, $provider);
         Auth::login($authUser, true);

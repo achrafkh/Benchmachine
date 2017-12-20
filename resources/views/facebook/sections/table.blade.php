@@ -51,7 +51,7 @@ $nbr_rep = 'Taux de réponse';
 						</div>
 					</td>
 					<td class="table-digit">{{ $account->fans->value }}</td>
-					<td class="table-digit">{{ is_null($account->absolute_fans->value) ? 0 : $account->absolute_fans->value }}</td>
+					<td class="table-digit {{ ($account->absolute_fans->value > 0) ? 'up' : 'down' }}">{{ is_null($account->absolute_fans->value) ? 0 : $account->absolute_fans->value }}</td>
 					<td class="table-digit">{{ is_null($account->fans_local->value) ? 0 : $account->fans_local->value }}</td>
 					<td class="table-digit">{{ is_null($account->posts->value) ? 0 : $account->posts->value }}</td>
 					<td class="table-digit">{{ $account->{$nbr_pub}->value }}</td>
