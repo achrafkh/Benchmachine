@@ -99,6 +99,9 @@ class Benchmark
         if (!isset($data['id'])) {
             $data['id'] = str_random(5);
         }
+        if (isset($data['class'])) {
+            $chart->class = $data['class'];
+        }
         $chart->type = $type;
         $chart->id = 'canvas-' . $data['id'];
         $chart->title_en = $data['title_en'];
@@ -195,6 +198,10 @@ class Benchmark
         $colors = config('utils.colors');
 
         $details = [];
+
+        if ($this->accounts->count() > 5) {
+            $chart->class = 'col-md-12';
+        }
 
         foreach ($this->accounts as $key => $account) {
             $chart->labels[] = str_limit($account->social_account_name->title, 15);
