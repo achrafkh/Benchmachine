@@ -25,7 +25,7 @@ $( document ).ready(function() {
 	        }
 	    });
 	}
-	//recursive_ajax();
+	recursive_ajax();
 });
 
 $('#mail_notif').unbind('click').bind('click', function (e) {
@@ -41,7 +41,6 @@ $('#saveEmail').unbind('click').bind('click', function (e) {
 	e.preventDefault();
 	$('#emailError').text('');
 	$('#emailError').css('display','none');
-	console.log($('#email').val());
 	$.ajax({
 	        type:"POST",
 	        data: {email: $('#email').val()},
