@@ -12,3 +12,5 @@ yarn-error.log
 .env
 public/static/app/*
 
+public/.htaccess
+
