@@ -28,6 +28,8 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('update:benchmark')->everyMinute();
 
+        $schedule->command('clean:pages')->dailyAt('00:00');
+
         // $schedule->command('update:benchmark')->everyMinute();
     }
 
