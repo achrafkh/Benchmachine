@@ -85,16 +85,16 @@ class BenchmarksController extends Controller
 
         $this->authorize('view', $benchmark);
 
-        // $file = public_path() . '/static/app/benchmark-' . $id . '.html';
+        $file = public_path() . '/static/app/benchmark-' . $id . '.html';
 
-        // if (file_exists($file)) {
-        //     $html = $this->repo->getBenchmarkHtml($id);
-        //     $html = str_insert($html, '<body class="">', getHtmlHeader(auth()->user()->name, auth()->user()->image, $id));
-        //     return view('facebook.benchmark_html', compact('html'));
-        // }
+        if (file_exists($file)) {
+            $html = $this->repo->getBenchmarkHtml($id);
+            $html = str_insert($html, '<body class="">', getHtmlHeader(auth()->user()->name, auth()->user()->image, $id));
+            return view('facebook.benchmark_html', compact('html'));
+        }
 
         $benchmark_ids = $benchmark->accounts->pluck('id')->toarray();
-        return view('facebook.loading', compact('benchmark', 'benchmark_ids', 'class'));
+
         $response = cpost(env('CORE') . '/platform/check-pages', ['pages_ids' => $benchmark_ids]);
         if (isset($response)) {
             if ((1 == $response->status) && (2 != $benchmark->status)) {
