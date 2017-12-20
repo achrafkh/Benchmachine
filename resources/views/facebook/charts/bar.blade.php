@@ -30,10 +30,12 @@ $(window).scroll(function() {
                 scales: {
                     xAxes: [{
                         stacked: false,
-                        beginAtZero: true,
                         ticks: {
-                            stepSize: 1,
-                            min: 0,
+                            autoSkip: false
+                        }
+                    }],
+                    yAxes: [{
+                        ticks: {
                             autoSkip: false
                         }
                     }]
