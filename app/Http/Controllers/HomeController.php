@@ -178,20 +178,17 @@ class HomeController extends Controller
 
     public function editEmail(Request $request)
     {
-
         $validator = Validator::make($request->all(), [
             'email' => 'required|email',
         ]);
 
         if ($validator->fails()) {
-            Session::flash('flash', ['class' => 'danger', 'msg' => $validator->errors()->first()]);
+            return response()->json(['msg' => $validator->errors()->first(), 'code' => 0]);
         } else {
             auth()->user()->setEmail($request->email);
         }
 
-        Session::put('email-' . $request->id, true);
-
-        return redirect()->back();
+        return response()->json(['msg' => 'Email Saved with success', 'code' => 1]);
     }
 
     public function showModal($id)

@@ -24,15 +24,9 @@
                 <p class="landing-txt">
                    Discover your key performances indicators, Learn  from social leaders and Set goals and baselines for performance and growth based on your direct competitors.
                 </p>
-               @if(auth()->check())
-                <a style="color:white" href="{{ url('/home') }}" class="landing-btn" waves-hover>
-                My Benchmarks
+                <a onclick="smoothScroll(document.getElementById('submit_pages'))" style="color:white" href="#" class="landing-btn" waves-hover>
+                Get A Glance
                 </a>
-               @else
-                <a style="color:white" href="{{ url('/default/no') }}" class="landing-btn" waves-hover>
-                Download a default example
-                </a>
-               @endif
                 <div class="video">
                     <div class="video-inner">
                         <video autoplay="" loop="" muted="" playsinline="" poster="{{url('/images/background.png')}}">

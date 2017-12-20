@@ -25,18 +25,6 @@
           ga('send', 'event', $(this).data('section'), $(this).data('name'), $(this).data('desc'));
           fbq($(this).data('name'),$(this).data('desc'));
         });
-
-        $(".sidebar-trigger").unbind().click(function() {
-           updateBenchmarks();
-        });
-
-        $(".sidebar-item").unbind().click(function() {
-          startLoader();
-        });
-        $(".print-btn").unbind().click(function() {
-          startLoader();
-          setTimeout(removeLoader, 5000)
-        });
     </script>
 </body>
 </html>

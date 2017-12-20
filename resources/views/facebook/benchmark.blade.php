@@ -83,7 +83,6 @@ $('#table').on('order.dt', function () {
 });
 
 $('.canvas-engagment').unbind('click').bind('click', function (e) {
-  startLoader();
   $('#chartdate_en').val($(this).val());
   $('.canvas-engagment').removeClass("btn-sunny").addClass("btn-default");
   $(this).removeClass("btn-default").addClass("btn-sunny");
@@ -95,16 +94,13 @@ $('.canvas-engagment').unbind('click').bind('click', function (e) {
     chartObject.data.datasets = e.output;
     chartObject.data.labels = e.lables;
     chartObject.update();
-    removeLoader();
   })
   .fail(function(e) {
     console.log(e);
     console.log('Something went wrong');
-    removeLoader();
   })
 });
 $('.canvas-interactions').unbind('click').bind('click', function (e) {
-  startLoader();
   $('#chartdate_in').val($(this).val());
   $('.canvas-interactions').removeClass("btn-sunny").addClass("btn-default");
   $(this).removeClass("btn-default").addClass("btn-sunny");
@@ -116,12 +112,10 @@ $('.canvas-interactions').unbind('click').bind('click', function (e) {
     chartObject.data.datasets = e.output;
     chartObject.data.labels = e.lables;
     chartObject.update();
-    removeLoader();
   })
   .fail(function(e) {
     console.log(e);
     console.log('Something went wrong');
-    removeLoader();
   })
 });
 </script>

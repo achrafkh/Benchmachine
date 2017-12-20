@@ -16,8 +16,13 @@
 					Get notified when benchmark is ready
 				</label>
 			</div>
-			<input class="notif-input form-control" type="text" placeholder="E-Mail...">
-			<button class="mbtn notif-sub" waves-hover>
+
+			<input required disabled id="email" class="notif-input form-control" type="email" placeholder="E-Mail...">
+
+			<div id="emailError" class="alert" style="margin-top: 15px;display: none">
+
+			</div>
+			<button disabled id="saveEmail" class="mbtn notif-sub" waves-hover>
 				<span>Save</span>
 			</button>
 		</form>

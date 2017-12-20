@@ -14,14 +14,6 @@ Route::get('payment/error/{token}', 'PaymentController@error');
 Route::post('payment/pay/{id}', 'PaymentController@Initpayment');
 Route::get('payment/pay/{id}', 'PaymentController@getInitpayment');
 
-Route::get('/test', function () {
-    $original_bench = json_decode(Storage::get('cache/benchmarks/benchmark-2.json'));
-    unset($original_bench->interactions);
-    unset($original_bench->old);
-    unset($original_bench->most_engaged_posts);
-    dd($original_bench);
-});
-
 /*
  * Authentication Routes
  */
