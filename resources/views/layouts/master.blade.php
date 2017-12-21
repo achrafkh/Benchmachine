@@ -31,14 +31,14 @@
 
     <!-- Open Graph data -->
     <meta property="og:title" content="Benchmarks.digital" />
-    <meta property="og:type" content="Landing Page" />
+    <meta property="og:type" content="website" />
     <meta property="og:url" content="{{ url('/') }}" />
     <meta property="og:image" content="{{ url('/images/logo.jpg') }}" />
     <meta property="og:description" content="Discover your key performances indicators, Learn from social leaders and Set goals and baselines for performance and growth based on your direct competitors." />
     <meta property="og:site_name" content="Benchmarks" />
-    <meta property="article:published_time" content="2017-12-30T05:59:00+01:00" />
-    <meta property="article:modified_time" content="2017-12-30T05:59:00+01:00" />
     <meta property="fb:admins" content="10206916243304374" />
+    <meta property="fb:app_id" content="{{ env('FACEBOOK_ID') }}" />
+
 
     <META NAME="geo.position" CONTENT="36.880750; 10.260194">
     <META NAME="geo.placename" CONTENT="KNSD">
