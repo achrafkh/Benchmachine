@@ -9,8 +9,8 @@
 			</span>
 		</div>
 		<table id="dt-tbl" class="data-table">
-				<thead>
-				<tr>
+			<thead>
+				<tr class="table-groups">
 					<th></th>
 					<th colspan="3">Fans</th>
 					<th colspan="2">Posts</th>

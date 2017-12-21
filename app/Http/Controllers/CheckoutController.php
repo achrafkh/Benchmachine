@@ -51,6 +51,7 @@ class CheckoutController extends Controller
         $this->processSuccessPayment($params);
 
         Session::flash('flash', ['class' => 'success', 'msg' => 'Thank you for your payement']);
+        Session::flash('payed', true);
         return redirect('/benchmarks/' . $request->benchmark_id);
     }
 

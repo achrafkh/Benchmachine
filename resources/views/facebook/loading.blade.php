@@ -10,6 +10,8 @@
 @endsection
 @section('custom-js')
 <script type="text/javascript">
+var benchId = {!! json_encode($benchmark->id) !!};
+
 $( document ).ready(function() {
 	function recursive_ajax(){
 	    $.ajax({
@@ -20,6 +22,10 @@ $( document ).ready(function() {
 	            if(data.status == 0){
 	            	setTimeout(recursive_ajax, 8000);
 	            } else {
+
+	            	ga('send', 'event', 'Loading', 'Loading page', 'Completed waiting on loading page');
+                    fbq('trackCustom', 'Loading','{status: "completed"}');
+
 	            	window.location.reload();
 	            }
 	        }
@@ -27,7 +33,10 @@ $( document ).ready(function() {
 	}
 	recursive_ajax();
 });
-
+$('.print-btn').unbind('click').bind('click', function (e) {
+  ga('send', 'event', 'BenchmarkPage', 'Download', 'Benchmark downloaded');
+  fbq('trackCustom', 'BenchmarkDownload');
+});
 $('#mail_notif').unbind('click').bind('click', function (e) {
 	if($(this).is(":checked")){
 		$('#email').prop('disabled', false);
@@ -47,6 +56,10 @@ $('#saveEmail').unbind('click').bind('click', function (e) {
 	        url: '/email-edit',
 	        success: function(data){
 	          if(data.code == 0){
+
+	          	ga('send', 'event', 'Loading', 'EmailUpdate', 'Successfully Updated Email');
+                fbq('trackCustom', 'EmailUpdate','{status: "success"}');
+
 	          	$('#emailError').text(data.msg);
 	          	$('#emailError').addClass('alert-danger');
 	          	$('#emailError').slideDown("slow").css('display','block');

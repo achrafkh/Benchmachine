@@ -10,7 +10,7 @@
 		</div>
 		<table id="table" class="data-table">
 			<thead>
-				<tr>
+				<tr class="table-groups">
 					<th></th>
 					<th colspan="3">Fans</th>
 					<th colspan="2">Posts</th>

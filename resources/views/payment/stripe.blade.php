@@ -1,7 +1,7 @@
 <hr>
-<div class="container" style="width: 50%;"  data-aos="fade-up" data-aos-once="true" data-aos-duration="800" data-aos-delay="0" data-aos-offset="0">
+<div id="paymentStripe"  class="container" style="width: 50%;"  data-aos="fade-up" data-aos-once="true" data-aos-duration="800" data-aos-delay="0" data-aos-offset="0">
 	<div class="row">
-		<div class="text-center">
+		<div class="text-center" id="reeee">
 			<h2 style="font-size: 32px;color: #4d4d4d;">Buy another <strong>BENCHMARK</strong></h2>
 		</div>
 		<hr>
@@ -112,7 +112,7 @@ a:hover {text-decoration:none; color:#fff;}
 		  data-panel-label="PAY"
 		  data-label="Generate"
 		  data-email="{{ auth()->user()->getValidEmail() }}"
-		  data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+		  data-image="{{ url('/images/logo.jpg') }}"
 		  data-locale="auto"
 		  data-zip-code="false"
 		  data-currency="usd">

@@ -102,6 +102,7 @@ class LoginController extends Controller
 
             return $authUser;
         }
+        Session::flash('CompleteRegistration', true);
         return User::create([
             'name' => $user->name,
             'email' => $user->email,

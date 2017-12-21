@@ -26,7 +26,7 @@
                 <p class="landing-txt">
                    Discover your key performances indicators, Learn  from social leaders and Set goals and baselines for performance and growth based on your direct competitors.
                 </p>
-                <a onclick="smoothScroll(document.getElementById('submit_pages'))" style="color:white" href="#" class="landing-btn" waves-hover>
+                <a onclick="smoothScroll(document.getElementById('submit_pages'))" style="color:white" href="#" id="glance" class="landing-btn" waves-hover>
                 Get A Glance
                 </a>
                 <div class="video">
@@ -36,7 +36,7 @@
                             <source src="{{ url('/front.mp4') }}">
                             Your browser does not support the video tag.
                         </video>
-                        <img class="video-screen" src="/assets/images/md-screen.png" alt="">
+                        <img class="video-screen" src="/assets/images/md-christmas-screen.png" alt="">
                     </div>
                 </div>
             </div>
@@ -87,7 +87,7 @@
                 </div>
             </div>
             <div class="text-center">
-                <button id="trigger" class="hf-sub" type="submit" waves-hover>
+                <button id="trigger" class="hf-sub track_click" type="submit" waves-hover>
                     <span class="hf-sub-txt1">Generate Benchmark</span>
                     <span class="hf-sub-txt2">Benchmark Generating</span>
                     <i class="icon-spin5 animate-spin"></i>
@@ -108,18 +108,21 @@ onload=function(){
 
 
 @section('js')
-<!-- Global site tag (gtag.js) - Google AdWords: 825013547 -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-825013547"></script>
-<script>
- window.dataLayer = window.dataLayer || [];
- function gtag(){dataLayer.push(arguments);}
- gtag('js', new Date());
- gtag('config', 'AW-825013547');
-</script>
+@if(Session::has('CompleteRegistration'))
+    <script type="text/javascript">
+        ga('send', 'event', 'CompleteRegistration', 'NewUser', 'New User Completed Registration');
+        fbq('track', 'CompleteRegistration');
+    </script>
+@endif
 <script type="text/javascript">
+$("#glance").unbind('click').bind("click", function (event) {
+    ga('send', 'event', 'CTA', 'CTA button', 'CTA button clicked');
+    fbq('trackCustom', 'CTA Clicked','{status: "completed"}');
+});
 var auth = {!! json_encode(auth()->check()) !!}
 var mainButton = $("#trigger");
         $("#trigger").unbind('click').bind("click", function (event) {
+
         mainButton.addClass('loading');
         $('.fb-box').removeClass('error');
         $('.fb-box').removeClass('success');
@@ -153,12 +156,15 @@ var mainButton = $("#trigger");
                 $('.fb-box').removeClass('loading');
                 $('.fb-box').addClass('success');
                 $('.fb-box').last().removeClass('error').removeClass('success').removeClass('loading');
+
                 if (data.hasOwnProperty('min')) {
+
                     $('#min').css('display', 'block');
                     mainButton.removeClass('loading');
                     return false;
                 }
                 if (data.hasOwnProperty('pages')) {
+
                     $.each(data.pages, function (index, value) {
                         $('#f_' + index).closest( "div.fb-box" ).removeClass('success').addClass('error');
                     });
@@ -166,6 +172,10 @@ var mainButton = $("#trigger");
                     return false;
                 }
                 if (data.hasOwnProperty('success')) {
+
+                    ga('send', 'event', 'GeneratingFreeBenchmark', 'AddedFreeBenchmark', 'Free benchmark generating started');
+                    fbq('trackCustom', 'FreeBenchmark','Freebenchmark added');
+
                          $.each(data.ids, function (key, value) {
                             $('<input />').attr('type', 'hidden')
                                     .attr('name', "account_ids[]")

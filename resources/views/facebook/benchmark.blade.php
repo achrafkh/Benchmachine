@@ -3,7 +3,9 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.2.0/aos.css">
 <div class="benchmark-page">
-
+<?php
+$freeBench = ($benchmark->details->since->diffInDays($benchmark->details->until));
+?>
 	@if(!isset($static))
 	 @include('layouts.partials.header',['id' => $benchmark->details->id])
 	@endif
@@ -45,6 +47,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.2.0/aos.js"></script>
 <script type="text/javascript" src="/js/animate.js"></script>
 <script type="text/javascript">
+var diffIn = {!! json_encode($freeBench) !!};
 
 var bench_id = {!! json_encode($benchmark->details->id) !!};
 $( document ).ready(function() {
@@ -65,6 +68,10 @@ $.get( "/api/show-modal/"+bench_id, function( data ) {
 @include('payment.'.getPaymentProvider().'_js')
 @endif
 <script type="text/javascript">
+var benchStatus = 'free';
+if(diffIn > 7){
+  benchStatus = 'paid';
+}
   var othercharts = [];
   var charts = [];
 </script>
@@ -74,6 +81,19 @@ $.get( "/api/show-modal/"+bench_id, function( data ) {
 
 
 <script type="text/javascript">
+var gaSend = true;
+$(window).scroll(function() {
+    if(elementInViewport(document.getElementById("paymentStripe"))){
+      if(gaSend){
+          ga('send', 'event', 'BenchmarkPage', 'ScrolledToBottom', 'Scrolled to bottom of benchmark');
+          fbq('trackCustom', 'ScrolledToBottom','{content_ids:"'bench_id'",content_type:"'+benchStatus+'"');
+          gaSend = false;
+      }
+    }
+});
+
+ga('send', 'event', 'BenchmarkPage', benchStatus+' Benchmark Viewed', 'Benchmark Viewed');
+fbq('track', 'ViewContent','{content_ids:"'bench_id'",content_type:"'+benchStatus+'"');
 
 var order = null;
 $('#table').on('order.dt', function () {
@@ -118,6 +138,23 @@ $('.canvas-interactions').unbind('click').bind('click', function (e) {
     console.log('Something went wrong');
   })
 });
+
+$('.print-btn').unbind('click').bind('click', function (e) {
+  ga('send', 'event', 'BenchmarkPage', 'Download', 'Benchmark downloaded');
+  fbq('trackCustom', 'BenchmarkDownload');
+});
+$('.notif-input').unbind('click').bind('click', function (e) {
+  ga('send', 'event', 'Loading', 'EmailUpdate', 'Updated Email');
+  fbq('trackCustom', 'EmailUpdate');
+});
+$('#hideme').unbind('click').bind('click', function (e) {
+  var title = {!! json_encode($benchmark->details->title) !!};
+  var benchiId = {!! json_encode($benchmark->details->id) !!};
+  ga('send', 'event', 'Checkout', 'InitiateCheckout', 'Presset Checkout Button');
+  fbq('track', 'InitiateCheckout','{value:"5", currency:"USD", content_name:"'+title+'", content_ids:"'+benchiId+'"}');
+});
+
+
 </script>
 
 @endsection

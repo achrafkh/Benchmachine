@@ -18,6 +18,7 @@ $(window).scroll(function() {
             },
             options: {
                 showXLabels: 10,
+                responsive: true,
                 animation:{
                   duration : Math.round(50000 / 17),
                 },

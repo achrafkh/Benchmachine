@@ -6,7 +6,7 @@
 			</svg>
 			<h1>Benchmark generating...</h1>
 			<p>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit..
+				{!! config('diver.msgs')[array_rand(config('diver.msgs'))]  !!}
 			</p>
 		</div>
 		<form class="pending-notif">
@@ -28,3 +28,9 @@
 		</form>
 	</div>
 </div>
+@if(Session::has('payed'))
+<script type="text/javascript">
+ga('send', 'event', 'Purchase', 'Purchased', 'Payment completed and waiting for benchmark');
+fbq('track', 'Purchase','{value:"5", currency:"USD",content_ids:"'+benchId+'",content_type:"benchmark"}');
+</script>
+@endif

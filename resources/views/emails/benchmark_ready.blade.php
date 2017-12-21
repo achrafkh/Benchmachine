@@ -101,7 +101,8 @@
                                         Hello, <b>{{ isset($benchmark->user->name) ? $benchmark->user->name : '' }}</b>
                                     </h1>
                                     <p class="txt">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod incididunt ut labore et dolore magna aliqua. Ut enim ad minim.
+                                        We finished collecting your benchmarks data,<br>
+                                        Discover your key performances indicators now and Learn more.
                                     </p>
                                 </td>
                             </tr>

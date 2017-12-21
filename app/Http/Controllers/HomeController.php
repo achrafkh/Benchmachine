@@ -173,7 +173,9 @@ class HomeController extends Controller
     {
         $benchmarks = auth()->user()->benchmarks()->with('accounts', 'order')->get();
 
-        return view('home', compact('benchmarks'));
+        $class = "listing_page";
+
+        return view('home', compact('benchmarks', 'class'));
     }
 
     public function editEmail(Request $request)

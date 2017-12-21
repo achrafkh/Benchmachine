@@ -63,6 +63,8 @@ $('#title').focusout(throttle(function(e){
     }
 	$.post( "/api/benchmarks/update-title", { title: $(this).val() ,id : {!! json_encode($benchmark->details->id) !!} })
 	.done(function( data ) {
+		ga('send', 'event', 'BenchmarkPage', 'UpdateTitle', 'Updated benchmark title');
+        fbq('trackCustom', 'BenchmarkTitle','{status: "Updated title"');
     	if(data.msg == 'error'){
     		inputVal.style.borderColor = '#ED1C24';
     	} else {
