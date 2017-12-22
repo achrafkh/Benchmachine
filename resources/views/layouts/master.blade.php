@@ -19,18 +19,10 @@
     </div>
     <script src="/assets/js/vendors.min.js"></script>
     <script src="/assets/js/theme.js"></script>
-    <script type="text/javascript">jQuery.fn.load = function(callback){ $(window).on("load", callback) };</script>
+    <script type="text/javascript"></script>
     @yield('js')
 
     @yield('custom-js')
-
-    <script type="text/javascript">
-        $( ".track_click" ).click(function() {
-          ga('send', 'event', $(this).data('section'), $(this).data('name'), $(this).data('desc'));
-          fbq('trackCustom', $(this).data('name'),$(this).data('fbq'));
-        });
-    </script>
-
 
 </body>
 </html>

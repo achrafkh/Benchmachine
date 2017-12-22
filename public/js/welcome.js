@@ -9,7 +9,6 @@ $("#glance").unbind('click').bind("click", function (event) {
     fbq('trackCustom', 'CTA Clicked','{status: "completed"}');
 });
 var auth = $('#auth').val();
-console.log(auth);
 var mainButton = $("#trigger");
         $("#trigger").unbind('click').bind("click", function (event) {
 
