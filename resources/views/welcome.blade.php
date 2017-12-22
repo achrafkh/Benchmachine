@@ -32,8 +32,8 @@
                 <div class="video">
                     <div class="video-inner">
                         <video alt="video on screen" autoplay="" loop="" muted="" playsinline="" poster="{{url('/images/background2.png')}}">
-                            <source src="{{ url('/front.mp4') }}" type="video/mp4">
-                            <source src="{{ url('/front.mp4') }}">
+                            <source src="{{ url('/assets/videos/benchmark.mp4') }}" type="video/mp4">
+                            <source src="{{ url('/assets/videos/benchmark.webm') }}">
                             Your browser does not support the video tag.
                         </video>
                         <img alt="page background" class="video-screen" src="/assets/images/md-christmas-screen.png">

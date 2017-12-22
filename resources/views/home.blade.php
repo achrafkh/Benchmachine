@@ -4,27 +4,28 @@
 @include('layouts.partials.header',['hidden_sidebar' => true])
 
 <div class="listing-wrapper">
-    <div class="container">
-        <h1 class="page-title">
+    <div class="listing-inner">
+        <div class="container">
+            <h1 class="page-title">
             My Benchmarks
-        </h1>
-        <table id="listing-table" class="data-table">
-            <thead>
-                <tr>
-                    <th data-sortable="true">Benchmark Name</th>
-                    <th data-sortable="true">Start Date</th>
-                    <th data-sortable="true">End Date</th>
-                    <th data-sortable="true">Date of creation</th>
-                    <th data-sortable="true">Status</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($benchmarks as $key => $benchmark)
+            </h1>
+            <table id="listing-table" class="data-table">
+                <thead>
+                    <tr>
+                        <th data-sortable="true">Benchmark Name</th>
+                        <th data-sortable="true">Start Date</th>
+                        <th data-sortable="true">End Date</th>
+                        <th data-sortable="true">Date of creation</th>
+                        <th data-sortable="true">Status</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($benchmarks as $key => $benchmark)
                     <tr data-index="{{$key}}">
                         <td class="table-benchmark-name">
                             <a href="/benchmarks/{{ $benchmark->id }}">
-                               {{  $benchmark->title }}
+                                {{  $benchmark->title }}
                             </a>
                         </td>
                         <td class="table-digit">{{ $benchmark->since }}</td>
@@ -35,15 +36,16 @@
                         </td>
                         <td>
                             <button class="table-delete">
-                                <svg class="svg" role="img" title="trash">
-                                    <use xlink:href="assets/images/svg-icons.svg#icon-trash"/>
-                                </svg>
+                            <svg class="svg" role="img" title="trash">
+                                <use xlink:href="assets/images/svg-icons.svg#icon-trash"/>
+                            </svg>
                             </button>
                         </td>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 @endsection

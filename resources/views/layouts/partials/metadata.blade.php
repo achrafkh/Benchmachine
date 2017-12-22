@@ -10,6 +10,7 @@
 <meta itemprop="name" content="Benchmarks">
 <meta itemprop="description" content="Discover your key performances indicators, Learn from social leaders and Set goals and baselines for performance and growth based on your direct competitors.">
 <meta itemprop="image" content="{{ url('/images/logo.jpg') }}">
+
 <!-- Twitter Card data -->
 <meta name="twitter:card" content="{{ url('/images/logo.jpg') }}">
 <meta name="twitter:site" content="@Kpeiz_Digital">
@@ -18,6 +19,7 @@
 <meta name="twitter:creator" content="@Kpeiz_Digital">
 <meta name="twitter:image:src" content="{{ url('/assets/images/christmas-bg.jpg') }}">
 <!-- Open Graph data -->
+
 <meta property="og:title" content="Benchmarks.digital" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="{{ url('/') }}" />
@@ -29,3 +31,9 @@
 <META NAME="geo.position" CONTENT="36.880750; 10.260194">
 <META NAME="geo.placename" CONTENT="KNSD">
 <META NAME="geo.region" CONTENT="Tunisia Tunis la Soukra 2036">
+<link rel="canonical" href="{{ URL::current() }}">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+<link rel="manifest" href="/assets/images/favicon/manifest.json">
+<link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">

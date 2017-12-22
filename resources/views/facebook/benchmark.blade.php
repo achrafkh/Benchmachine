@@ -1,7 +1,6 @@
 @extends('layouts.master')
 @section('content')
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.2.0/aos.css">
 <div class="benchmark-page">
 <?php
 $freeBench = ($benchmark->details->since->diffInDays($benchmark->details->until));
@@ -44,7 +43,7 @@ $freeBench = ($benchmark->details->since->diffInDays($benchmark->details->until)
 @section('custom-js')
 @if(!isset($print))
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.2.0/aos.js"></script>
+<script type="text/javascript" src="/assets/js/benchmark-vendors.min.js"></script>
 <script type="text/javascript" src="/js/animate.js"></script>
 <script type="text/javascript">
 var diffIn = {!! json_encode($freeBench) !!};
