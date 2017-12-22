@@ -31,7 +31,7 @@
                 </a>
                 <div class="video">
                     <div class="video-inner">
-                        <video autoplay="" loop="" muted="" playsinline="" poster="{{url('/images/background.png')}}">
+                        <video autoplay="" loop="" muted="" playsinline="" poster="{{url('/images/background2.png')}}">
                             <source src="{{ url('/front.mp4') }}" type="video/mp4">
                             <source src="{{ url('/front.mp4') }}">
                             Your browser does not support the video tag.
