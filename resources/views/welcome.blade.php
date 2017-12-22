@@ -41,6 +41,7 @@
                 </div>
             </div>
         </div>
+        <canvas id="snow" class="snow"></canvas>
         <img alt="cloud picture" class="cloud cloud-1" src="/assets/images/cloud_1.png">
         <img alt="cloud picture" class="cloud cloud-2" src="/assets/images/cloud_2.png" >
     </div>
@@ -108,5 +109,6 @@
         fbq('track', 'CompleteRegistration');
     </script>
 @endif
+<script type="text/javascript" src="/assets/js/canvas/snow.js"></script>
 <script type="text/javascript" src="/js/welcome.js"></script>
 @endsection
