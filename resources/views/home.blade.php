@@ -12,26 +12,26 @@
             <thead>
                 <tr>
                     <th data-sortable="true">Benchmark Name</th>
-                    <th data-sortable="true">Date of creation</th>
                     <th data-sortable="true">Start Date</th>
                     <th data-sortable="true">End Date</th>
+                    <th data-sortable="true">Date of creation</th>
                     <th data-sortable="true">Status</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                <?php for ($i = 1; $i <= 15; $i++) {?>
-                    <tr data-index="<?=$i?>">
+                @foreach($benchmarks as $key => $benchmark)
+                    <tr data-index="{{$key}}">
                         <td class="table-benchmark-name">
-                            <a href="">
-                                E-Sports
+                            <a href="/benchmarks/{{ $benchmark->id }}">
+                               {{  $benchmark->title }}
                             </a>
                         </td>
-                        <td class="table-digit">17/10/2017</td>
-                        <td class="table-digit">17/10/2017</td>
-                        <td class="table-digit">17/10/2017</td>
+                        <td class="table-digit">{{ $benchmark->since }}</td>
+                        <td class="table-digit">{{ $benchmark->until }}</td>
+                        <td class="table-digit">{{ $benchmark->created_at->toDateString() }}</td>
                         <td class="table-digit">
-                            <span class="label label-success">Ready</span>
+                            <span class="label label-{{ $benchmark->getStatus()['class'] }}">{{ $benchmark->getStatus()['text'] }}</span>
                         </td>
                         <td>
                             <button class="table-delete">
@@ -41,7 +41,7 @@
                             </button>
                         </td>
                     </tr>
-                <?php }?>
+                @endforeach
             </tbody>
         </table>
     </div>

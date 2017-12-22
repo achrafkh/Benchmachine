@@ -1,7 +1,6 @@
 <div class="sidebar">
 	<div class="sidebar-header">
 		<h2 class="sidebar-title" id="countBench">
-
 		</h2>
 		<button class="sidebar-close" type="button">
 			<svg class="svg" role="img" title="right-arrow" width="20" height="20">
@@ -47,9 +46,9 @@ function getStatus(status,className = false){
 		return 'Ready';
 	} else {
 		if(status == 1){
-			return 'orange';
+			return 'warning';
 		}
-		return 'green';
+		return 'success';
 	}
 }
 function getDom(benchmark,index){
@@ -57,7 +56,7 @@ function getDom(benchmark,index){
 	if(title == 'Benchmark'){
 		title += ' #'+index;
 	}
-	var string = '<a data-title="'+title+'" class="media sidebar-item" href="/benchmarks/'+benchmark.id+'"><ul class="media-body media-middle"><li class="si-name">'+title+'</li><li class="si-date">'+benchmark.since +' - '+benchmark.until+'</li></ul><div class="media-right media-middle"><span class="si-badge bg-'+getStatus(benchmark.status,true)+'">'+getStatus(benchmark.status)+'</span></div></a>';
+	var string = '<a data-title="'+title+'" class="media sidebar-item" href="/benchmarks/'+benchmark.id+'"><ul class="media-body media-middle"><li class="si-name">'+title+'</li><li class="si-date">'+benchmark.since +' - '+benchmark.until+'</li></ul><div class="media-right media-middle"><span class="label label-'+getStatus(benchmark.status,true)+'">'+getStatus(benchmark.status)+'</span></div></a>';
 	return string;
 }
 

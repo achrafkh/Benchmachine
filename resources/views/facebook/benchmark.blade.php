@@ -86,14 +86,14 @@ $(window).scroll(function() {
     if(elementInViewport(document.getElementById("paymentStripe"))){
       if(gaSend){
           ga('send', 'event', 'BenchmarkPage', 'ScrolledToBottom', 'Scrolled to bottom of benchmark');
-          fbq('trackCustom', 'ScrolledToBottom','{content_ids:"'bench_id'",content_type:"'+benchStatus+'"');
+          fbq('trackCustom', 'ScrolledToBottom','{content_ids:"'+bench_id+'",content_type:"'+benchStatus+'"');
           gaSend = false;
       }
     }
 });
 
 ga('send', 'event', 'BenchmarkPage', benchStatus+' Benchmark Viewed', 'Benchmark Viewed');
-fbq('track', 'ViewContent','{content_ids:"'bench_id'",content_type:"'+benchStatus+'"');
+fbq('track', 'ViewContent','{content_ids:"'+bench_id+'",content_type:"'+benchStatus+'"');
 
 var order = null;
 $('#table').on('order.dt', function () {
