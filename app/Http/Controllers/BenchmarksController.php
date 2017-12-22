@@ -52,7 +52,7 @@ class BenchmarksController extends Controller
 
         $benchmark_ids = $benchmark->accounts->pluck('id')->toarray();
 
-        $response = cpost(env('CORE') . '/platform/check-pages', ['pages_ids' => $benchmark_ids]);
+        $response = cpost(env('CORE2') . '/platform/check-pages', ['pages_ids' => $benchmark_ids]);
 
         if ((1 == $response->status) && (2 != $benchmark->status)) {
             $benchmark->markAsReady(auth()->user()->getValidEmail());
@@ -95,7 +95,8 @@ class BenchmarksController extends Controller
 
         $benchmark_ids = $benchmark->accounts->pluck('id')->toarray();
 
-        $response = cpost(env('CORE') . '/platform/check-pages', ['pages_ids' => $benchmark_ids]);
+        $response = cpost(env('CORE2') . '/platform/check-pages', ['pages_ids' => $benchmark_ids]);
+
         if (isset($response)) {
             if ((1 == $response->status) && (2 != $benchmark->status)) {
                 $benchmark->markAsReady(auth()->user()->getValidEmail());

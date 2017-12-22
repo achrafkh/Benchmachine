@@ -426,7 +426,7 @@ class Benchmark
         $params['since'] = $this->details->since->toDateString();
         $params['until'] = $this->details->until->toDateString();
 
-        $response = $api->get(env('CORE') . '/rest/insights/' . $id, $params);
+        $response = $api->get(env('CORE2') . '/rest/insights/' . $id, $params);
         if (!isset($response->data)) {
             return [];
         }

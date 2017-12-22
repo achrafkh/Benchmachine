@@ -49,7 +49,7 @@ class cleanPages extends Command
         $pages_ids = DB::table('new_pages')->pluck('page_id')->toarray();
 
         if (count($pages_ids)) {
-            $response = cpost(env('CORE') . '/rest/delete-accounts', ['social-accounts' => $pages_ids]);
+            $response = cpost(env('CORE2') . '/rest/delete-accounts', ['social-accounts' => $pages_ids]);
         }
         $this->log->info(count($pages_ids) . ' Pages deleted');
 

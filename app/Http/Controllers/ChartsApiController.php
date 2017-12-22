@@ -89,7 +89,7 @@ class ChartsApiController extends Controller
         $params['since'] = $since;
         $params['until'] = $until;
 
-        $response = $api->get(env('CORE') . '/rest/insights/' . $id, $params);
+        $response = $api->get(env('CORE2') . '/rest/insights/' . $id, $params);
         if (!isset($response->data)) {
             return [];
         }

@@ -11,7 +11,7 @@ function getEngagment($id, $since, $until)
     $params['since'] = $since;
     $params['until'] = $until;
 
-    $response = $api->get(env('CORE') . '/rest/insights/' . $id, $params);
+    $response = $api->get(env('CORE2') . '/rest/insights/' . $id, $params);
     if (!isset($response->data)) {
         return [];
     }
@@ -141,7 +141,7 @@ function cDelete($url, $params)
 // get a page likes number from kpeiz core
 function getLikes($id)
 {
-    return call(env('CORE') . '/platform/likes/' . $id);
+    return call(env('CORE2') . '/platform/likes/' . $id);
 }
 
 // get request for a url
