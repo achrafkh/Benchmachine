@@ -116,7 +116,7 @@ $(document).ready(function() {
 						<i class="icon-spin5 animate-spin"></i>\
 					</div>\
 					<div id="f_'+(index +1)+'" class="media-body fb-inner error_c">\
-						<h4 class="fb-nb">'+ nb[index+1] +' page</h4>\
+						<label for="fb_page_'+ (index +1) +'" class="fb-nb">'+ nb[index+1] +' page</label>\
 						<input id="fb_page_'+ (index +1) +'" class="fb-input" type="text" name="accounts[]" placeholder="https://www.facebook.com/exemple">\
 					</div>\
 				</div>'

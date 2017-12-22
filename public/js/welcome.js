@@ -3,6 +3,29 @@ onload=function(){
     if(e.value=="no")e.value="yes";
     else{e.value="no";location.reload();}
 }
+function hasDuplicates(array) {
+    var valuesSoFar = Object.create(null);
+    for (var i = 0; i < array.length; ++i) {
+        var value = array[i];
+        if (value in valuesSoFar) {
+            return value;
+        }
+        valuesSoFar[value] = true;
+    }
+    return false;
+}
+function inputsHaveDuplicateValues() {
+  var arr = [];
+  $('.fb-box').each(function () {
+    arr.push($(this).children('.fb-inner').children('.fb-input').val());
+  });
+  var elem = hasDuplicates(arr);
+  if(!elem){
+    return false;
+  }
+  return elem;
+}
+
 
 $("#glance").unbind('click').bind("click", function (event) {
     ga('send', 'event', 'CTA', 'CTA button', 'CTA button clicked');
@@ -11,18 +34,33 @@ $("#glance").unbind('click').bind("click", function (event) {
 var auth = $('#auth').val();
 var mainButton = $("#trigger");
         $("#trigger").unbind('click').bind("click", function (event) {
+        var fbBox = $('.fb-box');
+        event.preventDefault();
+        fbBox.removeClass('error');
+        fbBox.removeClass('success');
+        fbBox.removeClass('loading');
+        
+        var count = fbBox.filter(function(){
+            return $(this).children('.fb-inner').children('.fb-input').val() != '';
+        }).addClass('loading');
+        var dupls = inputsHaveDuplicateValues();
 
-        mainButton.addClass('loading');
-        $('.fb-box').removeClass('error');
-        $('.fb-box').removeClass('success');
+       if(!inputsHaveDuplicateValues()){
+            mainButton.addClass('loading');
+       } else {
         $('.fb-box').removeClass('loading');
-
-        $('.fb-box').addClass('loading');
-
-
+            fbBox.filter(function(){
+                var val = $(this).children('.fb-inner').children('.fb-input').val();
+                if(val == ''){
+                    return false;
+                }
+                return dupls.includes(val);
+            }).addClass('error');
+            return false;
+        }
         $('#min').css('display', 'none');
 
-        event.preventDefault();
+        
         var form = $('#submit_pages');
         var pages = $('#submit_pages').serializeArray();
         $.ajax({

@@ -67,7 +67,7 @@
                         <i class="icon-spin5 animate-spin"></i>
                     </div>
                     <div id="f_0" class="media-body fb-inner error_c">
-                        <h4 class="fb-nb">First page</h4>
+                        <label for="fb_page_0" class="fb-nb">First page</label>
                         <input id="fb_page_0" class="fb-input" type="text" name="accounts[]"
                         placeholder="https://www.facebook.com/exemple">
                     </div>
@@ -80,7 +80,7 @@
                         <i class="icon-spin5 animate-spin"></i>
                     </div>
                     <div id="f_1" class="media-body fb-inner error_c">
-                        <h4 class="fb-nb">Second page</h4>
+                        <label for="fb_page_1" class="fb-nb">Second page</label>
                         <input id="fb_page_1" class="fb-input" type="text" name="accounts[]"
                         placeholder="https://www.facebook.com/exemple">
                     </div>
