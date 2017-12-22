@@ -1,11 +1,9 @@
 @extends('layouts.master')
 @section('content')
+
 @include('layouts.partials.header')
 @include('layouts.partials.sidebar')
-
-
 @include('layouts.partials.loader')
-
 
 @endsection
 @section('custom-js')
@@ -22,10 +20,8 @@ $( document ).ready(function() {
 	            if(data.status == 0){
 	            	setTimeout(recursive_ajax, 8000);
 	            } else {
-
 	            	ga('send', 'event', 'Loading', 'Loading page', 'Completed waiting on loading page');
                     fbq('trackCustom', 'Loading','{status: "completed"}');
-
 	            	window.location.reload();
 	            }
 	        }
@@ -45,29 +41,19 @@ $('#mail_notif').unbind('click').bind('click', function (e) {
 });
 $('#saveEmail').unbind('click').bind('click', function (e) {
 	e.preventDefault();
-	$('#emailError').text('');
-	$('#emailError').css('display','none');
 	$.ajax({
 	        type:"POST",
 	        data: {email: $('#email').val()},
 	        url: '/email-edit',
 	        success: function(data){
 	          if(data.code == 0){
-
+                showAlert('danger',data.msg,5);
+	          } else {
 	          	ga('send', 'event', 'Loading', 'EmailUpdate', 'Successfully Updated Email');
                 fbq('trackCustom', 'EmailUpdate','{status: "success"}');
-
-	          	$('#emailError').text(data.msg);
-	          	$('#emailError').addClass('alert-danger');
-	          	$('#emailError').slideDown("slow").css('display','block');
-	          } else {
-	          	$('#emailError').text(data.msg);
-	          	$('#emailError').addClass('alert-success');
-	          	$('#emailError').slideDown("slow").css('display','block');
+                showAlert('success',data.msg,5);
 	          }
-	         	$("#emailError").fadeTo(5000, 500).slideUp(500, function(){
-			    	$("#emailError").slideUp(500);
-				});
+
 	        }
 	    });
 	});
