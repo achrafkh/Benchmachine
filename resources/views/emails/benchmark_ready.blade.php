@@ -90,7 +90,7 @@
                         <tbody>
                             <tr>
                                 <td height="140" background="{{ url('/mail/banner-bg.jpg') }}" valign="top" style="padding:30px;">
-                                    <a href="http://kpeiz.digital/">
+                                    <a href="https://kpeiz.digital/">
                                         <img src="{{ url('/mail/logo.png') }}">
                                     </a>
                                 </td>

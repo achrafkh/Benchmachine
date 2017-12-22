@@ -56,11 +56,10 @@ var mainButton = $("#trigger");
                 }
                 return dupls.includes(val);
             }).addClass('error');
+            showAlert('danger',"Can't add duplicate pages",5);
             return false;
         }
-        $('#min').css('display', 'none');
 
-        
         var form = $('#submit_pages');
         var pages = $('#submit_pages').serializeArray();
         $.ajax({
@@ -85,8 +84,8 @@ var mainButton = $("#trigger");
                 $('.fb-box').last().removeClass('error').removeClass('success').removeClass('loading');
 
                 if (data.hasOwnProperty('min')) {
-
-                    $('#min').css('display', 'block');
+                    console.log(data);
+                    showAlert('danger','Two Facebook pages required at least',5);
                     mainButton.removeClass('loading');
                     return false;
                 }
@@ -96,6 +95,7 @@ var mainButton = $("#trigger");
                         $('#f_' + index).closest( "div.fb-box" ).removeClass('success').addClass('error');
                     });
                     mainButton.removeClass('loading');
+                    showAlert('danger',"These pages dosen't exist",5);
                     return false;
                 }
                 if (data.hasOwnProperty('success')) {

@@ -12,6 +12,9 @@
 
 <body class="">
     <div class="page-wrap {{ $class or '' }}">
+        <div id="alertsParent" class="alerts-container">
+
+        </div>
     @yield('content')
     @include('layouts.partials.footer')
     </div>

@@ -19,7 +19,27 @@ function elementInViewport(el) {
     (left + width) > window.pageXOffset
   );
 }
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+function showAlert(type, text, duration){
+
+	var alert = '\
+		<div class="alert alert-' + type + ' alert-dismissible fade in">\
+		    <a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="icon-cancel"></i></a>\
+		    ' + text + '\
+		</div>\
+	'
+	if(duration != undefined || duration > 0){
+		$(alert).fadeIn(300).delay(duration * 1000).fadeOut(300, function(){$(this).remove()}).appendTo('.alerts-container');
+	}else{
+		$(alert).fadeIn(300).appendTo('.alerts-container');
+	}
+}
+
 $(document).ready(function() {
+
 
 	/*
 	-----------------------------------------

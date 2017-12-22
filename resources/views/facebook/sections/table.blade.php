@@ -42,7 +42,7 @@ $nbr_rep = 'Taux de réponse';
 					<td>
 						<div data-field="page" class="media table-fbpage">
 							<div class="media-left media-middle">
-								<span class="table-fbpage-img" style="background-image:url(http://graph.facebook.com/{{$account->social_account_name->real_id}}/picture)"></span>
+								<span class="table-fbpage-img" style="background-image:url(https://graph.facebook.com/{{$account->social_account_name->real_id}}/picture)"></span>
 							</div>
 							<div class="media-body media-middle">
 								<a target="_blank" href="https://www.facebook.com/{{ $account->social_account_name->label }}"><span class="table-fbpage-name">{{ $account->social_account_name->title }}</span></a>

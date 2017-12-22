@@ -1,7 +1,7 @@
 <footer>
 	<div class="container">
-		<a class="kpeiz-logo" href="http://kpeiz.digital/" target="_blank">
-			<svg version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="250.5 372 111 42.3">
+		<a class="kpeiz-logo" href="https://kpeiz.digital/" target="_blank">
+			<svg version="1.1" xmlns:xlink="https://www.w3.org/1999/xlink" viewBox="250.5 372 111 42.3">
 				<polygon points="250.5,405 250.5,372 262.5,372 262.5,377 256,377 256,405"/>
 				<polygon points="260.8,388.5 266.5,379.9 272.5,379.9 264.4,392.1 273,405 266.8,405 260.8,395.8 258.7,392.1"/>
 				<path d="M301.5,392.7c0,7.5-4.7,12.6-11.9,12.6c-4,0-7-1.6-8.9-4.5v13.5h-5.4v-34.3h5.4v4.3 c1.8-2.9,4.9-4.5,8.8-4.5C296.6,379.9,301.5,385.1,301.5,392.7 M296,392.5c0-4.7-3.2-8.1-7.6-8.1s-7.6,3.4-7.6,8.1 c0,4.9,3.2,8.2,7.6,8.2S296,397.3,296,392.5"/>

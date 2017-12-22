@@ -10623,6 +10623,76 @@ Components
 
 /*
 -----------------------------------------
+Alerts
+-----------------------------------------
+*/
+
+.alerts-container {
+	position: fixed;
+	top: 62px;
+	left: 0;
+	width: 100%;
+	text-align: center;
+	z-index: 98;
+}
+
+.alerts-container .alert {
+	position: relative;
+	color: #fff;
+	margin: 0;
+	border: 0;
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0;
+}
+
+.alerts-container .alert .close {
+	position: absolute;
+	top: 0;
+	right: 0;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	-moz-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	height: 100%;
+	padding: 10px;
+	opacity: 0.6;
+	text-shadow: none;
+}
+
+.alerts-container .alert .close:hover {
+	color: #fff;
+	opacity: 1;
+}
+
+.alerts-container .alert .close i {
+	font-size: 0;
+}
+
+.alerts-container .alert .close i:before {
+	font-size: 16px;
+}
+
+.alerts-container .alert.alert-success {
+	background-color: #20d077;
+}
+
+.alerts-container .alert.alert-danger {
+	background-color: #ff0047;
+}
+
+.alerts-container .alert.alert-warning {
+	background-color: #fb761d;
+}
+
+/*
+-----------------------------------------
 Badges
 -----------------------------------------
 */
@@ -10651,7 +10721,7 @@ Badges
 }
 
 .label.label-danger {
-	background-color: #ff0078;
+	background-color: #ff0047;
 	color: #fff;
 }
 
@@ -11503,11 +11573,11 @@ Facebook Inputs
 }
 
 .fb-wrap .fb-box.error .fb-icon {
-	color: #ff0078;
+	color: #ff0047;
 }
 
 .fb-wrap .fb-box.error .fb-icon:before {
-	background-color: #ff0078;
+	background-color: #ff0047;
 }
 
 .fb-wrap .fb-box.error .fb-icon .icon-cancel {
@@ -11557,6 +11627,12 @@ Overwrite
 	padding: 0;
 	border: none;
 	outline: none !important;
+}
+
+b,
+strong {
+	font-family: "open-sans-bold";
+	font-weight: normal;
 }
 
 ol,
@@ -11827,7 +11903,7 @@ table.data-table tbody tr td.table-digit.up {
 }
 
 table.data-table tbody tr td.table-digit.down {
-	color: #ff0078;
+	color: #ff0047;
 }
 
 table.data-table tbody tr td .table-fbpage {
@@ -12275,7 +12351,7 @@ Summary
 }
 
 .summary-section .summary-wrap .summary-block:hover .summary-progress .down {
-	background-color: #ff0078;
+	background-color: #ff0047;
 	color: #fff;
 }
 
@@ -12318,7 +12394,7 @@ Summary
 }
 
 .summary-section .summary-wrap.active .summary-block .summary-progress .down {
-	background-color: #ff0078;
+	background-color: #ff0047;
 	color: #fff;
 }
 
@@ -12818,6 +12894,10 @@ body.no-scroll {
 .page-wrap.home_page {
 	background-color: #fff;
 	padding: 0;
+}
+
+.page-wrap.home_page .alerts-container {
+	top: 0;
 }
 
 .page-wrap.benchmark_page .section {
