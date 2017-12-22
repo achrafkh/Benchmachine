@@ -4,6 +4,7 @@
     <title>Social Media Benchmarks</title>
     @include('layouts.partials.metadata')
     <link rel="stylesheet" href="/assets/css/theme.min.css">
+    <link rel="shortcut icon" href="/favicon.ico">
     <link type="text/css" rel="stylesheet" href="/css/loader.css">
     <link rel="canonical" href="{{ URL::current() }}">
 
