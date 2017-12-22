@@ -26,7 +26,7 @@
                 <p class="landing-txt">
                    Discover your key performances indicators, Learn  from social leaders and Set goals and baselines for performance and growth based on your direct competitors.
                 </p>
-                <a onclick="smoothScroll(document.getElementById('submit_pages'))" style="color:white" href="#" id="glance" class="landing-btn" waves-hover>
+                <a onclick="smoothScroll(document.getElementById('submit_pages'))"  href="#" id="glance" class="landing-btn white-txt" waves-hover>
                 Get A Glance
                 </a>
                 <div class="video">
@@ -54,7 +54,7 @@
                 <p>
                     Discover your key performances indicators, Learn from social leaders and Set goals and baselines for performance and growth based on your direct competitors.
                 </p>
-                <div id="min" class="alert alert-danger" style="display: none">
+                <div id="min" class="alert alert-danger hideme">
                   <strong>Danger!</strong> Minimum : 2 pages.
                 </div>
             </div>
@@ -97,13 +97,7 @@
     </div>
 </div>
 <input type="hidden" id="refreshed" value="no">
-<script type="text/javascript">
-onload=function(){
-    var e=document.getElementById("refreshed");
-    if(e.value=="no")e.value="yes";
-    else{e.value="no";location.reload();}
-}
-</script>
+<input type="hidden" id="auth" value="{{ auth()->check() }}">
 @endsection
 
 
@@ -114,91 +108,5 @@ onload=function(){
         fbq('track', 'CompleteRegistration');
     </script>
 @endif
-<script type="text/javascript">
-$("#glance").unbind('click').bind("click", function (event) {
-    ga('send', 'event', 'CTA', 'CTA button', 'CTA button clicked');
-    fbq('trackCustom', 'CTA Clicked','{status: "completed"}');
-});
-var auth = {!! json_encode(auth()->check()) !!}
-var mainButton = $("#trigger");
-        $("#trigger").unbind('click').bind("click", function (event) {
-
-        mainButton.addClass('loading');
-        $('.fb-box').removeClass('error');
-        $('.fb-box').removeClass('success');
-        $('.fb-box').removeClass('loading');
-
-        $('.fb-box').addClass('loading');
-
-
-        $('#min').css('display', 'none');
-
-        event.preventDefault();
-        var form = $('#submit_pages');
-        var pages = $('#submit_pages').serializeArray();
-        $.ajax({
-            url: '/api/pages/validate',
-            type: 'post',
-            statusCode: {
-                422: function (response) {
-                    $('.fb-box').removeClass('loading');
-                    $('.fb-box').addClass('success');
-                    $.each(response.responseJSON.errors, function (key, value) {
-                        var index = key.split(".");
-                        $('#f_' + index[1]).closest( "div.fb-box" ).removeClass('success').addClass('error');
-                    });
-                    $('.fb-box').last().removeClass('error').removeClass('success').removeClass('loading');
-                    mainButton.removeClass('loading');
-                }
-            },
-            data: pages,
-            success: function (data) {
-                $('.fb-box').removeClass('loading');
-                $('.fb-box').addClass('success');
-                $('.fb-box').last().removeClass('error').removeClass('success').removeClass('loading');
-
-                if (data.hasOwnProperty('min')) {
-
-                    $('#min').css('display', 'block');
-                    mainButton.removeClass('loading');
-                    return false;
-                }
-                if (data.hasOwnProperty('pages')) {
-
-                    $.each(data.pages, function (index, value) {
-                        $('#f_' + index).closest( "div.fb-box" ).removeClass('success').addClass('error');
-                    });
-                    mainButton.removeClass('loading');
-                    return false;
-                }
-                if (data.hasOwnProperty('success')) {
-
-                    ga('send', 'event', 'GeneratingFreeBenchmark', 'AddedFreeBenchmark', 'Free benchmark generating started');
-                    fbq('trackCustom', 'FreeBenchmark','Freebenchmark added');
-
-                         $.each(data.ids, function (key, value) {
-                            $('<input />').attr('type', 'hidden')
-                                    .attr('name', "account_ids[]")
-                                        .attr('value', value)
-                                        .appendTo(form);
-                            });
-                           $.post( {!! json_encode(route('newDemoBench')) !!}, pages ).done(function( data ) {
-                                if(auth){
-                                    window.location.href = {!! json_encode(url('/benchmarks/') ) !!}+'/'+data;
-                                    return false;
-
-                                } else {
-                                     window.location.href = {!! json_encode(url('/auth/facebook')) !!};
-                                }
-                            });
-                            event.preventDefault();
-                        }
-                    },
-                    error: function (data) {
-                        console.log(data.responseJSON)
-                    }
-                });
-            });
-</script>
-
+<script type="text/javascript" src="/js/welcome.js"></script>
 @endsection
