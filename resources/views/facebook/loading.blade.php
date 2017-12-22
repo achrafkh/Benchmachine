@@ -1,6 +1,5 @@
 @extends('layouts.master')
 @section('content')
-@include('layouts.partials.pixels')
 @include('layouts.partials.header')
 @include('layouts.partials.sidebar')
 

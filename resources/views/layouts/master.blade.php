@@ -6,11 +6,11 @@
     <link rel="stylesheet" href="/assets/css/theme.min.css">
     <link rel="stylesheet" href="/assets/css/custom.css">
     <link type="text/css" rel="stylesheet" href="/css/loader.css">
-
-    @include('layouts.partials.pixels')
+    <script type="text/javascript" src="/js/pixels.js"></script>
 </head>
 
 <body class="">
+
     <div class="page-wrap {{ $class or '' }}">
         <div id="alertsParent" class="alerts-container">
 
