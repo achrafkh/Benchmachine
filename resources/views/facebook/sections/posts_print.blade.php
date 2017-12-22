@@ -6,7 +6,7 @@
 		Benchmark overview (Sorted by {{ ucfirst(str_replace('_',' ',$sort)) }})
 	</span>
 </div>
-<div class="row nm-7 animatedParent" data-sequence="500">
+<div class="row nm-7 " >
 	@foreach($posts->flatten()->sortByDesc($sort)->take(4) as $key => $post)
 		@include('facebook.sections.partials.single_post_print')
 	@endforeach

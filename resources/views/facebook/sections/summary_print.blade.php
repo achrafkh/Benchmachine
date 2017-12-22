@@ -1,6 +1,6 @@
-<div class="section summary-section" data-aos="flip-down" data-aos-once="true">
+<div class="section summary-section" >
 	<div class="container">
-	<div class="benchmark-name" data-aos="fade-up" data-aos-once="true">
+	<div class="benchmark-name" >
 		<div class="container">
 		@if(Session::has('flash'))
 		<div class="alert alert-{{ Session::get('flash')['class'] }}">

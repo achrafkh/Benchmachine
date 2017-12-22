@@ -1,5 +1,6 @@
 @extends('layouts.master')
 @section('content')
+
 <link rel="stylesheet" type="text/css" href="/css/print.css">
 <div class="benchmark-page">
 	@if(!isset($static))
@@ -14,19 +15,19 @@
 	 @include('facebook.sections.charts_print',['charts' => $pack])
 	@endforeach
 
-	<div class="section posts-section" data-aos="slide-up" data-aos-once="true">
+	<div class="section posts-section" >
 		<div class="container">
 			@include('facebook.sections.posts_print',['posts' => $benchmark->posts,'sort'=> 'likes' ])
 			@include('facebook.sections.posts_print',['posts' => $benchmark->posts,'sort'=> 'comments' ])
 		</div>
 	</div>
-	<div class="section posts-section" data-aos="slide-up" data-aos-once="true">
+	<div class="section posts-section">
 		<div class="container">
 			@include('facebook.sections.posts_print',['posts' => $benchmark->posts,'sort'=> 'shares' ])
 			@include('facebook.sections.posts_print',['posts' => $benchmark->posts,'sort'=> 'engagement_rate' ])
 		</div>
 	</div>
-	<div class="section posts-section" data-aos="slide-up" data-aos-once="true">
+	<div class="section posts-section">
 		<div class="container">
 			@include('facebook.sections.posts_print',['posts' => $benchmark->posts,'sort'=> 'total_interactions' ])
 		</div>
@@ -46,6 +47,7 @@
 	var col = 1;
 	var type = "desc";
 </script>
+<script type="text/javascript" src="/assets/js/benchmark-vendors.min.js"></script>
 @foreach(collect($benchmark->charts)->collapse() as $chart)
 	@include('facebook.charts.print.'.$chart['type'], $chart)
 @endforeach

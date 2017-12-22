@@ -15,10 +15,12 @@
     @yield('content')
     @include('layouts.partials.footer')
     </div>
+
     <script src="/assets/js/vendors.min.js"></script>
     <script src="/assets/js/theme.js"></script>
     <script type="text/javascript"></script>
     @yield('js')
     @yield('custom-js')
+    <noscript>Your browser does not support JavaScript!</noscript>
 </body>
 </html>
