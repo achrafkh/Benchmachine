@@ -14,7 +14,7 @@ class Api
      */
     public function __construct()
     {
-        $this->client = new Client(['base_uri' => trim(env('CORE'), '/') . '/rest/']);
+        $this->client = new Client(['base_uri' => trim(env('CORE2'), '/') . '/rest/']);
     }
 
     /**
