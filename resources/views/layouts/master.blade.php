@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Benchmarks</title>
+    <title>Social Media Benchmarks</title>
     @include('layouts.partials.metadata')
     <link rel="stylesheet" href="/assets/css/theme.min.css">
     <link type="text/css" rel="stylesheet" href="/css/loader.css">

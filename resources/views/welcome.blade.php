@@ -5,7 +5,7 @@
         <div class="landing-wrap">
             <div class="landing-inner">
                 <a class="landing-logo" href=".">
-                    <img class="hidden-xs" src="assets/images/logo.png">
+                    <img class="hidden-xs" alt="Benchmarks.digital logo" src="assets/images/logo.png">
                     <svg class="svg visible-xs" role="img" title="logo">
                         <use xlink:href="/assets/images/svg-icons.svg#logo"/>
                     </svg>
@@ -31,18 +31,18 @@
                 </a>
                 <div class="video">
                     <div class="video-inner">
-                        <video autoplay="" loop="" muted="" playsinline="" poster="{{url('/images/background2.png')}}">
+                        <video alt="video on screen" autoplay="" loop="" muted="" playsinline="" poster="{{url('/images/background2.png')}}">
                             <source src="{{ url('/front.mp4') }}" type="video/mp4">
                             <source src="{{ url('/front.mp4') }}">
                             Your browser does not support the video tag.
                         </video>
-                        <img class="video-screen" src="/assets/images/md-christmas-screen.png" alt="">
+                        <img alt="page background" class="video-screen" src="/assets/images/md-christmas-screen.png" alt="">
                     </div>
                 </div>
             </div>
         </div>
-        <img class="cloud cloud-1" src="/assets/images/cloud_1.png" alt="">
-        <img class="cloud cloud-2" src="/assets/images/cloud_2.png" alt="">
+        <img alt="cloud picture" class="cloud cloud-1" src="/assets/images/cloud_1.png" alt="">
+        <img alt="cloud picture" class="cloud cloud-2" src="/assets/images/cloud_2.png" alt="">
     </div>
     <div class="home-form">
         <form id="submit_pages" action="{{ route('newDemoBench') }}" method="POST" >
