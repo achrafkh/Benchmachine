@@ -32,7 +32,7 @@ class User extends Authenticatable
 
     public function getImageAttribute()
     {
-        return 'http://graph.facebook.com/' . $this->provider_id . '/picture';
+        return 'https://graph.facebook.com/' . $this->provider_id . '/picture';
     }
 
     public function benchmarks()
