@@ -4,7 +4,6 @@
 <meta name="keywords" content="Benchmarks, Facebook, KPI, Social benchmarking">
 <meta name="description" content="Discover your key performances indicators, Learn from social leaders and Set goals and baselines for performance and growth based on your direct competitors.">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <!-- Twitter Card data -->
 <meta name="twitter:card" value="Discover your key performances indicators, Learn from social leaders and Set goals and baselines for performance and growth based on your direct competitors.">
 <!-- Schema.org markup for Google+ -->
