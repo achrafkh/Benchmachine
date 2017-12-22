@@ -36,13 +36,13 @@
                             <source src="{{ url('/front.mp4') }}">
                             Your browser does not support the video tag.
                         </video>
-                        <img alt="page background" class="video-screen" src="/assets/images/md-christmas-screen.png" alt="">
+                        <img alt="page background" class="video-screen" src="/assets/images/md-christmas-screen.png">
                     </div>
                 </div>
             </div>
         </div>
-        <img alt="cloud picture" class="cloud cloud-1" src="/assets/images/cloud_1.png" alt="">
-        <img alt="cloud picture" class="cloud cloud-2" src="/assets/images/cloud_2.png" alt="">
+        <img alt="cloud picture" class="cloud cloud-1" src="/assets/images/cloud_1.png">
+        <img alt="cloud picture" class="cloud cloud-2" src="/assets/images/cloud_2.png" >
     </div>
     <div class="home-form">
         <form id="submit_pages" action="{{ route('newDemoBench') }}" method="POST" >
