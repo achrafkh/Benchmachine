@@ -9,6 +9,7 @@ $freeBench = ($benchmark->details->since->diffInDays($benchmark->details->until)
 	 @include('layouts.partials.header',['id' => $benchmark->details->id])
 	@endif
   @include('layouts.partials.sidebar')
+  @include('layouts.partials.breadcumbs',['page' => ($benchmark->details->title .' | Since :'. $benchmark->details->since->todateString() .' | Until :'. $benchmark->details->until->todateString()) ])
 	<div class="benchmark-name" data-aos="fade-up" data-aos-once="true" data-aos-duration="800" data-aos-delay="0" data-aos-offset="0">
 		<div class="container">
 		@if(Session::has('flash'))

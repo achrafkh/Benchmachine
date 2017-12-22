@@ -14,10 +14,11 @@
 			<input type="hidden" id="col" name="col" value="1">
 			<input type="hidden" id="chartdate_en" name="chartdate_en" value="1">
 			<input type="hidden" id="chartdate_in" name="chartdate_in" value="1">
-			<button type="submit" class="mbtn mbtn-icon print-btn" waves-hover>
+			<button  type="submit" class="mbtn mbtn-icon print-btn" waves-hover>
 				<svg class="svg" role="img" title="printer">
 	        		<use xlink:href="/assets/images/svg-icons.svg#icon-printer"/>
 	        	</svg>
+	        	<i class="icon-spin5 animate-spin"></i>
 				<span class="hidden-xs">Print benchmark</span>
 			</button>
 		</form>

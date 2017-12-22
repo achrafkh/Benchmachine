@@ -10727,6 +10727,47 @@ Badges
 
 /*
 -----------------------------------------
+Breadcrumbs
+-----------------------------------------
+*/
+
+.breadcrumb-wrapper {
+	background-color: #f0f1f1;
+	margin-top: -1px;
+	border-bottom: 1px solid #ecebeb;
+}
+
+.breadcrumb-wrapper .breadcrumb {
+	background-color: transparent;
+	padding: 12px 0;
+	margin: 0;
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0;
+}
+
+.breadcrumb-wrapper .breadcrumb li {
+	font-family: "open-sans-medium";
+	font-size: 12px;
+}
+
+.breadcrumb-wrapper .breadcrumb li a {
+	font-family: inherit;
+	font-size: inherit;
+	color: #4d4d4d;
+	text-decoration: none;
+}
+
+.breadcrumb-wrapper .breadcrumb li a:hover {
+	color: #fb761d;
+}
+
+.breadcrumb-wrapper .breadcrumb li.active {
+	color: #9f9e9e;
+}
+
+/*
+-----------------------------------------
 Buttons
 -----------------------------------------
 */
@@ -10745,7 +10786,8 @@ Buttons
 }
 
 .mbtn span,
-.mbtn .svg {
+.mbtn .svg,
+.mbtn i {
 	display: inline-block;
 	vertical-align: middle;
 }
@@ -10763,10 +10805,28 @@ Buttons
 	padding: 0 25px 0 20px;
 }
 
+.mbtn.mbtn-icon i {
+	font-size: 16px;
+	width: 22px;
+}
+
 .mbtn.mbtn-icon .svg {
 	fill: #fff;
 	width: 22px;
 	height: 22px;
+}
+
+.mbtn.mbtn-icon .icon-spin5 {
+	display: none;
+}
+
+.mbtn.mbtn-icon.loading i,
+.mbtn.mbtn-icon.loading .svg {
+	display: none;
+}
+
+.mbtn.mbtn-icon.loading .icon-spin5 {
+	display: inline-block;
 }
 
 /*
@@ -12511,7 +12571,7 @@ Header
 	left: 0;
 	background-color: #fff;
 	width: 100%;
-	border: 1px solid #ecebeb;
+	border-bottom: 1px solid #ecebeb;
 	z-index: 99;
 }
 

@@ -33,10 +33,7 @@ $( document ).ready(function() {
 	}
 	recursive_ajax();
 });
-$('.print-btn').unbind('click').bind('click', function (e) {
-  ga('send', 'event', 'BenchmarkPage', 'Download', 'Benchmark downloaded');
-  fbq('trackCustom', 'BenchmarkDownload');
-});
+
 $('#mail_notif').unbind('click').bind('click', function (e) {
 	if($(this).is(":checked")){
 		$('#email').prop('disabled', false);
