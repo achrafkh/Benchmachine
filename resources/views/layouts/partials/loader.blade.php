@@ -11,18 +11,18 @@
 		</div>
 		<form class="pending-notif">
 			<div class="pending-checkbox">
-				<input id="mail_notif" type="checkbox" name="mail_notif">
+				<input checked id="mail_notif" type="checkbox" name="mail_notif">
 				<label for="mail_notif">
 					Get notified when benchmark is ready
 				</label>
 			</div>
 
-			<input required disabled id="email" class="notif-input form-control" type="email" placeholder="E-Mail...">
+			<input required id="email" class="notif-input form-control" type="email" placeholder="E-Mail..." value="{{ auth()->user()->getValidEmail() }}">
 
 			<div id="emailError" class="alert" style="margin-top: 15px;display: none">
 
 			</div>
-			<button disabled id="saveEmail" class="mbtn notif-sub" waves-hover>
+			<button id="saveEmail" class="mbtn notif-sub" waves-hover>
 				<span>Save</span>
 			</button>
 		</form>
