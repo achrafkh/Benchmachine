@@ -1,4 +1,4 @@
-<script type="text/javascript">
+ <script type="text/javascript">
 var since = new Date();
 since.setDate(since.getDate() - 2);
 var until = new Date();
@@ -54,6 +54,7 @@ $('#title').focusout(throttle(function(e){
 		return false;
 	}
 	var inputVal = document.getElementById("title");
+	var newVal = $(this).val();
 	if($(this).val().length < 5){
 
     	inputVal.style.borderColor = '#ED1C24';
@@ -63,6 +64,7 @@ $('#title').focusout(throttle(function(e){
     }
 	$.post( "/api/benchmarks/update-title", { title: $(this).val() ,id : {!! json_encode($benchmark->details->id) !!} })
 	.done(function( data ) {
+		$('#benchTitle').text(newVal);
 		ga('send', 'event', 'BenchmarkPage', 'UpdateTitle', 'Updated benchmark title');
         fbq('trackCustom', 'BenchmarkTitle','{status: "Updated title"');
     	if(data.msg == 'error'){
