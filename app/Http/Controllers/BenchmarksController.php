@@ -116,6 +116,24 @@ class BenchmarksController extends Controller
         return view('facebook.benchmark_html', compact('html'));
     }
 
+    public function deleteBenchmark(Request $request)
+    {
+        if (!$request->has('id')) {
+            return response()->json(['code' => 200, 'status' => 0]);
+        }
+        $benchmark = Benchmark::find($request->id);
+
+        $this->authorize('delete', $benchmark);
+
+        if (is_null($benchmark)) {
+            return response()->json(['code' => 200, 'status' => 0]);
+        }
+
+        $benchmark->delete();
+
+        return response()->json(['code' => 200, 'status' => 1]);
+    }
+
     /**
      * Download A benchmark as PDF
      * This uses Dompdf to generate the file

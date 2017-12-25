@@ -4,10 +4,13 @@ namespace App;
 
 use App\Mail\NotifyUser;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Mail;
 
 class Benchmark extends Model
 {
+    use SoftDeletes;
+
     protected $fillable = [
         'title', 'since', 'until', 'user_id', 'status', 'temp_id',
     ];

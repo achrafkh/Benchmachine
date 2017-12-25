@@ -9,6 +9,7 @@
             <h1 class="page-title">
             My Benchmarks
             </h1>
+           @if($benchmarks->count())
             <table id="listing-table" class="data-table">
                 <thead>
                     <tr>
@@ -22,7 +23,7 @@
                 </thead>
                 <tbody>
                     @foreach($benchmarks as $key => $benchmark)
-                    <tr data-index="{{$key}}">
+                    <tr id="benchmark-{{$benchmark->id}}" data-index="{{$key}}">
                         <td class="table-benchmark-name">
                             <a href="/benchmarks/{{ $benchmark->id }}">
                                 {{  $benchmark->title }}
@@ -35,7 +36,7 @@
                             <span class="label label-{{ $benchmark->getStatus()['class'] }}">{{ $benchmark->getStatus()['text'] }}</span>
                         </td>
                         <td>
-                            <button class="table-delete">
+                            <button  class="table-delete" data-id="{{ $benchmark->id }}">
                             <svg class="svg" role="img" title="trash">
                                 <use xlink:href="assets/images/svg-icons.svg#icon-trash"/>
                             </svg>
@@ -45,9 +46,33 @@
                     @endforeach
                 </tbody>
             </table>
+           @endif
         </div>
     </div>
 </div>
+
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="modalConfirm">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Confirm</h4>
+      </div>
+       <div class="modal-body">
+        <p>You are about to delete this benchmark permanently, Are you sure?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-id="" id="ConfirmYes">Yes</button>
+        <button type="button" class="btn btn-default" id="ConfirmNo">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="alert" role="alert" id="result"></div>
+
+
 @endsection
 @section('custom-js')
 <script type="text/javascript">
@@ -76,7 +101,36 @@ $(document).ready(function() {
             },
         }
     });
-} );
+
+    $('.table-delete').unbind('click').bind('click', function (e) {
+        $("#modalConfirm").modal('show');
+        $('#ConfirmYes').data('id', $(this).data('id'));
+    });
+    $('#ConfirmNo').unbind('click').bind('click', function (e) {
+        $('#ConfirmYes').data('id', '');
+        $("#modalConfirm").modal('hide');
+    });
+    $('#ConfirmYes').unbind('click').bind('click', function (e) {
+        deleteBenchmark($(this).data('id'));
+        $('#ConfirmYes').data('id', '');
+        $("#modalConfirm").modal('hide');
+    });
+
+    function deleteBenchmark(bench_id)
+    {
+        $.post('/benchmarks/delete', { id: bench_id }).then(function(response){
+            if(response.status == 1){
+                showAlert('success','Benchmark deleted successfully',5);
+                $('#listing-table').DataTable().row( $('#benchmark-'+bench_id) ).remove().draw();
+                return true;
+            } else {
+                showAlert('danger','Something went wrong, Try again',5);
+                return false;
+            }
+            return false;
+        });
+    }
+});
 </script>
 
 

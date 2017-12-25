@@ -23,6 +23,8 @@ class CreateBenchmarksTable extends Migration
             $table->date('until')->index();
             $table->timestamps();
 
+            $table->softDeletes();
+
             $table->index(['created_at', 'status']);
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');

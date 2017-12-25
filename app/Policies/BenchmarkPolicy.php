@@ -31,4 +31,9 @@ class BenchmarkPolicy
     {
         return $user->id === $benchmark->user_id;
     }
+
+    public function delete(User $user, Benchmark $benchmark)
+    {
+        return $user->id === $benchmark->user_id;
+    }
 }
