@@ -70,8 +70,8 @@ $.get( "/api/show-modal/"+bench_id, function( data ) {
 <script type="text/javascript">
 ga('send', {
   hitType: 'pageview',
-  title: 'Benchmark Page'
-  page: '/benchmarks'
+  title: 'Benchmark Page',
+  page: '/benchmarks',
 });
 
 var benchStatus = 'free';

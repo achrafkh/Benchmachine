@@ -106,8 +106,8 @@
 <script type="text/javascript">
 ga('send', {
   hitType: 'pageview',
-  title: 'Welcome Page'
-  page: '/'
+  title: 'Welcome Page',
+  page: '/',
 });
 </script>
 @if(Session::has('CompleteRegistration'))

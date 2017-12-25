@@ -11,8 +11,8 @@
 
 ga('send', {
   hitType: 'pageview',
-  title: 'Loading Page'
-  page: '/benchmarks/loading'
+  title: 'Loading Page',
+  page: '/benchmarks/loading',
 });
 
 var benchId = {!! json_encode($benchmark->id) !!};

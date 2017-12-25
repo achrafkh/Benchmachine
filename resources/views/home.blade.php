@@ -78,8 +78,8 @@
 <script type="text/javascript">
 ga('send', {
   hitType: 'pageview',
-  title: 'Listing page'
-  page: '/home'
+  title: 'Listing page',
+  page: '/home',
 });
 $(document).ready(function() {
     var searchIcon = '\
