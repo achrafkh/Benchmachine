@@ -103,6 +103,13 @@
 
 
 @section('js')
+<script type="text/javascript">
+ga('send', {
+  hitType: 'pageview',
+  title: 'Welcome Page'
+  page: '/'
+});
+</script>
 @if(Session::has('CompleteRegistration'))
     <script type="text/javascript">
         ga('send', 'event', 'CompleteRegistration', 'NewUser', 'New User Completed Registration');

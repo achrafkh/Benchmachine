@@ -68,6 +68,12 @@ $.get( "/api/show-modal/"+bench_id, function( data ) {
 @include('payment.'.getPaymentProvider().'_js')
 @endif
 <script type="text/javascript">
+ga('send', {
+  hitType: 'pageview',
+  title: 'Benchmark Page'
+  page: '/benchmarks'
+});
+
 var benchStatus = 'free';
 if(diffIn > 7){
   benchStatus = 'paid';

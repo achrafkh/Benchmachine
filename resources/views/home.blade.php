@@ -76,6 +76,11 @@
 @endsection
 @section('custom-js')
 <script type="text/javascript">
+ga('send', {
+  hitType: 'pageview',
+  title: 'Listing page'
+  page: '/home'
+});
 $(document).ready(function() {
     var searchIcon = '\
         <svg class="svg" role="img" title="search">\

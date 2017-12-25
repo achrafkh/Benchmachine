@@ -8,6 +8,13 @@
 @endsection
 @section('custom-js')
 <script type="text/javascript">
+
+ga('send', {
+  hitType: 'pageview',
+  title: 'Loading Page'
+  page: '/benchmarks/loading'
+});
+
 var benchId = {!! json_encode($benchmark->id) !!};
 
 $( document ).ready(function() {
