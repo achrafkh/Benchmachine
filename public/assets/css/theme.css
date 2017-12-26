@@ -10775,6 +10775,7 @@ Buttons
 .mbtn {
 	position: relative;
 	background-color: #fb761d;
+	display: inline-block;
 	font-size: 0;
 	color: #fff;
 	min-height: 37px;
@@ -10795,6 +10796,12 @@ Buttons
 .mbtn span {
 	font-family: "open-sans-bold";
 	font-size: 12px;
+}
+
+.mbtn:hover,
+.mbtn:focus,
+.mbtn:active {
+	color: #fff;
 }
 
 .mbtn.mbtn-icon {
@@ -11471,7 +11478,41 @@ Facebook Inputs
 -----------------------------------------
 */
 
-.fb-wrap .fb-box {
+.fb-wrapper {
+	background-color: #fff;
+	padding: 80px 0;
+	border-top: 1px solid #ecebeb;
+}
+
+.fb-wrapper .fb-inner {
+	max-width: 650px;
+	padding: 0 15px;
+	margin: auto;
+}
+
+.fb-wrapper .fb-header {
+	margin-bottom: 40px;
+	text-align: center;
+}
+
+.fb-wrapper .fb-header h1 {
+	font-family: "open-sans-light";
+	font-size: 38px;
+	color: #4d4d4d;
+}
+
+.fb-wrapper .fb-header h1 b {
+	font-family: "open-sans-extrabold";
+	text-transform: uppercase;
+}
+
+.fb-wrapper .fb-header p {
+	font-size: 13px;
+	color: #9f9e9e;
+	margin: 5px 0 10px;
+}
+
+.fb-wrapper .fb-form .fb-form-inner .fb-box {
 	position: relative;
 	background-color: #fff;
 	display: table;
@@ -11483,7 +11524,7 @@ Facebook Inputs
 	transition: all 0.2s ease-in-out;
 }
 
-.fb-wrap .fb-box .fb-icon {
+.fb-wrapper .fb-form .fb-form-inner .fb-box .fb-icon {
 	position: relative;
 	background-color: #fff;
 	vertical-align: middle;
@@ -11495,7 +11536,7 @@ Facebook Inputs
 	transition: all 0.2s ease-in-out;
 }
 
-.fb-wrap .fb-box .fb-icon i {
+.fb-wrapper .fb-form .fb-form-inner .fb-box .fb-icon i {
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -11512,15 +11553,15 @@ Facebook Inputs
 	transition: all 0.2s ease-in-out;
 }
 
-.fb-wrap .fb-box .fb-icon i:before {
+.fb-wrapper .fb-form .fb-form-inner .fb-box .fb-icon i:before {
 	font-size: 18px;
 }
 
-.fb-wrap .fb-box .fb-icon i.icon-facebook {
+.fb-wrapper .fb-form .fb-form-inner .fb-box .fb-icon i.icon-facebook {
 	opacity: 1;
 }
 
-.fb-wrap .fb-box .fb-icon i.icon-spin5 {
+.fb-wrapper .fb-form .fb-form-inner .fb-box .fb-icon i.icon-spin5 {
 	-webkit-transform-origin: 0% 0%;
 	-moz-transform-origin: 0% 0%;
 	-ms-transform-origin: 0% 0%;
@@ -11528,7 +11569,7 @@ Facebook Inputs
 	transform-origin: 0% 0%;
 }
 
-.fb-wrap .fb-box .fb-icon i.icon-spin5:before {
+.fb-wrapper .fb-form .fb-form-inner .fb-box .fb-icon i.icon-spin5:before {
 	-webkit-transform: translate(-50%, -50%);
 	-moz-transform: translate(-50%, -50%);
 	-ms-transform: translate(-50%, -50%);
@@ -11536,7 +11577,7 @@ Facebook Inputs
 	transform: translate(-50%, -50%);
 }
 
-.fb-wrap .fb-box .fb-icon:before {
+.fb-wrapper .fb-form .fb-form-inner .fb-box .fb-icon:before {
 	content: "";
 	position: absolute;
 	top: 0;
@@ -11550,7 +11591,7 @@ Facebook Inputs
 	transition: all 0.3s ease-in-out;
 }
 
-.fb-wrap .fb-box .fb-inner {
+.fb-wrapper .fb-form .fb-form-inner .fb-box .fb-inner {
 	width: 100%;
 	padding: 15px;
 	-webkit-transition: all 0.2s ease-in-out;
@@ -11559,14 +11600,14 @@ Facebook Inputs
 	transition: all 0.2s ease-in-out;
 }
 
-.fb-wrap .fb-box .fb-inner .fb-nb {
+.fb-wrapper .fb-form .fb-form-inner .fb-box .fb-inner .fb-nb {
 	font-family: "open-sans-medium";
 	font-size: 13px;
 	color: #4d4d4d;
 	margin-bottom: 2px;
 }
 
-.fb-wrap .fb-box .fb-inner .fb-input {
+.fb-wrapper .fb-form .fb-form-inner .fb-box .fb-inner .fb-input {
 	display: block;
 	font-family: "open-sans-medium";
 	font-size: 13px;
@@ -11574,24 +11615,24 @@ Facebook Inputs
 	width: 100%;
 }
 
-.fb-wrap .fb-box .fb-inner .fb-input::-webkit-input-placeholder {
+.fb-wrapper .fb-form .fb-form-inner .fb-box .fb-inner .fb-input::-webkit-input-placeholder {
 	color: rgba(159, 158, 158, 0.6);
 }
 
-.fb-wrap .fb-box .fb-inner .fb-input::-moz-placeholder {
+.fb-wrapper .fb-form .fb-form-inner .fb-box .fb-inner .fb-input::-moz-placeholder {
 	color: rgba(159, 158, 158, 0.6);
 }
 
-.fb-wrap .fb-box .fb-inner .fb-input:-ms-input-placeholder {
+.fb-wrapper .fb-form .fb-form-inner .fb-box .fb-inner .fb-input:-ms-input-placeholder {
 	color: rgba(159, 158, 158, 0.6);
 }
 
-.fb-wrap .fb-box .fb-inner .fb-input:-moz-placeholder {
+.fb-wrapper .fb-form .fb-form-inner .fb-box .fb-inner .fb-input:-moz-placeholder {
 	color: rgba(159, 158, 158, 0.6);
 }
 
-.fb-wrap .fb-box:before,
-.fb-wrap .fb-box:after {
+.fb-wrapper .fb-form .fb-form-inner .fb-box:before,
+.fb-wrapper .fb-form .fb-form-inner .fb-box:after {
 	position: absolute;
 	left: 0;
 	background-color: #ecebeb;
@@ -11605,46 +11646,46 @@ Facebook Inputs
 	transition: all 0.2s ease-in-out;
 }
 
-.fb-wrap .fb-box:before {
+.fb-wrapper .fb-form .fb-form-inner .fb-box:before {
 	content: "";
 	bottom: 0;
 }
 
-.fb-wrap .fb-box.loading .fb-icon i.icon-facebook,
-.fb-wrap .fb-box.success .fb-icon i.icon-facebook,
-.fb-wrap .fb-box.error .fb-icon i.icon-facebook {
+.fb-wrapper .fb-form .fb-form-inner .fb-box.loading .fb-icon i.icon-facebook,
+.fb-wrapper .fb-form .fb-form-inner .fb-box.success .fb-icon i.icon-facebook,
+.fb-wrapper .fb-form .fb-form-inner .fb-box.error .fb-icon i.icon-facebook {
 	opacity: 0;
 }
 
-.fb-wrap .fb-box.loading .fb-icon .icon-spin5 {
+.fb-wrapper .fb-form .fb-form-inner .fb-box.loading .fb-icon .icon-spin5 {
 	opacity: 1;
 }
 
-.fb-wrap .fb-box.success .fb-icon {
+.fb-wrapper .fb-form .fb-form-inner .fb-box.success .fb-icon {
 	color: #20d077;
 }
 
-.fb-wrap .fb-box.success .fb-icon:before {
+.fb-wrapper .fb-form .fb-form-inner .fb-box.success .fb-icon:before {
 	background-color: #20d077;
 }
 
-.fb-wrap .fb-box.success .fb-icon .icon-ok {
+.fb-wrapper .fb-form .fb-form-inner .fb-box.success .fb-icon .icon-ok {
 	opacity: 1;
 }
 
-.fb-wrap .fb-box.error .fb-icon {
+.fb-wrapper .fb-form .fb-form-inner .fb-box.error .fb-icon {
 	color: #ff0047;
 }
 
-.fb-wrap .fb-box.error .fb-icon:before {
+.fb-wrapper .fb-form .fb-form-inner .fb-box.error .fb-icon:before {
 	background-color: #ff0047;
 }
 
-.fb-wrap .fb-box.error .fb-icon .icon-cancel {
+.fb-wrapper .fb-form .fb-form-inner .fb-box.error .fb-icon .icon-cancel {
 	opacity: 1;
 }
 
-.fb-wrap .fb-box.focused {
+.fb-wrapper .fb-form .fb-form-inner .fb-box.focused {
 	-webkit-box-shadow: -5px 5px 25px 0px rgba(0, 0, 0, 0.1);
 	-moz-box-shadow: -5px 5px 25px 0px rgba(0, 0, 0, 0.1);
 	box-shadow: -5px 5px 25px 0px rgba(0, 0, 0, 0.1);
@@ -11656,22 +11697,179 @@ Facebook Inputs
 	transform: translate(0, -1px);
 }
 
-.fb-wrap .fb-box.focused .fb-icon {
+.fb-wrapper .fb-form .fb-form-inner .fb-box.focused .fb-icon {
 	color: #fff;
 }
 
-.fb-wrap .fb-box.focused .fb-icon:before {
+.fb-wrapper .fb-form .fb-form-inner .fb-box.focused .fb-icon:before {
 	width: 100%;
 }
 
-.fb-wrap .fb-box.focused:before,
-.fb-wrap .fb-box.focused:after {
+.fb-wrapper .fb-form .fb-form-inner .fb-box.focused:before,
+.fb-wrapper .fb-form .fb-form-inner .fb-box.focused:after {
 	opacity: 0;
 }
 
-.fb-wrap .fb-box:first-child:after {
+.fb-wrapper .fb-form .fb-form-inner .fb-box:first-child:after {
 	content: "";
 	top: 0;
+}
+
+.fb-wrapper .fb-footer {
+	margin: 40px auto 0;
+	text-align: center;
+}
+
+.fb-wrapper .fb-footer .fb-sub {
+	position: relative;
+	background-color: #fb761d;
+	display: inline-block;
+	font-size: 0;
+	color: #fff;
+	padding: 12px 40px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	text-transform: uppercase;
+	-webkit-transition: all 0.2s ease-in-out;
+	-moz-transition: all 0.2s ease-in-out;
+	-o-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
+}
+
+.fb-wrapper .fb-footer .fb-sub span {
+	font-family: "open-sans-bold";
+	font-size: 12px;
+}
+
+.fb-wrapper .fb-footer .fb-sub span.fb-sub-txt2 {
+	display: none;
+}
+
+.fb-wrapper .fb-footer .fb-sub i {
+	position: absolute;
+	top: 11px;
+	right: 20px;
+	opacity: 0;
+	-webkit-transition: opacity 0.2s ease-in-out;
+	-moz-transition: opacity 0.2s ease-in-out;
+	-o-transition: opacity 0.2s ease-in-out;
+	transition: opacity 0.2s ease-in-out;
+}
+
+.fb-wrapper .fb-footer .fb-sub i:before {
+	font-size: 19px;
+}
+
+.fb-wrapper .fb-footer .fb-sub.loading {
+	padding: 12px 60px 12px 40px;
+}
+
+.fb-wrapper .fb-footer .fb-sub.loading span.fb-sub-txt1 {
+	display: none;
+}
+
+.fb-wrapper .fb-footer .fb-sub.loading span.fb-sub-txt2 {
+	display: block;
+}
+
+.fb-wrapper .fb-footer .fb-sub.loading i {
+	opacity: 1;
+}
+
+/*
+-----------------------------------------
+Facebook Tabs
+-----------------------------------------
+*/
+
+.fb-wrapper .fb-inner .nav-tabs {
+	font-size: 0;
+	margin-bottom: 40px;
+	border: 0;
+	text-align: center;
+}
+
+.fb-wrapper .fb-inner .nav-tabs li {
+	position: relative;
+	float: none;
+	width: 200px;
+	padding: 15px 35px 15px 15px;
+	margin: 0 10px;
+	opacity: 0.3;
+	text-align: left;
+	white-space: nowrap;
+	border-bottom: 3px solid #ecebeb;
+}
+
+.fb-wrapper .fb-inner .nav-tabs li,
+.fb-wrapper .fb-inner .nav-tabs li span,
+.fb-wrapper .fb-inner .nav-tabs li .svg-tab-icon {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.fb-wrapper .fb-inner .nav-tabs li span {
+	font-family: "open-sans-bold";
+	font-size: 13px;
+	color: #4d4d4d;
+	margin-left: 10px;
+	text-transform: uppercase;
+}
+
+.fb-wrapper .fb-inner .nav-tabs li .svg-tab-icon {
+	fill: #9f9e9e;
+	width: 22px;
+	height: 22px;
+}
+
+.fb-wrapper .fb-inner .nav-tabs li .svg-tab-success,
+.fb-wrapper .fb-inner .nav-tabs li .svg-tab-next {
+	position: absolute;
+	top: 50%;
+	right: 10px;
+	-webkit-transform: translate(0, -50%);
+	-moz-transform: translate(0, -50%);
+	-ms-transform: translate(0, -50%);
+	-o-transform: translate(0, -50%);
+	transform: translate(0, -50%);
+}
+
+.fb-wrapper .fb-inner .nav-tabs li .svg-tab-success {
+	fill: #20d077;
+	width: 18px;
+	height: 18px;
+	opacity: 0;
+}
+
+.fb-wrapper .fb-inner .nav-tabs li .svg-tab-next {
+	fill: #4d4d4d;
+	width: 15px;
+	height: 15px;
+}
+
+.fb-wrapper .fb-inner .nav-tabs li.active {
+	opacity: 1;
+}
+
+.fb-wrapper .fb-inner .nav-tabs li.success {
+	border-bottom: 3px solid #20d077;
+}
+
+.fb-wrapper .fb-inner .nav-tabs li.success .svg-tab-success {
+	opacity: 1;
+}
+
+.fb-wrapper .fb-inner .nav-tabs li.success .svg-tab-next {
+	opacity: 0;
+}
+
+.fb-wrapper .fb-inner .tab-content .fb-header {
+	margin-bottom: 30px;
+}
+
+.fb-wrapper .fb-inner .tab-content .fb-footer {
+	text-align: right;
 }
 
 /*
@@ -11717,6 +11915,26 @@ h6 {
 Bootstrap Table
 -----------------------------------------
 */
+
+.dataTables_wrapper .dataTables_length label {
+	font-family: "open-sans-medium";
+	font-size: 12px;
+	font-weight: normal;
+	color: #9f9e9e;
+	margin: 0;
+}
+
+.dataTables_wrapper .dataTables_length label select {
+	background-color: #fff;
+	font-size: 12px;
+	color: #4d4d4d;
+	padding: 7px 10px;
+	margin: 0 5px;
+	border: 1px solid #ecebeb;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
 
 .dataTables_wrapper .dataTables_filter {
 	float: right;
@@ -12578,7 +12796,7 @@ Header
 .header .logo {
 	float: left;
 	font-size: 0;
-	padding: 15px 15px 15px 0;
+	padding: 15px;
 }
 
 .header .logo .svg {
@@ -12589,6 +12807,10 @@ Header
 
 .header .logo .svg .svg-logo-dot {
 	fill: #fb761d;
+}
+
+.header .logo:hover {
+	background-color: #fafafa;
 }
 
 .header .print-btn {
@@ -12751,7 +12973,7 @@ Home
 .home-page .landing .landing-wrap .landing-inner .landing-txt {
 	font-family: "open-sans-it";
 	color: #c2e0fe;
-	max-width: 420px;
+	max-width: 550px;
 	margin: 15px auto;
 }
 
@@ -12761,8 +12983,9 @@ Home
 	display: inline-block;
 	font-family: "open-sans-bold";
 	font-size: 13px;
+	color: #fff;
 	padding: 12px 50px; /* margin: 15px 0 50px; */
-	margin: 15px 0 0;
+	margin: 15px 0 -15px;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
@@ -12848,90 +13071,8 @@ Home
 	z-index: 1;
 }
 
-.home-page .home-form {
-	background-color: #fff;
-	padding: 40px 0 80px;
-}
-
-.home-page .home-form form {
-	max-width: 650px;
-	padding: 0 15px;
-	margin: auto;
-}
-
-.home-page .home-form .hf-header {
-	margin-bottom: 30px;
-}
-
-.home-page .home-form .hf-header h2 {
-	font-family: "open-sans-bold";
-	font-size: 15px;
-	color: #4d4d4d;
-	margin-bottom: 5px;
-	text-transform: uppercase;
-}
-
-.home-page .home-form .hf-header p {
-	font-size: 13px;
-	color: #9f9e9e;
-}
-
-.home-page .home-form .hf-sub {
-	position: relative;
-	background-color: #fb761d;
-	display: inline-block;
-	font-size: 0;
-	color: #fff;
-	padding: 12px 40px;
-	margin: 40px auto 0;
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 3px;
-	text-transform: uppercase;
-	-webkit-transition: all 0.2s ease-in-out;
-	-moz-transition: all 0.2s ease-in-out;
-	-o-transition: all 0.2s ease-in-out;
-	transition: all 0.2s ease-in-out;
-}
-
-.home-page .home-form .hf-sub span {
-	font-family: "open-sans-bold";
-	font-size: 12px;
-}
-
-.home-page .home-form .hf-sub span.hf-sub-txt2 {
-	display: none;
-}
-
-.home-page .home-form .hf-sub i {
-	position: absolute;
-	top: 11px;
-	right: 20px;
-	opacity: 0;
-	-webkit-transition: opacity 0.2s ease-in-out;
-	-moz-transition: opacity 0.2s ease-in-out;
-	-o-transition: opacity 0.2s ease-in-out;
-	transition: opacity 0.2s ease-in-out;
-}
-
-.home-page .home-form .hf-sub i:before {
-	font-size: 19px;
-}
-
-.home-page .home-form .hf-sub.loading {
-	padding: 12px 60px 12px 40px;
-}
-
-.home-page .home-form .hf-sub.loading span.hf-sub-txt1 {
-	display: none;
-}
-
-.home-page .home-form .hf-sub.loading span.hf-sub-txt2 {
-	display: block;
-}
-
-.home-page .home-form .hf-sub.loading i {
-	opacity: 1;
+.home-page .fb-wrapper {
+	border: 0;
 }
 
 /*
@@ -14720,6 +14861,10 @@ td.visible-lg {
 
 @media (min-width: 1558px) {
 
+.fb-wrapper .fb-inner {
+	max-width: 750px;
+}
+
 .home-page .landing .landing-wrap .landing-inner .landing-title {
 	font-size: 38px;
 }
@@ -14729,10 +14874,6 @@ td.visible-lg {
 }
 
 .home-page .landing .landing-wrap .landing-inner .video .video-inner .video-screen {
-	max-width: 750px;
-}
-
-.home-page .home-form form {
 	max-width: 750px;
 }
 
@@ -14753,6 +14894,18 @@ table.data-table tbody tr:hover {
 }
 
 @media (max-width: 768px) {
+
+.fb-wrapper {
+	padding: 50px 0;
+}
+
+.fb-wrapper .fb-header h1 {
+	font-size: 32px;
+}
+
+.fb-wrapper .fb-header p {
+	margin: 10px 0;
+}
 
 .dataTables_wrapper .dataTables_filter {
 	max-width: none;
@@ -14836,10 +14989,6 @@ footer .kpeiz-logo {
 
 .home-page .landing .landing-wrap .landing-inner .video .video-inner {
 	display: none;
-}
-
-.home-page .home-form .hf-header h2 {
-	font-size: 14px;
 }
 
 }

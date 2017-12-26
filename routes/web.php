@@ -53,5 +53,16 @@ Route::middleware(['auth'])->group(function () {
 
         Route::post('wkdownload/{id}', 'BenchmarksController@wkdownload')->name('wkdownloadPost');
     });
+});
+
+Route::middleware(['auth', 'admin'])->group(function () {
+
+    /**
+     ** Admins Routes
+     **/
+    Route::prefix('dashboard')->namespace('admin')->group(function () {
+        Route::get('/', 'DashboardController@index');
+        Route::get('/users', 'UsersController@index');
+    });
 
 });

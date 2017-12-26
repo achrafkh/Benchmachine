@@ -5,7 +5,7 @@
         <div class="landing-wrap">
             <div class="landing-inner">
                 <a class="landing-logo" href=".">
-                    <img class="hidden-xs" alt="Benchmarks.digital logo" src="assets/images/logo.png">
+                    <img class="hidden-xs" alt="Benchmarks.digital logo" src="/assets/images/logo.png">
                     <svg class="svg visible-xs" role="img" title="logo">
                         <use xlink:href="/assets/images/svg-icons.svg#logo"/>
                     </svg>
@@ -45,21 +45,15 @@
         <img alt="cloud picture" class="cloud cloud-1" src="/assets/images/cloud_1.png">
         <img alt="cloud picture" class="cloud cloud-2" src="/assets/images/cloud_2.png" >
     </div>
-    <div class="home-form">
-        <form id="submit_pages" action="{{ route('newDemoBench') }}" method="POST" >
-         {{ csrf_field() }}
-            <div class="hf-header">
-                <h2>
-                Add facebook pages
-                </h2>
-                <p>
-                    Discover your key performances indicators, Learn from social leaders and Set goals and baselines for performance and growth based on your direct competitors.
-                </p>
-                <div id="min" class="alert alert-danger hideme">
-                  <strong>Danger!</strong> Minimum : 2 pages.
-                </div>
+     <div class="fb-wrapper">
+        <div class="fb-inner">
+        <div class="fb-header">
+                <h1>Create a new <b>benchmark.</b></h1>
+                <p>Copy paste the url of the facebook pages you want to compare. It only takes a few seconds.</p>
             </div>
-            <div class="fb-wrap">
+        <form id="submit_pages" action="{{ route('newDemoBench') }}" method="POST" class="fb-form">
+         {{ csrf_field() }}
+            <div class="fb-form-inner">
                 <div class="media fb-box focused">
                     <div class="media-left fb-icon">
                         <i class="icon-facebook"></i>
@@ -87,14 +81,15 @@
                     </div>
                 </div>
             </div>
-            <div class="text-center">
-                <button id="trigger" class="hf-sub track_click" type="submit" waves-hover>
-                    <span class="hf-sub-txt1">Generate Benchmark</span>
-                    <span class="hf-sub-txt2">Benchmark Generating</span>
+            <div class="fb-footer">
+                <button id="trigger" class="fb-sub track_click" type="submit" waves-hover>
+                    <span class="fb-sub-txt1">Generate Benchmark</span>
+                    <span class="fb-sub-txt2">Benchmark Generating</span>
                     <i class="icon-spin5 animate-spin"></i>
                 </button>
             </div>
         </form>
+        </div>
     </div>
 </div>
 <input type="hidden" id="refreshed" value="no">

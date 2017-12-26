@@ -127,7 +127,7 @@ $(document).ready(function() {
 		$('.fb-box').removeClass('focused');
 		parent.addClass('focused');
 		if(parent.index() == index && index < 9){
-			$('.fb-wrap').append(
+			$('.fb-form-inner').append(
 				'<div class="media fb-box">\
 					<div class="media-left fb-icon">\
 						<i class="icon-facebook"></i>\

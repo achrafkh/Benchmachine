@@ -49,6 +49,87 @@
            @endif
         </div>
     </div>
+        <div class="fb-wrapper">
+        <div class="fb-inner">
+            <div class="fb-header">
+                <h1>
+                    Make another <b>benchmark.</b>
+                </h1>
+            </div>
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active">
+                    <svg class="svg svg-tab-icon" role="img" title="clipboard">
+                        <use xlink:href="assets/images/svg-icons.svg#icon-clipboard"/>
+                    </svg>
+                    <span>Add Pages</span>
+                    <svg class="svg svg-tab-success" role="img" title="round-check">
+                        <use xlink:href="assets/images/svg-icons.svg#icon-round-check"/>
+                    </svg>
+                    <svg class="svg svg-tab-next" role="img" title="angle-right">
+                        <use xlink:href="assets/images/svg-icons.svg#icon-angle-right"/>
+                    </svg>
+                </li>
+                <li role="presentation">
+                    <svg class="svg svg-tab-icon" role="img" title="calendar">
+                        <use xlink:href="assets/images/svg-icons.svg#icon-calendar"/>
+                    </svg>
+                    <span>Select Periode</span>
+                    <svg class="svg svg-tab-success" role="img" title="round check">
+                        <use xlink:href="assets/images/svg-icons.svg#icon-round-check"/>
+                    </svg>
+                    <svg class="svg svg-tab-next" role="img" title="angle right">
+                        <use xlink:href="assets/images/svg-icons.svg#icon-angle-right"/>
+                    </svg>
+                </li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+
+                <div role="tabpanel" class="tab-pane active" id="fb-tab">
+                    <div class="fb-header">
+                        <p>Copy paste the url of the facebook pages you want to compare. It only takes a few seconds.</p>
+                    </div>
+                    <form class="fb-form">
+                        <div class="fb-form-inner">
+                            <div class="media fb-box">
+                                <div class="media-left fb-icon">
+                                    <i class="icon-facebook"></i>
+                                    <i class="icon-ok"></i>
+                                    <i class="icon-cancel"></i>
+                                    <i class="icon-spin5 animate-spin"></i>
+                                </div>
+                                <div class="media-body fb-inner">
+                                    <label class="fb-nb" for="fb_page_1">First page</label>
+                                    <input id="fb_page_1" class="fb-input" type="text" name="fb_page_1" placeholder="https://www.facebook.com/exemple">
+                                </div>
+                            </div>
+                            <div class="media fb-box">
+                                <div class="media-left fb-icon">
+                                    <i class="icon-facebook"></i>
+                                </div>
+                                <div class="media-body fb-inner">
+                                    <label class="fb-nb" for="fb_page_2">Second page</label>
+                                    <input id="fb_page_2" class="fb-input" type="text" name="fb_page_2" placeholder="https://www.facebook.com/exemple">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="fb-footer">
+                        <a class="mbtn" href="#date-tab" aria-controls="date-tab" role="tab" data-toggle="tab">
+                            <span>Next Step</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div role="tabpanel" class="tab-pane" id="date-tab">
+
+                </div>
+
+            </div>
+        </div>
+    </div>
 </div>
 
 
@@ -69,10 +150,6 @@
     </div>
   </div>
 </div>
-
-<div class="alert" role="alert" id="result"></div>
-
-
 @endsection
 @section('custom-js')
 <script type="text/javascript">

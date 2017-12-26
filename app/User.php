@@ -66,12 +66,12 @@ class User extends Authenticatable
         return true;
     }
 
-    public function hasRole($role)
+    public function hasRole($roles)
     {
-        if (!is_array($role)) {
-            $role = [$role];
+        if (!is_array($roles)) {
+            $roles = [$roles];
         }
-        if (!in_array($this->role, $array)) {
+        if (!in_array($this->role, $roles)) {
             return false;
         }
         return true;
