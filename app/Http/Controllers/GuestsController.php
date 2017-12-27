@@ -24,11 +24,11 @@ class GuestsController extends Controller
             $redirect = '/home';
         }
         if (is_null($invitation)) {
-            Session::flash('msg', "This invitation doesn't exists");
+            Session::flash('msg', ['class' => 'danger', 'msg' => "This invitation doesn't exists"]);
             return redirect($redirect);
         }
         if (!is_null($invitation->invited_id)) {
-            Session::flash('msg', "This invitation has been already used");
+            Session::flash('msg', ['class' => 'danger', 'msg' => "This invitation has been already used"]);
             return redirect($redirect);
         }
         $class = "home_page";
@@ -73,7 +73,7 @@ class GuestsController extends Controller
             'id' => $benchmark->id,
         ]);
         Session::put('benchmark', $benchmark->id);
-
+        Session::put('used_invitation', $invite->id);
         return response()->json(['status' => 1, 'id' => $benchmark->id]);
     }
 }

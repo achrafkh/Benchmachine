@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use App\Benchmark;
 use App\Http\Controllers\Controller;
+use App\Invitation;
 use App\User;
 use Auth;
+use Carbon\Carbon;
 use Session;
 use Socialite;
 
@@ -70,6 +72,18 @@ class LoginController extends Controller
                 $benchmark->save();
                 Session::forget('benchmark');
                 Session::put('new_benchmark', $bench_id);
+                $invite_id = Session::get('used_invitation');
+
+                if (!is_null($invite_id)) {
+                    Session::forget('used_invitation');
+                    $invitation = Invitation::find($invite_id);
+                    $invitation->invited_id = Auth::id();
+                    if (!is_null($authUser->email)) {
+                        $invitation->invited_email = $authUser->email;
+                    }
+                    $invitation->used_at = Carbon::now();
+                    $invitation->save();
+                }
             }
 
             return redirect('/benchmarks/' . $bench_id);

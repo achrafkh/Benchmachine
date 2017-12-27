@@ -211,6 +211,7 @@ ga('send', {
   title: 'Listing page',
   page: '/home',
 });
+
 $(document).ready(function() {
     var searchIcon = '<i class="b-search"></i>';
 
@@ -250,6 +251,8 @@ $(document).ready(function() {
 
     function deleteBenchmark(bench_id)
     {
+        ga('send', 'event', 'ListingPage', 'DeleteBenchmark', 'Deleted Benchmark');
+        fbq('trackCustom', 'DeletedBenchmark');
         $.post('/benchmarks/delete', { id: bench_id }).then(function(response){
             if(response.status == 1){
                 showAlert('success','Benchmark deleted successfully',5);
@@ -389,7 +392,8 @@ $("#generateBench").unbind('click').bind("click", function (e) {
 });
 
 function sendForm(){
-
+    ga('send', 'event', 'ListingPage', 'CreatedBenchmark', 'Created benchmark from listing page');
+    fbq('trackCustom', 'CreatedBenchmarkListing');
     $.ajax({
         url: '/benchmark/new-bench',
         type: 'post',

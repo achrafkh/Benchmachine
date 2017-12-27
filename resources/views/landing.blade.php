@@ -165,7 +165,11 @@
 <script type="text/javascript">
 onload = function () {
     var e = document.getElementById("refreshed");
-    if (e.value == "no") e.value = "yes";
+    if (e.value == "no"){
+        e.value = "yes";
+        ga('send', 'event', 'Invitation', 'CheckedInvitation', 'Viewed invitation');
+        fbq('trackCustom', 'ClickedInvitation');
+    }
     else {
         e.value = "no";
         location.reload();
@@ -279,6 +283,7 @@ $("#generateBench").unbind('click').bind("click", function (e) {
 
     var since = new Date($('#date-from').val());
     var until = new Date($('#date-to').val());
+
     if(until < since){
         showAlert('danger','Invalid date range',5);
         return false;
@@ -294,6 +299,8 @@ $("#generateBench").unbind('click').bind("click", function (e) {
 
 function sendForm(){
     $.post('/benchmark/new', $('#submit_pages').serializeArray()).done(function (data) {
+        ga('send', 'event', 'Invitation', 'CreatedBenchmark', 'Created Benchmark using an infitation');
+        fbq('trackCustom', 'InvitationCreatedBenchmark');
         if (auth) {
             if(data.status == 0){
                 showAlert('error',data.msg,5);
@@ -307,11 +314,6 @@ function sendForm(){
         }
     });
 }
-
-
-
-
-
 
 $(document).on('focusout','.fb-input',function(){
         validatePage($(this));
@@ -407,7 +409,7 @@ function inputsHaveDuplicateValues() {
 ga('send', {
   hitType: 'pageview',
   title: 'Landing Page',
-  page: '/landing',
+  page: '/invitation',
 });
 </script>
 

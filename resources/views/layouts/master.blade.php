@@ -29,6 +29,13 @@
     <script type="text/javascript"></script>
     @yield('js')
     @yield('custom-js')
+    @if(Session::has('msg'))
+        @if(isset(Session::get('msg')['class']))
+        <script type="text/javascript">
+            showAlert({!! json_encode(Session::get('msg')['class']) !!},{!! json_encode(Session::get('msg')['msg']) !!},10);
+        </script>
+        @endif
+    @endif
     <noscript>Your browser does not support JavaScript!</noscript>
 </body>
 </html>
