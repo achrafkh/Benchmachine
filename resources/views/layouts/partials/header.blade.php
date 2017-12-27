@@ -1,7 +1,7 @@
 <header class="header">
 	<div class="container">
 
-		<a class="logo" href="/">
+		<a class="logo" href="/home">
 			<svg class="svg" role="img" title="logo">
         		<use xlink:href="/assets/images/svg-icons.svg#logo"/>
         	</svg>
