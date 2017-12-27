@@ -1,0 +1,102 @@
+@import "variables";
+
+@font-face {
+  font-family: 'icomoon';
+  src:
+    url('#{$icomoon-font-path}/icomoon/icomoon.ttf?7lryiy') format('truetype'),
+    url('#{$icomoon-font-path}/icomoon/icomoon.woff?7lryiy') format('woff'),
+    url('#{$icomoon-font-path}/icomoon/icomoon.svg?7lryiy#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="b-"], [class*=" b-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.b-angle-up {
+  &:before {
+    content: $b-angle-up;
+  }
+}
+.b-angle-down {
+  &:before {
+    content: $b-angle-down;
+  }
+}
+.b-angle-left {
+  &:before {
+    content: $b-angle-left;
+  }
+}
+.b-angle-right {
+  &:before {
+    content: $b-angle-right;
+  }
+}
+.b-bell {
+  &:before {
+    content: $b-bell;
+  }
+}
+.b-calendar {
+  &:before {
+    content: $b-calendar;
+  }
+}
+.b-clipboard {
+  &:before {
+    content: $b-clipboard;
+  }
+}
+.b-power-button {
+  &:before {
+    content: $b-power-button;
+  }
+}
+.b-printer {
+  &:before {
+    content: $b-printer;
+  }
+}
+.b-report {
+  &:before {
+    content: $b-report;
+  }
+}
+.b-right-arrow {
+  &:before {
+    content: $b-right-arrow;
+  }
+}
+.b-round-check {
+  &:before {
+    content: $b-round-check;
+  }
+}
+.b-search {
+  &:before {
+    content: $b-search;
+  }
+}
+.b-settings {
+  &:before {
+    content: $b-settings;
+  }
+}
+.b-trash {
+  &:before {
+    content: $b-trash;
+  }
+}

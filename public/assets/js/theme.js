@@ -61,6 +61,20 @@ $(document).ready(function() {
 
 	/*
 	-----------------------------------------
+	Date Picker -- http://amsul.ca/pickadate.js/date/
+	-----------------------------------------
+	*/
+
+	 $('.datepicker').pickadate({
+	 	showMonthsShort: true,
+	 	close: 'Cancel',
+	 	labelMonthNext: 'Go to the next month',
+  		labelMonthPrev: 'Go to the previous month',
+  		format: 'yyyy-mm-dd',
+	 });
+
+	/*
+	-----------------------------------------
 	Triggers
 	-----------------------------------------
 	*/
@@ -123,6 +137,7 @@ $(document).ready(function() {
 	var nb = ['First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth', 'Seventh', 'Eighth', 'Ninth', 'Tenth'];
 
 	$(document).on('focus', '.fb-input', function(){
+
 		var parent = $(this).parents('.fb-box');
 		$('.fb-box').removeClass('focused');
 		parent.addClass('focused');
@@ -141,7 +156,7 @@ $(document).ready(function() {
 					</div>\
 				</div>'
 			)
-			index++
+			index++;
 		}
 	});
 });

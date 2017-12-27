@@ -6,10 +6,16 @@
     <link rel="stylesheet" href="/assets/css/theme.min.css">
     <link rel="stylesheet" href="/assets/css/custom.css">
     <link type="text/css" rel="stylesheet" href="/css/loader.css">
+    @if(Agent::isMobile() || Agent::isTablet())
+        <link rel="stylesheet" href="/assets/css/picker/default.css">
+    @else
+        <link rel="stylesheet" href="/assets/css/picker/classic.css">
+    @endif
     <script type="text/javascript" src="/js/pixels.js"></script>
 </head>
 
-<body class="">
+<body class="@if(Agent::isMobile() || Agent::isTablet()) ismobile @endif">
+
     <div class="page-wrap {{ $class or '' }}">
         <div id="alertsParent" class="alerts-container">
 

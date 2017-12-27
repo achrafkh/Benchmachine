@@ -12,7 +12,8 @@
                 </a>
                 @if(auth()->check())
                 <a class="landing-login" href="{{ url('/home') }}" waves-hover>
-                    Dashboard
+                    <i class="icon-facebook"></i>
+                    Connect
                 </a>
                 @else
                 <a class="landing-login" href="{{ url('/auth/facebook') }}" waves-hover>
@@ -81,12 +82,20 @@
                     </div>
                 </div>
             </div>
-            <div class="fb-footer">
-                <button id="trigger" class="fb-sub track_click" type="submit" waves-hover>
-                    <span class="fb-sub-txt1">Generate Benchmark</span>
-                    <span class="fb-sub-txt2">Benchmark Generating</span>
-                    <i class="icon-spin5 animate-spin"></i>
+
+            <div class="fb-footer text-center" style="margin-top: 15px">
+                <button id="trigger" class="media fb-sub" waves-hover>
+                    <div class="media-left media-middle">
+                        <i class="icon-facebook"></i>
+                        <i class="icon-spin5 animate-spin"></i>
+                    </div>
+                    <div class="media-body media-middle">
+                        Generate Benchmark
+                    </div>
                 </button>
+                <p class="fb-sub-cap">
+                    One click, No password, Simple and practical
+                </p>
             </div>
         </form>
         </div>

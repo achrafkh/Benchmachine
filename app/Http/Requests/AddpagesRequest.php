@@ -24,7 +24,6 @@ class AddpagesRequest extends FormRequest
      */
     public function rules()
     {
-        //dd($this->all());
         $accs = $this->accounts;
 
         // Remove emty strings

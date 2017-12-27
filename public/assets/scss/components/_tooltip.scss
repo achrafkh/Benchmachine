@@ -1,0 +1,17 @@
+/*
+-----------------------------------------
+Tooltip
+-----------------------------------------
+*/
+
+.tooltip{
+	.tooltip-arrow{
+	    border-bottom-color: $green !important;
+	}
+	.tooltip-inner{
+		background-color: $green;
+		font-family: $bold;
+		font-size: 10px;
+		text-transform: uppercase;
+	}
+}

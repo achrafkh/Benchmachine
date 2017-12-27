@@ -1,0 +1,109 @@
+/*
+-----------------------------------------
+Transform
+-----------------------------------------
+*/
+
+@mixin transform($transform){
+	-o-transform:#{$transform};
+	-ms-transform:#{$transform};
+	-moz-transform:#{$transform};
+	-webkit-transform:#{$transform};
+	transform:#{$transform};
+}
+@mixin transform-origin($transform-origin){
+	-o-transform-origin:#{$transform-origin};
+	-ms-transform-origin:#{$transform-origin};
+	-moz-transform-origin:#{$transform-origin};
+	-webkit-transform-origin:#{$transform-origin};
+	transform-origin:#{$transform-origin};
+}
+
+/*
+-----------------------------------------
+Transition
+-----------------------------------------
+*/
+
+@mixin transition($transition){
+	-o-transition:#{$transition};
+	-ms-transition:#{$transition};
+	-moz-transition:#{$transition};
+	-webkit-transition:#{$transition};
+	transition:#{$transition};
+}
+
+/*
+-----------------------------------------
+Animation
+-----------------------------------------
+*/
+
+@mixin keyframes($animation-name) {
+    @-webkit-keyframes #{$animation-name} {@content;}
+    @-moz-keyframes #{$animation-name} {@content;}  
+    @-ms-keyframes #{$animation-name} {@content;}
+    @-o-keyframes #{$animation-name} {@content;}  
+    @keyframes #{$animation-name} {@content;}
+}
+@mixin animation($str) {
+	-webkit-animation: #{$str};
+	-moz-animation: #{$str};
+	-ms-animation: #{$str};
+	-o-animation: #{$str};
+	animation: #{$str};      
+}
+
+/*
+-----------------------------------------
+Placeholder
+-----------------------------------------
+*/
+
+@mixin placeholder(){
+	&::-webkit-input-placeholder {@content};
+	&::-moz-placeholder {@content};
+	&:-ms-input-placeholder {@content};
+	&:-moz-placeholder {@content};
+}
+
+/*
+-----------------------------------------
+Filter
+-----------------------------------------
+*/
+
+@mixin filter($filter){
+	-webkit-filter: #{$filter};
+    -moz-filter:#{$filter};
+    -o-filter: #{$filter};
+    -ms-filter: #{$filter};
+    filter: #{$filter};
+}
+
+@mixin respond-to($media) {
+	@if $media == xlg {
+		@media (min-width: #{$bigscreen_width + 1}) { @content; }
+	}
+	@else if $media == xmd {
+		@media (min-width: #{$desktop_width + 1}) { @content; }
+	}
+	@else if $media == xsm {
+		@media (min-width: #{$tablet_width + 1}) { @content; }
+	}
+	@else if $media == lg {
+		@media (max-width: #{$bigscreen_width}) { @content; }
+	}
+	@else if $media == md {
+		@media (max-width: #{$desktop_width}) { @content; }
+	}
+	@else if $media == sm {
+		@media (max-width: #{$tablet_width}) { @content; }
+	}
+	@else if $media == ms {
+		@media (max-width: #{$phone_landscape_width}) { @content; }
+	}
+	@else if $media == xs {
+		@media (max-width: #{$phone_portrait_width}) { @content; }
+	}
+}

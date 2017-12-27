@@ -1,0 +1,107 @@
+/*
+-----------------------------------------
+Posts
+-----------------------------------------
+*/
+
+.post{
+	display: block;
+	margin: 7px 0;
+	text-decoration: none !important;
+	transition: all 0.2s ease-in-out;
+	.post-img{
+		background-size:cover;
+		background-position: center;
+		height: 200px;
+	}
+	.post-content{
+		padding: 15px;
+		border-left: 1px solid $line_grey;
+		border-right: 1px solid $line_grey;
+		transition: all 0.2s ease-in-out;
+		.post-brand{
+			.brand-img{
+				display: block;
+				background-size:cover;
+				background-position: center;
+				width: 40px;
+				height: 40px;
+				border-radius: 3px;
+			}
+			.brand-name{
+				display: block;
+				font-family: $medium;
+				font-size: 13px;
+				color: $dk_grey;
+			}
+			.post-date{
+				display: block;
+				font-family: $medium;
+				font-size: 12px;
+				color: $grey;
+			}
+		}
+		.post-txt{
+			font-family: $medium;
+			font-size: 13px;
+			color: $grey;
+			height: 55px;
+			margin: 10px 0 0;
+			overflow: hidden;
+		}
+	}
+	.post-stats{
+		font-size: 0;
+	    padding-bottom: 10px;
+		border: 1px solid $line_grey;
+		border-top: 0;
+		text-align: center;
+		transition: all 0.2s ease-in-out;
+		li{
+			position: relative;
+			display: inline-block;
+			width: 20%;
+			text-transform: uppercase;
+			.post-stats-digit{
+				display: block;
+				font-family: $bold;
+				font-size: 13px;
+				color: $dk_grey;
+			}
+			.post-stats-cap{
+				display: block;
+				font-family: $bold;
+				font-size: 10px;
+				color: $grey;
+			}
+			&:after{
+				content: "";
+				position: absolute;
+				top: 50%;
+				right: 0;
+				background-color: $line_grey;
+				height: 90%;
+				width: 1px;
+				transform: translate(0, -50%);
+			}
+			&:last-child{
+				&:after{
+					content: none;
+				}
+			}
+		}
+	}
+	&:hover{
+		box-shadow: -5px 5px 25px 0px rgba($black, 0.1);
+		.post-content{
+			background-color: $white;
+			border-left: 1px solid $white;
+			border-right: 1px solid $white;
+		}
+		.post-stats{
+			background-color: $white;
+			border: 1px solid $white;
+			border-top: 0;
+		}
+	}
+}

@@ -1,6 +1,7 @@
 <?php
 
 Route::post('api/pages/validate', 'HomeController@validatePages');
+Route::post('api/pages/validate/single', 'HomeController@landingValidation');
 Route::post('api/details', 'HomeController@saveDetails');
 Route::post('/api/update-int', 'ChartsApiController@interactionsData');
 Route::post('/api/update-eng', 'ChartsApiController@engagmentData');
@@ -24,19 +25,29 @@ Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 /*
  * Authentication is NOT required to access this routes
  */
+Route::get('/landing', 'HomeController@landing')->name('landing');
 Route::get('/', 'HomeController@index')->name('login');
 Route::get('benchmarks/render/{id}/{col}/{type}/{date_en}/{date_in}', 'BenchmarksController@render')->name('Render');
 Route::get('benchmarks/init/{id}', 'HomeController@showDemoStatic')->name('showDemoBench');
 Route::post('create-demo', 'HomeController@createDemo')->name('newDemoBench');
+
+Route::post('/benchmark/new', 'GuestsController@newBenchmark');
+
+Route::get('/invitation/{id}', 'GuestsController@proccessInvitation');
+
 /*
  * Authentication is required to access this routes
  */
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', 'HomeController@home')->name('home');
     Route::post('/email-edit', 'HomeController@editEmail')->name('editEmail');
+
     Route::post('/payment/stripecheckout', 'CheckoutController@checkout')->name('stripeCheckout');
+    Route::post('/checkout/new', 'CheckoutController@homeCheckout');
+
     Route::post('/payment/gpgcheckout', 'CheckoutController@gpgCheckout')->name('gpgCheckout');
     Route::get('/api/benchmarks', 'BenchmarksController@getBenchmarks');
+    Route::post('/benchmark/new-bench', 'BenchmarksController@createBenchmark');
 
     /**
      ** Benchmarks Routes
@@ -63,6 +74,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::prefix('dashboard')->namespace('admin')->group(function () {
         Route::get('/', 'DashboardController@index');
         Route::get('/users', 'UsersController@index');
+        Route::get('/invitations', 'InvitationsController@index');
     });
 
 });

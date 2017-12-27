@@ -1,0 +1,61 @@
+/*
+-----------------------------------------
+Dropdown
+-----------------------------------------
+*/
+
+.dropdown{
+	.dropdown-menu{
+		display: block !important;
+		padding: 0;
+		margin: 0;
+		opacity: 0;
+		visibility: hidden;
+		border: 0;
+		border-radius: 0;
+		box-shadow: 0 10px 20px 0 rgba($black, 0.05);
+		transform: translate(0, -20px);
+		transition: all 0.1s ease-in-out;
+		li{
+			a, button{
+				color: $grey;
+				font-size: 0;
+				padding: 11px;
+				text-align: left;
+				text-transform: uppercase;
+				border-top: 1px solid $line_grey;
+				span{
+					font-family: $bold;
+					font-size: 11px;
+					margin-left: 10px;
+				}
+				i{
+					font-size: 18px;
+					color: $grey;
+					width: 22px;
+					text-align: center;
+					&.b-clipboard		{font-size: 22px}
+					&.b-settings		{font-size: 20px}
+					&.b-power-button	{font-size: 17px}
+				}
+				span, i{
+					display: inline-block;
+					vertical-align: middle;
+				}
+				&:hover{
+					color: $dk_grey;
+					i{
+						color :$orange;
+					}
+				}
+			}
+		}
+	}
+	&.open{
+		.dropdown-menu{
+			opacity: 1;
+			visibility: visible;
+			transform: translate(0, 0);
+		}
+	}
+}

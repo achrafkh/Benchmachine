@@ -1,0 +1,51 @@
+/*
+-----------------------------------------
+Alerts
+-----------------------------------------
+*/
+
+.alerts-container{
+	position: fixed;
+	top: 62px;
+	left: 0;
+	width: 100%;
+	text-align: center;
+	z-index: 98;
+	.alert{
+		position: relative;
+		color: $white;
+		margin: 0;
+		border: 0;
+		border-radius: 0;
+		.close{
+			position: absolute;
+			top: 0;
+			right: 0;
+			display: flex;
+			align-items: center;
+			height: 100%;
+			padding: 10px;
+			opacity: 0.6;
+			text-shadow: none;
+			&:hover{
+				color: $white;
+				opacity: 1;
+			}
+			i{
+				font-size: 0;
+				&:before{
+					font-size: 16px;
+				}
+			}
+		}
+		&.alert-success{
+			background-color: $green;
+		}
+		&.alert-danger{
+			background-color: $red;
+		}
+		&.alert-warning{
+			background-color: $orange;
+		}
+	}
+}

@@ -1,0 +1,120 @@
+/*
+-----------------------------------------
+Pending page
+-----------------------------------------
+*/
+
+.pending-wrapper{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: calc(100vh - 107px);
+	text-align: center;
+	padding: 50px 0;
+	.pending-content{
+		h1{
+			display: block;
+			font-family: $bold;
+			font-size: 14px;
+			color: $dk_grey;
+			margin: 7px 0 0;
+			text-transform: uppercase;
+		}
+		p{
+			font-family: $medium;
+			font-size: 13px;
+			color: $grey;
+			margin: 10px 0;
+		}
+		.svg{
+			stroke: $orange;
+			width: 65px;
+			height: 65px;
+		    stroke-dasharray: 450% 450%;
+    		stroke-dashoffset: 450%;
+    		animation: preloader 2s infinite ease-in-out;
+		}
+		@keyframes preloader{
+			0%{
+				stroke-dasharray: 450% 450%;
+    			stroke-dashoffset: 450%;
+			}
+			45%{
+				stroke-dasharray: 450% 0%;
+    			stroke-dashoffset: 450%;
+			}
+			55%{
+				stroke-dasharray: 450% 0%;
+    			stroke-dashoffset: -450%;
+			}
+			100%{
+				stroke-dasharray: 450% 450%;
+    			stroke-dashoffset: -450%;
+			}
+		}
+	}
+	.pending-notif{
+		margin-top: 40px;
+		.pending-checkbox{
+			input[type="checkbox"] {
+		    	display:none;
+			}
+			input[type="checkbox"] + label{
+				position: relative;
+				display: inline-block;
+				font-family: $medium;
+				font-size: 13px;
+				color: $grey;
+				font-weight: normal;
+				padding-left: 25px;
+				margin: 0 0 10px;
+				cursor: pointer;
+				&:before, &:after{
+					content: '';
+					position: absolute;
+					display: block;
+				}
+				&:before{
+					top: 0;
+					left: 0;
+					background-color: $white;
+					width: 17px;
+					height: 17px;
+					border: 1px solid $dk_line_grey;
+				}
+				&:after{
+					top: -2px;
+					left: 2px;
+					width: 18px;
+					height: 10px;
+					opacity: 0;
+					border-left: 3px solid $orange;
+					border-bottom: 3px solid $orange;
+					z-index: 1;
+					transform: rotate(-45deg);
+					transition: all 0.1s ease-in-out;
+				}
+			}
+			input[type="checkbox"]:checked + label{
+			    &:after{
+			    	opacity: 1;
+			    }
+			}
+		}
+		.notif-input{
+			font-family: $medium;
+			font-size: 12px;
+			color: $grey;
+			height: 38px;
+			max-width: 325px;
+			padding: 6px 12px;
+			margin: auto;
+			border: 1px solid $dk_line_grey;
+			box-shadow: none;
+			@include placeholder(){color: $grey}
+		}
+		.notif-sub{
+			margin-top: 15px;
+		}
+	}
+}

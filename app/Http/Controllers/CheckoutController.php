@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Acme\Gateway;
+use App\Acme\Wrapers\DAO;
 use App\Benchmark;
+use App\Http\Requests\BenchmarkRequest;
 use App\Order;
 use Artisan;
 use Cache;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Session;
 use \Stripe\Stripe;
@@ -15,11 +18,52 @@ class CheckoutController extends Controller
 {
     protected $stripe;
     // init stripe client
-    public function __construct(Stripe $stripe, Gateway $gateway)
+    public function __construct(Stripe $stripe, Gateway $gateway, DAO $api)
     {
+        $this->api = $api;
         $this->stripe = $stripe;
         $this->gpg = $gateway;
         $this->stripe->setApiKey(env('STRIPE_SECRET'));
+    }
+
+    public function homeCheckout(BenchmarkRequest $request)
+    {
+        try {
+            $charge = \Stripe\Charge::create([
+                'amount' => 500,
+                'currency' => 'usd',
+                "description" => "Benchmark",
+                "receipt_email" => auth()->user()->getValidEmail(),
+                'source' => $request->stripeToken,
+            ]);
+        } catch (\Exception $e) {
+            Session::flash('flash', ['class' => 'danger', 'msg' => $e->getMessage()]);
+            return redirect('/home');
+        }
+
+        $accounts = $request->accounts;
+
+        $title = $request->title;
+
+        $email = $request->email;
+
+        $since = Carbon::parse($request->since);
+        $until = Carbon::parse($request->until);
+
+        $response = $this->api->addPages($accounts);
+
+        $accounts = $response['account_ids']->pluck('id');
+        $status = $response['status'];
+
+        $user_id = auth()->user()->id;
+
+        $benchmark = $this->api->prepareBenchmark($accounts, $since, $until, $title, $user_id);
+
+        Artisan::call('fetch:benchmark', [
+            'id' => $benchmark->id,
+        ]);
+
+        return redirect('/benchmarks/' . $benchmark->id);
     }
 
     /**

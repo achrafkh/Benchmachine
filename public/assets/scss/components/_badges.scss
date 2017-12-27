@@ -1,0 +1,28 @@
+/*
+-----------------------------------------
+Badges
+-----------------------------------------
+*/
+
+.label{
+	background-color: $bg_grey;
+	display: inline-block;
+	font-family: $medium;
+	font-size: 10px;
+	line-height: 10px;
+	color: $dk_grey;
+    padding: 5px 10px 6px;
+	border-radius: 3px;
+	&.label-success{
+		background-color: $green;
+		color: $white;
+	}
+	&.label-warning{
+		background-color: $orange;
+		color: $white;
+	}
+	&.label-danger{
+		background-color: $red;
+		color: $white;
+	}
+}

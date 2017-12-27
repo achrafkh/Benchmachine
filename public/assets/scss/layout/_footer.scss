@@ -1,0 +1,69 @@
+/*
+-----------------------------------------
+Footer
+-----------------------------------------
+*/
+
+footer{
+	background-color: $lt_grey;
+	font-size: 0;
+	padding: 12px 0;
+	@include respond-to(ms){
+		padding: 20px 0;
+		text-align:center;
+	}
+	.copyright{
+		float: left;
+		font-family: $medium;
+		font-size: 12px;
+		color: $grey;
+		padding: 2px 0;
+		@include respond-to(ms){float:none;}
+	}
+	.footer-social{
+		margin-right: 20px;
+		float: right;
+		@include respond-to(ms){
+			float:none;
+			margin: 15px 0;
+		}
+		a{
+			display: inline-block;
+			color: $grey;
+			padding: 1px 5px;
+			text-decoration: none;
+			transition: all 0.2s ease-in-out;
+			i{
+				font-size: 0;
+			}
+			.icon-facebook{
+				&:before{font-size: 15px}
+			}
+			.icon-twitter{
+				&:before{font-size: 16px}
+			}
+			.icon-instagram{
+				&:before{font-size: 19px}
+			}
+			&:hover{
+				color: $orange;
+			}
+		}
+	}
+	.kpeiz-logo{
+		display: inline-block;
+		float: right;
+		text-decoration: none;
+		@include respond-to(ms){float:none;}
+		.svg{
+			width: 50px;
+			fill: $grey;
+			transition: all 0.2s ease-in-out;
+		}
+		&:hover{
+			.svg{
+				fill : #4b85e6;
+			}
+		}
+	}
+}

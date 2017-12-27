@@ -7,6 +7,7 @@ use App\Acme\Wrapers\DAO;
 use App\Acme\Wrapers\Utils;
 use App\Benchmark;
 use App\Http\Requests\AddpagesRequest;
+use App\Http\Requests\BenchmarkRequest;
 use App\Order;
 use Artisan;
 use Cache;
@@ -224,7 +225,7 @@ class BenchmarksController extends Controller
         $order = Order::create([
             'user_id' => auth()->user()->id,
             'benchmark_id' => $benchmark->id,
-            'total' => 25,
+            'total' => 5,
             'id' => 'machine-' . str_random(30),
             'status' => 0,
         ]);
@@ -291,5 +292,32 @@ class BenchmarksController extends Controller
             'status' => 200,
             'msg' => 'success',
         ]);
+    }
+
+    public function createBenchmark(BenchmarkRequest $request)
+    {
+        $accounts = $request->accounts;
+
+        $title = $request->title;
+
+        $email = $request->email;
+
+        $since = Carbon::parse($request->since);
+        $until = Carbon::parse($request->until);
+
+        $response = $this->api->addPages($accounts);
+
+        $accounts = $response['account_ids']->pluck('id');
+        $status = $response['status'];
+
+        $user_id = auth()->user()->id;
+
+        $benchmark = $this->api->prepareBenchmark($accounts, $since, $until, $title, $user_id);
+
+        Artisan::call('fetch:benchmark', [
+            'id' => $benchmark->id,
+        ]);
+
+        return response()->json(['status' => 1, 'id' => $benchmark->id]);
     }
 }

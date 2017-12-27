@@ -1,0 +1,44 @@
+/*
+-----------------------------------------
+Listing Page
+-----------------------------------------
+*/
+
+.listing-wrapper{
+	min-height: calc(100vh - 107px);
+	.listing-inner{
+		padding: 0 0 50px;
+		table.data-table{
+			thead{
+				tr{
+					th{
+						padding: 10px 15px;
+					}
+				}
+			}
+			tbody{
+				tr{
+					td{
+						padding: 15px;
+						&.table-benchmark-name{
+							width: 100%;
+							padding: 0;
+							text-align: left;
+							a{
+								display: block;
+								font-family: $medium;
+								font-size: 13px;
+								color: $dk_grey;
+								padding: 17px 15px;
+								text-decoration: none;
+								&:hover{
+									color: $orange;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

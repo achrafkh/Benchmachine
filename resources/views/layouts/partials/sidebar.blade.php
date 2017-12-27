@@ -3,17 +3,13 @@
 		<h2 class="sidebar-title" id="countBench">
 		</h2>
 		<button class="sidebar-close" type="button">
-			<svg class="svg" role="img" title="right-arrow" width="20" height="20">
-        		<use xlink:href="/assets/images/svg-icons.svg#icon-right-arrow"/>
-        	</svg>
+			<i class="b-right-arrow"></i>
 		</button>
 	</div>
 	<div class="sidebar-search">
 		<div class="search-wrap">
 			<input class="form-control" onkeyup="searchBenchmarks()" type="" id="searchBench" name="search" placeholder="Search..." value="">
-			<svg class="svg" role="img" title="search" width="18" height="18">
-        		<use xlink:href="/assets/images/svg-icons.svg#icon-search"/>
-        	</svg>
+			<i class="b-search"></i>
 		</div>
 	</div>
 	<div class="sidebar-body" id="listParent">

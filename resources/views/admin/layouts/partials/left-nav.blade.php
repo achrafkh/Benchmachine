@@ -35,7 +35,11 @@
 			<li class="nav-small-cap m-t-10" style="margin-left: 10px">  <strong>Main Menu</strong></li>
 			<li><a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i> <span class="hide-menu">Dashboard</span></a>
 			</li>
-			<li><a href="/dashboard/users" class="waves-effect"><i data-icon="&#xe008;" class="fa fa-users fa-fw"></i> <span class="hide-menu">Users</span></a>
+			<li>
+				<a href="/dashboard/users" class="waves-effect"><i data-icon="&#xe008;" class="fa fa-users fa-fw"></i> <span class="hide-menu">Users</span></a>
+			</li>
+			<li>
+				<a href="/dashboard/invitations" class="waves-effect"><i data-icon="&#xe008;" class="fa fa-paper-plane-o fa-fw"></i> <span class="hide-menu">Invitations</span></a>
 			</li>
 			<!-- <li>
 				<a href="javascript:void(0)" class="waves-effect active"><i data-icon="&#xe008;" class="linea-icon linea-basic fa-fw"></i> <span class="hide-menu">Ree<span class="fa arrow"></span><span class="label label-rouded label-purple pull-right">2</span></span></a>

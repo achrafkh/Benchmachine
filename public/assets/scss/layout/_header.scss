@@ -1,0 +1,75 @@
+/*
+-----------------------------------------
+Header
+-----------------------------------------
+*/
+
+.header{
+	position: fixed;
+	top: 0;
+	left: 0;
+	background-color: $white;
+	width: 100%;
+	border-bottom: 1px solid $line_grey;
+	z-index: 99;
+	.logo{
+		float: left;
+		font-size: 0;
+		padding: 15px;
+		.svg{
+			fill: $dk_grey;
+			width: 30px;
+			height: 30px;
+			.svg-logo-dot	{fill: $orange}
+		}
+		&:hover{
+			background-color: $bg_grey;
+		}
+	}
+	.print-btn{
+		float: left;
+		margin: 12px 15px 11px;
+	}
+	.profile-dropdown{
+		float: right;
+		font-size: 0;
+		.profile-trigger{
+			background-color: transparent;
+			padding: 10px 0;
+			text-align: left;
+			.media-body{
+				width: auto;
+			}
+			.profile-img{
+				background-size: cover;
+				background-position: center;
+				display: block;
+				height: 40px;
+				width: 40px;
+				border-radius: 100%;
+			}
+			.profile-name{
+				display: block;
+				font-family: $medium;
+				font-size: 13px;
+				color: $dk_grey;
+				max-width: 150px;
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+			}
+			.profile-type{
+				display: block;
+				font-size: 12px;
+				color: $grey;
+			}
+			.media-right{
+				@include respond-to(ms){padding: 0;}
+				.icon-down-open-1{
+					font-size: 18px;
+					color: $grey;
+				}
+			}
+		}
+	}
+}

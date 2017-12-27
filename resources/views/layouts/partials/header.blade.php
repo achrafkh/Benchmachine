@@ -15,9 +15,7 @@
 			<input type="hidden" id="chartdate_en" name="chartdate_en" value="1">
 			<input type="hidden" id="chartdate_in" name="chartdate_in" value="1">
 			<button  type="submit" class="mbtn mbtn-icon print-btn" waves-hover>
-				<svg class="svg" role="img" title="printer">
-	        		<use xlink:href="/assets/images/svg-icons.svg#icon-printer"/>
-	        	</svg>
+				<i class="b-printer"></i>
 	        	<i class="icon-spin5 animate-spin"></i>
 				<span class="hidden-xs">Print benchmark</span>
 			</button>
@@ -45,21 +43,17 @@
 			</div>
 			</button>
 			<ul class="dropdown-menu dropdown-menu-right">
-				@if(!isset($hidden_sidebar))
+
 					<li>
 						<button onclick="updateBenchmarks()" class="sidebar-trigger" type="button">
-							<svg class="svg" role="img" title="report" width="20" height="20">
-				        		<use xlink:href="/assets/images/svg-icons.svg#icon-report"/>
-				        	</svg>
+							<i class="b-clipboard"></i>
 							<span>My Benchmarks</span>
 						</button>
 					</li>
-				@endif
+
 				<!-- <li>
 					<a href="">
-						<svg class="svg" role="img" title="settings" width="20" height="20">
-			        		<use xlink:href="assets/images/svg-icons.svg#icon-settings"/>
-			        	</svg>
+						<i class="b-settings"></i>
 						<span>Settings</span>
 					</a>
 				</li> -->
@@ -67,9 +61,7 @@
 					<a href="/logout"
 						onclick="event.preventDefault();
 						document.getElementById('logout-form').submit();">
-						<svg class="svg" role="img" title="power-button" width="20" height="20">
-			        		<use xlink:href="/assets/images/svg-icons.svg#icon-power-button"/>
-			        	</svg>
+						<i class="b-power-button"></i>
 						<span>Log out</span>
 					</a>
 				</li>

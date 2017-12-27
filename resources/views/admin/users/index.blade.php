@@ -23,6 +23,9 @@ td.details-control {
 tr.details td.details-control {
     background: url('/images/minus.png') no-repeat center center;
 }
+.table td, .table th {
+    vertical-align: middle;
+}
 </style>
 @endsection
 
@@ -41,7 +44,7 @@ tr.details td.details-control {
 							<th>role</th>
 							<th>Join date</th>
 							<th>Last login</th>
-							<th>Date</th>
+							<th>Actions</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -89,14 +92,21 @@ tr.details td.details-control {
             ajax: '/api/admin/users',
             columns:
             [
-				{ 'data': 'name', 'name': 'name' },
+            	{ 'data': 'provider_id','width': 200, render: function(data, type, full, meta)
+                  {
+                  	return getUserImage(data,full.name);
+                  }
+           		},
                 { 'data': 'email', 'name': 'email' },
                 { 'data': 'role', 'name': 'role' },
                 { 'data': 'created_at', 'name': 'created_at' },
                 { 'data': 'updated_at', 'name': 'updated_at' },
-                { 'data': 'id', render: function(data, type, full, meta)
+                {  "searchable": false,'data': 'id','width': 120,render: function(data, type, full, meta)
                   {
-                    return  '<button type="button" onclick="getModal('+data+')" class="btn btn-warning btn-circle"><i class="fa fa-pencil"></i> </button>'
+                    var string =  '<button style="margin-right:5px" type="button" onclick="getModal('+data+')" class="btn btn-info btn-circle"><i class="fa  fa-list-alt"></i> </button>';
+                    string+= '<button style="margin-right:5px" type="button" onclick="getSend('+data+')" class="btn btn-success btn-circle"><i class=" icon-share-alt"></i> </button>';
+                    string+= '<button  type="button" onclick="banUser('+data+')" class="btn btn-danger btn-circle"><i class=" icon-trash"></i> </button>';
+                    return string;
                   }
                 }
             ]
@@ -108,7 +118,10 @@ function str_limit(str,limit)
 
 	return str;
 }
-
+function getUserImage(id,name)
+{
+	return '<img  src="https://graph.facebook.com/' +id+ '/picture"><span style="margin-left:5px;">'+name+'</span>';
+}
 function getModal(id){
 	$.get( "/api/admin/benchmarks/", function( data ) {
 	 	 $("#BenchmarksModal").html(data);
@@ -123,6 +136,7 @@ function getModal(id){
 		                "data":           null,
 		                "defaultContent": ""
 		            },
+
 		            { "data": "title" },
 		            { 'data': 'status', render: function(data, type, full, meta)
 	                  {
@@ -138,6 +152,7 @@ function getModal(id){
 		            { "data": "until" },
 		            { "data": "created_at" },
 		            { 'data': 'id', render: function(data, type, full, meta)
+
 	                	{
 	                    return  '<button type="button" class="btn btn-danger btn-circle"><i class="fa fa-trash-o"></i></button>\
 	                    	<button type="button" class="btn btn-info btn-circle"><i class="fa fa-eye"></i></button>';
@@ -151,7 +166,7 @@ function getModal(id){
 			function format ( d ) {
 			    var string = '<div class="row">';
 			    d.accounts.forEach(function(element) {
-			    	string += '<div style="margin-top:10px;" class="col-md-3"><a target="_blank" href="https://www.facebook.com/'+element.label+'">'+str_limit(element.title,15)+'</a></div>';
+			    	string += '<div style="margin-top:10px;" class="col-md-3"><a target="_blank" href="https://www.facebook.com/'+element.real_id+'">'+str_limit(element.title,15)+'</a></div>';
 			    });
       			string += '</div>';
 

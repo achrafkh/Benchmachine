@@ -65,7 +65,7 @@
 
     .data-table {white-space: nowrap;}
     .data-table thead tr th{padding: 8px 10px;}
-    .benchmark-page{
+    .benchmark_page{
         padding: 0;
     }
     .benchmark-name input{

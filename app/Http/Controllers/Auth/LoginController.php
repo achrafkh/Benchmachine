@@ -57,6 +57,7 @@ class LoginController extends Controller
         $user = Socialite::driver($provider)->user();
         $bench_id = Session::get('benchmark');
         $authUser = $this->findOrCreateUser($user, $provider);
+
         Auth::login($authUser, true);
 
         // check if user added a benchmark before login
@@ -64,10 +65,12 @@ class LoginController extends Controller
 
         if (!is_null($bench_id)) {
             $benchmark = Benchmark::find(Session::get('benchmark'));
-            $benchmark->user_id = Auth::id();
-            $benchmark->save();
-            Session::forget('benchmark');
-            Session::put('new_benchmark', $bench_id);
+            if (!is_null($benchmark)) {
+                $benchmark->user_id = Auth::id();
+                $benchmark->save();
+                Session::forget('benchmark');
+                Session::put('new_benchmark', $bench_id);
+            }
 
             return redirect('/benchmarks/' . $bench_id);
         }

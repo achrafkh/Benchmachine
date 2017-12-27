@@ -35,6 +35,16 @@ class User extends Authenticatable
         return 'https://graph.facebook.com/' . $this->provider_id . '/picture';
     }
 
+    public function sentInvitations()
+    {
+        return $this->hasMany(Invitation::class, 'user_id');
+    }
+
+    public function recievedInvitations()
+    {
+        return $this->hasMany(Invitation::class, 'invited_id');
+    }
+
     public function benchmarks()
     {
         return $this->hasMany(Benchmark::class);

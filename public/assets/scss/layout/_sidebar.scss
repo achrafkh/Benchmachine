@@ -1,0 +1,126 @@
+/*
+-----------------------------------------
+Sidebar layout
+-----------------------------------------
+*/
+
+.sidebar{
+	position: fixed;
+	top: 0;
+	right: 0;
+	background-color: $white;
+	display: flex;
+    flex-direction: column;
+	height: 100%;
+	width: 300px;
+	z-index: 100;
+	transform: translate(100%, 0);
+	transition: all 0.2s ease-in-out;
+	.sidebar-header{
+		position: relative;
+		padding: 24px 60px 24px 20px;
+		border-bottom: 1px solid $line_grey;
+		.sidebar-title{
+			font-family: $bold;
+			font-size: 13px;
+			line-height: 13px;
+			color: $dk_grey;
+			margin: 0;
+			text-transform: uppercase;
+		}
+		.sidebar-close{
+			position: absolute;
+			top: 50%;
+			right: 0;
+			background-color: transparent;
+			font-size: 0;
+			padding: 21px 20px;
+			transform: translate(0, -50%);
+			i{
+				font-size: 21px;
+				color: $grey;
+			}
+		}
+	}
+	.sidebar-search{
+		background-color: $bg_grey;
+		padding: 15px 20px;
+		border-bottom: 1px solid $line_grey;
+		.search-wrap{
+			position: relative;
+			background-color: $white;
+			.form-control{
+				position: relative;
+				background-color: transparent;
+				font-family: $medium;
+				font-size: 13px;
+				color: $grey;
+			    padding: 6px 40px 6px 12px;
+				border: 1px solid $line_grey;
+				border-radius: 0;
+				box-shadow: none;
+				z-index: 1;
+				@include placeholder(){color: $grey}
+			}
+			i{
+				position: absolute;
+				top: 50%;
+				right: 12px;
+				font-size: 17px;
+				color: $grey;
+				transform: translate(0, -50%);
+			}
+		}
+	}
+	.sidebar-body{
+		flex: 1;
+		overflow-y: auto;
+		.sidebar-item{
+			display: block;
+			padding: 15px 20px;
+			margin: 0;
+			border-bottom: 1px solid $line_grey;
+			text-decoration: none;
+			.si-name{
+				font-family: $medium;
+				font-size: 13px;
+				line-height: 13px;
+				color: $dk_grey;
+				max-width: 200px;
+				margin-bottom: 3px;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+			.si-date{
+				font-family: $medium;
+				font-size: 11px;
+				line-height: 11px;
+				color: $grey; 
+			}
+			&:hover{
+				background-color: $bg_grey;
+			}
+		}
+	}
+	&.active{
+		transform: translate(0%, 0);
+	}
+}
+
+.sidebar-backlayer{
+	position: fixed;
+	top: 0;
+	left: 0;
+	background-color: rgba($black, 0.35);
+	height: 100%;
+	width: 100%;
+	opacity: 0;
+	visibility: hidden;
+	z-index: 99;
+	transition: all 0.2s ease-in-out;
+	&.active{
+		opacity: 1;
+		visibility: visible;
+	}
+}

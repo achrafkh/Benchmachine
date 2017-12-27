@@ -26,7 +26,14 @@ class HomeController extends Controller
     {
         $this->api = $api;
         $this->repo = $repo;
-        $this->middleware('auth', ["except" => ["index", "validatePages", "createDemo", "defaultBenchmark"]]);
+        $this->middleware('auth', ["except" => ["index", "landingValidation", "validatePages", "createDemo", "defaultBenchmark"]]);
+    }
+
+    public function landingValidation(AddpagesRequest $request)
+    {
+        $response = $this->api->addPages($request->accounts);
+
+        return response()->json($response);
     }
 
     /**
@@ -36,6 +43,11 @@ class HomeController extends Controller
     public function index()
     {
         return view('welcome', ['class' => 'home_page']);
+    }
+
+    public function landing()
+    {
+        return view('landing', ['class' => 'home_page']);
     }
 
     public function defaultBenchmark($print = 'no')
