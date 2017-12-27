@@ -360,7 +360,6 @@ function nextStep()
     $('#date-tab').addClass('active');
 }
 $("#generateBench").unbind('click').bind("click", function (e) {
-
     if($('#title').val().length < 4){
         $(this).attr('disabled',false);
         $(this).removeClass('loading');

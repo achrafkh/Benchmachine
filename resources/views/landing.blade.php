@@ -270,14 +270,21 @@ function nextStep()
 }
 
 $("#generateBench").unbind('click').bind("click", function (e) {
-
-
     if($('#title').val().length < 4){
         $(this).attr('disabled',false);
-        $(this).addClass('loading');
-        showAlert('error','Title is too short',5);
+        $(this).removeClass('loading');
+        showAlert('danger','Title is too short',5);
         return false;
     }
+
+    var since = new Date($('#date-from').val());
+    var until = new Date($('#date-to').val());
+    if(until < since){
+        showAlert('danger','Invalid date range',5);
+        return false;
+    }
+
+
     $(this).attr('disabled',true);
     $(this).addClass('loading');
     e.preventDefault();
