@@ -124,7 +124,7 @@
                                     From
                                 </label>
                                 <div class="input-container">
-                                    <input class="form-control datepicker" id="date-from" type="text" name="since" placeholder="12/09/2017">
+                                    <input class="form-control datepicker" id="date-from" type="text" name="since" value="{{\Carbon::now()->subDays(8)->toDateString()}}">
                                     <i class="b-calendar"></i>
                                 </div>
                             </div>
@@ -133,7 +133,7 @@
                                     To
                                 </label>
                                <div class="input-container">
-                                    <input class="form-control datepicker" id="date-to" type="text" name="until" placeholder="12/12/2017">
+                                    <input class="form-control datepicker" id="date-to" type="text" name="until" value="{{\Carbon::now()->subDays(1)->toDateString()}}">
                                     <i class="b-calendar"></i>
                                 </div>
                             </div>
