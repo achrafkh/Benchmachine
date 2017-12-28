@@ -25,7 +25,7 @@ function updateBenchmarks(){
 	$.get( "/api/benchmarks", function( data ) {}).then(function(data){
 		$('#countBench').text('My Benchmarks ('+data.length+')');
 		if(data.length == 0 ){
-			parent.append('<div class="media sidebar-item"><ul class="media-body media-middle"><li class="si-name text-center">You have no benchmarks yet</li></ul></div>');
+			parent.html('<div class="media sidebar-item"><ul class="media-body media-middle"><li class="si-name text-center">You have no benchmarks yet</li></ul></div>');
 			return false;
 		}
 		parent.empty();
