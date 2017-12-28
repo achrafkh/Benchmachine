@@ -82,6 +82,11 @@ class BenchmarksController extends Controller
 
         $benchmark = Benchmark::with('accounts')->find($id);
 
+        if (is_null($benchmark)) {
+            Session::flash('msg', ['class' => 'warning', 'msg' => "Sorry, we can't find the benchmark you are asking for"]);
+            return redirect('/home');
+        }
+
         $class = 'pending_page';
 
         $this->authorize('view', $benchmark);
