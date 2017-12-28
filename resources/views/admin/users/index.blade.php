@@ -180,7 +180,6 @@ function getModal(id){
 				    return false;
 				}
 
-
 				$.post('/benchmarks/delete',{id : $(this).data('id')}).then(function(e){
 					if(e.status == 1){
 						dt.ajax.reload();
