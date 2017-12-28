@@ -46,7 +46,7 @@
 				@if(auth()->check())
 					@if(auth()->user()->isSuperAdmin())
 					<li>
-						<a href="/dashboard" class="sidebar-trigger" type="button">
+						<a href="/dashboard"  type="button">
 							<i class="fa fa-dashboard"></i>
 							<span>Dashboard</span>
 						</a>
