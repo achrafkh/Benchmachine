@@ -206,7 +206,7 @@ class BenchmarksController extends Controller
             'date_in' => $data['chartdate_in'],
         ]);
 
-        return response()->download(storage_path('app/' . $path));
+        return response()->download(storage_path('app/' . $path), 'benchmarks.digital.pdf');
     }
 
     /**

@@ -48,15 +48,20 @@ var timer = null;
 	    delay || 1200);
 	};
 }
+$('#title').focus(function(e){
+	$('.print-btn').attr('disabled',true);
+});
 $('#title').focusout(throttle(function(e){
+	$('.print-btn').attr('disabled',true);
 	var original = $('#original').val();
 	if(original === $(this).val()){
+		$('.print-btn').attr('disabled',false);
 		return false;
 	}
 	var inputVal = document.getElementById("title");
 	var newVal = $(this).val();
 	if($(this).val().length < 5){
-
+		showAlert('danger','Title is too short',5);
     	inputVal.style.borderColor = '#ED1C24';
     	return false;
 	} else {
@@ -64,6 +69,7 @@ $('#title').focusout(throttle(function(e){
     }
 	$.post( "/api/benchmarks/update-title", { title: $(this).val() ,id : {!! json_encode($benchmark->details->id) !!} })
 	.done(function( data ) {
+		$('.print-btn').attr('disabled',false);
 		$('#benchTitle').text(newVal);
 		ga('send', 'event', 'BenchmarkPage', 'UpdateTitle', 'Updated benchmark title');
         fbq('trackCustom', 'BenchmarkTitle','{status: "Updated title"');

@@ -45,6 +45,7 @@ $freeBench = ($benchmark->details->since->diffInDays($benchmark->details->until)
 @if(!isset($print))
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
 <script type="text/javascript" src="/assets/js/benchmark-vendors.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.fileDownload/1.4.2/jquery.fileDownload.min.js"></script>
 <script type="text/javascript" src="/js/animate.js"></script>
 <script type="text/javascript">
 var diffIn = {!! json_encode($freeBench) !!};
@@ -157,8 +158,37 @@ $('#hideme').unbind('click').bind('click', function (e) {
   ga('send', 'event', 'Checkout', 'InitiateCheckout', 'Presset Checkout Button');
   fbq('track', 'InitiateCheckout','{value:"5", currency:"USD", content_name:"'+title+'", content_ids:"'+benchiId+'"}');
 });
+var benchData = {};
+benchData.col = $('#col').val();
+benchData.type = $('#type').val();
+benchData.chartdate_en = $('#chartdate_en').val();
+benchData.chartdate_in = $('#chartdate_in').val();
 
-
+$('.print-btn').unbind('click').bind('click', function (e) {
+  e.preventDefault();
+  $('.print-btn').attr('disabled',true);
+  $('.print-btn').addClass('loading');
+  $.fileDownload('/benchmarks/wkdownload/'+ {!! json_encode($benchmark->details->id) !!}, {
+      httpMethod: 'POST',
+      data: benchData,
+      dataType:"blob",
+      successCallback: function (url) {
+        showAlert('success','Download Started',5);
+        $('.print-btn').attr('disabled',false);
+        $('.print-btn').removeClass('loading');
+      },
+      failCallback: function (html, url) {
+        showAlert('danger','Something went wrong',5);
+        $('.print-btn').attr('disabled',false);
+        $('.print-btn').removeClass('loading');
+      }
+  });
+  setTimeout(function() {
+    $('.print-btn').attr('disabled',false);
+    $('.print-btn').removeClass('loading');
+  }, 7000);
+  return false;
+});
 </script>
 
 @endsection
