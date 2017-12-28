@@ -230,7 +230,6 @@ $("#nextStep").unbind('click').bind("click", function (event) {
             $('.fb-box').last().removeClass('error').removeClass('success').removeClass('loading');
 
             if (data.hasOwnProperty('min')) {
-                console.log(data);
                 showAlert('danger', 'Two Facebook pages required at least', 5);
                 mainButton.removeClass('loading');
                 return false;
@@ -260,7 +259,7 @@ $("#nextStep").unbind('click').bind("click", function (event) {
             }
         },
         error: function (data) {
-            console.log(data.responseJSON)
+            console.log(data.responseJSON);
         }
     });
 });
@@ -337,7 +336,6 @@ function validatePage(url){
         type: 'post',
         data: input,
         success: function (data) {
-            console.log(data);
             var dupls = inputsHaveDuplicateValues();
             if(!inputsHaveDuplicateValues()){
                } else {

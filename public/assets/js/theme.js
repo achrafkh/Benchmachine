@@ -71,6 +71,8 @@ $(document).ready(function() {
 	 	labelMonthNext: 'Go to the next month',
   		labelMonthPrev: 'Go to the previous month',
   		format: 'yyyy-mm-dd',
+  		max: new Date(),
+
 	 });
 
 	/*

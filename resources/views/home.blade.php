@@ -121,7 +121,7 @@
                             </div>
                             <div class="col-md-6">
                                 <label>
-                                    From
+                                    Since
                                 </label>
                                 <div class="input-container">
                                     <input class="form-control datepicker" id="date-from" type="text" name="since" placeholder="12/09/2017" value="{{ Carbon\Carbon::now()->subDays(9)->toDateString() }}">
@@ -130,7 +130,7 @@
                             </div>
                             <div class="col-md-6">
                                 <label>
-                                    To
+                                    Until
                                 </label>
                                <div class="input-container">
                                     <input class="form-control datepicker" id="date-to" type="text" name="until" placeholder="12/12/2017" value="{{ Carbon\Carbon::yesterday()->toDateString() }}">
@@ -320,7 +320,6 @@ $("#nextStep").unbind('click').bind("click", function (event) {
             $('.fb-box').last().removeClass('error').removeClass('success').removeClass('loading');
 
             if (data.hasOwnProperty('min')) {
-                console.log(data);
                 showAlert('danger', 'Two Facebook pages required at least', 5);
                 mainButton.removeClass('loading');
                 return false;
@@ -350,7 +349,7 @@ $("#nextStep").unbind('click').bind("click", function (event) {
             }
         },
         error: function (data) {
-            console.log(data.responseJSON)
+            console.log(data.responseJSON);
         }
     });
 });
@@ -446,7 +445,6 @@ function validatePage(url){
         type: 'post',
         data: input,
         success: function (data) {
-            console.log(data);
             var dupls = inputsHaveDuplicateValues();
             if(!inputsHaveDuplicateValues()){
                } else {

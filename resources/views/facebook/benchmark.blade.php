@@ -122,8 +122,7 @@ $('.canvas-engagment').unbind('click').bind('click', function (e) {
     chartObject.update();
   })
   .fail(function(e) {
-    console.log(e);
-    console.log('Something went wrong');
+    showAlert('danger','Something went wrong',6);
   })
 });
 $('.canvas-interactions').unbind('click').bind('click', function (e) {
@@ -140,8 +139,7 @@ $('.canvas-interactions').unbind('click').bind('click', function (e) {
     chartObject.update();
   })
   .fail(function(e) {
-    console.log(e);
-    console.log('Something went wrong');
+    showAlert('danger','Something went wrong',6);
   })
 });
 

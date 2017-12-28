@@ -209,7 +209,9 @@ $(document).on('click','.delete',function(){
 	}
 
 	$.post('/api/admin/invitations/delete/'+$(this).data('id')).then(function(e){
-		console.log(e);
+		if(e.status == 1){
+			table.ajax.reload();
+		}
 	});
 });
 
@@ -224,7 +226,6 @@ $( "#newInvitationForm" ).submit(function( event ) {
                var errors = response.responseJSON.errors;
                $.each(errors,function(i,v){
                		$('#error-'+i).text(v[0]);
-               		console.log($('#error-'+i).parent('.form-group').addClass('has-danger'))
                });
             }
         },

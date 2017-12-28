@@ -57,6 +57,12 @@ class InvitationsController extends Controller
 
     public function delete($id)
     {
-        return Invitation::find($id)->delete();
+        $invite = Invitation::find($id);
+
+        if (is_null($invite)) {
+            return response()->json(['status' => 1]);
+        }
+
+        return response()->json(['status' => $invite->delete()]);
     }
 }

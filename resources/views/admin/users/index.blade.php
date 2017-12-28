@@ -39,6 +39,7 @@ tr.details td.details-control {
 				<table id="users" class="table table-striped">
 					<thead>
 						<tr>
+							<th></th>
 							<th>name</th>
 							<th>email</th>
 							<th>role</th>
@@ -92,11 +93,12 @@ tr.details td.details-control {
             ajax: '/api/admin/users',
             columns:
             [
-            	{ 'data': 'provider_id','width': 200, render: function(data, type, full, meta)
+            	{'searchable':false ,'data': 'provider_id','width': 50, render: function(data, type, full, meta)
                   {
-                  	return getUserImage(data,full.name);
+                  	return getUserImage(data);
                   }
            		},
+           		{ 'data': 'name', 'name': 'name' },
                 { 'data': 'email', 'name': 'email' },
                 { 'data': 'role', 'name': 'role' },
                 { 'data': 'created_at', 'name': 'created_at' },
@@ -104,7 +106,7 @@ tr.details td.details-control {
                 {  "searchable": false,'data': 'id','width': 120,render: function(data, type, full, meta)
                   {
                     var string =  '<button style="margin-right:5px" type="button" onclick="getModal('+data+')" class="btn btn-info btn-circle"><i class="fa  fa-list-alt"></i> </button>';
-                    string+= '<button style="margin-right:5px" type="button" onclick="getSend('+data+')" class="btn btn-success btn-circle"><i class=" icon-share-alt"></i> </button>';
+                    string+= '<button style="margin-right:5px" type="button" onclick="getEdit('+data+')" class="btn btn-success btn-circle"><i class="fa fa-pencil"></i> </button>';
                     string+= '<button  type="button" onclick="banUser('+data+')" class="btn btn-danger btn-circle"><i class=" icon-trash"></i> </button>';
                     return string;
                   }
@@ -118,9 +120,9 @@ function str_limit(str,limit)
 
 	return str;
 }
-function getUserImage(id,name)
+function getUserImage(id)
 {
-	return '<img  src="https://graph.facebook.com/' +id+ '/picture"><span style="margin-left:5px;">'+name+'</span>';
+	return '<img  src="https://graph.facebook.com/' +id+ '/picture">';
 }
 function getModal(id){
 	$.get( "/api/admin/benchmarks/", function( data ) {
