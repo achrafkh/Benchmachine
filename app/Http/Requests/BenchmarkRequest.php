@@ -42,7 +42,7 @@ class BenchmarkRequest extends FormRequest
             $rules['accounts.' . $i] = 'required|url';
         }
 
-        $now = Carbon::now()->toDateString();
+        $now = Carbon::now()->addDay()->toDateString();
         $rules['since'] = 'required|date|before:until';
         $rules['until'] = 'required|date|after:since|before:' . $now;
 

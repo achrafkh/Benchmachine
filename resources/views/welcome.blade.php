@@ -54,7 +54,7 @@
             </div>
         <form id="submit_pages" action="{{ route('newDemoBench') }}" method="POST" class="fb-form">
          {{ csrf_field() }}
-            <div class="fb-form-inner">
+            <div class="fb-inner">
                 <div class="media fb-box focused">
                     <div class="media-left fb-icon">
                         <i class="icon-facebook"></i>

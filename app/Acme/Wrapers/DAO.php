@@ -32,7 +32,11 @@ class DAO
     public function getBenchmarkById($id)
     {
         if (Storage::has('cache/benchmarks/benchmark-' . $id . '.json')) {
-            return json_decode(Storage::get('cache/benchmarks/benchmark-' . $id . '.json'));
+            $data = json_decode(Storage::get('cache/benchmarks/benchmark-' . $id . '.json'));
+            $benchmark = Benchmark::find($id);
+            $data->data->details->title = $benchmark->title;
+
+            return $data;
         }
         $benchmark = Benchmark::with('accounts')->find($id);
         if (!$benchmark) {

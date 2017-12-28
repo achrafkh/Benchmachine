@@ -72,6 +72,7 @@ class GuestsController extends Controller
         Artisan::call('fetch:benchmark', [
             'id' => $benchmark->id,
         ]);
+        cleanCache($benchmark->id, true);
         Session::put('benchmark', $benchmark->id);
         Session::put('used_invitation', $invite->id);
         return response()->json(['status' => 1, 'id' => $benchmark->id]);
