@@ -9,7 +9,7 @@
 	<div class="row">
 		<div class="">
 			<h2 style="font-size: 30px;color: #4d4d4d;margin-bottom: 10px">Select periode</h2>
-			<p style="color: #a6a6a1">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
+			<p style="color: #a6a6a1">Extend your benchmark periode and get a better insight & overview,</p>
 		</div>
 		<hr>
 	</div>

@@ -120,14 +120,16 @@ class BenchmarksController extends Controller
     public function deleteBenchmark(Request $request)
     {
         if (!$request->has('id')) {
-            return response()->json(['code' => 200, 'status' => 0]);
+            return response()->json(['code' => 200, 'status' => 0, 'msg' => 'no id found']);
         }
         $benchmark = Benchmark::find($request->id);
 
-        $this->authorize('delete', $benchmark);
+        if (!auth()->user()->isSuperAdmin()) {
+            $this->authorize('delete', $benchmark);
+        }
 
         if (is_null($benchmark)) {
-            return response()->json(['code' => 200, 'status' => 0]);
+            return response()->json(['code' => 200, 'status' => 0, 'msg' => 'no benchmark with matching id found ' . $request->id]);
         }
 
         $benchmark->delete();

@@ -154,8 +154,8 @@ function getModal(id){
 		            { 'data': 'id', render: function(data, type, full, meta)
 
 	                	{
-	                    return  '<button type="button" class="btn btn-danger btn-circle"><i class="fa fa-trash-o"></i></button>\
-	                    	<button type="button" class="btn btn-info btn-circle"><i class="fa fa-eye"></i></button>';
+	                    return  '<button type="button" class="btn btn-danger btn-circle delete-bench" data-id="'+full.id+'"><i class="fa fa-trash-o"></i></button>\
+	                    	<a target="_blank" href="/benchmarks/'+full.id+'" class="btn btn-info btn-circle"><i class="fa fa-eye"></i></a>';
 	                	}
 	                },
 		        ],
@@ -172,6 +172,22 @@ function getModal(id){
 
       			return string;
 			}
+
+
+			$(document).on( 'click', '.delete-bench', function () {
+
+				if (confirm("Are you sure you want to delete this benchmark?") != true) {
+				    return false;
+				}
+
+
+				$.post('/benchmarks/delete',{id : $(this).data('id')}).then(function(e){
+					if(e.status == 1){
+						dt.ajax.reload();
+					}
+				});
+			});
+
 			$('#benchmarksTb tbody').on( 'click', 'tr td.details-control', function () {
 			    var tr = $(this).closest('tr');
 			    var row = dt.row( tr );
