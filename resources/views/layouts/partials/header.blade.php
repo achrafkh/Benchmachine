@@ -43,13 +43,23 @@
 			</div>
 			</button>
 			<ul class="dropdown-menu dropdown-menu-right">
-
+				@if(auth()->check())
+					@if(auth()->user()->isSuperAdmin())
 					<li>
-						<button onclick="updateBenchmarks()" class="sidebar-trigger" type="button">
-							<i class="b-clipboard"></i>
-							<span>My Benchmarks</span>
-						</button>
+						<a href="/dashboard" class="sidebar-trigger" type="button">
+							<i class="fa fa-dashboard"></i>
+							<span>Dashboard</span>
+						</a>
 					</li>
+					@endif
+				@endif
+				<li>
+					<button onclick="updateBenchmarks()" class="sidebar-trigger" type="button">
+						<i class="b-clipboard"></i>
+						<span>My Benchmarks</span>
+					</button>
+				</li>
+
 
 				<!-- <li>
 					<a href="">
