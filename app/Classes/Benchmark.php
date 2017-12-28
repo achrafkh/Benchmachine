@@ -136,7 +136,7 @@ class Benchmark
 
         $count = [];
         foreach ($this->accounts as $key => $account) {
-            $chart->data[] = $this->posts->where('social_post_account', $key)->count();
+            $chart->data[] = $account->posts->value;
             $chart->labels[] = str_limit($account->social_account_name->title, 15);
         }
 
