@@ -4,7 +4,7 @@
 		<a class="navbar-toggle hidden-sm hidden-md hidden-lg " href="javascript:void(0)" data-toggle="collapse" data-target=".navbar-collapse"><i class="ti-menu"></i></a>
 		<div class="top-left-part">
 			<!-- Logo -->
-			<a style="margin-left: 5px" class="logo" href="index.html">
+			<a style="margin-left: 5px" class="logo" href="/home">
 				<!-- Logo icon image, you can use font-icon also -->
 				<b>
 				<!--This is dark logo icon--><img src="/assets/images/small-logo.png" alt="home" class="dark-logo" /><!--This is light logo icon--><img src="/assets/images/small-logo.png" alt="home" class="light-logo" />
