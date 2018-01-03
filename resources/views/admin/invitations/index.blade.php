@@ -122,6 +122,13 @@ tr.details td.details-control {
 									<input name="max" type="number" type="text" class="form-control " id="inputDanger1">
 									<div id="error-max" class="form-control-feedback"></div>
 							</div>
+							<div class="form-check bd-example-indeterminate">
+                                <label class="custom-control custom-checkbox">
+                                    <input name="sendmail" type="checkbox" class="custom-control-input">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Send email</span>
+                                </label>
+                            </div>
 							<div class="text-right">
 								<button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
 								<button type="button" data-dismiss="modal" class="btn btn-inverse waves-effect waves-light">Cancel</button>

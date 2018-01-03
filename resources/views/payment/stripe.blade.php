@@ -2,7 +2,7 @@
 <div id="paymentStripe"  class="container" style="width: 50%;"  data-aos="fade-up" data-aos-once="true" data-aos-duration="800" data-aos-delay="0" data-aos-offset="0">
 	<div class="row">
 		<div class="text-center" id="reeee">
-			<h2 style="font-size: 32px;color: #4d4d4d;">Buy another <strong>BENCHMARK</strong></h2>
+			<h2 style="font-size: 32px;color: #4d4d4d;">Extend this <strong>BENCHMARK</strong></h2>
 		</div>
 		<hr>
 	</div>
@@ -59,7 +59,7 @@
 				<strong class="price">5 USD</strong>
 			</div>
 		</div>
-		<p style="font-size: 13px;color: #a6a6a1;margin-top: 20px;padding-left: 15px;">*Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
+		<!-- <p style="font-size: 13px;color: #a6a6a1;margin-top: 20px;padding-left: 15px;">*Lorem Ipsum is simply dummy text of the printing and typesetting industry</p> -->
 	</div>
 	<style type="text/css">
 .btn-sunny {

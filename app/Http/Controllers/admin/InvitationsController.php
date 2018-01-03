@@ -5,9 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\InvitationRequest;
 use App\Invitation;
-use App\Mail\InvitationEmail;
 use Illuminate\Http\Request;
-use Mail;
 
 class InvitationsController extends Controller
 {
@@ -18,6 +16,7 @@ class InvitationsController extends Controller
 
     public function generate(InvitationRequest $request)
     {
+
         $invitation = new Invitation;
         $invitation->user_id = $request->user_id;
         if ($request->has('email')) {
@@ -31,9 +30,9 @@ class InvitationsController extends Controller
         $invitation->id = str_random(15) . '|' . time();
         $invitation->save();
 
-        if ($request->has('email')) {
-            Mail::to($invitation->invited_email)->send(new InvitationEmail(['invitation' => $invitation->toarray()]));
-        }
+        // if ($request->has('email') && $request->has('sendmail')) {
+        //     Mail::to($invitation->invited_email)->send(new InvitationEmail(['invitation' => $invitation->toarray()]));
+        // }
 
         return response()->json(['status' => 1, 'invitation' => $invitation]);
     }

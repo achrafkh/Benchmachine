@@ -27,9 +27,11 @@ class GuestsController extends Controller
             Session::flash('msg', ['class' => 'danger', 'msg' => "This invitation doesn't exists"]);
             return redirect($redirect);
         }
-        if (!is_null($invitation->invited_id)) {
-            Session::flash('msg', ['class' => 'danger', 'msg' => "This invitation has been already used"]);
-            return redirect($redirect);
+        if ('manual' != $invitation->type) {
+            if (!is_null($invitation->invited_id)) {
+                Session::flash('msg', ['class' => 'danger', 'msg' => "This invitation has been already used"]);
+                return redirect($redirect);
+            }
         }
         $class = "home_page";
         return view('landing', compact('invitation', 'class'));

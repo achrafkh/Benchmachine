@@ -25,7 +25,7 @@ class InvitationRequest extends FormRequest
     {
         return [
             'user_id' => 'required',
-            'email' => 'required|email',
+            'email' => 'email',
             'type' => 'required',
             'max' => 'required_if:type,==,auto',
         ];
