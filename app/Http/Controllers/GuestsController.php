@@ -24,7 +24,7 @@ class GuestsController extends Controller
             $redirect = '/home';
         }
         if (is_null($invitation)) {
-            Session::flash('msg', ['class' => 'danger', 'msg' => "This invitation doesn't exists"]);
+            Session::flash('msg', ['class' => 'danger', 'msg' => "This invitation doesn't exists or Expired"]);
             return redirect($redirect);
         }
         if ('manual' != $invitation->type) {
