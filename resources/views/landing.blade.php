@@ -10,7 +10,8 @@
                         <use xlink:href="/assets/images/svg-icons.svg#logo"/>
                     </svg>
                 </a>
-                @if(auth()->check())
+               {{--
+                 @if(auth()->check())
                 <a class="landing-login" href="{{ url('/home') }}" waves-hover>
                     <i class="icon-facebook"></i>
                     Connect
@@ -21,6 +22,7 @@
                     Connect
                 </a>
                 @endif
+               --}}
                 <h1 class="landing-title">
                 Get a Free Market Overview Now
                 </h1>
