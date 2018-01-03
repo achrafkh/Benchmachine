@@ -1,7 +1,8 @@
 @extends('layouts.master')
 @section('content')
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css" rel="stylesheet" type="text/css" />
-<div class="benchmark-page">
+<div class="benchmark-wrapper">
+
 <?php
 $freeBench = ($benchmark->details->since->diffInDays($benchmark->details->until));
 ?>
@@ -10,6 +11,27 @@ $freeBench = ($benchmark->details->since->diffInDays($benchmark->details->until)
 	@endif
   @include('layouts.partials.sidebar')
   @include('layouts.partials.breadcumbs',['title' => $benchmark->details->title,'date' => (' | Since :'. $benchmark->details->since->todateString() .' | Until :'. $benchmark->details->until->todateString()) ])
+<div class="action-btns">
+  <div class="container">
+    <form id="printpdf" action="{{url('/benchmarks/wkdownload/' . $benchmark->details->id)}}" method="POST" class="hidden-print print-btn">
+      {{ csrf_field() }}
+      <input type="hidden" id="type" name="type" value="desc">
+      <input type="hidden" id="col" name="col" value="1">
+      <input type="hidden" id="chartdate_en" name="chartdate_en" value="1">
+      <input type="hidden" id="chartdate_in" name="chartdate_in" value="1">
+      <button  type="submit" class="mbtn mbtn-icon print-btn" waves-hover>
+      <i class="b-printer"></i>
+      <i class="icon-spin5 animate-spin"></i>
+      <span class="hidden-xs">Print</span>
+      </button>
+    </form>
+    <button class="mbtn mbtn-icon mail-btn hidden" waves-hover>
+      <i class="b-paper-plane"></i>
+      <i class="icon-spin5 animate-spin"></i>
+      <span class="hidden-xs">Invite</span>
+    </button>
+  </div>
+</div>
 	<div class="benchmark-name" data-aos="fade-up" data-aos-once="true" data-aos-duration="800" data-aos-delay="0" data-aos-offset="0">
 		<div class="container">
 		@if(Session::has('flash'))

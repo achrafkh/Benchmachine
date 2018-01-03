@@ -47,58 +47,60 @@
         <img alt="cloud picture" class="cloud cloud-2" src="/assets/images/cloud_2.png" >
     </div>
      <div class="fb-wrapper">
-        <div class="fb-inner">
-        <div class="fb-header">
+        <form id="submit_pages" action="{{ route('newDemoBench') }}" method="POST" class="fb-form">
+         {{ csrf_field() }}
+            <div class="fb-header">
                 <h1>Create a new <b>benchmark.</b></h1>
                 <p>Copy paste the url of the facebook pages you want to compare. It only takes a few seconds.</p>
             </div>
-        <form id="submit_pages" action="{{ route('newDemoBench') }}" method="POST" class="fb-form">
-         {{ csrf_field() }}
-            <div class="fb-inner">
-                <div class="media fb-box focused">
-                    <div class="media-left fb-icon">
-                        <i class="icon-facebook"></i>
-                        <i class="icon-ok"></i>
-                        <i class="icon-cancel"></i>
-                        <i class="icon-spin5 animate-spin"></i>
+             <div class="tab-content">
+                <div role="tabpanel" class="tab-pane fb-tab active">
+                    <div class="fb-inner  fb-form-inner">
+                        <div class="media fb-box focused">
+                            <div class="media-left fb-icon">
+                                <i class="icon-facebook"></i>
+                                <i class="icon-ok"></i>
+                                <i class="icon-cancel"></i>
+                                <i class="icon-spin5 animate-spin"></i>
+                            </div>
+                            <div id="f_0" class="media-body fb-inner error_c">
+                                <label for="fb_page_0" class="fb-nb">First page</label>
+                                <input id="fb_page_0" class="fb-input" type="text" name="accounts[]"
+                                placeholder="https://www.facebook.com/exemple">
+                            </div>
+                        </div>
+                        <div class="media fb-box">
+                            <div class="media-left fb-icon">
+                                <i class="icon-facebook"></i>
+                                <i class="icon-ok"></i>
+                                <i class="icon-cancel"></i>
+                                <i class="icon-spin5 animate-spin"></i>
+                            </div>
+                            <div id="f_1" class="media-body fb-inner error_c">
+                                <label for="fb_page_1" class="fb-nb">Second page</label>
+                                <input id="fb_page_1" class="fb-input" type="text" name="accounts[]"
+                                placeholder="https://www.facebook.com/exemple">
+                            </div>
+                        </div>
                     </div>
-                    <div id="f_0" class="media-body fb-inner error_c">
-                        <label for="fb_page_0" class="fb-nb">First page</label>
-                        <input id="fb_page_0" class="fb-input" type="text" name="accounts[]"
-                        placeholder="https://www.facebook.com/exemple">
-                    </div>
-                </div>
-                <div class="media fb-box">
-                    <div class="media-left fb-icon">
-                        <i class="icon-facebook"></i>
-                        <i class="icon-ok"></i>
-                        <i class="icon-cancel"></i>
-                        <i class="icon-spin5 animate-spin"></i>
-                    </div>
-                    <div id="f_1" class="media-body fb-inner error_c">
-                        <label for="fb_page_1" class="fb-nb">Second page</label>
-                        <input id="fb_page_1" class="fb-input" type="text" name="accounts[]"
-                        placeholder="https://www.facebook.com/exemple">
-                    </div>
-                </div>
-            </div>
 
-            <div class="fb-footer text-center" style="margin-top: 15px">
-                <button id="trigger" class="media fb-sub" waves-hover>
-                    <div class="media-left media-middle">
-                        <i class="icon-facebook"></i>
-                        <i class="icon-spin5 animate-spin"></i>
+                    <div class="fb-footer">
+                        <button id="trigger" class="media fb-sub" waves-hover>
+                            <div class="media-left media-middle">
+                                <i class="icon-facebook"></i>
+                                <i class="icon-spin5 animate-spin"></i>
+                            </div>
+                            <div class="media-body media-middle">
+                                Generate Benchmark
+                            </div>
+                        </button>
+                        <p class="fb-sub-cap">
+                            One click, No password, Simple and practical
+                        </p>
                     </div>
-                    <div class="media-body media-middle">
-                        Generate Benchmark
-                    </div>
-                </button>
-                <p class="fb-sub-cap">
-                    One click, No password, Simple and practical
-                </p>
+                </div>
             </div>
         </form>
-        </div>
     </div>
 </div>
 <input type="hidden" id="refreshed" value="no">

@@ -52,7 +52,11 @@
             {{ csrf_field() }}
             <div class="fb-header">
                 <h1>
-                Make another <b>benchmark.</b>
+                @if($benchmarks->count())
+                    Make another <b>Benchmark.</b>
+                @else
+                    Create your first <b>Benchmark.</b>
+                @endif
                 </h1>
             </div>
             <!-- Nav tabs -->
@@ -68,12 +72,12 @@
             </ul>
             <!-- Tab panes -->
             <div class="tab-content">
-                <div role="tabpanel" class="tab-pane fb-tab fade in active"" id="fb-tab">
+                <div role="tabpanel" class="tab-pane fb-tab fade in active" id="fb-tab">
                     <div class="fb-header">
                         <p>Copy paste the url of the facebook pages you want to compare. It only takes a few seconds.</p>
                     </div>
-                    <div class="fb-inner fb-form-inner">
-                        <div class="media fb-box">
+                    <div class="fb-inner  fb-form-inner">
+                        <div class="media fb-box focused">
                             <div class="media-left fb-icon">
                                 <i class="icon-facebook"></i>
                                 <i class="icon-ok"></i>
@@ -98,14 +102,17 @@
                             </div>
                         </div>
                     </div>
-                    <div class="fb-footer">
-                        <button disabled class="mbtn" id="nextStep" aria-controls="date-tab" role="tab" data-toggle="tab">
-                        <span>Next Step</span>
+
+                    <div class="fb-footer clearfix">
+                        <button class="mbtn mbtn-icon next-btn" id="nextStep" disabled aria-controls="date-tab" role="tab" data-toggle="tab">
+                            <span>Next</span>
+                            <i class="b-angle-right"></i>
+                            <i class="icon-spin5 animate-spin"></i>
                         </button>
                     </div>
                 </div>
 
-                 <div role="tabpanel" class="tab-pane period-tab fade in" id="date-tab">
+                <div role="tabpanel" class="tab-pane period-tab fade in" id="date-tab">
                     <div class="fb-header">
                         <p>Copy paste the url of the facebook pages you want to compare. It only takes a few seconds.</p>
                     </div>
@@ -137,9 +144,34 @@
                                     <i class="b-calendar"></i>
                                 </div>
                             </div>
+                            <div class="col-md-6" id="difTime">
+                                <span>Benchmark 8 Days</span>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="text-right">
+                                    <strong class="price">5 USD</strong>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                VAT
+                            </div>
+                            <div class="col-md-6">
+                                <div class="text-right">
+                                    <strong>0 USD</strong>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="col-md-6">
+                                <strong>TOTAL</strong>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="text-right">
+                                    <strong class="price">5 USD</strong>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="fb-footer">
+                    <div class="fb-footer clearfix">
                         <script
                           src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                           data-key="pk_test_NwBR00CRQsOdtzDqa20ztBYl"
@@ -157,26 +189,15 @@
                             document.getElementsByClassName("stripe-button-el")[0].style.display = 'none';
                         </script>
                         <button id="initStripe" type="submit"  class="media fb-sub" waves-hover style="display:none">
-                        <div class="media-left media-middle">
-                            <i class="icon-facebook"></i>
-                            <i class="icon-spin5 animate-spin"></i>
-                        </div>
-                        <div class="media-body media-middle">
-                            Generate Benchmark
-                        </div>
+
                         </button>
-                        <button type="button" id="generateBench" class="media fb-sub" waves-hover>
-                        <div class="media-left media-middle">
-                            <i class="icon-facebook"></i>
-                            <i class="icon-spin5 animate-spin"></i>
-                        </div>
-                        <div class="media-body media-middle">
-                            Generate Benchmark
-                        </div>
+                        <button type="submit" id="generateBench" class="mbtn next-btn">
+                            <span>Purchase</span>
                         </button>
-                        <p class="fb-sub-cap">
-                            One click, No password, Simple and practical
-                        </p>
+                        <a id="backBtn" class="mbtn mbtn-default mbtn-icon prev-btn" href="#fb-tab" aria-controls="fb-tab" role="tab" data-toggle="tab">
+                            <i class="b-angle-left"></i>
+                            <span>Back</span>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -211,7 +232,9 @@ ga('send', {
   title: 'Listing page',
   page: '/home',
 });
-
+$( "#backBtn" ).click(function() {
+  mainButton.removeClass('loading');
+});
 $(document).ready(function() {
     var searchIcon = '<i class="b-search"></i>';
 
@@ -357,9 +380,9 @@ $("#nextStep").unbind('click').bind("click", function (event) {
 function nextStep()
 {
     $('#fb-tab-li').addClass('success');
-    $('#fb-tab').removeClass('active');
     $('#date-tab-li').addClass('active');
-    $('#date-tab').addClass('active');
+    $('#fb-tab').removeClass('active');
+    $('#date-tab').addClass('active in');
 }
 $("#generateBench").unbind('click').bind("click", function (e) {
     if($('#title').val().length < 4){
@@ -510,5 +533,86 @@ function inputsHaveDuplicateValues() {
 }
 </script>
 
+
+
+
+
+
+
+
+
+
+
+
+ <script type="text/javascript">
+var since = new Date();
+since.setDate(since.getDate() - 2);
+var until = new Date();
+until.setDate(until.getDate() - 1);
+$( document ).ready(function() {
+    var input_from = $('#date-from').pickadate({
+            showMonthsShort: true,
+            close: 'Cancel',
+            labelMonthNext: 'Go to the next month',
+            labelMonthPrev: 'Go to the previous month',
+            format: 'yyyy-mm-dd',
+            max: since,
+    });
+    var input_to = $('#date-to').pickadate({
+            showMonthsShort: true,
+            close: 'Cancel',
+            labelMonthNext: 'Go to the next month',
+            labelMonthPrev: 'Go to the previous month',
+            format: 'yyyy-mm-dd',
+            max: until,
+    });
+    input_from = input_from.pickadate('picker');
+    input_to = input_to.pickadate('picker');
+
+
+    input_from.on({
+      set: function(e) {
+       if(e.select){
+        valideDates();
+       }
+      }
+    });
+    input_to.on({
+      set: function(e) {
+       if(e.select){
+        valideDates();
+       }
+      }
+    });
+});
+
+
+function valideDates(){
+    $('#hideme').attr('disabled',true);
+    $('.price').html('0 USD');
+    $('#difTime').html('<span>Benchmark 7 Days</span>');
+
+    if($('#date-from').val() == '' || $('#date-to').val() == ''){
+        showAlert('danger','Invalid date range',6);
+        return false;
+    }
+    var since = new Date($('#date-from').val());
+    var until = new Date($('#date-to').val());
+    if(until < since){
+        showAlert('danger','Invalid date range',6);
+        return false;
+    }
+    if(timeDiff(since,until) < 8){
+        $('.price').html('0 USD');
+        return false;
+    }
+    var diff = timeDiff( $('#date-from').val(), $('#date-to').val() );
+    $('#difTime').html('<span>Benchmark '+diff+' Days</span>');
+    $('.price').html('5 USD');
+    $('#hideme').attr('disabled',false);
+    return true;
+}
+
+</script>
 
 @endsection

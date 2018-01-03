@@ -1,26 +1,5 @@
 <header class="header">
 	<div class="container">
-
-		<a class="logo" href="/home">
-			<svg class="svg" role="img" title="logo">
-        		<use xlink:href="/assets/images/svg-icons.svg#logo"/>
-        	</svg>
-		</a>
-
-	@if(isset($id))
-		<form id="printpdf" action="{{url('/benchmarks/wkdownload/' . $id)}}" method="POST">
-		{{ csrf_field() }}
-			<input type="hidden" id="type" name="type" value="desc">
-			<input type="hidden" id="col" name="col" value="1">
-			<input type="hidden" id="chartdate_en" name="chartdate_en" value="1">
-			<input type="hidden" id="chartdate_in" name="chartdate_in" value="1">
-			<button  type="submit" class="mbtn mbtn-icon print-btn" waves-hover>
-				<i class="b-printer"></i>
-	        	<i class="icon-spin5 animate-spin"></i>
-				<span class="hidden-xs">Print benchmark</span>
-			</button>
-		</form>
-	@endif
 		<div class="dropdown profile-dropdown">
 			<button class="media profile-trigger" class="media" type="button" data-toggle="dropdown">
 			<div class="media-left media-middle">
@@ -54,13 +33,11 @@
 					@endif
 				@endif
 				<li>
-					<button onclick="updateBenchmarks()" class="sidebar-trigger" type="button">
+					<a href="#">
 						<i class="b-clipboard"></i>
 						<span>My Benchmarks</span>
-					</button>
+					</a>
 				</li>
-
-
 				<!-- <li>
 					<a href="">
 						<i class="b-settings"></i>
@@ -80,5 +57,13 @@
 					</form>
 			</ul>
 		</div>
+		<a class="logo" href="/home">
+			<svg class="svg" role="img" title="logo">
+        		<use xlink:href="/assets/images/svg-icons.svg#logo"/>
+        	</svg>
+		</a>
+		<button class="sidebar-trigger" onclick="updateBenchmarks()">
+			<i class="b-menu"></i>
+		</button>
 	</div>
 </header>

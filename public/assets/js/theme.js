@@ -143,6 +143,7 @@ $(document).ready(function() {
 		var parent = $(this).parents('.fb-box');
 		$('.fb-box').removeClass('focused');
 		parent.addClass('focused');
+		console.log(parent.index(),index);
 		if(parent.index() == index && index < 9){
 			$('.fb-form-inner').append(
 				'<div class="media fb-box">\

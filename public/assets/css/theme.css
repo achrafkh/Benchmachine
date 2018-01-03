@@ -149,6 +149,18 @@ Vendors
 	-moz-osx-font-smoothing: grayscale;
 }
 
+.b-menu:before {
+	content: "";
+}
+
+.b-printer:before {
+	content: "";
+}
+
+.b-paper-plane:before {
+	content: "";
+}
+
 .b-angle-up:before {
 	content: "";
 }
@@ -179,10 +191,6 @@ Vendors
 
 .b-power-button:before {
 	content: "";
-}
-
-.b-printer:before {
-	content: "";
 }
 
 .b-report:before {
@@ -3856,9 +3864,7 @@ tbody.collapse.in {
 	-webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
 	-moz-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
 	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
-	-webkit-background-clip: padding-box;
 	-moz-background-clip: padding-box;
-	-o-background-clip: padding-box;
 	background-clip: padding-box;
 }
 
@@ -5529,9 +5535,7 @@ a.badge:focus {
 	background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
 	background-image: -moz-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
 	background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
-	-webkit-background-size: 40px 40px;
 	-moz-background-size: 40px 40px;
-	-o-background-size: 40px 40px;
 	background-size: 40px 40px;
 }
 
@@ -6521,9 +6525,7 @@ button.close {
 	-webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
 	-moz-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
 	box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
-	-webkit-background-clip: padding-box;
 	-moz-background-clip: padding-box;
-	-o-background-clip: padding-box;
 	background-clip: padding-box;
 	outline: 0;
 }
@@ -6771,9 +6773,7 @@ button.close {
 	word-wrap: normal;
 	font-size: 14px;
 	background-color: #fff;
-	-webkit-background-clip: padding-box;
 	-moz-background-clip: padding-box;
-	-o-background-clip: padding-box;
 	background-clip: padding-box;
 	border: 1px solid #ccc;
 	border: 1px solid rgba(0, 0, 0, 0.2);
@@ -10719,7 +10719,7 @@ Alerts
 .alerts-container .alert {
 	position: relative;
 	color: #fff;
-	margin: 0;
+	margin: 0 0 10px;
 	border: 0;
 	-webkit-border-radius: 0;
 	-moz-border-radius: 0;
@@ -10893,8 +10893,15 @@ Buttons
 }
 
 .mbtn.mbtn-icon i {
+	font-size: 0;
+}
+
+.mbtn.mbtn-icon i:before {
+	display: block;
 	font-size: 17px;
+	line-height: 22px;
 	width: 22px;
+	height: 22px;
 }
 
 .mbtn.mbtn-icon .icon-spin5 {
@@ -10909,8 +10916,81 @@ Buttons
 	display: inline-block;
 }
 
+.mbtn.mbtn-default {
+	background-color: #f0f1f1;
+	color: #9f9e9e;
+}
+
+.mbtn.mbtn-default:hover {
+	color: #9f9e9e;
+}
+
 .mbtn:disabled {
 	opacity: 0.4;
+}
+
+/*
+-----------------------------------------
+Facebook button
+-----------------------------------------
+*/
+
+.fb-sub {
+	position: relative;
+	background-color: #4b85e6;
+	font-size: 0;
+	color: #fff;
+	max-width: 275px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	text-transform: uppercase;
+	-webkit-box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.2);
+	-moz-box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.2);
+	box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.2);
+	-webkit-transition: all 0.2s ease-in-out;
+	-moz-transition: all 0.2s ease-in-out;
+	-o-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
+}
+
+.fb-sub .media-left {
+	background-color: #4073e1;
+	padding: 10px;
+}
+
+.fb-sub .media-left i {
+	font-size: 0;
+	width: 25px;
+	text-align: center;
+}
+
+.fb-sub .media-left i:before {
+	font-size: 23px;
+}
+
+.fb-sub .media-left i.icon-spin5 {
+	display: none;
+}
+
+.fb-sub .media-body {
+	font-family: "open-sans-medium";
+	font-size: 12px;
+	padding: 15px 25px;
+}
+
+.fb-sub.loading .media-left i.icon-facebook {
+	display: none;
+}
+
+.fb-sub.loading .media-left i.icon-spin5 {
+	display: block;
+}
+
+.fb-sub-cap {
+	font-size: 12px;
+	color: #9f9e9e;
+	margin: 10px 0 0;
 }
 
 /*
@@ -11257,62 +11337,16 @@ Facebook Inputs
 	top: 0;
 }
 
-.fb-wrapper .fb-sub {
-	position: relative;
-	background-color: #4b85e6;
-	font-size: 0;
-	color: #fff;
-	max-width: 275px;
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 3px;
-	text-transform: uppercase;
-	-webkit-box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.2);
-	-moz-box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.2);
-	box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.2);
-	-webkit-transition: all 0.2s ease-in-out;
-	-moz-transition: all 0.2s ease-in-out;
-	-o-transition: all 0.2s ease-in-out;
-	transition: all 0.2s ease-in-out;
-}
-
-.fb-wrapper .fb-sub .media-left {
-	background-color: #4073e1;
-	padding: 10px;
-}
-
-.fb-wrapper .fb-sub .media-left i {
-	font-size: 0;
-	width: 25px;
+.fb-wrapper .fb-footer {
 	text-align: center;
 }
 
-.fb-wrapper .fb-sub .media-left i:before {
-	font-size: 23px;
+.fb-wrapper .fb-footer .prev-btn {
+	float: left;
 }
 
-.fb-wrapper .fb-sub .media-left i.icon-spin5 {
-	display: none;
-}
-
-.fb-wrapper .fb-sub .media-body {
-	font-family: "open-sans-medium";
-	font-size: 12px;
-	padding: 15px 25px;
-}
-
-.fb-wrapper .fb-sub.loading .media-left i.icon-facebook {
-	display: none;
-}
-
-.fb-wrapper .fb-sub.loading .media-left i.icon-spin5 {
-	display: block;
-}
-
-.fb-wrapper .fb-sub-cap {
-	font-size: 12px;
-	color: #9f9e9e;
-	margin: 10px 0 0;
+.fb-wrapper .fb-footer .next-btn {
+	float: right;
 }
 
 /*
@@ -11396,7 +11430,6 @@ Facebook Tabs
 
 .fb-wrapper .fb-form .tab-content .tab-pane.fb-tab .fb-footer {
 	margin: 40px auto 0;
-	text-align: right;
 }
 
 .fb-wrapper .fb-form .tab-content .tab-pane.period-tab .fb-inner {
@@ -11407,7 +11440,7 @@ Facebook Tabs
 .fb-wrapper .fb-form .tab-content .tab-pane.period-tab .fb-inner label {
 	font-family: "open-sans-bold";
 	font-size: 12px;
-	color: #9f9e9e;
+	color: #4d4d4d;
 	font-weight: normal;
 	text-transform: uppercase;
 	margin: 0 0 10px;
@@ -11475,7 +11508,6 @@ Facebook Tabs
 
 .fb-wrapper .fb-form .tab-content .tab-pane.period-tab .fb-footer {
 	margin: 25px auto 0;
-	text-align: center;
 }
 
 /*
@@ -12075,6 +12107,13 @@ Bootstrap Table
 -----------------------------------------
 */
 
+.dataTables_wrapper .dataTables_empty {
+	font-family: "open-sans-medium";
+	font-size: 14px;
+	color: #9f9e9e;
+	padding: 40px 0 !important;
+}
+
 .dataTables_wrapper .dataTables_length label {
 	font-family: "open-sans-medium";
 	font-size: 12px;
@@ -12256,9 +12295,7 @@ table.data-table {
 }
 
 table.data-table thead tr th {
-	-webkit-background-size: 15px 15px;
 	-moz-background-size: 15px;
-	-o-background-size: 15px;
 	background-size: 15px;
 	font-family: "open-sans-bold";
 	font-size: 11px;
@@ -12348,9 +12385,7 @@ table.data-table tbody tr td .table-fbpage {
 
 table.data-table tbody tr td .table-fbpage .table-fbpage-img {
 	display: block;
-	-webkit-background-size: cover;
 	-moz-background-size: cover;
-	-o-background-size: cover;
 	background-size: cover;
 	background-position: center;
 	width: 40px;
@@ -12457,9 +12492,7 @@ Posts
 }
 
 .post .post-img {
-	-webkit-background-size: cover;
 	-moz-background-size: cover;
-	-o-background-size: cover;
 	background-size: cover;
 	background-position: center;
 	height: 200px;
@@ -12477,9 +12510,7 @@ Posts
 
 .post .post-content .post-brand .brand-img {
 	display: block;
-	-webkit-background-size: cover;
 	-moz-background-size: cover;
-	-o-background-size: cover;
 	background-size: cover;
 	background-position: center;
 	width: 40px;
@@ -12609,12 +12640,33 @@ Layout
 
 /*
 -----------------------------------------
+Action Buttons
+-----------------------------------------
+*/
+
+.action-btns {
+	font-size: 0;
+	padding: 30px 0;
+	text-align: right;
+}
+
+.action-btns .print-btn {
+	display: inline-block;
+}
+
+.action-btns .print-btn,
+.action-btns .mail-btn {
+	margin-left: 10px;
+}
+
+/*
+-----------------------------------------
 Title
 -----------------------------------------
 */
 
 .benchmark-name {
-	padding: 65px 0;
+	padding: 0 0 65px;
 }
 
 .benchmark-name h2 {
@@ -12951,9 +13003,16 @@ Header
 }
 
 .header .logo {
-	float: left;
+	position: absolute;
+	top: 0;
+	left: 50%;
 	font-size: 0;
 	padding: 15px;
+	-webkit-transform: translate(-50%, 0);
+	-moz-transform: translate(-50%, 0);
+	-ms-transform: translate(-50%, 0);
+	-o-transform: translate(-50%, 0);
+	transform: translate(-50%, 0);
 }
 
 .header .logo .svg {
@@ -12970,13 +13029,8 @@ Header
 	background-color: #fafafa;
 }
 
-.header .print-btn {
-	float: left;
-	margin: 12px 15px 11px;
-}
-
 .header .profile-dropdown {
-	float: right;
+	float: left;
 	font-size: 0;
 }
 
@@ -12991,9 +13045,7 @@ Header
 }
 
 .header .profile-dropdown .profile-trigger .profile-img {
-	-webkit-background-size: cover;
 	-moz-background-size: cover;
-	-o-background-size: cover;
 	background-size: cover;
 	background-position: center;
 	display: block;
@@ -13027,6 +13079,23 @@ Header
 	color: #9f9e9e;
 }
 
+.header .sidebar-trigger {
+	background-color: transparent;
+	float: right;
+	font-size: 0;
+	color: #9f9e9e;
+	padding: 21px 15px;
+	margin-right: -15px;
+}
+
+.header .sidebar-trigger i {
+	font-size: 18px;
+}
+
+.header .sidebar-trigger:hover {
+	background-color: #fafafa;
+}
+
 /*
 -----------------------------------------
 Home
@@ -13037,9 +13106,7 @@ Home
 	position: relative; /* background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHZpZXdCb3g9IjAgMCAxIDEiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxyYWRpYWxHcmFkaWVudCBpZD0idnNnZyIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiIGN4PSI1MCUiIGN5PSI1MCUiIHI9IjQxLjMlIj48c3RvcCBzdG9wLWNvbG9yPSIjMTI4OGZkIiBzdG9wLW9wYWNpdHk9IjEiIG9mZnNldD0iMCIvPjxzdG9wIHN0b3AtY29sb3I9IiMwMDVkYmIiIHN0b3Atb3BhY2l0eT0iMSIgb2Zmc2V0PSIxIi8+PC9yYWRpYWxHcmFkaWVudD48cmVjdCB4PSItNTAiIHk9Ii01MCIgd2lkdGg9IjEwMSIgaGVpZ2h0PSIxMDEiIGZpbGw9InVybCgjdnNnZykiIC8+PC9zdmc+);
   background-image: radial-gradient(circle 800px at center center,rgb(18, 136, 253) 0%,rgb(0, 93, 187) 100%); */
 	background-image: url(../images/christmas-bg.jpg);
-	-webkit-background-size: cover;
 	-moz-background-size: cover;
-	-o-background-size: cover;
 	background-size: cover;
 	background-position: center bottom;
 	height: 100vh;
@@ -15083,7 +15150,7 @@ table.data-table tbody tr:hover {
 }
 
 .benchmark-name {
-	padding: 50px 0;
+	padding: 0 0 50px;
 }
 
 .benchmark-name input {

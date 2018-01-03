@@ -3,8 +3,46 @@ var since = new Date();
 since.setDate(since.getDate() - 2);
 var until = new Date();
 until.setDate(until.getDate() - 1);
-
 $( document ).ready(function() {
+	var input_from = $('#date-from').pickadate({
+			showMonthsShort: true,
+		 	close: 'Cancel',
+		 	labelMonthNext: 'Go to the next month',
+	  		labelMonthPrev: 'Go to the previous month',
+	  		format: 'yyyy-mm-dd',
+	  		max: since,
+	});
+	var input_to = $('#date-to').pickadate({
+			showMonthsShort: true,
+		 	close: 'Cancel',
+		 	labelMonthNext: 'Go to the next month',
+	  		labelMonthPrev: 'Go to the previous month',
+	  		format: 'yyyy-mm-dd',
+	  		max: until,
+	});
+	input_from = input_from.pickadate('picker');
+	input_to = input_to.pickadate('picker');
+
+	input_from.set('select', Orisince);
+	input_to.set('select', Oriuntil);
+
+	input_from.on({
+	  set: function(e) {
+	   if(e.select){
+	   	$('#since').val($('#date-from').val() );
+	   	valideDates();
+	   }
+	  }
+	});
+	input_to.on({
+	  set: function(e) {
+	   if(e.select){
+	   	$('#until').val($('#date-to').val() );
+	   	valideDates();
+	   }
+	  }
+	});
+
 	$( ".animateMe" ).each(function( index ) {
 		var nbr = parseInt( $(this).text().replace(/ /g,'') , 10);
 		$(this).text(0);
@@ -15,27 +53,6 @@ $( document ).ready(function() {
 	        },2000);
 	    }.bind(this), 1500 + (index * 100));
 	});
-    $('#datepicker-inline-until').datepicker({
-	    todayHighlight: false,
-	    inline: true,
-	    endDate: until,
-        useCurrent: false,
-	    format: 'yyyy-mm-dd',
-    }).on('changeDate', function(event){
-    	$('#until').val($('#datepicker-inline-until').datepicker("getFormattedDate"));
-
-    	valideDates();
-    });
-	$('#datepicker-inline-since').datepicker({
-	    todayHighlight: false,
-	    inline: true,
-	    endDate: since,
-        useCurrent: false,
-	    format: 'yyyy-mm-dd'
-    }).on('changeDate', function(event){
-    	$('#since').val($('#datepicker-inline-since').datepicker("getFormattedDate"));
-    	valideDates();
-    });
 });
 function throttle(f, delay){
 var timer = null;
@@ -80,27 +97,28 @@ $('#title').focusout(throttle(function(e){
     	}
   	});
 }));
-
-
 function valideDates(){
-	$('#hideme').css('display','none');
+	$('#hideme').attr('disabled',true);
 	$('.price').html('0 USD');
 	$('#difTime').html('<span>Benchmark 7 Days</span>');
-	if($('#since').val() == '' || $('#until').val() == ''){
+	if($('#date-from').val() == '' || $('#date-to').val() == ''){
+		showAlert('danger','Invalid date range',6);
 		return false;
 	}
-	var since = new Date($('#since').val());
-	var until = new Date($('#until').val());
+	var since = new Date($('#date-from').val());
+	var until = new Date($('#date-to').val());
 	if(until < since){
+		showAlert('danger','Invalid date range',6);
 		return false;
 	}
 	if(timeDiff(since,until) < 8){
+		showAlert('danger','Date range must be more than 7 days',6);
 		return false;
 	}
-	var diff = timeDiff( $('#since').val(), $('#until').val() );
+	var diff = timeDiff( $('#date-from').val(), $('#date-to').val() );
 	$('#difTime').html('<span>Benchmark '+diff+' Days</span>');
 	$('.price').html('5 USD');
-	$('#hideme').css('display','block');
+	$('#hideme').attr('disabled',false);
 	return true;
 }
 
