@@ -5,7 +5,7 @@
 			Data
 			</h2>
 			<span class="section-cap">
-				Benchmark overview
+				Key performance indicators
 			</span>
 		</div>
 		<table id="table" class="data-table">

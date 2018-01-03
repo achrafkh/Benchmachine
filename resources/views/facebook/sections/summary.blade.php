@@ -5,7 +5,7 @@
 			Summary
 			</h2>
 			<span class="section-cap">
-				Benchmark overview
+				Average Kpi’s
 			</span>
 		</div>
 		<div class="summary-wrap">
