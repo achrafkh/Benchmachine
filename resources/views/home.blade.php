@@ -113,9 +113,6 @@
                 </div>
 
                 <div role="tabpanel" class="tab-pane period-tab fade in" id="date-tab">
-                    <div class="fb-header">
-                        <p>Copy paste the url of the facebook pages you want to compare. It only takes a few seconds.</p>
-                    </div>
                     <div class="fb-inner">
                         <div class="row">
                             <div class="col-md-12">
@@ -125,6 +122,9 @@
                                 <div class="input-container">
                                     <input class="form-control" id="title" type="text" name="title" placeholder="Benchmark">
                                 </div>
+                            </div>
+                            <div class="col-md-12">
+                                <p>Choose the time periods for your benchmark report.</p>
                             </div>
                             <div class="col-md-6">
                                 <label>
@@ -188,12 +188,12 @@
                          <script>
                             document.getElementsByClassName("stripe-button-el")[0].style.display = 'none';
                         </script>
-                        <button id="initStripe" type="submit"  class="media fb-sub" waves-hover style="display:none">
-
-                        </button>
-                        <button type="submit" id="generateBench" class="mbtn next-btn">
-                            <span>Purchase</span>
-                        </button>
+                        <div class="fb-footer-inner">
+                            <button id="initStripe" type="submit"  class="hidden" waves-hover></button>
+                            <button type="submit" id="generateBench" class="mbtn">
+                                <span>Purchase</span>
+                            </button>
+                        </div>
                         <a id="backBtn" class="mbtn mbtn-default mbtn-icon prev-btn" href="#fb-tab" aria-controls="fb-tab" role="tab" data-toggle="tab">
                             <i class="b-angle-left"></i>
                             <span>Back</span>
@@ -258,7 +258,7 @@ $(document).ready(function() {
         }
     });
 
-    $('.table-delete').unbind('click').bind('click', function (e) {
+    $(document).on('click', '.table-delete', function (e) {
         $("#modalConfirm").modal('show');
         $('#ConfirmYes').data('id', $(this).data('id'));
     });

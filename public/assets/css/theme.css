@@ -11106,6 +11106,12 @@ Facebook Inputs
 	border-top: 1px solid #ecebeb;
 }
 
+.fb-wrapper p {
+	font-size: 13px;
+	color: #9f9e9e;
+	margin: 10px 0;
+}
+
 .fb-wrapper .fb-form {
 	max-width: 650px;
 	padding: 0 15px;
@@ -11129,8 +11135,6 @@ Facebook Inputs
 }
 
 .fb-wrapper .fb-header p {
-	font-size: 13px;
-	color: #9f9e9e;
 	margin: 5px 0 10px;
 }
 

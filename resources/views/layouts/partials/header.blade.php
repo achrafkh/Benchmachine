@@ -33,7 +33,7 @@
 					@endif
 				@endif
 				<li>
-					<a href="#">
+					<a href="/home">
 						<i class="b-clipboard"></i>
 						<span>My Benchmarks</span>
 					</a>
