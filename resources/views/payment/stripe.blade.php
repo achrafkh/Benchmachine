@@ -66,7 +66,7 @@
 						<input type="hidden" name="until" id="until" value="{{ $benchmark->details->until->todateString() }}">
 						<script
 							src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-							data-key="pk_test_NwBR00CRQsOdtzDqa20ztBYl"
+							data-key="{{ env('STRIPE_KEY') }}"
 							data-amount="500"
 							data-name="Benchmarks.digital"
 							data-panel-label="PAY"

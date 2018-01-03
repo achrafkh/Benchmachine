@@ -174,7 +174,7 @@
                     <div class="fb-footer clearfix">
                         <script
                           src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                          data-key="pk_test_NwBR00CRQsOdtzDqa20ztBYl"
+                          data-key="{{ env('STRIPE_KEY') }}"
                           data-amount="500"
                           data-name="Benchmark Machine"
                           data-panel-label="PAY"
@@ -532,15 +532,6 @@ function inputsHaveDuplicateValues() {
   return elem;
 }
 </script>
-
-
-
-
-
-
-
-
-
 
 
 
