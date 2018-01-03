@@ -106,6 +106,7 @@ class HomeController extends Controller
      */
     public function validatePages(AddpagesRequest $request)
     {
+
         $accounts = $request->accounts;
         if (count($accounts) < 2) {
             return response()->json(['min' => true]);
@@ -156,7 +157,6 @@ class HomeController extends Controller
             $email = $request->email;
         }
 
-        dd($request->all());
         $since = Carbon::now()->subDays(8)->toDateString();
         $until = Carbon::now()->subDays(1)->toDateString();
 

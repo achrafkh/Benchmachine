@@ -165,9 +165,11 @@ class DAO
             $account->label = $response->data->social_account_label;
             $account->title = $response->data->social_account_title;
 
-            if (!$response->data->exits) {
-                $status = 0;
-            }
+            // if (!$response->data->exits) {
+            //     $status = 0;
+            // }
+
+            $status = 1;
 
             $account_ids->push($account);
         }
