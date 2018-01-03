@@ -60,7 +60,7 @@ class GeneratePdf extends Command
             unlink($fullPath);
         }
 
-        $cmd = 'xvfb-run wkhtmltopdf -L 0mm -R 0mm -T 0mm -B 0mm -O landscape --javascript-delay 2000 ' . $url . ' ' . $fullPath . ' 2>&1';
+        $cmd = 'xvfb-run wkhtmltopdf --image-dpi 300 --image-quality 80 --disable-internal-links -L 0mm -R 0mm -T 0mm -B 0mm -O landscape --javascript-delay 2000 ' . $url . ' ' . $fullPath . ' 2>&1';
 
         $process = new Process($cmd);
         $process->run();
