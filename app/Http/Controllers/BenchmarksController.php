@@ -8,8 +8,10 @@ use App\Acme\Wrapers\Utils;
 use App\Benchmark;
 use App\Http\Requests\AddpagesRequest;
 use App\Http\Requests\BenchmarkRequest;
+use App\Invitation;
 use App\Order;
 use Artisan;
+use Auth;
 use Cache;
 use Carbon\Carbon;
 use File;
@@ -104,6 +106,18 @@ class BenchmarksController extends Controller
 
         $response = cpost(env('CORE2') . '/platform/check-pages', ['pages_ids' => $benchmark_ids]);
 
+        $invite_id = Session::get('used_invitation');
+
+        if (!is_null($invite_id)) {
+            Session::forget('used_invitation');
+            $invitation = Invitation::find($invite_id);
+            $invitation->invited_id = Auth::id();
+            if (!is_null(auth()->user())) {
+                $invitation->invited_email = auth()->user()->email;
+            }
+            $invitation->used_at = Carbon::now();
+            $invitation->save();
+        }
         if (isset($response)) {
             if ((1 == $response->status) && (2 != $benchmark->status)) {
                 $benchmark->markAsReady(auth()->user()->getValidEmail());

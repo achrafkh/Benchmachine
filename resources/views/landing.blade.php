@@ -49,7 +49,7 @@
         <img alt="cloud picture" class="cloud cloud-2" src="/assets/images/cloud_2.png" >
     </div>
     <div class="fb-wrapper">
-        <form id="submit_pages" action="{{ route('newDemoBench') }}" method="POST" class="fb-form">
+        <form id="submit_pages" action="/benchmark/new" method="POST" class="fb-form">
             {{ csrf_field() }}
             <input type="hidden" name="invitation" value="{{ $invitation->id }}">
             <div class="fb-header">

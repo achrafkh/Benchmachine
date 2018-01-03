@@ -155,6 +155,8 @@ class HomeController extends Controller
         if ($request->has('email')) {
             $email = $request->email;
         }
+
+        dd($request->all());
         $since = Carbon::now()->subDays(8)->toDateString();
         $until = Carbon::now()->subDays(1)->toDateString();
 

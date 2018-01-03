@@ -39,6 +39,7 @@ class GuestsController extends Controller
 
     public function newBenchmark(BenchmarkRequest $request)
     {
+
         $accounts = $request->accounts;
 
         $invite = Invitation::find($request->invitation);
@@ -59,6 +60,13 @@ class GuestsController extends Controller
         $since = Carbon::now()->subDays(8)->toDateString();
         $until = Carbon::now()->subDays(1)->toDateString();
 
+        if ($request->has('since')) {
+            $since = Carbon::parse($request->since);
+        }
+        if ($request->has('until')) {
+            $until = Carbon::parse($request->until);
+        }
+
         $response = $this->api->addPages($accounts);
 
         $accounts = $response['account_ids']->pluck('id');
@@ -75,8 +83,10 @@ class GuestsController extends Controller
             'id' => $benchmark->id,
         ]);
         cleanCache($benchmark->id, true);
+
         Session::put('benchmark', $benchmark->id);
         Session::put('used_invitation', $invite->id);
+
         return response()->json(['status' => 1, 'id' => $benchmark->id]);
     }
 }
