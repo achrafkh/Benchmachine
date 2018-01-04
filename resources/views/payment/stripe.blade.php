@@ -9,7 +9,7 @@
 		<div class="tab-content">
 			<div role="tabpanel" class="tab-pane period-tab active">
 				<div class="fb-header">
-					<p>Copy paste the url of the facebook pages you want to compare. It only takes a few seconds.</p>
+					<p>Choose the time periods for your benchmark report.</p>
 				</div>
 				<div class="fb-inner">
 					<div class="row">
