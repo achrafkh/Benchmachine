@@ -15,10 +15,3 @@ ga('create', 'UA-111529715-1', 'auto');
 
 
 
-window._mfq = window._mfq || [];
-(function() {
-var mf = document.createElement("script");
-mf.type = "text/javascript"; mf.async = true;
-mf.src = "//cdn.mouseflow.com/projects/b80d4089-8ab5-4741-be42-fc8110a57f84.js";
-document.getElementsByTagName("head")[0].appendChild(mf);
-})();
