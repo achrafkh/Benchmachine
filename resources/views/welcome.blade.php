@@ -122,6 +122,13 @@ ga('send', {
         fbq('track', 'CompleteRegistration');
     </script>
 @endif
+
+@if(Session::has('canceled'))
+<script type="text/javascript">
+    ga('send', 'event', 'CanceledAuth', 'AuthCancel', 'User didnt accept auth');
+    fbq('trackCustom', 'Canceled Authentication');
+</script>
+@endif
 <script type="text/javascript" src="/assets/js/canvas/snow.js"></script>
 <script type="text/javascript" src="/js/welcome.js"></script>
 @endsection

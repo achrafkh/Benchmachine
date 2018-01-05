@@ -59,6 +59,7 @@ class LoginController extends Controller
         try {
             $user = Socialite::driver($provider)->user();
         } catch (\Exception $e) {
+            Session::flash('canceled', true);
             Session::flash('msg', ['class' => 'danger', 'msg' => "Sorry, Authentication is required"]);
             return redirect('/');
         }
