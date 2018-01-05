@@ -59,7 +59,7 @@
 					</div>
 				</div>
 				<div class="fb-footer">
-					<form action="{{ route('stripeCheckout') }}" method="POST">
+					<form id="stripeForm" action="{{ route('stripeCheckout') }}" method="POST">
 						{{ csrf_field() }}
 						<input type="hidden" name="benchmark_id" value="{{$benchmark->details->id}}">
 						<input type="hidden" name="since" id="since" value="{{ $benchmark->details->since->todateString() }}">
@@ -77,12 +77,13 @@
 							data-zip-code="false"
 							data-currency="usd">
 						</script>
-						<script>
-						document.getElementsByClassName("stripe-button-el")[0].style.display = 'none';
-						</script>
 						<button disabled="" type="submit" id="hideme" class="mbtn">
 							<span>Purchase</span>
 						</button>
+						<script>
+						document.getElementsByClassName("stripe-button-el")[0].style.display = 'none';
+						</script>
+
 					</form>
 				</div>
 			</div>
