@@ -176,7 +176,7 @@
                           src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                           data-key="{{ env('STRIPE_KEY') }}"
                           data-amount="500"
-                          data-name="Benchmark Machine"
+                          data-name="Benchmarks.digital"
                           data-panel-label="PAY"
                           data-label="Generate"
                           data-email="{{ auth()->user()->getValidEmail() }}"
