@@ -108,7 +108,7 @@ class LoginController extends Controller
      */
     public function findOrCreateUser($user, $provider)
     {
-        $authUser = User::orwhere('provider_id', $user->id)->orwhere('email', $user->email)->first();
+        $authUser = User::where('provider_id', $user->id)->first();
 
         if ($authUser && isset($authUser->provider_id)) {
             $authUser->token = $user->token;
