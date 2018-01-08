@@ -232,6 +232,7 @@ function str_insert($str, $search, $insert)
 // empty white spaces in html
 function replace($html)
 {
+    return $html;
     $preg = [
         "/\n([\S])/" => '$1',
         "/\r/" => '',
