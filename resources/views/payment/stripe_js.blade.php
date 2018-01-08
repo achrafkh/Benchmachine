@@ -4,6 +4,8 @@ since.setDate(since.getDate() - 2);
 var until = new Date();
 until.setDate(until.getDate() - 1);
 $( document ).ready(function() {
+
+	$('.stripe-button-el').css('display','none');
 	var input_from = $('#date-from').pickadate({
 			showMonthsShort: true,
 		 	close: 'Cancel',

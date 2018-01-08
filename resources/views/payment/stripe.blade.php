@@ -80,9 +80,6 @@
 						<button disabled="" type="submit" id="hideme" class="mbtn">
 							<span>Purchase</span>
 						</button>
-						<script>
-						document.getElementsByClassName("stripe-button-el")[0].style.display = 'none';
-						</script>
 
 					</form>
 				</div>
