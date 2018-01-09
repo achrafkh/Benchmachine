@@ -173,9 +173,13 @@ class HomeController extends Controller
         Artisan::call('fetch:benchmark', [
             'id' => $benchmark->id,
         ]);
-        Session::put('benchmark', $benchmark->id);
+        if ($request->ajax()) {
+            Session::put('benchmark', $benchmark->id);
 
-        return response()->json($benchmark->id);
+            return response()->json($benchmark->id);
+        }
+
+        return redirect('/benchmarks/' . $benchmark->id);
     }
 
     /**
@@ -186,10 +190,10 @@ class HomeController extends Controller
     public function home()
     {
         $benchmarks = auth()->user()->benchmarks()->with('accounts', 'order')->get();
-
+        $hasBenchmarks = auth()->user()->benchmarks()->withTrashed()->count();
         $class = "listing_page";
 
-        return view('home', compact('benchmarks', 'class'));
+        return view('home', compact('benchmarks', 'class', 'hasBenchmarks'));
     }
 
     public function editEmail(Request $request)

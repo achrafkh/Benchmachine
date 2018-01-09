@@ -11,7 +11,21 @@
     @else
         <link rel="stylesheet" href="/assets/css/picker/classic.css">
     @endif
+    @if(auth()->guest())
     <script type="text/javascript" src="/js/pixels.js"></script>
+    @elseif(auth()->user()->hasRole(['client']))
+    <script type="text/javascript" src="/js/pixels.js"></script>
+    @else
+    <script type="text/javascript">
+        function ga(){
+            return null;
+        }
+        function fbq(){
+            return null;
+        }
+    </script>
+
+    @endif
 </head>
 
 <body class="@if(Agent::isMobile() || Agent::isTablet()) ismobile @endif">
@@ -38,6 +52,7 @@
     @endif
     <noscript>Your browser does not support JavaScript!</noscript>
 
+    @if(auth()->guest())
     <script type="text/javascript">
         window._mfq = window._mfq || [];
         (function() {
@@ -47,5 +62,16 @@
         document.getElementsByTagName("head")[0].appendChild(mf);
         })();
     </script>
+    @elseif(auth()->user()->hasRole(['client']))
+        <script type="text/javascript">
+            window._mfq = window._mfq || [];
+            (function() {
+            var mf = document.createElement("script");
+            mf.type = "text/javascript"; mf.async = true;
+            mf.src = "//cdn.mouseflow.com/projects/b80d4089-8ab5-4741-be42-fc8110a57f84.js";
+            document.getElementsByTagName("head")[0].appendChild(mf);
+            })();
+        </script>
+    @endif
 </body>
 </html>

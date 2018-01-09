@@ -35,11 +35,12 @@
                             <td class="table-digit">
                                 <span class="label label-{{ $benchmark->getStatus()['class'] }}">{{ $benchmark->getStatus()['text'] }}</span>
                             </td>
-                            <td>
+
+                           <!--  <td>
                                 <button  class="table-delete" data-id="{{ $benchmark->id }}">
                                     <i class="b-trash"></i>
                                 </button>
-                            </td>
+                            </td> -->
                         </tr>
                         @endforeach
                     </tbody>
@@ -48,6 +49,127 @@
         </div>
     @endif
     <div class="fb-wrapper">
+    @if(!$hasBenchmarks)
+        <form id="submit_pages" action="{{ route('newDemoBench') }}" method="POST" class="fb-form">
+            {{ csrf_field() }}
+            <div class="fb-header">
+                <h1>
+                 Create your first Free <b>Benchmark.</b>
+                </h1>
+            </div>
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li id="fb-tab-li" role="presentation" class="active">
+                    <i class="b-clipboard"></i>
+                    <span>Add Pages</span>
+                </li>
+                <li id="date-tab-li" role="presentation">
+                    <i class="b-calendar"></i>
+                    <span>Select Periode</span>
+                </li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane fb-tab fade in active" id="fb-tab">
+                    <div class="fb-header">
+                        <p>Copy paste the url of the facebook pages you want to compare. It only takes a few seconds.</p>
+                    </div>
+                    <div class="fb-inner  fb-form-inner">
+                        <div class="media fb-box focused">
+                            <div class="media-left fb-icon">
+                                <i class="icon-facebook"></i>
+                                <i class="icon-ok"></i>
+                                <i class="icon-cancel"></i>
+                                <i class="icon-spin5 animate-spin"></i>
+                            </div>
+                            <div class="media-body fb-inner">
+                                <label class="fb-nb" for="fb_page_1">First page</label>
+                                <input name="accounts[]" id="fb_page_1" class="fb-input" type="text" name="fb_page_1" placeholder="https://www.facebook.com/exemple">
+                            </div>
+                        </div>
+                        <div class="media fb-box">
+                            <div class="media-left fb-icon">
+                                <i class="icon-facebook"></i>
+                                <i class="icon-ok"></i>
+                                <i class="icon-cancel"></i>
+                                <i class="icon-spin5 animate-spin"></i>
+                            </div>
+                            <div class="media-body fb-inner">
+                                <label class="fb-nb" for="fb_page_2">Second page</label>
+                                <input name="accounts[]" id="fb_page_2" class="fb-input" type="text" name="fb_page_2" placeholder="https://www.facebook.com/exemple">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="fb-footer clearfix">
+                        <button class="mbtn mbtn-icon next-btn" id="nextStep" disabled aria-controls="date-tab" role="tab" data-toggle="tab">
+                            <span>Next</span>
+                            <i class="b-angle-right"></i>
+                            <i class="icon-spin5 animate-spin"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div role="tabpanel" class="tab-pane period-tab fade in" id="date-tab">
+                    <div class="fb-inner">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>
+                                    Benchmark Name
+                                </label>
+                                <div class="input-container">
+                                    <input class="form-control" id="title" type="text" name="title" placeholder="Benchmark">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <p>Choose the time periods for your benchmark report.</p>
+                            </div>
+
+
+                            <div class="col-md-6" id="difTime">
+                                <span>Benchmark 7 Days</span>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="text-right">
+                                    <strong class="price">5 USD</strong>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                VAT
+                            </div>
+                            <div class="col-md-6">
+                                <div class="text-right">
+                                    <strong>0 USD</strong>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="col-md-6">
+                                <strong>TOTAL</strong>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="text-right">
+                                    <strong class="price">5 USD</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fb-footer clearfix">
+                        <div class="fb-footer-inner">
+                            <button id="initStripe" type="submit"  class="hidden" waves-hover></button>
+                            <button type="submit" id="generateBench" class="mbtn">
+                                <span>Purchase</span>
+                            </button>
+                        </div>
+
+                        <a id="backBtn" class="mbtn mbtn-default mbtn-icon prev-btn" href="#fb-tab" aria-controls="fb-tab" role="tab" data-toggle="tab">
+                            <i class="b-angle-left"></i>
+                            <span>Back</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    @else
         <form id="submit_pages" action="/checkout/new" method="POST" class="fb-form">
             {{ csrf_field() }}
             <div class="fb-header">
@@ -202,6 +324,7 @@
                 </div>
             </div>
         </form>
+    @endif
     </div>
 </div>
 <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="modalConfirm">
@@ -535,8 +658,9 @@ function inputsHaveDuplicateValues() {
 
 
 
- <script type="text/javascript">
+<script type="text/javascript">
 var since = new Date();
+var statuss = {!! json_encode($hasBenchmarks) !!}
 since.setDate(since.getDate() - 2);
 var until = new Date();
 until.setDate(until.getDate() - 1);
@@ -560,8 +684,8 @@ $( document ).ready(function() {
     input_from = input_from.pickadate('picker');
     input_to = input_to.pickadate('picker');
 
-
-    input_from.on({
+    if(statuss > 0){
+            input_from.on({
       set: function(e) {
        if(e.select){
         valideDates();
@@ -575,6 +699,8 @@ $( document ).ready(function() {
        }
       }
     });
+    }
+
 });
 
 

@@ -64,6 +64,7 @@ class LoginController extends Controller
             return redirect('/');
         }
         $bench_id = Session::get('benchmark');
+
         $authUser = $this->findOrCreateUser($user, $provider);
 
         Auth::login($authUser, true);
