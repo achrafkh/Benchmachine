@@ -131,7 +131,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="text-right">
-                                    <strong class="price">5 USD</strong>
+                                    <strong class="price">0 USD</strong>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -148,7 +148,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="text-right">
-                                    <strong class="price">5 USD</strong>
+                                    <strong class="price">0 USD</strong>
                                 </div>
                             </div>
                         </div>
