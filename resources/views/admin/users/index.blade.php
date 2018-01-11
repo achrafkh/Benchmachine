@@ -98,7 +98,11 @@ tr.details td.details-control {
                   	return getUserImage(data);
                   }
            		},
-           		{ 'data': 'name', 'name': 'name' },
+           		{ 'data': 'name', render: function(data, type, full, meta)
+                  {
+                    return '<a style="cursor:pointer" target="_blank" href="https://www.facebook.com/'+full.provider_id+'">'+data+'</a>';
+                  }
+                },
                 { 'data': 'email', 'name': 'email' },
                 { 'data': 'role', 'name': 'role' },
                 { 'data': 'created_at', 'name': 'created_at' },
@@ -122,7 +126,7 @@ function str_limit(str,limit)
 }
 function getUserImage(id)
 {
-	return '<img  src="https://graph.facebook.com/' +id+ '/picture">';
+	return '<a style="cursor:pointer" target="_blank" href="https://www.facebook.com/'+id+'"><img  src="https://graph.facebook.com/' +id+ '/picture"></a>';
 }
 function getModal(id){
 	$.get( "/api/admin/benchmarks/", function( data ) {

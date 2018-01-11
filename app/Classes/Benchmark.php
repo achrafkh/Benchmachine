@@ -128,11 +128,11 @@ class Benchmark
 
         $chart->type = $type;
         $chart->id = 'canvas-' . $data['id'];
-        $chart->title_en = 'Total Nombre des publication';
+        $chart->title_en = 'Total posts number';
         if ($chart->title_en) {
-            $chart->title = 'Total Nombre des publication';
+            $chart->title = 'Total posts number';
         }
-        $chart->label = 'Total Nombre des publication';
+        $chart->label = 'Total posts number';
 
         $count = [];
         foreach ($this->accounts as $key => $account) {
@@ -155,11 +155,11 @@ class Benchmark
 
         $chart->type = $type;
         $chart->id = 'canvas-' . $data['id'];
-        $chart->title_en = 'Moyene des publication par jour';
+        $chart->title_en = 'Average daily posts';
         if ($chart->title_en) {
-            $chart->title = 'Moyene des publication par jour';
+            $chart->title = 'Average daily posts';
         }
-        $chart->label = 'Moyene des publication par jour';
+        $chart->label = 'Average daily posts';
 
         $count = [];
         foreach ($this->accounts as $key => $account) {
@@ -182,11 +182,11 @@ class Benchmark
 
         $chart->type = $type;
         $chart->id = 'canvas-' . $data['id'];
-        $chart->title_en = 'Total Interactions par type';
+        $chart->title_en = 'Total Interactions';
         if ($chart->title_en) {
-            $chart->title = 'Total Interactions par type';
+            $chart->title = 'Total Interactions';
         }
-        $chart->label = 'Total Interactions par type';
+        $chart->label = 'Total Interactions';
 
         $count = [];
 
